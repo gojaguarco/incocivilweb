@@ -1,21 +1,21 @@
 interface BurgerProps {
-  openNav?: () => void;
-  closeNav?: () => void;
+  // openNav?: () => void;
+  // closeNav?: () => void;
   isNavOpen: boolean;
   barColor?: string;
 }
 
-const Burger = ({ openNav, closeNav, isNavOpen, barColor }: BurgerProps) => {
+const Burger = ({ isNavOpen, barColor }: BurgerProps) => {
   return (
     <div
       className="flex justify-center items-center"
-      onClick={() => {
-        if (isNavOpen) {
-          closeNav && closeNav();
-        } else {
-          openNav && openNav();
-        }
-      }}
+      // onClick={() => {
+      //   if (isNavOpen) {
+      //     closeNav && closeNav();
+      //   } else {
+      //     openNav && openNav();
+      //   }
+      // }}
     >
       <div className="relative flex flex-col justify-between items-center z-50 gap-[6px] cursor-pointer " >
         <Bar
