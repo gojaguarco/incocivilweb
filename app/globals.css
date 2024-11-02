@@ -40,7 +40,7 @@
     }
   }
   a {
-    @apply font-montserrat font-extralight text-sm
+    @apply font-montserrat font-extralight text-sm hover:underline underline-offset-2
   }
   h1 {
     @apply text-[30px] md:text-[45px] font-montserrat font-extrabold tracking-wider
