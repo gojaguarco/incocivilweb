@@ -1,5 +1,4 @@
 "use client"
-import { HOMEPAGE_QUERYResult } from "@/sanity.types"
 import { useState } from "react"
 
 type TProps = {
@@ -13,8 +12,6 @@ type TProps = {
     answer: string;
   }
 }
-
-
 
 const Faq = ({ faq}: TProps) => {
 
