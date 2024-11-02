@@ -1,0 +1,111 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@layer base {
+  .no-scrollbar::-webkit-scrollbar{
+    width: 0px;
+  }
+  .no-scrollbar::-webkit-scrollbar-thumb{
+    width: 5px;
+    background-color: rgba(0, 0, 0, 0.048);
+    border-radius: 6px;
+  }
+  .no-scrollbar::-webkit-scrollbar-corner{
+    background-color: #f1f1f1;
+  }
+  .no-scrollbar::-webkit-scrollbar-button{
+    display: none;
+  }
+  .main-background{
+    background: linear-gradient(120deg, #363942 2%, #1F2127 98%);
+  }
+  .text-balance {
+    text-wrap: balance;
+  }
+  .el-shadow {
+    box-shadow: -1px 1px 3px 1px rgba(0, 0, 0, 0.15);
+  }
+}
+
+@layer base {
+  .default-paddings {
+    @apply px-4 xs:px-8 sm:px-14 md:px-20 xl:px-0
+  }
+  .nav-font {
+    a{
+      @apply text-light font-inter font-extralight text-sm xl:text-base text-nowrap
+    }
+  }
+  a {
+    @apply font-montserrat font-extralight text-sm
+  }
+  h1 {
+    @apply text-[30px] md:text-[45px] font-montserrat font-extrabold tracking-wider
+  }
+  h2 {
+    @apply text-[30px] font-montserrat font-extrabold tracking-wide
+  }
+  h3 {
+    @apply text-[25px] font-montserrat font-medium
+  }
+  h4 {
+    @apply text-base font-montserrat font-medium
+  }
+  h5 {
+    @apply text-base font-montserrat font-light uppercase tracking-wider
+  }
+  h6 {
+    @apply text-sm font-montserrat font-semibold
+  }
+  h7 {
+    @apply text-sm font-montserrat font-medium
+  }
+  p {
+    @apply text-sm font-inter font-extralight
+  }
+  label {
+    @apply text-sm font-light font-montserrat 
+  }
+  input, textarea {
+    @apply placeholder:text-xs font-inter font-light placeholder:text-slate-400
+  }
+}
+
+/* SURFACE SLIDER */
+@layer base {
+  .make-3d {
+    transform-style: preserve-3d;
+    transform: perspective(3000px);
+  }
+  .surface-object {
+    transition: .3s;
+    filter: brightness(1);
+    width: 120px;
+  }
+  .surface-object:hover {
+    transform: translateZ(200px);
+    filter: brightness(1);
+    width: 250px;
+  }
+  .surface-object:hover + *{
+    transform: translateZ(150px) rotateY(40deg);
+  }
+  .surface-object:hover + * + *{
+    transform: translateZ(70px) rotateY(20deg);
+  }
+  .surface-object:hover + * + * + *{
+    transform: translateZ(30px) rotateY(10deg);
+  }
+  .surface-object:has(+ *:hover) {
+    transform: translateZ(150px) rotateY(-40deg);
+  }
+  .surface-object:has(+ * + *:hover) {
+    transform: translateZ(70px) rotateY(-20deg);
+  }
+  .surface-object:has(+ * + * + *:hover) {
+    transform: translateZ(30px) rotateY(-10deg);
+  }
+}
