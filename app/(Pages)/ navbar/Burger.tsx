@@ -17,18 +17,18 @@ const Burger = ({ isNavOpen, barColor }: BurgerProps) => {
       //   }
       // }}
     >
-      <div className="relative flex flex-col justify-between items-center z-50 gap-[6px] cursor-pointer " >
+      <div className="relative flex flex-col justify-between z-50 gap-[5px] xs:gap-[6px] cursor-pointer " >
         <Bar
           barColor={barColor}
-          width={isNavOpen ? "w-6 translate-x-20" : "w-7"}
+          width={isNavOpen ? "w-6 xs:w-7 translate-x-20" : "w-6 xs:w-7"}
         />
         <Bar
-          width={isNavOpen ? "w-6 translate-x-20" : "w-6"}
+          width={isNavOpen ? "w-6 xs:w-7 translate-x-20" : "w-[22px] xs:w-[25px]"}
           barColor={barColor}
         />
         <Bar
           barColor={barColor}
-          width={isNavOpen ? "w-6 translate-x-20" : "w-7"}
+          width={isNavOpen ? "w-6 xs:w-7 translate-x-20" : "w-6 xs:w-7"}
         />
       </div>
     </div>
@@ -49,7 +49,7 @@ const Bar = ({
 }: BarProps) => {
   return (
     <div
-      className={`${width} ${rotateZ} transition-all duration-1000 h-[3px]  ${barColor} rounded-md`}
+      className={`${width} ${rotateZ} transition-all duration-1000 h-[2.5px] xs:h-[3px]  ${barColor} rounded-md`}
     />
   );
 };

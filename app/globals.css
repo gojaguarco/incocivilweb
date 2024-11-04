@@ -32,7 +32,7 @@
 
 @layer base {
   .default-paddings {
-    @apply px-4 xs:px-8 sm:px-14 md:px-20 xl:px-0
+    @apply px-4 xs:px-8 sm:px-14 md:px-20 xl:px-5 2xl:px-0
   }
   .nav-font {
     a{
@@ -43,16 +43,16 @@
     @apply font-montserrat font-extralight text-sm hover:underline underline-offset-2
   }
   h1 {
-    @apply text-[30px] md:text-[45px] font-montserrat font-extrabold tracking-wider
+    @apply text-[26px] xs:text-[32px] sm:text-[45px] lg:text-[38px] xl:text-[45px] font-montserrat font-extrabold tracking-wider
   }
   h2 {
-    @apply text-[30px] font-montserrat font-extrabold tracking-wide
+    @apply text-2xl sm:text-[34px] font-montserrat font-extrabold tracking-wide
   }
   h3 {
-    @apply text-[25px] font-montserrat font-medium
+    @apply text-[20px] xs:text-[25px] font-montserrat font-medium
   }
   h4 {
-    @apply text-base font-montserrat font-medium
+    @apply text-sm leading-none lg:text-base font-montserrat font-medium
   }
   h5 {
     @apply text-base font-montserrat font-light uppercase tracking-wider
@@ -64,7 +64,7 @@
     @apply text-sm font-montserrat font-medium
   }
   p {
-    @apply text-sm font-inter font-extralight
+    @apply text-xs xs:text-sm lg:text-[15px] font-inter font-extralight
   }
   label {
     @apply text-sm font-light font-montserrat 
@@ -84,11 +84,13 @@
     transition: .3s;
     filter: brightness(1);
     width: 120px;
+    filter: drop-shadow(-1px 1px 3px 1px rgba(0, 0, 0, 0.15));
   }
   .surface-object:hover {
     transform: translateZ(200px);
     filter: brightness(1);
     width: 250px;
+    
   }
   .surface-object:hover + *{
     transform: translateZ(150px) rotateY(40deg);
