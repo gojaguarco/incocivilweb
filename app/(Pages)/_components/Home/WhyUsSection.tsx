@@ -13,7 +13,7 @@ const WhyUsSection = ({content}: TProps) => {
   return (
     <section className="flex justify-center relative w-full py-20 overflow-hidden default-paddings bg-light">
       <div className="flex flex-col-reverse lg:flex-row w-full gap-14 items-end max-w-screen-xl">
-        <ImageOrVideo className="w-full lg:w-2/5 h-80 aspect-video object-cover" content={content.ImageOrVideo}/>
+        <ImageOrVideo className="w-full lg:w-2/5 h-80 aspect-video object-cover " content={content.ImageOrVideo}/>
         <header className="w-full lg:w-3/5 flex flex-col">
           <div className="w-full mb-4">
             <div className="flex items-center gap-2">

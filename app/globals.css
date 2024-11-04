@@ -64,7 +64,7 @@
     @apply text-sm font-montserrat font-medium
   }
   p {
-    @apply text-xs xs:text-sm lg:text-[15px] font-inter font-extralight
+    @apply text-xs xs:text-sm font-inter font-extralight
   }
   label {
     @apply text-sm font-light font-montserrat 
@@ -84,7 +84,6 @@
     transition: .3s;
     filter: brightness(1);
     width: 120px;
-    filter: drop-shadow(-1px 1px 3px 1px rgba(0, 0, 0, 0.15));
   }
   .surface-object:hover {
     transform: translateZ(200px);

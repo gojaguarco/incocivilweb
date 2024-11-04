@@ -21,7 +21,7 @@ const FaqSection = ({content}: TProps) => {
               <h6 className="text-accent1">{content.sectionName}</h6>
             </div>
             <h2>{content.title}</h2>
-            <p>{content.sectionDescription}</p>
+            <p className="mt-2">{content.sectionDescription}</p>
           </div>
           <section className="w-full flex flex-col gap-2.5">
           { content.faqs.map((faq, index) => (

@@ -23,7 +23,7 @@ const Faq = ({ faq}: TProps) => {
   }
 
   return (
-        <article className="bg-light-dark rounded-xl w-full px-4 py-2">
+        <article className="bg-light-dark rounded-xl w-full px-4 py-2 el-shadow">
           <div className="flex justify-between items-center group cursor-pointer" onClick={()=> toggleOpen()} >
             <h4 className="group-hover:underline">{faq.question}</h4>
             <svg xmlns="http://www.w3.org/2000/svg" width={30} height={30} viewBox="0 0 24 24" fill="none" strokeWidth={1.5} strokeLinecap="round" strokeLinejoin="round" className={`stroke-gray-600 transition-all duration-300 ${isOpen && 'rotate-180'}`}>

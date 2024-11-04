@@ -1240,6 +1240,81 @@ export type SanityImageMetadata = {
 
 export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | Geopoint | Slug | Config | Project | ProjectSection | ProjectContactSection | AboutHeroSection | ImageSection | WhatwedoSection | ContactSection | Faq | FaqSection | SurfaceSliderSection | ImageOrVideo | WhyusSection | SecondaryService | Service | Surface | SurfaceTypes | ServicesSection | HomeHeroSection | Pages | VideoObject | Button | Post | Category | BlockContent | ImageObject | SanityFileAsset | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata;
 export declare const internalGroqTypeReferenceTo: unique symbol;
+// Source: ./sanity/queries/aboutQueries.ts
+// Variable: ABOUTPAGE_QUERY
+// Query: *[_type == 'pages'][0]{  aboutPage}
+export type ABOUTPAGE_QUERYResult = {
+  aboutPage: Array<{
+    titleDescription: string;
+    title1: string;
+    title2: string;
+    highlightedTitle: string;
+    descriptionText: string;
+    ImageOrVideo: {
+      imagenOVideo?: boolean;
+      imagen?: {
+        asset?: {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+        };
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        alt: string;
+        _type: "imageObject";
+      };
+      video?: VideoObject;
+    };
+    _type: "aboutHeroSection";
+    _key: string;
+  } | {
+    title: string;
+    sectionName?: string;
+    descriptionText: string;
+    ctaButton1: Button;
+    ctaButton2?: Button;
+    ImageOrVideo: {
+      imagenOVideo?: boolean;
+      imagen?: {
+        asset?: {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+        };
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        alt: string;
+        _type: "imageObject";
+      };
+      video?: VideoObject;
+    };
+    _type: "imageSection";
+    _key: string;
+  } | {
+    title: string;
+    sectionName: string;
+    descriptionText: string;
+    ctaButton: Button;
+    imageArray: Array<{
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      alt: string;
+      _type: "imageObject";
+      _key: string;
+    }>;
+    _type: "whatwedoSection";
+    _key: string;
+  }>;
+} | null;
+
 // Source: ./sanity/queries/blogQueries.ts
 // Variable: BLOGS_QUERY
 // Query: *[_type == "post" ][0...12]{  _id, title, description, image}
@@ -1634,6 +1709,7 @@ export type HOMEPAGE_QUERYResult = {
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
+    "*[_type == 'pages'][0]{\n  aboutPage\n}": ABOUTPAGE_QUERYResult;
     "*[_type == \"post\" ][0...12]{\n  _id, title, description, image\n}": BLOGS_QUERYResult;
     "*[_type == \"post\" && _id == $id][0]{\n  title, description, body, image, categories, publishedAt\n}": BLOG_QUERYResult;
     "*[_type == 'pages'][0]{\n  homePage[] {\n    ...,\n    primarySurfaces[]->,\n    surfaceList[]->,\n    faqs []->,\n  }\n}": HOMEPAGE_QUERYResult;

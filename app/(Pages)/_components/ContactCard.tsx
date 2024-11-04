@@ -11,7 +11,7 @@ type TProps = {
 
 const ContactCard = ({content, className}: TProps) => {
   return (
-    <form className={`${className} flex flex-col gap-2 rounded-xl py-7 px-6 el-shado justify-center`}>
+    <form className={`${className} flex flex-col gap-2 rounded-xl py-7 px-6 el-shado justify-center el-shadow`}>
       <div>
         <h2 className="text-2xl">{content.title}</h2>
         <p>{content.description}</p>

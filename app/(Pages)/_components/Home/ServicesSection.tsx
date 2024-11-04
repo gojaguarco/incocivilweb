@@ -16,7 +16,7 @@ const ServicesSection = ({content}: TProps) => {
     <section className="flex justify-center relative w-full py-20 overflow-hidden default-paddings bg-light-dark">
       <div className="flex flex-col lg:flex-row w-full gap-14 items-end max-w-screen-xl">
         <header className="flex flex-col items-center justify-between w-full lg:w-3/5 gap-4">
-          <div className="w-full">
+          <div className="w-full flex flex-col gap-0.5">
             <h5>{content.titleDescription}</h5>
             <h2>{content.title}</h2>
             <div className="flex items-center gap-2">
@@ -34,11 +34,11 @@ const ServicesSection = ({content}: TProps) => {
           <div className="flex flex-col w-full gap-4">
             <h4>También Realizamos:</h4>
             {content.secondaryServices.map((service, index) => (
-              <article className="w-full flex gap-4 p-2 rounded-lg bg-light" key={index}>
-                <Image className="w-28 h-28 object-cover rounded-md" src={urlFor(service.imageObject.asset || "").width(400).height(400).url()} alt={service.imageObject.alt} width={400} height={400}/>
-                <div className="w-full h-28 flex flex-col justify-center gap-1 pr-4">
+              <article className="w-full flex gap-4 p-2 rounded-lg bg-light el-shadow" key={index}>
+                <Image className="w-28 aspect-square object-cover rounded-md" src={urlFor(service.imageObject.asset || "").width(400).height(400).url()} alt={service.imageObject.alt} width={400} height={400}/>
+                <div className="w-full flex flex-col justify-center gap-1 pr-1 lg:pr-4">
                   <h4>{service.title}</h4>
-                  <p>{service.description}</p>
+                  <p className="text-[13px]">{service.description}</p>
                 </div>
               </article>
             ))}

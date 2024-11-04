@@ -25,12 +25,12 @@ const ContactSection = ({content}: TProps) => {
           </div>
           <Image className="object-cover w-full rounded-xl h-72" src={urlFor(content.imageObject.asset || "").width(800).height(400).url()} alt={content.imageObject.alt} width={800} height={400}/>
           <div className="flex gap-5">
-            <article className="w-1/2 p-4 rounded-xl bg-light flex flex-col items-end gap-3 justify-between">
-              <p className="w-full text-base">{content.homeProject.text}</p>
+            <article className="w-1/2 p-4 rounded-xl bg-light flex flex-col items-end gap-3 justify-between el-shadow">
+              <p className="w-full text-base font-normal">{content.homeProject.text}</p>
               <LinkButton color={content.homeProject.ctaButton.color} link={content.homeProject.ctaButton.link} size={content.homeProject.ctaButton.size} text={content.homeProject.ctaButton.text} />
             </article>
-            <article className="w-1/2 p-4 rounded-xl bg-light flex flex-col items-end gap-3 justify-between">
-              <p className="w-full text-base">{content.comercialProject.text}</p>
+            <article className="w-1/2 p-4 rounded-xl bg-light flex flex-col items-end gap-3 justify-between el-shadow">
+              <p className="w-full text-base font-normal">{content.comercialProject.text}</p>
               <LinkButton color={content.comercialProject.ctaButton.color} link={content.comercialProject.ctaButton.link} size={content.comercialProject.ctaButton.size} text={content.comercialProject.ctaButton.text} />
             </article>
           </div>
