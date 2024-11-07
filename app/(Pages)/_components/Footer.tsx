@@ -14,7 +14,7 @@ const Footer = () => {
         <section className="flex flex-col md:flex-row gap-x-20 gap-y-12 text-slate-300 px-6">
           <div className="flex flex-col gap-1.5">
             <h4>Enlaces Rápidos</h4>
-            <div className="w-8 h-[3px] bg-accent1 rounded-full"/>
+            <div className="w-8 h-[3px] bg-accent1 rounded-full mb-3"/>
             <Link href="/">Home</Link>
             <Link href="/">Quienes Somos</Link>
             <Link href="/">Proyectos</Link>
@@ -24,7 +24,7 @@ const Footer = () => {
           </div>
           <div className="flex flex-col gap-1.5">
             <h4>Información</h4>
-            <div className="w-8 h-[3px] bg-accent1 rounded-full"/>
+            <div className="w-8 h-[3px] bg-accent1 rounded-full mb-3"/>
             <Link href="/">gerenciaincocivil@gmail.com</Link>
             <Link href="/">+57 317 212 1142</Link>
             <Link href="/">Cali - Valle del Cauca</Link>
@@ -32,7 +32,7 @@ const Footer = () => {
           </div>
           <div className="flex flex-col gap-1.5">
             <h4>Redes Sociales</h4>
-            <div className="w-8 h-[3px] bg-accent1 rounded-full"/>
+            <div className="w-8 h-[3px] bg-accent1 rounded-full mb-3"/>
             <div className="flex">
               <Link href={"/"}>
                 <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="icon icon-tabler icons-tabler-outline icon-tabler-brand-whatsapp">

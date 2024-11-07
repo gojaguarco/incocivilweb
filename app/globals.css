@@ -64,13 +64,13 @@
     @apply text-sm font-montserrat font-medium
   }
   p {
-    @apply text-xs xs:text-sm font-inter font-extralight
+    @apply text-xs xs:text-sm font-inter font-extralight whitespace-pre-line
   }
   label {
-    @apply text-sm font-light font-montserrat 
+    @apply text-sm font-light font-montserrat whitespace-pre-line 
   }
   input, textarea {
-    @apply placeholder:text-xs font-inter font-light placeholder:text-slate-400
+    @apply placeholder:text-xs font-inter font-light placeholder:text-slate-400 whitespace-pre-line
   }
 }
 

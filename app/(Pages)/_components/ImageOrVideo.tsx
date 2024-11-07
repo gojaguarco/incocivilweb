@@ -1,5 +1,6 @@
 import { internalGroqTypeReferenceTo, SanityImageCrop, SanityImageHotspot, VideoObject } from '@/sanity.types';
 import { urlFor } from '@/sanity/lib/image';
+import { buildFileUrl, parseAssetId } from '@sanity/asset-utils';
 import Image from 'next/image';
 import React from 'react'
 
@@ -28,10 +29,26 @@ const ImageOrVideo = ({content, className}: TProps) => {
   return (
     <Image className={`${className} rounded-3xl`} src={urlFor(content.imagen.asset || "").width(800).height(800).url()} alt={content.imagen.alt} height={800} width={800}/>
   )
-  if(content.video)
-  return(
-    <video src={urlFor(content.video.video.asset || "").height(800).width(800).url()}/>
-  )
+  if(content.video){
+    const video = parseAssetId(content.video.video.asset?._ref || "")
+    const videoUrl = buildFileUrl(video, {projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID, dataset: process.env.NEXT_PUBLIC_SANITY_DATASET})
+    const imagenUrl= urlFor(content.video.imagenDeCarga || "").width(800).height(800).url()
+    return(
+      <video
+        className={`${className} rounded-3xl object-cover bg-dark aspect-video`}
+        controls
+        playsInline
+        autoPlay
+        preload="metadata"
+        poster={imagenUrl}
+      >
+        <source src={videoUrl} />
+          {content.video.imagenDeCarga && (
+          <img src={imagenUrl} alt={content.video.imagenDeCarga.alt} />
+          )}
+      </video>
+    )
+  }
 }
 
 export default ImageOrVideo

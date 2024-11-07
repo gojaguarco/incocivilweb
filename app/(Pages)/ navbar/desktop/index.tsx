@@ -17,7 +17,7 @@ const DesktopNavBar = ({ className }: Props) => {
       </Link>
       <div className="w-full h-full flex items-center justify-end prose gap-6 xl:gap-9 pr-10 nav-font">
         <Link href='/'>Home</Link>
-        <Link href='/'>Quienes Somos</Link>
+        <Link href='/quienes-somos'>Quienes Somos</Link>
         <Link href='/'>Proyectos</Link>
         <Link href='/'>Servicios</Link>
         <Link href='/'>Blog</Link>
