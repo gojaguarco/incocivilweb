@@ -43,7 +43,7 @@ const ImageOrVideo = ({content, className}: TProps) => {
       >
         <source src={videoUrl} />
           {content.video.imagenDeCarga && (
-          <img src={imagenUrl} alt={content.video.imagenDeCarga.alt} />
+          <Image src={imagenUrl} alt={content.video.imagenDeCarga.alt} width={500} height={250} />
           )}
       </video>
     )

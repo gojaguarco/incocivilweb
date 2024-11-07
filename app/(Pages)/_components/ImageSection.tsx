@@ -36,7 +36,7 @@ type TProps = {
 const ImageSection = ({content, inverse, bg}: TProps) => {
   return (
     <section className={`flex justify-center relative w-full py-14 lg:py-20 overflow-hidden default-paddings ${bg}`}>
-      <div className="flex flex-col lg:flex-row w-full gap-8 lg:gap-14 lg:items-center max-w-screen-xl">
+      <div className={`flex flex-col ${inverse ? 'lg:flex-row-reverse' : 'lg:flex-row'} w-full gap-8 lg:gap-14 lg:items-center max-w-screen-xl`}>
       <section className="w-full lg:w-1/2 flex flex-col gap-5">
           <h2 className="text-slate-800 text-xl sm:text-2xl">{content.title}</h2>
           <p>{content.descriptionText}</p>

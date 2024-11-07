@@ -1,5 +1,4 @@
 import { ABOUTPAGE_QUERYResult } from "@/sanity.types"
-import Image from "next/image"
 import ImageOrVideo from "../ImageOrVideo"
 
 type TProps = {
