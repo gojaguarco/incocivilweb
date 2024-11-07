@@ -23,7 +23,7 @@ const ContactSection = ({content}: TProps) => {
             </div>
             <h2>{content.title}</h2>
           </div>
-          <Image className="object-cover w-full rounded-xl h-72" src={urlFor(content.imageObject.asset || "").width(800).height(400).url()} alt={content.imageObject.alt} width={800} height={400}/>
+          <Image className="object-cover w-full rounded-xl h-72" src={urlFor(content.imageObject).width(800).height(400).format('webp').url()} alt={content.imageObject.alt} width={800} height={400}/>
           <div className="flex gap-5">
             <article className="w-1/2 p-4 rounded-xl bg-light flex flex-col items-end gap-3 justify-between el-shadow">
               <p className="w-full text-base font-normal">{content.homeProject.text}</p>

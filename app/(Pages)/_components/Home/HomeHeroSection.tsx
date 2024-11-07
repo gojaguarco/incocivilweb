@@ -34,7 +34,7 @@ const HomeHeroSection = ({content}: TProps) => {
           </section>
         </div>
         <div className="relative flex w-full lg:w-1/2 bg-light-dark rounded-2xl p-2 max-h-96 overflow-hidden">
-          <Image className="w-full object-cover rounded-xl" src={urlFor(content.expertiseCard.image.asset?._ref || "").width(800).height(800).url()} alt={content.expertiseCard.image.alt} height={800} width={800}/>
+          <Image className="w-full object-cover rounded-xl" src={urlFor(content.expertiseCard.image).width(800).height(800).format('webp').url()} alt={content.expertiseCard.image.alt} height={800} width={800}/>
           <section className="absolute bottom-0 right-0 p-2 px-3 lg:p-3 bg-light-dark rounded-tl-xl text-primary w-3/4 sm:w-2/3 md:w-1/2 lg:w-2/3 xl:w-1/2 flex flex-col gap-1">
             <Esquina className="absolute -top-3 w-3 h-3 right-2 rotate-90" colorHex='e0e3ec'/>
             <Esquina className="absolute -left-3 w-3 h-3 bottom-2 rotate-90" colorHex='e0e3ec'/>

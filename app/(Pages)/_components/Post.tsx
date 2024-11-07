@@ -17,7 +17,7 @@ export function Post({ post }: { post: BLOG_QUERYResult }) {
       {image?.asset?._ref ? (
         <Image
           className="float-left m-0 w-1/3 mr-4 rounded-lg"
-          src={urlFor(image?.asset?._ref).width(300).height(300).url()}
+          src={urlFor(image).width(300).height(300).format('webp').url()}
           width={300}
           height={300}
           alt={title || ""}

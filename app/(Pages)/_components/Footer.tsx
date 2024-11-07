@@ -16,7 +16,7 @@ const Footer = () => {
             <h4>Enlaces Rápidos</h4>
             <div className="w-8 h-[3px] bg-accent1 rounded-full mb-3"/>
             <Link href="/">Home</Link>
-            <Link href="/">Quienes Somos</Link>
+            <Link href="/quienes-somos">Quienes Somos</Link>
             <Link href="/">Proyectos</Link>
             <Link href="/">Servicios</Link>
             <Link href="/">Blog</Link>

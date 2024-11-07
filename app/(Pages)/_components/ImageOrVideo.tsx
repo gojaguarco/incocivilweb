@@ -27,12 +27,12 @@ type TProps = {
 const ImageOrVideo = ({content, className}: TProps) => {
   if(content.imagenOVideo === true && content.imagen)
   return (
-    <Image className={`${className} rounded-3xl`} src={urlFor(content.imagen.asset || "").width(800).height(800).url()} alt={content.imagen.alt} height={800} width={800}/>
+    <Image className={`${className} rounded-3xl`} src={urlFor(content.imagen).width(800).height(800).format('webp').url()} alt={content.imagen.alt} height={800} width={800}/>
   )
   if(content.video){
     const video = parseAssetId(content.video.video.asset?._ref || "")
     const videoUrl = buildFileUrl(video, {projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID, dataset: process.env.NEXT_PUBLIC_SANITY_DATASET})
-    const imagenUrl= urlFor(content.video.imagenDeCarga || "").width(800).height(800).url()
+    const imagenUrl= urlFor(content.video.imagenDeCarga).width(800).height(800).format('webp').url()
     return(
       <video
         className={`${className} rounded-3xl object-cover bg-dark aspect-video`}

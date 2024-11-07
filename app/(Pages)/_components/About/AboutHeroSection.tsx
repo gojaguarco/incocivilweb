@@ -11,14 +11,14 @@ type TProps = {
 
 const AboutHeroSection = ({content}: TProps) => {
   return (
-    <section className="flex justify-center relative w-full py-20 overflow-hidden default-paddings ">
-      <div className="flex flex-col lg:flex-row w-full gap-14 lg:items-center max-w-screen-xl">
+    <section className="flex justify-center relative w-full py-14 lg:py-20 overflow-hidden default-paddings ">
+      <div className="flex flex-col lg:flex-row w-full gap-8 lg:gap-14 lg:items-center max-w-screen-xl">
         <header className="flex flex-col text-light w-full lg:w-1/2">
-          <h5 className=" font-thin text-lg tracking-[3px]">{content.titleDescription}</h5>
-          <h2 className="text-2xl font-semibold mt-1">{content.title1}</h2>
-          <div className="flex items-center gap-3 mt-2">
-            <h4 className="text-lg">{content.title2}</h4>
-            <h2 className="px-4 py-1.5 bg-accent2 rounded-lg text-slate-800 text-2xl">{content.highlightedTitle}</h2>
+          <h5 className="text-sm sm:text-base md:text-lg font-thin tracking-[3px]">{content.titleDescription}</h5>
+          <h2 className="text-xl md:text-2xl font-semibold mt-1">{content.title1}</h2>
+          <div className="flex items-center gap-1 md:gap-3 mt-2">
+            <h4 className="text-sm sm:text-base md:text-lg text-nowrap">{content.title2}</h4>
+            <h2 className="text-xl sm:text-2xl px-2 py-0.5 md:px-4 md:py-1.5 bg-accent2 rounded-lg text-slate-800">{content.highlightedTitle}</h2>
           </div>
           <p className="mt-6 text-slate-300">{content.descriptionText}</p>
         </header>

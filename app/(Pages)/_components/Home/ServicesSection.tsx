@@ -35,7 +35,7 @@ const ServicesSection = ({content}: TProps) => {
             <h4>También Realizamos:</h4>
             {content.secondaryServices.map((service, index) => (
               <article className="w-full flex gap-4 p-2 rounded-lg bg-light el-shadow" key={index}>
-                <Image className="w-28 aspect-square object-cover rounded-md" src={urlFor(service.imageObject.asset || "").width(400).height(400).url()} alt={service.imageObject.alt} width={400} height={400}/>
+                <Image className="w-28 aspect-square object-cover rounded-md" src={urlFor(service.imageObject).width(400).height(400).format('webp').url()} alt={service.imageObject.alt} width={400} height={400}/>
                 <div className="w-full flex flex-col justify-center gap-1 pr-1 lg:pr-4">
                   <h4>{service.title}</h4>
                   <p className="text-[13px]">{service.description}</p>

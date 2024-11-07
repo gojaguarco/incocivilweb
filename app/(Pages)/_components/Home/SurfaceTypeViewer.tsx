@@ -19,7 +19,7 @@ const SurfaceTypeViewer = ({content}: TProps) => {
       {content.map((surface, index) => {
         if(index === 0 || index === 3) return(
           <div className="w-full sm:w-2/5 relative group" key={index}>
-            <Image className="w-full h-full object-cover  rounded-xl" src={urlFor(surface.imageObject.asset || "").width(800).height(400).url()}  alt={surface.imageObject.alt} width={800} height={400} />
+            <Image className="w-full h-full object-cover  rounded-xl" src={urlFor(surface.imageObject).width(800).height(400).format('webp').url()}  alt={surface.imageObject.alt} width={800} height={400} />
             <div className="absolute bottom-0 right-0 bg-light rounded-tl-xl flex px-2 py-0.5 items-center gap-1">
               <div className="w-4 h-4 rounded-full bg-accent1 group-hover:rotate-90 transition-all flex items-center justify-center">
               <svg className="w-3.5 h-3.5 -rotate-45" xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" fill="" stroke="#fff" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" >
@@ -37,7 +37,7 @@ const SurfaceTypeViewer = ({content}: TProps) => {
         ) 
         else return(
           <div className="w-full sm:w-2/5 flex-grow relative group" key={index}>
-            <Image className="w-full h-full object-cover  rounded-xl" src={urlFor(surface.imageObject.asset || "").width(800).height(400).url()}  alt={surface.imageObject.alt} width={800} height={400} />
+            <Image className="w-full h-full object-cover  rounded-xl" src={urlFor(surface.imageObject).width(800).height(400).format('webp').url()}  alt={surface.imageObject.alt} width={800} height={400} />
             <div className="absolute bottom-0 right-0 bg-light rounded-tl-xl flex px-2 py-0.5 items-center gap-1">
               <div className="w-4 h-4 rounded-full bg-accent1 group-hover:rotate-90 transition-all flex items-center justify-center">
               <svg className="w-3.5 h-3.5 -rotate-45" xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" fill="" stroke="#fff" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" >
