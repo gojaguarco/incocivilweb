@@ -35,10 +35,9 @@ const ImageOrVideo = ({content, className}: TProps) => {
     const imagenUrl= urlFor(content.video.imagenDeCarga).width(800).height(800).format('webp').url()
     return(
       <video
-        className={`${className} rounded-3xl object-cover bg-dark aspect-video`}
+        className={`${className} rounded-3xl object-contain aspect-square md:aspect-video bg-dark`}
         controls
         playsInline
-        autoPlay
         preload="metadata"
         poster={imagenUrl}
       >

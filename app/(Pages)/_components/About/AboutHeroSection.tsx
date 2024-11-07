@@ -22,7 +22,7 @@ const AboutHeroSection = ({content}: TProps) => {
           </div>
           <p className="mt-6 text-slate-300">{content.descriptionText}</p>
         </header>
-        <ImageOrVideo className="w-full lg:w-1/2 aspect-video el-shadow" content={content.ImageOrVideo}></ImageOrVideo>
+        <ImageOrVideo className="w-full lg:w-1/2 el-shadow" content={content.ImageOrVideo}></ImageOrVideo>
       </div>
     </section>
   )

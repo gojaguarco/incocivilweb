@@ -52,7 +52,7 @@
     @apply text-[20px] xs:text-[25px] font-montserrat font-medium
   }
   h4 {
-    @apply text-sm leading-none lg:text-base font-montserrat font-medium
+    @apply text-sm leading-none sm:text-base font-montserrat font-medium
   }
   h5 {
     @apply text-base font-montserrat font-light uppercase tracking-wider
