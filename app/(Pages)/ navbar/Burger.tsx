@@ -10,10 +10,10 @@ const Burger = ({ openNav, closeNav, isNavOpen, barColor }: BurgerProps) => {
     <div
       className="flex justify-center items-center"
       onClick={() => {
-        if (isNavOpen) {
-          closeNav && closeNav();
-        } else {
-          openNav && openNav();
+        if (isNavOpen && closeNav) {
+          closeNav();
+        } else if(openNav){
+          openNav();
         }
       }}
     >

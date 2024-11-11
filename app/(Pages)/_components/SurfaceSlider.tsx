@@ -17,8 +17,8 @@ const SurfaceSlider = ({content}: TProps) => {
 
   const [scroll, setScroll] = useState<number>(0);
   const [imageWidth, setImageWidth] = useState<number>(0);
-  const [isImageOpen, setImageOpen] = useState(false);
-  const [imageIndex, setImageIndex] = useState(0);
+  // const [isImageOpen, setImageOpen] = useState(false);
+  // const [imageIndex, setImageIndex] = useState(0);
 
   const selectedImage = Math.round(
     ((scroll - (imageWidth/2) + 2.3 )/ (imageWidth)
@@ -40,8 +40,8 @@ const SurfaceSlider = ({content}: TProps) => {
 
   const handleWidth = () => {
     const carRef = carouselRef.current;
-    if (window.innerWidth) {
-      carRef && setImageWidth(carRef.clientHeight)
+    if (window.innerWidth && carRef) {
+      setImageWidth(carRef.clientHeight)
     }
   };
 
@@ -75,10 +75,10 @@ const SurfaceSlider = ({content}: TProps) => {
                 onClick={() =>{
                   carouselRef?.current?.scrollTo({ left: index * imageWidth + (imageWidth/2) + 2.3 ,
                   behavior: "smooth"});
-                  if(selectedImage === index){
-                    setImageIndex(index)
-                    setImageOpen(true);
-                  }
+                  // if(selectedImage === index){
+                  //   setImageIndex(index)
+                  //   setImageOpen(true);
+                  // }
                 }} 
                 className={`w-full h-full snap-center object-cover rounded-2xl transition-all ease-out scale-75 ${selectedImage === index ? "scale-100 cursor-zoom-in" : "cursor-pointer"}`} src={urlFor(surface.imageObject).width(600).height(600).format('webp').url()} alt={surface.imageObject.alt} width={600} height={600}/>
             </article>
