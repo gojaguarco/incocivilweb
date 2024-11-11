@@ -1,13 +1,17 @@
+"use client"
 import Image from "next/image";
 import LinkButton from "../../_components/LinkButton";
 import Link from "next/link";
 import Esquina from "../../_components/Esquina";
+import { usePathname } from "next/navigation";
 
 type Props = {
   className?: string;
 }
 
 const DesktopNavBar = ({ className }: Props) => {
+
+  const pathname = usePathname();
   
   return(
     <nav className={`${className} items-center justify-between`}>
@@ -16,8 +20,8 @@ const DesktopNavBar = ({ className }: Props) => {
         <Image src='/IncocivilLogo.svg' alt='isologo Incocivil' height={40} width={180}/>
       </Link>
       <div className="w-full h-full flex items-center justify-end prose gap-6 xl:gap-9 pr-10 nav-font">
-        <Link href='/'>Home</Link>
-        <Link href='/quienes-somos'>Quienes Somos</Link>
+        <Link className={`${pathname === '/' && 'underline underline-offset-2 pointer-events-none'}`} href='/'>Home</Link>
+        <Link className={`${pathname === '/quienes-somos' && 'underline underline-offset-2 pointer-events-none'}`} href='/quienes-somos'>Quienes Somos</Link>
         <Link href='/'>Proyectos</Link>
         <Link href='/'>Servicios</Link>
         <Link href='/'>Blog</Link>

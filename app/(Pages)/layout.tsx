@@ -20,8 +20,10 @@ const montserrat = Montserrat({
 export default async function PagesLayout(
   {
     children,
+    modal,
   }: Readonly<{
     children: React.ReactNode;
+    modal: React.ReactNode;
   }>
 ) {
   return (
@@ -38,6 +40,7 @@ export default async function PagesLayout(
       <Navbar />
       <Image src='/Marble.webp' alt='marble backround' width={2000} height={1000} className="fixed top-0 bottom-0 left-1/2 -translate-x-1/2 h-full opacity-[25%] object-cover"/>
     <main className="w-full main-background prose lg:prose-lg max-w-none overflow-hidden flex flex-col items-center">
+        {modal}
         {children}
     </main>
     <Footer />

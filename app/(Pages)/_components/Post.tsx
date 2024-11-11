@@ -1,10 +1,10 @@
 import Image from "next/image";
-import { PortableText } from "@portabletext/react";
 
 import { urlFor } from "@/sanity/lib/image";
 
 import Link from "next/link";
 import { BLOG_QUERYResult } from "@/sanity.types";
+import { PortableText } from "next-sanity";
 
 export function Post({ post }: { post: BLOG_QUERYResult }) {
   const { title, description, image, body } = post || {};

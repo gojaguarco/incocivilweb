@@ -9,13 +9,13 @@ export const surfaceTypesType = defineType({
     fields: [
         defineField({
             name: 'title',
-            title: 'Nombre de la Superficie',
+            title: 'Nombre del tipo de Superficie',
             type: 'string',
             validation: (Rule) => Rule.required(),
         }),
         defineField({
             name: 'description',
-            title: 'Descripción de la Superficie',
+            title: 'Descripción del tipo de Superficie',
             type: 'blockContent',
             validation: (Rule) => Rule.required(),
         }),

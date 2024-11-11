@@ -2,6 +2,7 @@ import { HOMEPAGE_QUERYResult } from "@/sanity.types"
 import { urlFor } from "@/sanity/lib/image"
 import Image from "next/image"
 import Esquina from "../Esquina"
+import Link from "next/link"
 
   type TProps = {
     content: Extract<
@@ -18,7 +19,7 @@ const SurfaceTypeViewer = ({content}: TProps) => {
     <section className="p-2 xs:p-2.5 rounded-2xl bg-light w-full flex flex-col sm:flex-row flex-wrap gap-2 xs:gap-2.5 el-shadow cursor-pointer">
       {content.map((surface, index) => {
         if(index === 0 || index === 3) return(
-          <div className="w-full sm:w-2/5 relative group" key={index}>
+          <Link href={`/surface-type/${surface._id}`} className="w-full sm:w-2/5 relative group" key={index} >
             <Image className="w-full h-full object-cover  rounded-xl" src={urlFor(surface.imageObject).width(800).height(400).format('webp').url()}  alt={surface.imageObject.alt} width={800} height={400} />
             <div className="absolute bottom-0 right-0 bg-light rounded-tl-xl flex px-2 py-0.5 items-center gap-1">
               <div className="w-4 h-4 rounded-full bg-accent1 group-hover:rotate-90 transition-all flex items-center justify-center">
@@ -33,10 +34,10 @@ const SurfaceTypeViewer = ({content}: TProps) => {
               <Esquina className="absolute rotate-90 w-2.5 h-2.5 -top-2.5 right-0" colorHex="f1f4fe"/>
               <Esquina className="absolute rotate-90 w-2.5 h-2.5 -left-2.5 bottom-0" colorHex="f1f4fe"/>
             </div>
-          </div>
+          </Link>
         ) 
         else return(
-          <div className="w-full sm:w-2/5 flex-grow relative group" key={index}>
+          <Link href={`/surface-type/${surface._id}`} className="w-full sm:w-2/5 flex-grow relative group" key={index}>
             <Image className="w-full h-full object-cover  rounded-xl" src={urlFor(surface.imageObject).width(800).height(400).format('webp').url()}  alt={surface.imageObject.alt} width={800} height={400} />
             <div className="absolute bottom-0 right-0 bg-light rounded-tl-xl flex px-2 py-0.5 items-center gap-1">
               <div className="w-4 h-4 rounded-full bg-accent1 group-hover:rotate-90 transition-all flex items-center justify-center">
@@ -51,7 +52,7 @@ const SurfaceTypeViewer = ({content}: TProps) => {
               <Esquina className="absolute rotate-90 w-2.5 h-2.5 -top-2.5 right-0" colorHex="f1f4fe"/>
               <Esquina className="absolute rotate-90 w-2.5 h-2.5 -left-2.5 bottom-0" colorHex="f1f4fe"/>
             </div>
-          </div>
+          </Link>
         )
       })}
     </section>

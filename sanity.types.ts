@@ -1705,6 +1705,191 @@ export type HOMEPAGE_QUERYResult = {
   }>;
 } | null;
 
+// Source: ./sanity/queries/surfaceQueries.ts
+// Variable: SURFACETYPES_QUERY
+// Query: *[_type == 'surfaceTypes'][]
+export type SURFACETYPES_QUERYResult = Array<{
+  _id: string;
+  _type: "surfaceTypes";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title: string;
+  description: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "normal";
+    listItem?: "bullet";
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  } | {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt: string;
+    _type: "imageObject";
+    _key: string;
+  } | {
+    video: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.fileAsset";
+      };
+      _type: "file";
+    };
+    imagenDeCarga: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      alt: string;
+      _type: "imageObject";
+    };
+    _type: "video";
+    _key: string;
+  }>;
+  imageObject: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt: string;
+    _type: "image";
+  };
+}>;
+// Variable: SURFACETYPE_QUERY
+// Query: *[_type == 'surfaceTypes' && _id == $id][0]
+export type SURFACETYPE_QUERYResult = {
+  _id: string;
+  _type: "surfaceTypes";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title: string;
+  description: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "normal";
+    listItem?: "bullet";
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  } | {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt: string;
+    _type: "imageObject";
+    _key: string;
+  } | {
+    video: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.fileAsset";
+      };
+      _type: "file";
+    };
+    imagenDeCarga: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      alt: string;
+      _type: "imageObject";
+    };
+    _type: "video";
+    _key: string;
+  }>;
+  imageObject: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt: string;
+    _type: "image";
+  };
+} | null;
+// Variable: SURFACESBYTYPE_QUERY
+// Query: *[_type == 'surface' && type._ref == $id ][]
+export type SURFACESBYTYPE_QUERYResult = Array<{
+  _id: string;
+  _type: "surface";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title: string;
+  description?: string;
+  imageObject: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt: string;
+    _type: "image";
+  };
+  type: {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "surfaceTypes";
+  };
+  price?: number;
+  code?: number;
+}>;
+
 // Query TypeMap
 import "@sanity/client";
 declare module "@sanity/client" {
@@ -1713,5 +1898,8 @@ declare module "@sanity/client" {
     "*[_type == \"post\" ][0...12]{\n  _id, title, description, image\n}": BLOGS_QUERYResult;
     "*[_type == \"post\" && _id == $id][0]{\n  title, description, body, image, categories, publishedAt\n}": BLOG_QUERYResult;
     "*[_type == 'pages'][0]{\n  homePage[] {\n    ...,\n    primarySurfaces[]->,\n    surfaceList[]->,\n    faqs []->,\n  }\n}": HOMEPAGE_QUERYResult;
+    "*[_type == 'surfaceTypes'][]": SURFACETYPES_QUERYResult;
+    "*[_type == 'surfaceTypes' && _id == $id][0]": SURFACETYPE_QUERYResult;
+    "*[_type == 'surface' && type._ref == $id ][]": SURFACESBYTYPE_QUERYResult;
   }
 }
