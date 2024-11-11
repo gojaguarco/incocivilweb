@@ -39,7 +39,7 @@ export default async function Page(props: { params: Promise<QueryParams> }) {
   <Modal>
     <article className="bg-light-dark z-10 gap-2 md:gap-10 p-3 sm:p-5 md:p-8 flex flex-col w-full rounded-2xl max-h-[90vh]">
       <div className="flex flex-col lg:flex-row gap-2 md:gap-10">
-        <Image className="w-full lg:w-1/2 object-cover rounded-lg h-32" src={urlFor(surfaceType.imageObject).width(800).height(400).format('webp').url()} alt={surfaceType.imageObject.alt} width={800} height={400}/>
+        <Image className="w-full lg:w-1/2 object-cover rounded-lg h-40 md:h-auto" src={urlFor(surfaceType.imageObject).width(800).height(400).format('webp').url()} alt={surfaceType.imageObject.alt} width={800} height={400}/>
         <div className="flex flex-col gap-4 w-full lg:w-1/2">
           <h2>{surfaceType.title}</h2>
           <PortableText value={surfaceType.description}/>

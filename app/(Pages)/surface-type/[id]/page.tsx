@@ -37,10 +37,10 @@ export default async function Page(props: { params: Promise<QueryParams> }) {
 
 
   return (
-  <section className="w-full min-h-[calc(100svh-60px)] flex py-20 default-paddings justify-center">
-    <article className="bg-light-dark z-10 gap-10 max-w-screen-xl p-5 xs:p-8 flex flex-col w-full h-full rounded-2xl">
-    <div className="flex flex-col lg:flex-row gap-10">
-    <Image className="w-full lg:w-1/2 object-cover rounded-lg" src={urlFor(surfaceType.imageObject).width(800).height(400).format('webp').url()} alt={surfaceType.imageObject.alt} width={800} height={400}/>
+  <section className="w-full min-h-[calc(100svh-60px)] flex py-5 md:py-20 default-paddings justify-center">
+    <article className="bg-light-dark z-10 gap-2 md:gap-10 max-w-screen-xl p-3 sm:p-8 flex flex-col w-full h-full rounded-2xl">
+    <div className="flex flex-col lg:flex-row gap-2 md:gap-10">
+    <Image className="w-full lg:w-1/2 object-cover rounded-lg h-40 sm:h-auto" src={urlFor(surfaceType.imageObject).width(800).height(400).format('webp').url()} alt={surfaceType.imageObject.alt} width={800} height={400}/>
     <div className="flex flex-col gap-4 w-full lg:w-1/2">
       <h2>{surfaceType.title}</h2>
       <PortableText value={surfaceType.description}/>
