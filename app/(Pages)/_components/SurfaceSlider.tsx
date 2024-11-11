@@ -80,7 +80,7 @@ const SurfaceSlider = ({content}: TProps) => {
                   //   setImageOpen(true);
                   // }
                 }} 
-                className={`w-full h-full snap-center object-cover rounded-2xl transition-all ease-out scale-75 ${selectedImage === index ? "scale-100 cursor-zoom-in" : "cursor-pointer"}`} src={urlFor(surface.imageObject).width(600).height(600).format('webp').url()} alt={surface.imageObject.alt} width={600} height={600}/>
+                className={`w-full h-full snap-center object-cover rounded-2xl transition-all ease-out  ${selectedImage === index ? "scale-100 cursor-zoom-in" : "cursor-pointer scale-75"}`} src={urlFor(surface.imageObject).width(600).height(600).format('webp').url()} alt={surface.imageObject.alt} width={600} height={600}/>
             </article>
           ))}
           <span className="px-[calc(100vw/4)]" />
