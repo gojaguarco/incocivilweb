@@ -1,6 +1,6 @@
 import { client, sanityFetch } from "@/sanity/lib/client";
 import { urlFor } from "@/sanity/lib/image";
-import { SURFACE_QUERY, SURFACES_QUERY, SURFACETYPE_QUERY } from "@/sanity/queries/surfaceQueries";
+import { SURFACE_QUERY, SURFACES_QUERY } from "@/sanity/queries/surfaceQueries";
 import Image from "next/image";
 import { QueryParams } from "sanity";
 import Modal from "@/app/(Pages)/_components/Modal";
