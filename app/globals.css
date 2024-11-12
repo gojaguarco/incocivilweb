@@ -42,31 +42,35 @@
     }
   }
   a {
-    @apply font-montserrat font-extralight text-sm hover:underline underline-offset-2
+    @apply font-montserrat font-extralight text-sm hover:underline underline-offset-2 whitespace-pre-line 
   }
   h1 {
-    @apply text-[26px] xs:text-[32px] sm:text-[45px] lg:text-[38px] xl:text-[45px] font-montserrat font-extrabold tracking-wider
+    @apply text-[26px] xs:text-[32px] sm:text-[45px] lg:text-[38px] xl:text-[45px] font-montserrat font-extrabold tracking-wider whitespace-pre-line 
   }
   h2 {
-    @apply text-2xl sm:text-[34px] font-montserrat font-extrabold tracking-wide
+    @apply text-2xl sm:text-[34px] font-montserrat font-extrabold tracking-wide whitespace-pre-line 
   }
   h3 {
-    @apply text-[20px] xs:text-[25px] font-montserrat font-medium
+    @apply text-[20px] xs:text-[25px] font-montserrat font-medium whitespace-pre-line 
   }
   h4 {
-    @apply text-sm leading-none sm:text-base font-montserrat font-medium
+    @apply text-sm leading-none sm:text-base font-montserrat font-medium whitespace-pre-line 
   }
   h5 {
-    @apply text-base font-montserrat font-light uppercase tracking-wider
+    @apply text-base font-montserrat font-light uppercase tracking-wider whitespace-pre-line 
   }
   h6 {
-    @apply text-sm font-montserrat font-semibold
+    @apply text-sm font-montserrat font-semibold whitespace-pre-line 
   }
   h7 {
-    @apply text-sm font-montserrat font-medium
+    @apply text-sm font-montserrat font-medium whitespace-pre-line 
   }
   p {
-    @apply text-[13px] xs:text-sm font-inter font-extralight whitespace-pre-line
+    @apply text-[13px] xs:text-sm font-inter font-extralight whitespace-pre-line leading-normal
+  }
+  p:empty:before {
+    content: ' ';
+    white-space: pre;
   }
   label {
     @apply text-sm font-light font-montserrat whitespace-pre-line 

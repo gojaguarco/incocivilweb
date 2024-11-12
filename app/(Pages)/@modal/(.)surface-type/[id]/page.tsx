@@ -26,7 +26,7 @@ export default async function Page(props: { params: Promise<QueryParams> }) {
     params,
   });
   if (!surfaceType) {
-    return (<>oli</>);
+    return null;
   }
 
   const surfaces = await sanityFetch({
