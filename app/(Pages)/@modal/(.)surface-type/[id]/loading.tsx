@@ -4,9 +4,9 @@ import Spinner from "@/app/(Pages)/_components/Spinner";
 export default function Loading(){
   return(
     <Modal>
-      <div className="w-full h-full flex flex-col items-center justify-center">
+      <div className="p-20 rounded-xl bg-light flex flex-col items-center justify-center">
         <Spinner />
-        <h1 className="text-light">Cargando...</h1>
+        <h1 className="">Cargando...</h1>
       </div>
     </Modal>
   )
