@@ -1859,7 +1859,7 @@ export type SURFACETYPE_QUERYResult = {
   };
 } | null;
 // Variable: SURFACESBYTYPE_QUERY
-// Query: *[_type == 'surface' && type._ref == $id ][]
+// Query: *[_type == 'surface' && type._ref == $id ][0...10]
 export type SURFACESBYTYPE_QUERYResult = Array<{
   _id: string;
   _type: "surface";
@@ -1889,6 +1889,58 @@ export type SURFACESBYTYPE_QUERYResult = Array<{
   price?: number;
   code?: number;
 }>;
+// Variable: SURFACES_QUERY
+// Query: *[_type == 'surface'][]
+export type SURFACES_QUERYResult = Array<{
+  _id: string;
+  _type: "surface";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title: string;
+  description?: string;
+  imageObject: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt: string;
+    _type: "image";
+  };
+  type: {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "surfaceTypes";
+  };
+  price?: number;
+  code?: number;
+}>;
+// Variable: SURFACE_QUERY
+// Query: *[_type == 'surface' && _id == $id ][0]{  _id,  title,  imageObject,  type -> {    title  }}
+export type SURFACE_QUERYResult = {
+  _id: string;
+  title: string;
+  imageObject: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt: string;
+    _type: "image";
+  };
+  type: {
+    title: string;
+  };
+} | null;
 
 // Query TypeMap
 import "@sanity/client";
@@ -1900,6 +1952,8 @@ declare module "@sanity/client" {
     "*[_type == 'pages'][0]{\n  homePage[] {\n    ...,\n    primarySurfaces[]->,\n    surfaceList[]->,\n    faqs []->,\n  }\n}": HOMEPAGE_QUERYResult;
     "*[_type == 'surfaceTypes'][]": SURFACETYPES_QUERYResult;
     "*[_type == 'surfaceTypes' && _id == $id][0]": SURFACETYPE_QUERYResult;
-    "*[_type == 'surface' && type._ref == $id ][]": SURFACESBYTYPE_QUERYResult;
+    "*[_type == 'surface' && type._ref == $id ][0...10]": SURFACESBYTYPE_QUERYResult;
+    "*[_type == 'surface'][]": SURFACES_QUERYResult;
+    "*[_type == 'surface' && _id == $id ][0]{\n  _id,\n  title,\n  imageObject,\n  type -> {\n    title\n  }\n}": SURFACE_QUERYResult;
   }
 }

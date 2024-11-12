@@ -4,6 +4,7 @@ import { SURFACESBYTYPE_QUERY, SURFACETYPE_QUERY, SURFACETYPES_QUERY } from "@/s
 import { PortableText, QueryParams } from "next-sanity";
 import Image from "next/image";
 import SurfaceSlider from "../../_components/SurfaceSlider";
+import Link from "next/link";
 
 
 
@@ -27,7 +28,7 @@ export default async function Page(props: { params: Promise<QueryParams> }) {
     params,
   });
   if (!surfaceType) {
-    return (<>oli</>);
+    return null;
   }
 
   const surfaces = await sanityFetch({
@@ -37,8 +38,17 @@ export default async function Page(props: { params: Promise<QueryParams> }) {
 
 
   return (
-  <section className="w-full min-h-[calc(100svh-60px)] flex py-5 md:py-20 default-paddings justify-center">
-    <article className="bg-light-dark z-10 gap-2 md:gap-10 max-w-screen-xl p-3 sm:p-8 flex flex-col w-full h-full rounded-2xl">
+  <section className="w-full min-h-[calc(100svh-60px)] flex flex-col gap-1 py-5 md:py-20 default-paddings justify-center z-10">
+    <Link className="text-white w-full mb-4 text-lg flex items-center gap-1" href={'/'}>
+        <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1} strokeLinecap="round" strokeLinejoin="round" className="">
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <path d="M5 12l14 0" />
+          <path d="M5 12l6 6" />
+          <path d="M5 12l6 -6" />
+        </svg>
+        Volver
+      </Link>
+    <article className="bg-light-dark gap-2 md:gap-10 max-w-screen-xl p-3 sm:p-8 flex flex-col w-full h-full rounded-2xl">
     <div className="flex flex-col lg:flex-row gap-2 md:gap-10">
     <Image className="w-full lg:w-1/2 object-cover rounded-lg h-40 sm:h-auto" src={urlFor(surfaceType.imageObject).width(800).height(400).format('webp').url()} alt={surfaceType.imageObject.alt} width={800} height={400}/>
     <div className="flex flex-col gap-4 w-full lg:w-1/2">

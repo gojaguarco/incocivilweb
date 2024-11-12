@@ -3,6 +3,7 @@
 import { HOMEPAGE_QUERYResult } from "@/sanity.types"
 import { urlFor } from "@/sanity/lib/image"
 import Image from "next/image"
+import { useRouter } from "next/navigation"
 import { useLayoutEffect, useRef, useState } from "react"
 
 type TProps = {
@@ -13,6 +14,9 @@ type TProps = {
 }
 
 const SurfaceSlider = ({content}: TProps) => {
+
+  const router = useRouter()
+
   const carouselRef = useRef<HTMLDivElement>(null);
 
   const [scroll, setScroll] = useState<number>(0);
@@ -59,8 +63,8 @@ const SurfaceSlider = ({content}: TProps) => {
       <section className="hidden lg:flex w-full pt-5 h-64 gap-2 make-3d items-center justify-center">
         {content.map((surface, index) => (
           <article 
-          className={`surface-object h-full flex items-center justify-center`} key={index}>
-            <Image className="w-full h-full object-cover rounded-xl" src={urlFor(surface.imageObject).width(600).height(600).format('webp').url()} alt={surface.imageObject.alt} width={600} height={600}/>
+          className={`surface-object h-full flex items-center justify-center cursor-zoom-in`} key={index}>
+            <Image onClick={() => router.push(`/surface/${surface._id}`)} className="w-full h-full object-cover rounded-xl" src={urlFor(surface.imageObject).width(600).height(600).format('webp').url()} alt={surface.imageObject.alt} width={600} height={600}/>
           </article>
         ))}
       </section>
@@ -75,10 +79,9 @@ const SurfaceSlider = ({content}: TProps) => {
                 onClick={() =>{
                   carouselRef?.current?.scrollTo({ left: index * imageWidth + (imageWidth/2) + 2.3 ,
                   behavior: "smooth"});
-                  // if(selectedImage === index){
-                  //   setImageIndex(index)
-                  //   setImageOpen(true);
-                  // }
+                  if(selectedImage === index){
+                    router.push(`/surface/${surface._id}`)
+                  }
                 }} 
                 className={`w-full h-full snap-center object-cover rounded-2xl transition-all ease-out duration-300 ${selectedImage === index ? "scale-100 cursor-zoom-in" : "cursor-pointer scale-75"}`} src={urlFor(surface.imageObject).width(600).height(600).format('webp').url()} alt={surface.imageObject.alt} width={600} height={600}/>
             </article>
