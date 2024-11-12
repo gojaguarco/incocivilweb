@@ -24,7 +24,7 @@ const DesktopNavBar = ({ className }: Props) => {
         <Link className={`${pathname === '/quienes-somos' && 'underline underline-offset-2 pointer-events-none'}`} href='/quienes-somos'>Quienes Somos</Link>
         <Link href='/'>Proyectos</Link>
         <Link className={`${pathname === '/services' && 'underline underline-offset-2 pointer-events-none'}`}  href='/services'>Servicios</Link>
-        <Link href='/'>Blog</Link>
+        <Link className={`${pathname === '/blog' && 'underline underline-offset-2 pointer-events-none'}`} href='/blog'>Blog</Link>
         
       </div>
       <section className="relative bg-light-dark rounded-bl-xl h-full pl-4 pr-10 xl:pr-20 2xl:pr-60 flex items-center justify-center">
