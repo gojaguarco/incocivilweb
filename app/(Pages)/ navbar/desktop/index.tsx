@@ -23,7 +23,7 @@ const DesktopNavBar = ({ className }: Props) => {
         <Link className={`${pathname === '/' && 'underline underline-offset-2 pointer-events-none'}`} href='/'>Home</Link>
         <Link className={`${pathname === '/quienes-somos' && 'underline underline-offset-2 pointer-events-none'}`} href='/quienes-somos'>Quienes Somos</Link>
         <Link href='/'>Proyectos</Link>
-        <Link href='/'>Servicios</Link>
+        <Link className={`${pathname === '/services' && 'underline underline-offset-2 pointer-events-none'}`}  href='/services'>Servicios</Link>
         <Link href='/'>Blog</Link>
         
       </div>

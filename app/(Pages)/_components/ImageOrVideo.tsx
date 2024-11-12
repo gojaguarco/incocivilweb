@@ -25,8 +25,7 @@ type TProps = {
 }
 
 const ImageOrVideo = ({content, className}: TProps) => {
-  if(content.imagenOVideo === true && content.imagen)
-  return (
+  if(content.imagenOVideo === true && content.imagen) return (
     <Image className={`${className} rounded-3xl`} src={urlFor(content.imagen).width(800).height(800).format('webp').url()} alt={content.imagen.alt} height={800} width={800}/>
   )
   if(content.video){
