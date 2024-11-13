@@ -29,7 +29,7 @@ const FaqSection = ({content}: TProps) => {
           ))}
           </section>
         </header>
-        <Image className={"w-full lg:w-2/5 aspect-video lg:aspect-video rounded-xl object-cover"} src={urlFor(content.imageObject).width(600).height(600).format('webp').url()} alt={content.imageObject.alt} width={600} height={600} />
+        <Image className={"w-full lg:w-2/5 aspect-video lg:aspect-video rounded-xl object-cover max-h-[500px]"} src={urlFor(content.imageObject).width(600).height(600).format('webp').url()} alt={content.imageObject.alt} width={600} height={600} />
       </div>
     </section>
   )

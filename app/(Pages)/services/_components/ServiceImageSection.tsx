@@ -6,7 +6,7 @@ import ImageOrVideo from "../../_components/ImageOrVideo"
 type TProps = {
   service: Extract<
   NonNullable<SERVICE_QUERYResult>,
-  {}
+  {_type: 'service'}
 >,
   inverse?: boolean;
   bg: string;

@@ -39,6 +39,9 @@ const ServicesSection = ({content}: TProps) => {
                 <div className="w-full flex flex-col justify-center gap-1 pr-1 lg:pr-4">
                   <h4>{service.title}</h4>
                   <p className="text-[13px]">{service.description}</p>
+                  <div className="pt-1">
+                    <LinkButton color="claro" size="pequeño" link={`/service/${service.reference._ref}`} text="Ver Servicio"/>
+                  </div>
                 </div>
               </article>
             ))}
