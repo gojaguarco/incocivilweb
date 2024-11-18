@@ -1,7 +1,7 @@
 import { ABOUTPAGE_QUERYResult } from "@/sanity.types"
 import { urlFor } from "@/sanity/lib/image"
 import Image from "next/image"
-import LinkButton from "../LinkButton"
+import LinkButton from "../../_components/LinkButton"
 
 
 type TProps = {

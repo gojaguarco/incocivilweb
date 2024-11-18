@@ -1705,6 +1705,130 @@ export type HOMEPAGE_QUERYResult = {
   }>;
 } | null;
 
+// Source: ./sanity/queries/projectQueries.ts
+// Variable: PROJECTS_QUERY
+// Query: *[_type == 'pages'][0]{  projectsPage[]{    ...,    projects[] -> {      _id,      image,      title,    }  }}
+export type PROJECTS_QUERYResult = {
+  projectsPage: Array<{
+    titleDescription?: string;
+    title: string;
+    imageObject: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      alt: string;
+      _type: "image";
+    };
+    _type: "projectContactSection";
+    _key: string;
+    projects: null;
+  } | {
+    titleDescription?: string;
+    title: string;
+    ctaButton1: Button;
+    projects: Array<{
+      _id: string;
+      image: {
+        asset?: {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+        };
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        alt: string;
+        _type: "imageObject";
+      };
+      title: string;
+    }>;
+    _type: "projectSection";
+    _key: string;
+  }>;
+} | null;
+// Variable: PROJECT_QUERY
+// Query: *[_type == 'project' && _id == $id][0]
+export type PROJECT_QUERYResult = {
+  _id: string;
+  _type: "project";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title: string;
+  descriptionText: string;
+  image: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt: string;
+    _type: "imageObject";
+  };
+  body: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "normal";
+    listItem?: "bullet";
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  } | {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt: string;
+    _type: "imageObject";
+    _key: string;
+  } | {
+    video: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.fileAsset";
+      };
+      _type: "file";
+    };
+    imagenDeCarga: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      alt: string;
+      _type: "imageObject";
+    };
+    _type: "video";
+    _key: string;
+  }>;
+} | null;
+
 // Source: ./sanity/queries/serviceQueries.ts
 // Variable: SERVICES_QUERY
 // Query: *[_type == 'service'][]
@@ -2114,6 +2238,8 @@ declare module "@sanity/client" {
     "*[_type == \"post\" ][0...12]{\n  _id, title, description, image\n}": BLOGS_QUERYResult;
     "*[_type == \"post\" && _id == $id][0]{\n  title, description, body, image, categories, publishedAt\n}": BLOG_QUERYResult;
     "*[_type == 'pages'][0]{\n  homePage[] {\n    ...,\n    primarySurfaces[]->,\n    surfaceList[]->,\n    faqs []->,\n  }\n}": HOMEPAGE_QUERYResult;
+    "*[_type == 'pages'][0]{\n  projectsPage[]{\n    ...,\n    projects[] -> {\n      _id,\n      image,\n      title,\n    }\n  }\n}": PROJECTS_QUERYResult;
+    "*[_type == 'project' && _id == $id][0]": PROJECT_QUERYResult;
     "*[_type == 'service'][]": SERVICES_QUERYResult;
     "*[_type == 'service' && _id == $id][0]": SERVICE_QUERYResult;
     "*[_type == 'surfaceTypes'][]": SURFACETYPES_QUERYResult;

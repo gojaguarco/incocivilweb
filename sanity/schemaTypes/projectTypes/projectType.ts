@@ -14,12 +14,6 @@ export const projectType = defineType({
       validation: (Rule) => Rule.required(),
 		}),
     defineField({
-      name: 'descriptionText',
-      title: 'Corta descripción del Proyecto',
-      type: 'text',
-      validation: (Rule) => Rule.required(),
-    }),
-    defineField({
       name: 'image',
       title: 'Imagen de Portada del Proyecto',
       type: 'imageObject',
@@ -34,20 +28,21 @@ export const projectType = defineType({
   preview: {
     select: {
       title: 'title',
-      subtitle: 'descriptionText',
+      subtitle: 'title',
+      media: 'image',
     },
     prepare(selection) {
-      const { title, subtitle } = selection;
+      const { title, subtitle, media } = selection;
       if (!title || !subtitle) {
         return {
           title: "Sin título",
-          subtitle: "Sin subtítulo",
+          subtitle: "Proyecto",
         };
       }
       return {
         title: `${title}`,
-        subtitle: `${subtitle}`,
-        media: DocumentVideoIcon,
+        subtitle: `Proyecto`,
+        media: media,
       };
     },
   },

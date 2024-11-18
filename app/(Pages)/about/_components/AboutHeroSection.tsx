@@ -1,5 +1,5 @@
 import { ABOUTPAGE_QUERYResult } from "@/sanity.types"
-import ImageOrVideo from "../ImageOrVideo"
+import ImageOrVideo from "../../_components/ImageOrVideo"
 
 type TProps = {
   content: Extract<

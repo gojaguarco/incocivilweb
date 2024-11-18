@@ -49,10 +49,10 @@ const Menu = ({
         </header>
         <section className="w-full h-full flex flex-col gap-4 p-10 [&>a]:text-xl" onClick={() => setIsMenu(false)}>
           <Link href='/'>Home</Link>
-          <Link href='/quienes-somos'>Quienes Somos</Link>
-          <Link href='/'>Proyectos</Link>
-          <Link href='/'>Servicios</Link>
-          <Link href='/'>Blog</Link>
+          <Link href='/about'>Quienes Somos</Link>
+          <Link href='/projects'>Proyectos</Link>
+          <Link href='/services'>Servicios</Link>
+          <Link href='/blog'>Blog</Link>
         </section>
         <footer className=" w-screen max-w-[400px] h-16 border-t border-stone-300 flex items-center justify-center gap-2">
           <Image src="/IsoLogo.svg" alt="Incocivil isoLogo" height={50} width={50} />

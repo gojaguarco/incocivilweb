@@ -21,8 +21,8 @@ const DesktopNavBar = ({ className }: Props) => {
       </Link>
       <div className="w-full h-full flex items-center justify-end prose gap-6 xl:gap-9 pr-10 nav-font">
         <Link className={`${pathname === '/' && 'underline underline-offset-2 pointer-events-none'}`} href='/'>Home</Link>
-        <Link className={`${pathname === '/quienes-somos' && 'underline underline-offset-2 pointer-events-none'}`} href='/quienes-somos'>Quienes Somos</Link>
-        <Link href='/'>Proyectos</Link>
+        <Link className={`${pathname === '/about' && 'underline underline-offset-2 pointer-events-none'}`} href='/about'>Quienes Somos</Link>
+        <Link className={`${pathname === '/projects' && 'underline underline-offset-2 pointer-events-none'}`} href='/projects'>Proyectos</Link>
         <Link className={`${pathname === '/services' && 'underline underline-offset-2 pointer-events-none'}`}  href='/services'>Servicios</Link>
         <Link className={`${pathname === '/blog' && 'underline underline-offset-2 pointer-events-none'}`} href='/blog'>Blog</Link>
         

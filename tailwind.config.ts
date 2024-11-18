@@ -20,6 +20,7 @@ const config: Config = {
         background: "var(--background)",
         foreground: "var(--foreground)",
         primary: '#363942',
+        'primary-light': '#414553',
         dark: '#121212',
         accent1: '#C95701',
         accent2: '#F8DB7D',

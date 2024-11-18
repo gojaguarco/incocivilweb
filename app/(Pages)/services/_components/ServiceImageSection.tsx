@@ -20,7 +20,7 @@ const ServiceImageSection = ({service, inverse, bg}: TProps) => {
             <h2 className="text-slate-800 text-xl sm:text-2xl">{service.title}</h2>
             <p>{service.descriptionText}</p>
             <div className="flex gap-3">
-              <LinkButton color={'oscuro'} link={`/service/${service._id}`} size={'mediano'} text={'Ver Servicio'}/>
+              <LinkButton color={'oscuro'} link={`/services/${service._id}`} size={'mediano'} text={'Ver Servicio'}/>
             </div>
           </section>
           <ImageOrVideo className="w-full lg:w-1/2 aspect-video object-cover" content={service.ImageOrVideo} />

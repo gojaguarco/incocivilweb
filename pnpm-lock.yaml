@@ -659,8 +659,8 @@ packages:
       '@codemirror/view': ^6.0.0
       '@lezer/common': ^1.0.0
 
-  '@codemirror/autocomplete@6.18.2':
-    resolution: {integrity: sha512-wJGylKtMFR/Ds6Gh01+OovXE/pncPiKZNNBKuC39pKnH+XK5d9+WsNqcrdxPjFPFTigRBqse0rfxw9UxrfyhPg==}
+  '@codemirror/autocomplete@6.18.3':
+    resolution: {integrity: sha512-1dNIOmiM0z4BIBwxmxEfA1yoxh1MF/6KPBbh20a5vphGV0ictKlgQsbJs6D6SkR6iJpGbpwRsa6PFMNlg9T9pQ==}
     peerDependencies:
       '@codemirror/language': ^6.0.0
       '@codemirror/state': ^6.0.0
@@ -694,8 +694,8 @@ packages:
   '@codemirror/view@6.34.1':
     resolution: {integrity: sha512-t1zK/l9UiRqwUNPm+pdIT0qzJlzuVckbTEMVNFhfWkGiBQClstzg+78vedCvLSX0xJEZ6lwZbPpnljL7L6iwMQ==}
 
-  '@codemirror/view@6.34.2':
-    resolution: {integrity: sha512-d6n0WFvL970A9Z+l9N2dO+Hk9ev4hDYQzIx+B9tCyBP0W5wPEszi1rhuyFesNSkLZzXbQE5FPH7F/z/TMJfoPA==}
+  '@codemirror/view@6.34.3':
+    resolution: {integrity: sha512-Ph5d+u8DxIeSgssXEakaakImkzBV4+slwIbcxl9oc9evexJhImeu/G8TK7+zp+IFK9KuJ0BdSn6kTBJeH2CHvA==}
 
   '@dnd-kit/accessibility@3.1.0':
     resolution: {integrity: sha512-ea7IkhKvlJUv9iSHJOnxinBcoOI3ppGnnL+VDJ75O45Nss6HtZd8IdN8touXPDtASfeI2T2LImb8VOZcL47wjQ==}
@@ -5634,11 +5634,11 @@ snapshots:
       '@codemirror/view': 6.34.1
       '@lezer/common': 1.2.3
 
-  '@codemirror/autocomplete@6.18.2(@codemirror/language@6.10.3)(@codemirror/state@6.4.1)(@codemirror/view@6.34.2)(@lezer/common@1.2.3)':
+  '@codemirror/autocomplete@6.18.3(@codemirror/language@6.10.3)(@codemirror/state@6.4.1)(@codemirror/view@6.34.3)(@lezer/common@1.2.3)':
     dependencies:
       '@codemirror/language': 6.10.3
       '@codemirror/state': 6.4.1
-      '@codemirror/view': 6.34.2
+      '@codemirror/view': 6.34.3
       '@lezer/common': 1.2.3
 
   '@codemirror/commands@6.7.1':
@@ -5682,7 +5682,7 @@ snapshots:
   '@codemirror/search@6.5.7':
     dependencies:
       '@codemirror/state': 6.4.1
-      '@codemirror/view': 6.34.2
+      '@codemirror/view': 6.34.3
       crelt: 1.0.6
 
   '@codemirror/state@6.4.1': {}
@@ -5691,7 +5691,7 @@ snapshots:
     dependencies:
       '@codemirror/language': 6.10.3
       '@codemirror/state': 6.4.1
-      '@codemirror/view': 6.34.2
+      '@codemirror/view': 6.34.3
       '@lezer/highlight': 1.2.1
 
   '@codemirror/view@6.34.1':
@@ -5700,7 +5700,7 @@ snapshots:
       style-mod: 4.1.2
       w3c-keyname: 2.2.8
 
-  '@codemirror/view@6.34.2':
+  '@codemirror/view@6.34.3':
     dependencies:
       '@codemirror/state': 6.4.1
       style-mod: 4.1.2
@@ -7210,13 +7210,13 @@ snapshots:
 
   codemirror@6.0.1(@lezer/common@1.2.3):
     dependencies:
-      '@codemirror/autocomplete': 6.18.2(@codemirror/language@6.10.3)(@codemirror/state@6.4.1)(@codemirror/view@6.34.2)(@lezer/common@1.2.3)
+      '@codemirror/autocomplete': 6.18.3(@codemirror/language@6.10.3)(@codemirror/state@6.4.1)(@codemirror/view@6.34.3)(@lezer/common@1.2.3)
       '@codemirror/commands': 6.7.1
       '@codemirror/language': 6.10.3
       '@codemirror/lint': 6.8.2
       '@codemirror/search': 6.5.7
       '@codemirror/state': 6.4.1
-      '@codemirror/view': 6.34.2
+      '@codemirror/view': 6.34.3
     transitivePeerDependencies:
       - '@lezer/common'
 

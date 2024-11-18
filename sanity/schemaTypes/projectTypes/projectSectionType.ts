@@ -34,7 +34,7 @@ export const projectSectionType = defineType({
       }],
       validation: (Rule) => [
         Rule.required(),
-        Rule.unique(),
+        // Rule.unique(),
         Rule.min(2),
       ],
     })

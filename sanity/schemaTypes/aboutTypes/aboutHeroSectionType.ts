@@ -43,7 +43,7 @@ export const aboutHeroSectionType = defineType({
   preview: {
     select: {
       title: 'titleDescription',
-      subtitle: 'DescriptionText',
+      subtitle: 'descriptionText',
     },
     prepare(selection) {
       const { title, subtitle } = selection;

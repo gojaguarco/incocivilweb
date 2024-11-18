@@ -1,7 +1,7 @@
 import { sanityFetch } from "@/sanity/lib/client";
-import AboutHeroSection from "../_components/About/AboutHeroSection";
+import AboutHeroSection from "./_components/AboutHeroSection";
 import { ABOUTPAGE_QUERY } from "@/sanity/queries/aboutQueries";
-import WhatWeDoSection from "../_components/About/WhatWeDoSection";
+import WhatWeDoSection from "./_components/WhatWeDoSection";
 import ImageSection from "../_components/ImageSection";
 
 

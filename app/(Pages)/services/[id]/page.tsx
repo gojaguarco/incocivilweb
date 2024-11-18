@@ -33,7 +33,7 @@ export default async function Page(props: { params: Promise<QueryParams> }) {
 
   return(
     <section className="w-full min-h-[calc(100svh-60px)] flex justify-center py-8 md:py-20 default-paddings bg-light-dark z-10">
-      <div className="flex flex-col max-w-screen-md">
+      <div className="w-full flex flex-col max-w-screen-md gap-6">
         <Link className="w-full mb-4 text-lg flex items-center gap-1" href={'/services'}>
           <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1} strokeLinecap="round" strokeLinejoin="round" className="">
             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
