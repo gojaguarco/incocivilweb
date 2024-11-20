@@ -427,13 +427,6 @@
         },
         "optional": false
       },
-      "descriptionText": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        },
-        "optional": false
-      },
       "image": {
         "type": "objectAttribute",
         "value": {
@@ -1107,6 +1100,37 @@
                 "type": "string",
                 "value": "image"
               }
+            }
+          }
+        },
+        "optional": false
+      },
+      "contactCard": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "object",
+          "attributes": {
+            "title": {
+              "type": "objectAttribute",
+              "value": {
+                "type": "string"
+              },
+              "optional": false
+            },
+            "description": {
+              "type": "objectAttribute",
+              "value": {
+                "type": "string"
+              },
+              "optional": false
+            },
+            "ctaButton": {
+              "type": "objectAttribute",
+              "value": {
+                "type": "inline",
+                "name": "button"
+              },
+              "optional": false
             }
           }
         },
@@ -5816,6 +5840,37 @@
                             "type": "string",
                             "value": "image"
                           }
+                        }
+                      }
+                    },
+                    "optional": false
+                  },
+                  "contactCard": {
+                    "type": "objectAttribute",
+                    "value": {
+                      "type": "object",
+                      "attributes": {
+                        "title": {
+                          "type": "objectAttribute",
+                          "value": {
+                            "type": "string"
+                          },
+                          "optional": false
+                        },
+                        "description": {
+                          "type": "objectAttribute",
+                          "value": {
+                            "type": "string"
+                          },
+                          "optional": false
+                        },
+                        "ctaButton": {
+                          "type": "objectAttribute",
+                          "value": {
+                            "type": "inline",
+                            "name": "button"
+                          },
+                          "optional": false
                         }
                       }
                     },

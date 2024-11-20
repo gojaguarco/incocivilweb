@@ -81,7 +81,6 @@ export type Project = {
   _updatedAt: string;
   _rev: string;
   title: string;
-  descriptionText: string;
   image: {
     asset?: {
       _ref: string;
@@ -187,6 +186,11 @@ export type ProjectContactSection = {
     crop?: SanityImageCrop;
     alt: string;
     _type: "image";
+  };
+  contactCard: {
+    title: string;
+    description: string;
+    ctaButton: Button;
   };
 };
 
@@ -959,6 +963,11 @@ export type Pages = {
       alt: string;
       _type: "image";
     };
+    contactCard: {
+      title: string;
+      description: string;
+      ctaButton: Button;
+    };
     _type: "projectContactSection";
     _key: string;
   }>;
@@ -1724,6 +1733,11 @@ export type PROJECTS_QUERYResult = {
       alt: string;
       _type: "image";
     };
+    contactCard: {
+      title: string;
+      description: string;
+      ctaButton: Button;
+    };
     _type: "projectContactSection";
     _key: string;
     projects: null;
@@ -1760,7 +1774,6 @@ export type PROJECT_QUERYResult = {
   _updatedAt: string;
   _rev: string;
   title: string;
-  descriptionText: string;
   image: {
     asset?: {
       _ref: string;

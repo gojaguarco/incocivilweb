@@ -20,6 +20,32 @@ export const projectContactSectionType = defineType({
       validation: (Rule) => Rule.required(),
     }),
     ImageSchema,
+    defineField({
+      name: 'contactCard',
+      title: 'Cuadro de Email',
+      type: 'object',
+      fields: [
+        defineField({
+          name: 'title',
+          title: 'Título',
+          type: 'string',
+          validation: (Rule) => Rule.required(),
+        }),
+        defineField({
+          name: 'description',
+          title: 'Descripción',
+          type: 'string',
+          validation: (Rule) => Rule.required(),
+        }),
+        defineField({
+          name: 'ctaButton',
+          title: 'Botón de Call to Action',
+          type: 'button',
+          validation: (Rule) => Rule.required(),
+        })
+      ],
+      validation: (Rule) => Rule.required(),
+    }),
   ],
   preview: {
     select: {

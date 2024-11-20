@@ -17,9 +17,9 @@ const Page = async () => {
           {section._type == 'projectSection' && (
             <ProjectSection bg={index % 2 === 0 ? 'bg-light' : 'bg-light-dark'} content={section} first={index === 0 ? true : false}/>
           )}
-          {/* {section._type == 'projectContactSection' && (
-            <ProjectContactSection content={section} />
-          )} */}
+          {section._type == 'projectContactSection' && (
+            <ProjectContactSection bg={index % 2 === 0 ? 'bg-light' : 'bg-light-dark'} content={section} />
+          )}
         </section>
       ))}
     </>

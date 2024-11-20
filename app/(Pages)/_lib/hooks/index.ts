@@ -21,7 +21,7 @@ export const useClickOutside = (
     return () => {
       document.removeEventListener('mousedown', handleClickOutside as unknown as EventListener);
     };
-  }, [ref, callback, ignoreRef]);
+  }, [ref, callback, ignoreRef, handleClickOutside]);
 };
 
 export const useHideBodyOverflow = (isOverflowHidden: boolean) => {

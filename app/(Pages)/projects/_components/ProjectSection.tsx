@@ -19,7 +19,7 @@ const ProjectSection = ({content, bg, first}: TProps) => {
     <section className={`flex justify-center ${!first && bg} w-full py-14 lg:py-20 overflow-hidden default-paddings`}>
       <div className="max-w-screen-xl flex flex-col w-full items-center gap-8">
         <header className="flex justify-between w-full">
-          <div className="flex flex-col text-light">
+          <div className={`flex flex-col ${first ? 'text-light' : 'text-primary'}`}>
             <h5 className="text-sm sm:text-base md:text-lg font-thin tracking-[3px]">{content.titleDescription}</h5>
             <h2 className="text-xl md:text-2xl font-semibold mt-1">{content.title}</h2>
           </div>
@@ -27,7 +27,7 @@ const ProjectSection = ({content, bg, first}: TProps) => {
             <LinkButton color={content.ctaButton1.color} link={content.ctaButton1.link} size={content.ctaButton1.size} text={content.ctaButton1.text} />
           </div>
         </header>
-        <section className="w-full overflow-x-scroll no-scrollbar">
+        <section className="w-full overflow-x-scroll no-scrollbar p-2">
           <ul className="flex gap-6">
             {content.projects.map((project, index) => (
               <Link className={`p-2 ${first ? 'bg-primary' : 'bg-light'} rounded-2xl relative flex items-center justify-center h-48 w-64 lg:h-56 lg:w-80 el-shadow group flex-shrink-0`} href={`/projects/${project._id}`} key={index}>
