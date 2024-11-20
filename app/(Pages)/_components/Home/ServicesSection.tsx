@@ -40,7 +40,7 @@ const ServicesSection = ({content}: TProps) => {
                   <h4>{service.title}</h4>
                   <p className="text-[13px]">{service.description}</p>
                   <div className="pt-1">
-                    <LinkButton color="claro" size="pequeño" link={`/service/${service.reference._ref}`} text="Ver Servicio"/>
+                    <LinkButton color="claro" size="pequeño" link={`/services/${service.reference._ref}`} text="Ver Servicio"/>
                   </div>
                 </div>
               </article>
