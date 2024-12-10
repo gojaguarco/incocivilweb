@@ -30,7 +30,7 @@ const DesktopNavBar = ({ className }: Props) => {
       <section className="relative bg-light-dark rounded-bl-xl h-full pl-4 pr-10 xl:pr-20 2xl:pr-60 flex items-center justify-center">
         <Esquina className="absolute h-3 w-3 top-0 -left-3" colorHex="e0e3ec"/>
         <Esquina className="absolute h-3 w-3 right-0 -bottom-[12.5px]" colorHex="e0e3ec"/>
-        <LinkButton text='Contáctanos' size="grande" color="naranja" link="/" />
+        <LinkButton text='Contáctanos' size="grande" color="naranja" link="/contact" />
       </section>
     </nav>
   )

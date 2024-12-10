@@ -13,7 +13,7 @@ type TProps = {
 
 const HomeHeroSection = ({content}: TProps) => {
   return (
-    <section className="flex justify-center relative w-full py-12 lg:py-32 overflow-hidden default-paddings">
+    <section className="flex justify-center relative w-full py-12 lg:py-24 overflow-hidden default-paddings">
       <div className="flex flex-col lg:flex-row w-full gap-8 lg:gap-14 items-end max-w-screen-xl">
         <div className="flex flex-col w-full lg:w-1/2 gap-8 lg:gap-12">
           <header className="flex flex-col text-light-dark gap-1">
