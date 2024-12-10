@@ -10,7 +10,7 @@ export const configType = defineType({
     defineField({
       name: 'contactLink',
       title: 'Link URL de Contacto',
-      type: 'url',
+      type: 'string',
       validation: (Rule) => Rule.required(),
     }),
     defineField({

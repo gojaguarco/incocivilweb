@@ -33,7 +33,8 @@ export default async function Page(props: { params: Promise<QueryParams> }) {
   }
 
   return(
-    <section className="w-full min-h-[calc(100svh-60px)] flex py-5 md:py-20 default-paddings items-center flex-col gap-1 z-10">
+    <section className="w-full min-h-[calc(100svh-60px)] flex py-5 md:py-20 default-paddings justify-center z-10">
+      <div className="flex flex-col gap-1 justify-center max-w-screen-xl w-full ">
       <Link className="text-white w-full mb-4 text-lg flex items-center gap-1" href={'/'}>
         <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1} strokeLinecap="round" strokeLinejoin="round" className="">
           <path stroke="none" d="M0 0h24v24H0z" fill="none" />
@@ -55,6 +56,7 @@ export default async function Page(props: { params: Promise<QueryParams> }) {
           <Esquina className="absolute rotate-90 w-2.5 h-2.5 -left-2.5 bottom-0" colorHex="f1f4fe"/>
         </div>
       </article>
+      </div>
     </section>
   )
 }

@@ -1713,6 +1713,13 @@ export type HOMEPAGE_QUERYResult = {
     faqs: null;
   }>;
 } | null;
+// Variable: CONTACTCARD_QUERY
+// Query: *[_type == 'pages'][0].homePage[_type == 'contactSection'][0].contactCard
+export type CONTACTCARD_QUERYResult = {
+  title: string;
+  description: string;
+  ctaButton: Button;
+} | null;
 
 // Source: ./sanity/queries/projectQueries.ts
 // Variable: PROJECTS_QUERY
@@ -2251,6 +2258,7 @@ declare module "@sanity/client" {
     "*[_type == \"post\" ][0...12]{\n  _id, title, description, image\n}": BLOGS_QUERYResult;
     "*[_type == \"post\" && _id == $id][0]{\n  title, description, body, image, categories, publishedAt\n}": BLOG_QUERYResult;
     "*[_type == 'pages'][0]{\n  homePage[] {\n    ...,\n    primarySurfaces[]->,\n    surfaceList[]->,\n    faqs []->,\n  }\n}": HOMEPAGE_QUERYResult;
+    "*[_type == 'pages'][0].homePage[_type == 'contactSection'][0].contactCard": CONTACTCARD_QUERYResult;
     "*[_type == 'pages'][0]{\n  projectsPage[]{\n    ...,\n    projects[] -> {\n      _id,\n      image,\n      title,\n    }\n  }\n}": PROJECTS_QUERYResult;
     "*[_type == 'project' && _id == $id][0]": PROJECT_QUERYResult;
     "*[_type == 'service'][]": SERVICES_QUERYResult;

@@ -9,3 +9,5 @@ defineQuery(`*[_type == 'pages'][0]{
     faqs []->,
   }
 }`)
+
+export const CONTACTCARD_QUERY = defineQuery(`*[_type == 'pages'][0].homePage[_type == 'contactSection'][0].contactCard`)
