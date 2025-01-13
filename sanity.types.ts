@@ -2013,6 +2013,14 @@ export type SERVICE_QUERYResult = {
   }>;
 } | null;
 
+// Source: ./sanity/queries/settingsQueries.ts
+// Variable: EMAILSENDING_QUERY
+// Query: *[_type == 'config'][0].information{  phone,  email}
+export type EMAILSENDING_QUERYResult = {
+  phone: number;
+  email: string;
+} | null;
+
 // Source: ./sanity/queries/surfaceQueries.ts
 // Variable: SURFACETYPES_QUERY
 // Query: *[_type == 'surfaceTypes'][]
@@ -2263,6 +2271,7 @@ declare module "@sanity/client" {
     "*[_type == 'project' && _id == $id][0]": PROJECT_QUERYResult;
     "*[_type == 'service'][]": SERVICES_QUERYResult;
     "*[_type == 'service' && _id == $id][0]": SERVICE_QUERYResult;
+    "*[_type == 'config'][0].information{\n  phone,\n  email\n}": EMAILSENDING_QUERYResult;
     "*[_type == 'surfaceTypes'][]": SURFACETYPES_QUERYResult;
     "*[_type == 'surfaceTypes' && _id == $id][0]": SURFACETYPE_QUERYResult;
     "*[_type == 'surface' && type._ref == $id ][0...10]": SURFACESBYTYPE_QUERYResult;

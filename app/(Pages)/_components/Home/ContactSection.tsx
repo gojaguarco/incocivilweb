@@ -3,6 +3,8 @@ import ContactCard from "../ContactCard"
 import Image from "next/image"
 import { urlFor } from "@/sanity/lib/image"
 import LinkButton from "../LinkButton"
+import { sanityFetch } from "@/sanity/lib/client"
+import { EMAILSENDING_QUERY } from "@/sanity/queries/settingsQueries"
 
 type TProps = {
   content: Extract<
@@ -11,7 +13,12 @@ type TProps = {
 >
 }
 
-const ContactSection = ({content}: TProps) => {
+const ContactSection = async ({content}: TProps) => {
+
+  const adminData = await sanityFetch({
+    query: EMAILSENDING_QUERY,
+  })
+  
   return (
     <section className="flex justify-center relative w-full py-20 overflow-hidden default-paddings bg-light-dark">
       <div className="flex flex-col lg:flex-row w-full gap-14 max-w-screen-xl">
@@ -35,7 +42,7 @@ const ContactSection = ({content}: TProps) => {
             </article>
           </div>
         </header>
-        <ContactCard className="w-full lg:w-1/2 bg-light" content={content.contactCard}/>
+        <ContactCard className="w-full lg:w-1/2 bg-light" content={content.contactCard} adminData={adminData}/>
       </div>
     </section>
   )
