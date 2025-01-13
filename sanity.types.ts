@@ -2020,6 +2020,23 @@ export type EMAILSENDING_QUERYResult = {
   phone: number;
   email: string;
 } | null;
+// Variable: FOOTERSETTINGS_QUERY
+// Query: *[_type == 'config'][0]{  information,  socialLinks}
+export type FOOTERSETTINGS_QUERYResult = {
+  information: {
+    email: string;
+    phone: number;
+    address?: string;
+    city: string;
+    country: string;
+  };
+  socialLinks: Array<{
+    redSocial: "facebook" | "Instagram" | "linkedIn" | "Otra" | "TikTok" | "WhatsApp" | "X" | "YouTube";
+    url: string;
+    _type: "link";
+    _key: string;
+  }>;
+} | null;
 
 // Source: ./sanity/queries/surfaceQueries.ts
 // Variable: SURFACETYPES_QUERY
@@ -2272,6 +2289,7 @@ declare module "@sanity/client" {
     "*[_type == 'service'][]": SERVICES_QUERYResult;
     "*[_type == 'service' && _id == $id][0]": SERVICE_QUERYResult;
     "*[_type == 'config'][0].information{\n  phone,\n  email\n}": EMAILSENDING_QUERYResult;
+    "*[_type == 'config'][0]{\n  information,\n  socialLinks\n}": FOOTERSETTINGS_QUERYResult;
     "*[_type == 'surfaceTypes'][]": SURFACETYPES_QUERYResult;
     "*[_type == 'surfaceTypes' && _id == $id][0]": SURFACETYPE_QUERYResult;
     "*[_type == 'surface' && type._ref == $id ][0...10]": SURFACESBYTYPE_QUERYResult;

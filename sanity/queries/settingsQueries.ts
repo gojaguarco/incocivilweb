@@ -4,3 +4,8 @@ export const EMAILSENDING_QUERY = defineQuery(`*[_type == 'config'][0].informati
   phone,
   email
 }`)
+
+export const FOOTERSETTINGS_QUERY = defineQuery(`*[_type == 'config'][0]{
+  information,
+  socialLinks
+}`)
