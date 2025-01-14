@@ -1,3 +1,4 @@
+import BackButton from "@/app/(Pages)/_components/BackButton";
 import Modal from "@/app/(Pages)/_components/Modal";
 import SurfaceSlider from "@/app/(Pages)/_components/SurfaceSlider";
 import { client, sanityFetch } from "@/sanity/lib/client";
@@ -42,6 +43,7 @@ export default async function Page(props: { params: Promise<QueryParams> }) {
         <Image className="w-full lg:w-1/2 object-cover rounded-lg h-40 lg:h-auto" src={urlFor(surfaceType.imageObject).width(800).height(400).format('webp').url()} alt={surfaceType.imageObject.alt} width={800} height={400}/>
         <div className="flex flex-col gap-4 w-full lg:w-1/2">
           <h2>{surfaceType.title}</h2>
+          <BackButton />
           <PortableText value={surfaceType.description}/>
         </div>
       </div>

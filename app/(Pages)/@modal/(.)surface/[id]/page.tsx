@@ -5,6 +5,7 @@ import Image from "next/image";
 import { QueryParams } from "sanity";
 import Modal from "@/app/(Pages)/_components/Modal";
 import Esquina from "@/app/(Pages)/_components/Esquina";
+import BackButton from "@/app/(Pages)/_components/BackButton";
 
 
 
@@ -39,9 +40,10 @@ export default async function Page(props: { params: Promise<QueryParams> }) {
         <div className="absolute bottom-2 right-2 bg-light rounded-tl-xl flex flex-col p-2 gap-0.5">
           <h2>{surface.title}</h2>
           <div className="flex items-center gap-2">
-            <div className="w-5 h-[3px] bg-accent1 rounded-full"/>
-            <h6 className="text-accent1">{surface.type.title}</h6>
+              <div className="w-5 h-[3px] bg-accent1 rounded-full"/>
+              <h6 className="text-accent1">{surface.type.title}</h6>
           </div>
+          <BackButton />
           <Esquina className="absolute rotate-90 w-2.5 h-2.5 -top-2.5 right-0" colorHex="f1f4fe"/>
           <Esquina className="absolute rotate-90 w-2.5 h-2.5 -left-2.5 bottom-0" colorHex="f1f4fe"/>
         </div>
