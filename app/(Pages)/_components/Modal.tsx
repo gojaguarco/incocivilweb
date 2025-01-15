@@ -13,7 +13,7 @@ const Modal = ({
   const router = useRouter()
 
   const handleOpenChange = () => {
-    router.back()
+    router.push("/")
   }
 
   const stopPropagation = (event: React.MouseEvent) => {

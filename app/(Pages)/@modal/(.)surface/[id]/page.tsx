@@ -1,11 +1,12 @@
 import { client, sanityFetch } from "@/sanity/lib/client";
 import { urlFor } from "@/sanity/lib/image";
-import { SURFACE_QUERY, SURFACES_QUERY } from "@/sanity/queries/surfaceQueries";
+import { HOMESURFACEIDS_QUERY, SURFACE_QUERY, SURFACES_QUERY } from "@/sanity/queries/surfaceQueries";
 import Image from "next/image";
 import { QueryParams } from "sanity";
 import Modal from "@/app/(Pages)/_components/Modal";
 import Esquina from "@/app/(Pages)/_components/Esquina";
 import BackButton from "@/app/(Pages)/_components/BackButton";
+import NavigationButtons from "@/app/(Pages)/_components/NavigationButtons";
 
 
 
@@ -25,10 +26,17 @@ export default async function Page(props: { params: Promise<QueryParams> }) {
 
   const params = await props.params;
 
+  const surfaceId = params.id as string || "";
+
   const surface = await sanityFetch({
     query: SURFACE_QUERY,
     params,
   });
+
+  const surfacesArray = await sanityFetch({
+    query: HOMESURFACEIDS_QUERY,
+  });
+
   if(!surface) {
     return null
   }
@@ -36,6 +44,7 @@ export default async function Page(props: { params: Promise<QueryParams> }) {
   return(
     <Modal>
       <article className="w-full max-w-screen-xl p-2 rounded-3xl bg-light relative overflow-hidden">
+        <NavigationButtons currentId={surfaceId} idArray={surfacesArray as string[]} />
         <Image className="w-full rounded-2xl max-w-screen-xl" src={urlFor(surface.imageObject).width(2000).height(1000).format('webp').url()} alt={surface.imageObject.alt} width={2000} height={1000}/>
         <div className="absolute bottom-2 right-2 bg-light rounded-tl-xl flex flex-col p-2 gap-0.5">
           <h2>{surface.title}</h2>

@@ -83,5 +83,22 @@ export const configType = defineType({
         Rule.min(2)
       ],
     }),
+    defineField({
+      name: "metadata",
+      title: "Metadata",
+      type: "object",
+      fields: [
+        defineField({
+          name: "title",
+          title: "Título de la página (SEO)",
+          type: "string",
+        }),
+        defineField({
+          name: "description",
+          title: "Descripción de la página (SEO)",
+          type: "text",
+        }),
+      ]
+    })
   ]
 })

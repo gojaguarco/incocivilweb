@@ -72,6 +72,10 @@ export type Config = {
     _type: "link";
     _key: string;
   }>;
+  metadata?: {
+    title?: string;
+    description?: string;
+  };
 };
 
 export type Project = {
@@ -2037,6 +2041,12 @@ export type FOOTERSETTINGS_QUERYResult = {
     _key: string;
   }>;
 } | null;
+// Variable: METADATA_QUERY
+// Query: *[_type == 'config'][0].metadata
+export type METADATA_QUERYResult = {
+  title?: string;
+  description?: string;
+} | null;
 
 // Source: ./sanity/queries/surfaceQueries.ts
 // Variable: SURFACETYPES_QUERY
@@ -2274,6 +2284,12 @@ export type SURFACE_QUERYResult = {
     title: string;
   };
 } | null;
+// Variable: ALLSURFACEIDS_QUERY
+// Query: *[_type == 'surface'][]._id
+export type ALLSURFACEIDS_QUERYResult = Array<string>;
+// Variable: HOMESURFACEIDS_QUERY
+// Query: *[_type == 'pages'][0].homePage[_type == 'surfaceSliderSection'][0].surfaceList[]._ref
+export type HOMESURFACEIDS_QUERYResult = Array<string> | null;
 
 // Query TypeMap
 import "@sanity/client";
@@ -2290,10 +2306,13 @@ declare module "@sanity/client" {
     "*[_type == 'service' && _id == $id][0]": SERVICE_QUERYResult;
     "*[_type == 'config'][0].information{\n  phone,\n  email\n}": EMAILSENDING_QUERYResult;
     "*[_type == 'config'][0]{\n  information,\n  socialLinks\n}": FOOTERSETTINGS_QUERYResult;
+    "*[_type == 'config'][0].metadata": METADATA_QUERYResult;
     "*[_type == 'surfaceTypes'][]": SURFACETYPES_QUERYResult;
     "*[_type == 'surfaceTypes' && _id == $id][0]": SURFACETYPE_QUERYResult;
     "*[_type == 'surface' && type._ref == $id ][0...10]": SURFACESBYTYPE_QUERYResult;
     "*[_type == 'surface'][]": SURFACES_QUERYResult;
     "*[_type == 'surface' && _id == $id ][0]{\n  _id,\n  title,\n  imageObject,\n  type -> {\n    title\n  }\n}": SURFACE_QUERYResult;
+    "*[_type == 'surface'][]._id": ALLSURFACEIDS_QUERYResult;
+    "*[_type == 'pages'][0].homePage[_type == 'surfaceSliderSection'][0].surfaceList[]._ref\n": HOMESURFACEIDS_QUERYResult;
   }
 }

@@ -9,3 +9,5 @@ export const FOOTERSETTINGS_QUERY = defineQuery(`*[_type == 'config'][0]{
   information,
   socialLinks
 }`)
+
+export const METADATA_QUERY = defineQuery(`*[_type == 'config'][0].metadata`)

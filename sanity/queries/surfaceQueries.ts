@@ -15,3 +15,8 @@ export const SURFACE_QUERY = defineQuery(`*[_type == 'surface' && _id == $id ][0
     title
   }
 }`)
+
+export const ALLSURFACEIDS_QUERY = defineQuery(`*[_type == 'surface'][]._id`)
+
+export const HOMESURFACEIDS_QUERY = defineQuery(`*[_type == 'pages'][0].homePage[_type == 'surfaceSliderSection'][0].surfaceList[]._ref
+`)

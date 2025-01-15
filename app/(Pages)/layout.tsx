@@ -6,6 +6,8 @@ import { VisualEditing } from "next-sanity";
 import Footer from "./_components/Footer";
 import Navbar from "./ navbar";
 import { WhatsappButton } from "./_components/WhatsappButton";
+import { METADATA_QUERY } from "@/sanity/queries/settingsQueries";
+import { sanityFetch } from "@/sanity/lib/client";
 
 const inter = Inter({
   weight: ["100", "200", "300", "400", "500", "700", "800", "900"],
@@ -17,6 +19,19 @@ const montserrat = Montserrat({
   subsets: ["latin"],
   variable: "--font-montserrat",
 });
+
+export async function generateMetadata() {
+
+  const Metadata = await sanityFetch({
+    query: METADATA_QUERY,
+  })
+
+  return {
+    title: Metadata?.title,
+    description: Metadata?.description,
+  };
+}
+
 
 export default async function PagesLayout(
   {
