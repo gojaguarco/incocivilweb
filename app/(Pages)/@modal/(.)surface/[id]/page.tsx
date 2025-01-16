@@ -43,11 +43,11 @@ export default async function Page(props: { params: Promise<QueryParams> }) {
 
   return(
     <Modal>
-      <article className="w-full max-w-screen-xl p-2 rounded-3xl bg-light relative overflow-hidden">
+      <article className="h-[80svh] sm:h-[70svh] md:h-[60svh] w-full max-w-screen-xl p-2 rounded-3xl bg-light relative overflow-hidden">
         <NavigationButtons currentId={surfaceId} idArray={surfacesArray as string[]} />
-        <Image className="w-full rounded-2xl max-w-screen-xl" src={urlFor(surface.imageObject).width(2000).height(1000).format('webp').url()} alt={surface.imageObject.alt} width={2000} height={1000}/>
-        <div className="absolute bottom-2 right-2 bg-light rounded-tl-xl flex flex-col p-2 gap-0.5">
-          <h2>{surface.title}</h2>
+        <Image className="w-full h-full object-cover rounded-2xl max-w-screen-xl" src={urlFor(surface.imageObject).width(2000).height(1000).format('webp').quality(100).url()} alt={surface.imageObject.alt} width={2000} height={1000}/>
+        <div className="max-w-[70%] absolute bottom-2 right-2 bg-light rounded-tl-xl flex flex-col p-2 gap-0.5">
+          <h2 className="text-base sm:text-xl">{surface.title}</h2>
           <div className="flex items-center gap-2">
               <div className="w-5 h-[3px] bg-accent1 rounded-full"/>
               <h6 className="text-accent1">{surface.type.title}</h6>
