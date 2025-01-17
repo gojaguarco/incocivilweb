@@ -44,7 +44,7 @@ export default async function Page(props: { params: Promise<QueryParams> }) {
         </svg>
         Volver
       </Link>
-      <article className="h-[80svh] sm:h-[70svh] md:h-[60svh] w-[50%] max-w-screen-xl p-2 rounded-3xl bg-light relative overflow-hidden">
+      <article className="h-[80svh] sm:h-[70svh] md:h-[60svh] w-[85vw] max-w-screen-xl p-2 rounded-3xl bg-light relative overflow-hidden">
         <Image className="w-full h-full object-cover rounded-2xl max-w-screen-xl" src={urlFor(surface.imageObject).width(2000).height(1000).format('webp').quality(100).url()} alt={surface.imageObject.alt} width={2000} height={1000}/>
         <div className="max-w-[70%] absolute bottom-2 right-2 bg-light rounded-tl-xl flex flex-col p-2 gap-0.5">
           <h2 className="text-base sm:text-xl">{surface.title}</h2>
