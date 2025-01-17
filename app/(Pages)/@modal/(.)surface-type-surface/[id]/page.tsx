@@ -1,12 +1,12 @@
 import { client, sanityFetch } from "@/sanity/lib/client";
 import { urlFor } from "@/sanity/lib/image";
-import { HOMESURFACEIDS_QUERY, SURFACE_QUERY, SURFACES_QUERY } from "@/sanity/queries/surfaceQueries";
+import { SURFACE_QUERY, SURFACES_QUERY, SURFACESBYTYPE_IDS_QUERY } from "@/sanity/queries/surfaceQueries";
 import Image from "next/image";
 import { QueryParams } from "sanity";
 import Modal from "@/app/(Pages)/_components/Modal";
 import Esquina from "@/app/(Pages)/_components/Esquina";
 import BackButton from "@/app/(Pages)/_components/BackButton";
-import NavigationButtons from "@/app/(Pages)/_components/NavigationButtons";
+import NavigationTypeButtons from "@/app/(Pages)/_components/NavigationTypeButtons";
 
 
 
@@ -26,15 +26,22 @@ export default async function Page(props: { params: Promise<QueryParams> }) {
 
   const params = await props.params;
 
-  const surfaceId = params.id as string || "";
+  const id = params.id as string || ""
+
+  console.log({id})
+
+  const [surfaceTypeId, surfaceId] = id.split("!");
+
+  console.log({surfaceId, surfaceTypeId})
 
   const surface = await sanityFetch({
     query: SURFACE_QUERY,
-    params,
+    params: {id: surfaceId},
   });
 
   const surfacesArray = await sanityFetch({
-    query: HOMESURFACEIDS_QUERY,
+    query: SURFACESBYTYPE_IDS_QUERY,
+    params: {id: surfaceTypeId}
   });
 
   if(!surface) {
@@ -44,7 +51,7 @@ export default async function Page(props: { params: Promise<QueryParams> }) {
   return(
     <Modal>
       <article className="h-[80svh] sm:h-[70svh] md:h-[60svh] w-[50%] max-w-screen-xl p-2 rounded-3xl bg-light relative overflow-hidden">
-        <NavigationButtons currentId={surfaceId} idArray={surfacesArray as string[]} />
+        <NavigationTypeButtons currentId={surfaceId} idArray={surfacesArray as string[]} surfaceTypeId={surfaceTypeId} />
         <Image className="w-full h-full object-cover rounded-2xl max-w-screen-xl" src={urlFor(surface.imageObject).width(2000).height(1000).format('webp').quality(100).url()} alt={surface.imageObject.alt} width={2000} height={1000}/>
         <div className="max-w-[70%] absolute bottom-2 right-2 bg-light rounded-tl-xl flex flex-col p-2 gap-0.5">
           <h2 className="text-base sm:text-xl">{surface.title}</h2>

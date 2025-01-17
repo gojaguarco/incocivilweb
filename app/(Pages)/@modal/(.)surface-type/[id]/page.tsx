@@ -1,6 +1,6 @@
 import BackButton from "@/app/(Pages)/_components/BackButton";
 import Modal from "@/app/(Pages)/_components/Modal";
-import SurfaceSlider from "@/app/(Pages)/_components/SurfaceSlider";
+import SurfaceTypeSlider from "@/app/(Pages)/_components/SurfaceTypeSlider";
 import { client, sanityFetch } from "@/sanity/lib/client";
 import { urlFor } from "@/sanity/lib/image";
 import { SURFACESBYTYPE_QUERY, SURFACETYPE_QUERY, SURFACETYPES_QUERY } from "@/sanity/queries/surfaceQueries";
@@ -48,7 +48,7 @@ export default async function Page(props: { params: Promise<QueryParams> }) {
         </div>
       </div>
 
-      <SurfaceSlider content={surfaces} />
+      <SurfaceTypeSlider content={surfaces} surfaceType={params.id} />
     </article>
   </Modal>
   )}
