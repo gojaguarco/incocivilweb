@@ -2232,6 +2232,9 @@ export type SURFACESBYTYPE_QUERYResult = Array<{
   price?: number;
   code?: number;
 }>;
+// Variable: SURFACESBYTYPE_IDS_QUERY
+// Query: *[_type == 'surface' && type._ref == $id ][]._id
+export type SURFACESBYTYPE_IDS_QUERYResult = Array<string>;
 // Variable: SURFACES_QUERY
 // Query: *[_type == 'surface'][]
 export type SURFACES_QUERYResult = Array<{
@@ -2310,6 +2313,7 @@ declare module "@sanity/client" {
     "*[_type == 'surfaceTypes'][]": SURFACETYPES_QUERYResult;
     "*[_type == 'surfaceTypes' && _id == $id][0]": SURFACETYPE_QUERYResult;
     "*[_type == 'surface' && type._ref == $id ][0...10]": SURFACESBYTYPE_QUERYResult;
+    "*[_type == 'surface' && type._ref == $id ][]._id": SURFACESBYTYPE_IDS_QUERYResult;
     "*[_type == 'surface'][]": SURFACES_QUERYResult;
     "*[_type == 'surface' && _id == $id ][0]{\n  _id,\n  title,\n  imageObject,\n  type -> {\n    title\n  }\n}": SURFACE_QUERYResult;
     "*[_type == 'surface'][]._id": ALLSURFACEIDS_QUERYResult;
