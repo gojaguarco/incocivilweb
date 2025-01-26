@@ -3,8 +3,8 @@ import { urlFor } from "@/sanity/lib/image";
 import { SURFACESBYTYPE_QUERY, SURFACETYPE_QUERY, SURFACETYPES_QUERY } from "@/sanity/queries/surfaceQueries";
 import { PortableText, QueryParams } from "next-sanity";
 import Image from "next/image";
-import SurfaceSlider from "../../_components/SurfaceSlider";
 import Link from "next/link";
+import SurfaceTypeSlider from "../../_components/SurfaceTypeSlider";
 
 
 
@@ -58,7 +58,7 @@ export default async function Page(props: { params: Promise<QueryParams> }) {
     </div>
     </div>
 
-    <SurfaceSlider content={surfaces} />
+    <SurfaceTypeSlider content={surfaces} surfaceType={params.id} />
     </article>
     </div>
 

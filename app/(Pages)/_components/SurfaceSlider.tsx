@@ -74,7 +74,7 @@ const SurfaceSlider = ({content}: TProps) => {
           <span className="px-[calc(100vw/4)]" />
           {content.map((surface, index) => (
             <article 
-            className={`w-[45vw] sm:w-[40vw] md:w-[30vw] aspect-square flex relative`} key={index}>
+            className={`w-[45vw] sm:w-[40vw] md:w-[30vw] min-h-[45vw] sm:min-h-[40vw] md:min-h-[30vw] flex relative`} key={index}>
               <Image 
                 onClick={() =>{
                   carouselRef?.current?.scrollTo({ left: index * imageWidth + (imageWidth/2) + 2.3 ,

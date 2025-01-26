@@ -44,7 +44,9 @@ export default async function Page(props: { params: Promise<QueryParams> }) {
         <div className="flex flex-col gap-4 w-full lg:w-1/2">
           <h2>{surfaceType.title}</h2>
           <BackButton />
-          <PortableText value={surfaceType.description}/>
+          <section className="w-full min-h-1 flex-shrink overflow-y-scroll">
+            <PortableText value={surfaceType.description}/>
+          </section>
         </div>
       </div>
 
