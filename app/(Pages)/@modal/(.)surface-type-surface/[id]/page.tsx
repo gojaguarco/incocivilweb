@@ -28,11 +28,7 @@ export default async function Page(props: { params: Promise<QueryParams> }) {
 
   const id = params.id as string || ""
 
-  console.log({ id })
-
   const [surfaceTypeId, surfaceId] = id.split("!");
-
-  console.log({ surfaceId, surfaceTypeId })
 
   const surface = await sanityFetch({
     query: SURFACE_QUERY,
