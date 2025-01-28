@@ -24,7 +24,7 @@ const Catalogo = ({ catalogo }: {
     <ul className="w-full grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
       {filteredCatalogo.map((item) => (
         <li key={item._id}>
-          <Link href={`/catalogo/${item._id}`}>
+          <Link scroll={false} href={`/surface-type/${item.type._id}`} >
             <ItemCard
               title={item.title}
               description={item.type.title}
