@@ -3,8 +3,9 @@ import { CATALOGO_QUERYResult } from "@/sanity.types";
 import Link from "next/link";
 import ItemCard from "../_components/ItemCard";
 import { useSearchParams } from "next/navigation";
+import { Suspense } from "react";
 
-const Catalogo = ({ catalogo }: {
+const CatalogoUl = ({ catalogo }: {
   catalogo: CATALOGO_QUERYResult;
 }) => {
   const searchParams = useSearchParams();
@@ -37,5 +38,17 @@ const Catalogo = ({ catalogo }: {
     </ul>
   );
 }
+
+
+
+const Catalogo = ({ catalogo }: {
+  catalogo: CATALOGO_QUERYResult;
+}) => {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <CatalogoUl catalogo={catalogo} />
+    </Suspense>
+  )
+};
 
 export default Catalogo;

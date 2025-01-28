@@ -1,7 +1,8 @@
 "use client";
 import { useRouter, useSearchParams } from "next/navigation";
+import { Suspense } from "react";
 
-const SelectFilter = ({ filterName, options, allTitle, allValue }: {
+const Select = ({ filterName, options, allTitle, allValue }: {
   filterName: string;
   options: {
     value: string;
@@ -39,6 +40,28 @@ const SelectFilter = ({ filterName, options, allTitle, allValue }: {
         </option>
       ))}
     </select>
+  );
+}
+
+
+const SelectFilter = ({ filterName, options, allTitle, allValue }: {
+  filterName: string;
+  options: {
+    value: string;
+    label: string;
+  }[];
+  allTitle: string;
+  allValue?: string;
+}) => {
+  return (
+    <Suspense>
+      <Select
+        filterName={filterName}
+        options={options}
+        allTitle={allTitle}
+        allValue={allValue}
+      />
+    </Suspense>
   );
 }
 

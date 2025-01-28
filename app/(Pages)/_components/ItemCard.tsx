@@ -3,14 +3,18 @@ import Image from "next/image";
 import Esquina from "./Esquina";
 
 const ItemCard = ({ title, image, imageAlt, description }: {
-  image: any;
+  image: string | null;
   imageAlt: string;
   title: string;
   description: string;
 }) => {
   return (
     <div className="p-2 bg-primary-light rounded-2xl flex items-center justify-center h-48 lg:h-56 el-shadow group relative text-light">
-      <Image className="rounded-xl w-full h-full object-cover" src={urlFor(image).width(500).height(500).format('webp').url()} alt={imageAlt} width={500} height={500} />
+      {image ? <Image className="rounded-xl w-full h-full object-cover" src={urlFor(image).width(500).height(500).format('webp').url()} alt={imageAlt} width={500} height={500} /> : (
+        <div className="w-full h-full bg-primary rounded-xl flex items-center justify-center">
+          <h2 className="text-4xl">📸</h2>
+        </div>
+      )}
       <footer className="absolute bottom-2 left-2 right-2 flex flex-col items-end">
         <div className={`bg-primary-light rounded-tl-xl flex px-2 py-1 items-center gap-1.5 max-w-[80%] relative`}>
           <div className="w-4 h-4 rounded-full bg-accent1 group-hover:rotate-90 transition-all flex items-center justify-center">

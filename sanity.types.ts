@@ -1349,26 +1349,18 @@ export type ABOUTPAGE_QUERYResult = {
 
 // Source: ./sanity/queries/blogQueries.ts
 // Variable: BLOGS_QUERY
-// Query: *[_type == "post" ][0...12]{  _id, title, description, image}
+// Query: *[_type == "post" ][0...12]{  _id,   title,   description,     "image": {    "url": image.asset->url,    "alt": image.alt    },}
 export type BLOGS_QUERYResult = Array<{
   _id: string;
   title: string;
   description: string;
   image: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
+    url: string | null;
     alt: string;
-    _type: "imageObject";
   };
 }>;
 // Variable: BLOG_QUERY
-// Query: *[_type == "post" && _id == $id][0]{  title, description, body, image, categories, publishedAt}
+// Query: *[_type == "post" && _id == $id][0]{  title,   description,   body,   "image": {    "url": image.asset->url,    "alt": image.alt    },   categories,   publishedAt}
 export type BLOG_QUERYResult = {
   title: string;
   description: string;
@@ -1427,16 +1419,8 @@ export type BLOG_QUERYResult = {
     _key: string;
   }>;
   image: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
+    url: string | null;
     alt: string;
-    _type: "imageObject";
   };
   categories: Array<{
     _ref: string;
@@ -2370,8 +2354,8 @@ import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
     "*[_type == 'pages'][0]{\n  aboutPage\n}": ABOUTPAGE_QUERYResult;
-    "*[_type == \"post\" ][0...12]{\n  _id, title, description, image\n}": BLOGS_QUERYResult;
-    "*[_type == \"post\" && _id == $id][0]{\n  title, description, body, image, categories, publishedAt\n}": BLOG_QUERYResult;
+    "*[_type == \"post\" ][0...12]{\n  _id, \n  title, \n  description,   \n  \"image\": {\n    \"url\": image.asset->url,\n    \"alt\": image.alt\n    },\n}": BLOGS_QUERYResult;
+    "*[_type == \"post\" && _id == $id][0]{\n  title, \n  description, \n  body, \n  \"image\": {\n    \"url\": image.asset->url,\n    \"alt\": image.alt\n    }, \n  categories, \n  publishedAt\n}": BLOG_QUERYResult;
     "*[_type == \"surface\"]{\n  _id, \n  title, \n  \"image\": imageObject.asset->url, \n  \"type\": type -> {\n      title,\n      _id\n  },\n  caliber,\n  price,\n  \"formats\": formats[]->{\n      height, \n      width\n    }  \n}": CATALOGO_QUERYResult;
     "*[_type == \"surfaceTypes\"]{\n  _id, \n  title\n} ": ALL_SURFACE_TYPES_QUERYResult;
     "*[_type == 'pages'][0]{\n  homePage[] {\n    ...,\n    primarySurfaces[]->,\n    surfaceList[]->,\n    faqs []->,\n  }\n}": HOMEPAGE_QUERYResult;
