@@ -29,15 +29,20 @@ export const surfaceType = defineType({
     type: 'document',
     fields: [
         defineField({
+            name: "available",
+            title: "Disponible",
+            type: "boolean",
+        }),
+        defineField({
             name: 'title',
             title: 'Nombre',
             type: 'string',
             validation: (Rule) => Rule.required(),
         }),
         defineField({
-            name: 'description',
-            title: 'Descripción',
-            type: 'text',
+            name: 'code',
+            title: 'Código del Material',
+            type: 'number',
         }),
         ImageSchema,
         defineField({
@@ -48,14 +53,28 @@ export const surfaceType = defineType({
             validation: (Rule) => Rule.required(),
         }),
         defineField({
+            name: "caliber",
+            title: "Calibre",
+            type: "string",
+        }),
+
+
+        defineField({
             name: 'price',
             title: 'Precio m2',
             type: 'number',
         }),
         defineField({
-            name: 'code',
-            title: 'Código del Material',
-            type: 'number',
-        })
+            name: "formatos",
+            title: "Formatos",
+            type: "array",
+            of: [{ type: "string" }],
+        }),
+        defineField({
+            name: 'description',
+            title: 'Descripción',
+            type: 'text',
+        }),
+  
     ]
 })
