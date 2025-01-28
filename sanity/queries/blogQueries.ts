@@ -10,3 +10,5 @@ export const BLOG_QUERY =
   title, description, body, image, categories, publishedAt
 }`);
 
+
+

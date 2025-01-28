@@ -52,6 +52,16 @@ export type Slug = {
   source?: string;
 };
 
+export type SurfaceFormat = {
+  _id: string;
+  _type: "surfaceFormat";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  height: number;
+  width: number;
+};
+
 export type Config = {
   _id: string;
   _type: "config";
@@ -551,8 +561,9 @@ export type Surface = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
+  available?: boolean;
   title: string;
-  description?: string;
+  code?: number;
   imageObject: {
     asset?: {
       _ref: string;
@@ -571,8 +582,16 @@ export type Surface = {
     _weak?: boolean;
     [internalGroqTypeReferenceTo]?: "surfaceTypes";
   };
-  price?: number;
-  code?: number;
+  caliber?: string;
+  price?: string;
+  formats?: Array<{
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    _key: string;
+    [internalGroqTypeReferenceTo]?: "surfaceFormat";
+  }>;
+  description?: string;
 };
 
 export type SurfaceTypes = {
@@ -1251,7 +1270,7 @@ export type SanityImageMetadata = {
   isOpaque?: boolean;
 };
 
-export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | Geopoint | Slug | Config | Project | ProjectSection | ProjectContactSection | AboutHeroSection | ImageSection | WhatwedoSection | ContactSection | Faq | FaqSection | SurfaceSliderSection | ImageOrVideo | WhyusSection | SecondaryService | Service | Surface | SurfaceTypes | ServicesSection | HomeHeroSection | Pages | VideoObject | Button | Post | Category | BlockContent | ImageObject | SanityFileAsset | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata;
+export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | Geopoint | Slug | SurfaceFormat | Config | Project | ProjectSection | ProjectContactSection | AboutHeroSection | ImageSection | WhatwedoSection | ContactSection | Faq | FaqSection | SurfaceSliderSection | ImageOrVideo | WhyusSection | SecondaryService | Service | Surface | SurfaceTypes | ServicesSection | HomeHeroSection | Pages | VideoObject | Button | Post | Category | BlockContent | ImageObject | SanityFileAsset | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./sanity/queries/aboutQueries.ts
 // Variable: ABOUTPAGE_QUERY
@@ -1428,6 +1447,31 @@ export type BLOG_QUERYResult = {
   }>;
   publishedAt: string | null;
 } | null;
+
+// Source: ./sanity/queries/catalogoQueries.ts
+// Variable: CATALOGO_QUERY
+// Query: *[_type == "surface"]{  _id,   title,   "image": imageObject.asset->url,   "type": type -> {      title,      _id  },  caliber,  price,  "formats": formats[]->{      height,       width    }  }
+export type CATALOGO_QUERYResult = Array<{
+  _id: string;
+  title: string;
+  image: string | null;
+  type: {
+    title: string;
+    _id: string;
+  };
+  caliber: string | null;
+  price: string | null;
+  formats: Array<{
+    height: number;
+    width: number;
+  }> | null;
+}>;
+// Variable: ALL_SURFACE_TYPES_QUERY
+// Query: *[_type == "surfaceTypes"]{  _id,   title}
+export type ALL_SURFACE_TYPES_QUERYResult = Array<{
+  _id: string;
+  title: string;
+}>;
 
 // Source: ./sanity/queries/homeQueries.ts
 // Variable: HOMEPAGE_QUERY
@@ -1645,8 +1689,9 @@ export type HOMEPAGE_QUERYResult = {
       _createdAt: string;
       _updatedAt: string;
       _rev: string;
+      available?: boolean;
       title: string;
-      description?: string;
+      code?: number;
       imageObject: {
         asset?: {
           _ref: string;
@@ -1665,8 +1710,16 @@ export type HOMEPAGE_QUERYResult = {
         _weak?: boolean;
         [internalGroqTypeReferenceTo]?: "surfaceTypes";
       };
-      price?: number;
-      code?: number;
+      caliber?: string;
+      price?: string;
+      formats?: Array<{
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        _key: string;
+        [internalGroqTypeReferenceTo]?: "surfaceFormat";
+      }>;
+      description?: string;
     }>;
     _type: "surfaceSliderSection";
     _key: string;
@@ -2049,9 +2102,9 @@ export type METADATA_QUERYResult = {
 } | null;
 
 // Source: ./sanity/queries/surfaceQueries.ts
-// Variable: SURFACETYPES_QUERY
+// Variable: ALLSURFACETYPES_QUERY
 // Query: *[_type == 'surfaceTypes'][]
-export type SURFACETYPES_QUERYResult = Array<{
+export type ALLSURFACETYPES_QUERYResult = Array<{
   _id: string;
   _type: "surfaceTypes";
   _createdAt: string;
@@ -2125,9 +2178,9 @@ export type SURFACETYPES_QUERYResult = Array<{
     _type: "image";
   };
 }>;
-// Variable: SURFACETYPE_QUERY
+// Variable: SURFACETYPEBYID_QUERY
 // Query: *[_type == 'surfaceTypes' && _id == $id][0]
-export type SURFACETYPE_QUERYResult = {
+export type SURFACETYPEBYID_QUERYResult = {
   _id: string;
   _type: "surfaceTypes";
   _createdAt: string;
@@ -2209,8 +2262,9 @@ export type SURFACESBYTYPE_QUERYResult = Array<{
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
+  available?: boolean;
   title: string;
-  description?: string;
+  code?: number;
   imageObject: {
     asset?: {
       _ref: string;
@@ -2229,8 +2283,16 @@ export type SURFACESBYTYPE_QUERYResult = Array<{
     _weak?: boolean;
     [internalGroqTypeReferenceTo]?: "surfaceTypes";
   };
-  price?: number;
-  code?: number;
+  caliber?: string;
+  price?: string;
+  formats?: Array<{
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    _key: string;
+    [internalGroqTypeReferenceTo]?: "surfaceFormat";
+  }>;
+  description?: string;
 }>;
 // Variable: SURFACESBYTYPE_IDS_QUERY
 // Query: *[_type == 'surface' && type._ref == $id ][]._id
@@ -2243,8 +2305,9 @@ export type SURFACES_QUERYResult = Array<{
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
+  available?: boolean;
   title: string;
-  description?: string;
+  code?: number;
   imageObject: {
     asset?: {
       _ref: string;
@@ -2263,8 +2326,16 @@ export type SURFACES_QUERYResult = Array<{
     _weak?: boolean;
     [internalGroqTypeReferenceTo]?: "surfaceTypes";
   };
-  price?: number;
-  code?: number;
+  caliber?: string;
+  price?: string;
+  formats?: Array<{
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    _key: string;
+    [internalGroqTypeReferenceTo]?: "surfaceFormat";
+  }>;
+  description?: string;
 }>;
 // Variable: SURFACE_QUERY
 // Query: *[_type == 'surface' && _id == $id ][0]{  _id,  title,  imageObject,  type -> {    title  }}
@@ -2301,6 +2372,8 @@ declare module "@sanity/client" {
     "*[_type == 'pages'][0]{\n  aboutPage\n}": ABOUTPAGE_QUERYResult;
     "*[_type == \"post\" ][0...12]{\n  _id, title, description, image\n}": BLOGS_QUERYResult;
     "*[_type == \"post\" && _id == $id][0]{\n  title, description, body, image, categories, publishedAt\n}": BLOG_QUERYResult;
+    "*[_type == \"surface\"]{\n  _id, \n  title, \n  \"image\": imageObject.asset->url, \n  \"type\": type -> {\n      title,\n      _id\n  },\n  caliber,\n  price,\n  \"formats\": formats[]->{\n      height, \n      width\n    }  \n}": CATALOGO_QUERYResult;
+    "*[_type == \"surfaceTypes\"]{\n  _id, \n  title\n} ": ALL_SURFACE_TYPES_QUERYResult;
     "*[_type == 'pages'][0]{\n  homePage[] {\n    ...,\n    primarySurfaces[]->,\n    surfaceList[]->,\n    faqs []->,\n  }\n}": HOMEPAGE_QUERYResult;
     "*[_type == 'pages'][0].homePage[_type == 'contactSection'][0].contactCard": CONTACTCARD_QUERYResult;
     "*[_type == 'pages'][0]{\n  projectsPage[]{\n    ...,\n    projects[] -> {\n      _id,\n      image,\n      title,\n    }\n  }\n}": PROJECTS_QUERYResult;
@@ -2310,8 +2383,8 @@ declare module "@sanity/client" {
     "*[_type == 'config'][0].information{\n  phone,\n  email\n}": EMAILSENDING_QUERYResult;
     "*[_type == 'config'][0]{\n  information,\n  socialLinks\n}": FOOTERSETTINGS_QUERYResult;
     "*[_type == 'config'][0].metadata": METADATA_QUERYResult;
-    "*[_type == 'surfaceTypes'][]": SURFACETYPES_QUERYResult;
-    "*[_type == 'surfaceTypes' && _id == $id][0]": SURFACETYPE_QUERYResult;
+    "*[_type == 'surfaceTypes'][]": ALLSURFACETYPES_QUERYResult;
+    "*[_type == 'surfaceTypes' && _id == $id][0]": SURFACETYPEBYID_QUERYResult;
     "*[_type == 'surface' && type._ref == $id ][0...10]": SURFACESBYTYPE_QUERYResult;
     "*[_type == 'surface' && type._ref == $id ][]._id": SURFACESBYTYPE_IDS_QUERYResult;
     "*[_type == 'surface'][]": SURFACES_QUERYResult;
