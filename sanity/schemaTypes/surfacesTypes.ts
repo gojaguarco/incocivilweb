@@ -1,5 +1,6 @@
 import { defineField, defineType } from "sanity";
 import { ImageSchema } from "./generalSchemas";
+import ColombianPrice from "../components/ColombianPrice";
 
 
 export const surfaceTypesType = defineType({
@@ -57,12 +58,11 @@ export const surfaceType = defineType({
             title: "Calibre",
             type: "string",
         }),
-
-
         defineField({
             name: 'price',
             title: 'Precio m2',
-            type: 'number',
+            type: 'string',
+            components: { input: ColombianPrice },
         }),
         defineField({
             name: "formatos",
