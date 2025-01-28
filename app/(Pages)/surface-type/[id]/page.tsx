@@ -1,6 +1,6 @@
 import { client, sanityFetch } from "@/sanity/lib/client";
 import { urlFor } from "@/sanity/lib/image";
-import { SURFACESBYTYPE_QUERY, SURFACETYPE_QUERY, SURFACETYPES_QUERY } from "@/sanity/queries/surfaceQueries";
+import { ALLSURFACETYPES_QUERY, SURFACESBYTYPE_QUERY, SURFACETYPEBYID_QUERY } from "@/sanity/queries/surfaceQueries";
 import { PortableText, QueryParams } from "next-sanity";
 import Image from "next/image";
 import Link from "next/link";
@@ -10,7 +10,7 @@ import SurfaceTypeSlider from "../../_components/SurfaceTypeSlider";
 
 export async function generateStaticParams() {
   const surfaceTypes = await client.fetch(
-    SURFACETYPES_QUERY,
+    ALLSURFACETYPES_QUERY,
     {},
     { perspective: "published" }
   );
@@ -24,7 +24,7 @@ export default async function Page(props: { params: Promise<QueryParams> }) {
 
   const params = await props.params;
   const surfaceType = await sanityFetch({
-    query: SURFACETYPE_QUERY,
+    query: SURFACETYPEBYID_QUERY,
     params,
   });
   if (!surfaceType) {
