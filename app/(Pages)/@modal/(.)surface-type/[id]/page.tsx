@@ -58,7 +58,7 @@ export default async function Page(props: { params: Promise<QueryParams> }) {
         <div className="flex flex-col lg:flex-row gap-2 md:gap-10">
           <div className="relative w-full">
             <NavButtons className="lg:hidden" backLink={prevId && `/surface-type/${prevId}`} nextLink={nextId && `/surface-type/${nextId}`} />
-            <Image className="w-full object-cover rounded-lg h-40" src={urlFor(surfaceType.imageObject).width(800).height(400).format('webp').url()} alt={surfaceType.imageObject.alt} width={800} height={400} />
+            <Image className="w-full object-cover rounded-lg h-40 lg:h-auto" src={urlFor(surfaceType.imageObject).width(800).height(400).format('webp').url()} alt={surfaceType.imageObject.alt} width={800} height={400} />
           </div>
           <div className="flex flex-col gap-4 w-full lg:w-1/2">
             <h2>{surfaceType.title}</h2>
