@@ -34,7 +34,7 @@ export const surfaceFormatType = defineType({
         };
       }
       return {
-        title: `${height} cm x ${width} cm`,
+        title: `${height}cm x ${width}cm`,
       };
     },
   }
