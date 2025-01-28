@@ -10,14 +10,14 @@ export const surfaceFormatType = defineType({
     defineField({
       name: "width",
       title: "Ancho",
-      description: "En (cms)",
+      description: "En (cm)",
       type: "number",
       validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "height",
       title: "Alto",
-      description: "En (cms)",
+      description: "En (cm)",
       type: "number",
       validation: (Rule) => Rule.required(),
     })
@@ -34,7 +34,7 @@ export const surfaceFormatType = defineType({
         };
       }
       return {
-        title: `${width} cms x ${height} cms`,
+        title: `${width} cm x ${height} cm`,
       };
     },
   }
