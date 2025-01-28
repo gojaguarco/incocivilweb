@@ -25,7 +25,7 @@ export default async function Page() {
         <LightCard>
           <div className="flex justify-between items-center">
             <span className="text-xl font-montserrat">
-              Filtra por tipo de superficie
+              Filtra por superficie
             </span>
             <SelectFilter
               allTitle="Ver Todos"
