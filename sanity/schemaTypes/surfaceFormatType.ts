@@ -8,19 +8,19 @@ export const surfaceFormatType = defineType({
   icon: SizeIcon,
   fields: [
     defineField({
+      name: "height",
+      title: "Largo",
+      description: "En (cm)",
+      type: "number",
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
       name: "width",
       title: "Ancho",
       description: "En (cm)",
       type: "number",
       validation: (Rule) => Rule.required(),
     }),
-    defineField({
-      name: "height",
-      title: "Largo",
-      description: "En (cm)",
-      type: "number",
-      validation: (Rule) => Rule.required(),
-    })
   ],
   preview: {
     select: {
@@ -34,7 +34,7 @@ export const surfaceFormatType = defineType({
         };
       }
       return {
-        title: `${width} cm x ${height} cm`,
+        title: `${height} cm x ${width} cm`,
       };
     },
   }
