@@ -16,7 +16,7 @@ export const surfaceFormatType = defineType({
     }),
     defineField({
       name: "height",
-      title: "Alto",
+      title: "Largo",
       description: "En (cm)",
       type: "number",
       validation: (Rule) => Rule.required(),
