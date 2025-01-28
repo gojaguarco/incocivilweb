@@ -23,18 +23,21 @@ const CatalogoUl = ({ catalogo }: {
   });
   return (
     <ul className="w-full grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-      {filteredCatalogo.map((item) => (
-        <li key={item._id}>
-          <Link scroll={false} href={`/surface-type/${item.type._id}`} >
-            <ItemCard
-              title={item.title}
-              description={item.type.title}
-              image={item.image}
-              imageAlt={item.title}
-            />
-          </Link>
-        </li>
-      ))}
+      {filteredCatalogo.map((item) => {
+        const title = item.title.toLowerCase().replace(item.type.title.toLowerCase(), "");
+        return (
+          <li key={item._id}>
+            <Link scroll={false} href={`/surface-type/${item.type._id}`} >
+              <ItemCard
+                title={title}
+                description={item.type.title}
+                image={item.image}
+                imageAlt={item.title}
+              />
+            </Link>
+          </li>
+        )
+      })}
     </ul>
   );
 }
