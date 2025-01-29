@@ -13,7 +13,9 @@ export const CATALOGO_QUERY = defineQuery(`*[_type == "surface"]{
   "formats": formats[]->{
       height, 
       width
-    }  
+    },
+    code,
+    description
 }`);
 
 export const ALL_SURFACE_TYPES_QUERY = defineQuery(`*[_type == "surfaceTypes"]{

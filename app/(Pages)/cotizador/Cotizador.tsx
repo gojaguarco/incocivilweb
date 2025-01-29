@@ -14,9 +14,8 @@ const Cotizador = ({ surfaceTypes, catalogo }: {
 }) => {
   const searchParams = useSearchParams();
   const surfaceTypeId = searchParams.get("surfaceType");
-  const selectedSurfaceIds = searchParams.get("surfaceId")?.split(",");
+  const selectedSurfaceIds = searchParams.get("surfaceId")?.split(",") ?? []
   const router = useRouter();
-
   const filteredCatalogo = catalogo.filter((item) => {
     if (!surfaceTypeId) {
       return true;
@@ -29,36 +28,45 @@ const Cotizador = ({ surfaceTypes, catalogo }: {
 
 
   const createQueryString = useCallback(
-    (name: string, value: string, action: 'add' | 'remove' = 'add') => {
+    (name: string, value: string, action: 'add' | 'remove' | 'replace' = 'add') => {
       const params = new URLSearchParams(searchParams.toString())
       const currentValues = params.get(name)?.split(',').filter(Boolean) || []
-      
+
       if (action === 'add' && !currentValues.includes(value)) {
         params.set(name, [...currentValues, value].join(','))
       } else if (action === 'remove') {
         params.set(name, currentValues.filter(v => v !== value).join(','))
-      }
- 
+      } else if (action === "replace") {
+        params.set(name, value)
+      };
+
       return params.toString()
     },
     [searchParams]
   )
+
+  
   const addSurfaceId = (id: string) => {
     router.push(`?${createQueryString('surfaceId', id, 'add')}`)
   }
 
   const removeSurfaceId = (id: string) => {
-    router.push(`?${createQueryString('surfaceId', id, 'remove')}`)
+    if (selectedSurfaceIds.length === 1) {
+      // remove surfaceId from url search params
+      const params = new URLSearchParams(searchParams.toString());
+      params.delete('surfaceId');
+      router.push(`?${params.toString()}`);
+    } else {
+      router.push(`?${createQueryString('surfaceId', id, 'remove')}`);
+    }
   }
-
-  console.log({searchParams, selectedSurfaceIds})
 
   return (
     <>
       <LightCard>
         <div className="flex justify-between items-center">
           <h2 className="text-lg font-light">
-            1. Selecciona el tipo de superficie
+            1. Selecciona el tipo de superficie.
           </h2>
           <SelectFilter
             allTitle="Todos"
@@ -72,7 +80,7 @@ const Cotizador = ({ surfaceTypes, catalogo }: {
       </LightCard>
       {surfaceTypeId && (
         <LightCard className="pr-0 flex flex-col gap-2">
-          <h2 className="text-lg font-light font-montserrat">2. Selecciona las superficies que deseas cotizar</h2>
+          <h2 className="text-lg font-light font-montserrat">2. Selecciona las superficies que deseas cotizar.</h2>
           <div className="overflow-x-scroll no-scrollbar">
             <ul className="flex gap-4 w-fit">
               {filteredCatalogo.map((item) => (
@@ -89,6 +97,58 @@ const Cotizador = ({ surfaceTypes, catalogo }: {
               ))}
             </ul>
           </div>
+        </LightCard>
+      )}
+      {surfaceTypeId && selectedSurfaceIds && selectedSurfaceIds.length >= 1 && (
+        <LightCard>
+          <h2 className="text-lg font-light">
+            3. Selecciona los formatos que necesitas para tu proyecto.
+          </h2>
+          <table className="w-full border-collapse">
+            <thead>
+              <tr className="border-b">
+                <th className="text-left p-2">Material</th>
+                <th className="text-left p-2">Código</th>
+                <th className="text-left p-2">Tipo</th>
+                <th className="text-left p-2">Calibre</th>
+                <th className="text-left p-2">Descripción</th>
+                <th className="text-left p-2">Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              {selectedSurfaceIds.map((id) => {
+                const surface = catalogo.find((item) => item._id === id);
+                if (!surface) return null;
+
+                return (
+                  <tr key={id} className="border-b">
+                    <td className="p-2">
+                      {surface.image && <Image className="rounded-lg w-[116.25px] h-[47px] object-cover" src={urlFor(surface.image).width(116).height(47).format('webp').url()} alt={surface.title} width={116} height={47} />}
+                      {surface.title}
+                    </td>
+                    <td className="p-2">{surface.code}</td>
+                    <td className="p-2">{surface.type.title}</td>
+                    <td className="p-2">{surface.caliber}</td>
+                    <td className="p-2">{surface.description}</td>
+                    <td className="p-2">
+                      <button
+                        onClick={() => removeSurfaceId(id)}
+                        className="p-2 text-red-500 hover:text-red-700"
+                      >
+                        <svg xmlns="http://www.w3.org/2000/svg" width={20} height={20} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
+                          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                          <path d="M4 7h16" />
+                          <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
+                          <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
+                          <path d="M10 12l4 4m0 -4l-4 4" />
+                        </svg>
+                      </button>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
         </LightCard>
       )}
     </>

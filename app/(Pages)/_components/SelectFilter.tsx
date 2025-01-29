@@ -1,6 +1,6 @@
 "use client";
 import { useRouter, useSearchParams } from "next/navigation";
-import { Suspense } from "react";
+import { Suspense, useCallback } from "react";
 
 const Select = ({ filterName, options, allTitle, allValue }: {
   filterName: string;
@@ -17,11 +17,28 @@ const Select = ({ filterName, options, allTitle, allValue }: {
   const selectedOption = searchParams.get(filterName);
 
   const router = useRouter();
+
+  const createQueryString = useCallback(
+    (name: string, value: string, action: 'add' | 'remove' | 'replace' = 'add') => {
+      const params = new URLSearchParams(searchParams.toString())
+      const currentValues = params.get(name)?.split(',').filter(Boolean) || []
+
+      if (action === 'add' && !currentValues.includes(value)) {
+        params.set(name, [...currentValues, value].join(','))
+      } else if (action === 'remove') {
+        params.set(name, currentValues.filter(v => v !== value).join(','))
+      } else if (action === "replace") {
+        params.set(name, value)
+      };
+
+      return params.toString()
+    },
+    [searchParams]);
+
+
   const onSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const value = e.target.value;
-    router.push(`?${filterName}=${value}`, {
-      scroll: false
-    });
+    router.push(`?${createQueryString(filterName, value, "replace")}`, { scroll: false });
   };
 
   const optionsWiithAll = [{ value: allValue ?? "all", label: allTitle }, ...options];
