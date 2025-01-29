@@ -22,7 +22,7 @@ const MobileNavBar = ({ className }: Props) => {
         <Image className="w-[105px] xs:w-[120px]" src='/IncocivilLogo.svg' alt='isologo Incocivil' height={40} width={120}/>
       </Link>
       <section className="bg-light-dark rounded-bl-[6px] h-full px-2 xs:px-4 flex items-center justify-center gap-2 xs:gap-3 relative">
-        <LinkButton text='Contáctanos' size="grande" color="naranja" link="/contact" />
+        <LinkButton text='Cotizador' size="grande" color="naranja" link="/cotizador" />
         <Burger isNavOpen={isNavOpen} barColor="bg-primary" openNav={() => setIsNavOpen(true)} closeNav={() => setIsNavOpen(false)}/>
         <Esquina className="absolute h-[6px] w-[6px] top-0 -left-[6px]" colorHex="e0e3ec"/>
         <Esquina className="absolute h-[6px] w-[6px] right-0 -bottom-[6.5px]" colorHex="e0e3ec"/>
