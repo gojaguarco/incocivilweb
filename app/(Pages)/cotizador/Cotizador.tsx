@@ -6,9 +6,9 @@ import SelectFilter from "../_components/SelectFilter";
 import { useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
 import { urlFor } from "@/sanity/lib/image";
-import { useCallback } from "react";
+import { Suspense, useCallback } from "react";
 
-const Cotizador = ({ surfaceTypes, catalogo }: {
+const CotizadorUi = ({ surfaceTypes, catalogo }: {
   surfaceTypes: ALL_SURFACE_TYPES_QUERYResult;
   catalogo: CATALOGO_QUERYResult;
 }) => {
@@ -45,7 +45,7 @@ const Cotizador = ({ surfaceTypes, catalogo }: {
     [searchParams]
   )
 
-  
+
   const addSurfaceId = (id: string) => {
     router.push(`?${createQueryString('surfaceId', id, 'add')}`)
   }
@@ -85,7 +85,7 @@ const Cotizador = ({ surfaceTypes, catalogo }: {
             <ul className="flex gap-4 w-fit">
               {filteredCatalogo.map((item) => (
                 <li key={item._id} className="w-[200px] p-1 bg-light rounded-xl relative">
-                  {item.image ? <Image className="rounded-lg w-[200px] h-[200px] object-cover" src={urlFor(item.image).width(200).height(200).format('webp').url()} alt={item.title} width={200} height={200} /> : (
+                  {item.image ? <Image className="rounded-lg w-full h-full object-cover" src={urlFor(item.image).width(200).height(200).format('webp').url()} alt={item.title} width={200} height={200} /> : (
                     <div className="w-[200px] h-[200px] bg-primary rounded-xl flex items-center justify-center">
                       <h2 className="text-4xl">📸</h2>
                     </div>
@@ -153,6 +153,18 @@ const Cotizador = ({ surfaceTypes, catalogo }: {
       )}
     </>
   );
+}
+
+const Cotizador = ({ surfaceTypes, catalogo }: {
+  surfaceTypes: ALL_SURFACE_TYPES_QUERYResult;
+  catalogo: CATALOGO_QUERYResult;
+}) => {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <CotizadorUi catalogo={catalogo} surfaceTypes={surfaceTypes} />
+    </Suspense>
+
+  )
 }
 
 export default Cotizador;

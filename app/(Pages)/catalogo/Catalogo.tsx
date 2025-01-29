@@ -5,7 +5,7 @@ import ItemCard from "../_components/ItemCard";
 import { useSearchParams } from "next/navigation";
 import { Suspense } from "react";
 
-const CatalogoUl = ({ catalogo }: {
+const CatalogoUi = ({ catalogo }: {
   catalogo: CATALOGO_QUERYResult;
 }) => {
   const searchParams = useSearchParams();
@@ -49,7 +49,7 @@ const Catalogo = ({ catalogo }: {
 }) => {
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <CatalogoUl catalogo={catalogo} />
+      <CatalogoUi catalogo={catalogo} />
     </Suspense>
   )
 };
