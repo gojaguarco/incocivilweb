@@ -1,9 +1,21 @@
 import { urlFor } from "@/sanity/lib/image";
 import Image from "next/image";
 import Esquina from "./Esquina";
+import { internalGroqTypeReferenceTo, SanityImageCrop, SanityImageHotspot } from "@/sanity.types";
 
 const ItemCard = ({ title, image, imageAlt, description }: {
-  image: string | null;
+  image: {
+    asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt: string;
+    _type: "image";
+} | null;
   imageAlt: string;
   title: string;
   description: string;

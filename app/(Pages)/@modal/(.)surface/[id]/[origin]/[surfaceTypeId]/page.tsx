@@ -1,6 +1,6 @@
 import { client, sanityFetch } from "@/sanity/lib/client";
 import { urlFor } from "@/sanity/lib/image";
-import { HOMESURFACEIDS_QUERY, SURFACE_QUERY, SURFACES_QUERY } from "@/sanity/queries/surfaceQueries";
+import { CATALOGUE_SURFACES_IDS_QUERY, HOMESURFACEIDS_QUERY, SURFACE_QUERY, SURFACES_QUERY, SURFACESBYTYPE_IDS_QUERY } from "@/sanity/queries/surfaceQueries";
 import Image from "next/image";
 import { QueryParams } from "sanity";
 import Modal from "@/app/(Pages)/_components/Modal";
@@ -27,6 +27,27 @@ export default async function Page(props: { params: Promise<QueryParams> }) {
   const params = await props.params;
 
   const surfaceId = params.id as string || "";
+  const origin = params.origin as "homepage" | "surfaceType" | "catalogue" || "";
+  const surfaceTypeId = params.surfaceTypeId as string || "";
+
+  // origin = homepage
+  // origin = surfacetype
+  // origin = catalogo
+
+  // cambia el array de la navegacio el surfaces array
+  // si homepage es el default
+  // si origen es surfacetype y surfacetype id es diferente a 0 hay q traer el array de surfaces type
+    const surfacesArrayBySurfaceType = await sanityFetch({
+      query: SURFACESBYTYPE_IDS_QUERY,
+      params: { id: surfaceTypeId }
+    });
+  // si viene del catalogo hay q traer el array de q se usa en el catalogo 
+
+  const catalogueSurfaces = await sanityFetch({
+    query: CATALOGUE_SURFACES_IDS_QUERY,
+  })
+
+  console.log({origin, surfaceTypeId, catalogueSurfaces})
 
   const surface = await sanityFetch({
     query: SURFACE_QUERY,
@@ -35,9 +56,9 @@ export default async function Page(props: { params: Promise<QueryParams> }) {
 // id de la superficie
 // origen del click
 // id del tipo de superficie opcional 
-  const surfacesArray = await sanityFetch({
+  const surfacesArray = origin === "homepage" ? await sanityFetch({
     query: HOMESURFACEIDS_QUERY,
-  });
+  }) : origin === "surfaceType" && surfaceTypeId !== "0" && surfaceTypeId.length > 1 ? surfacesArrayBySurfaceType : catalogueSurfaces;
 
   if(!surface) {
     return null

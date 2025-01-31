@@ -1434,11 +1434,22 @@ export type BLOG_QUERYResult = {
 
 // Source: ./sanity/queries/catalogoQueries.ts
 // Variable: CATALOGO_QUERY
-// Query: *[_type == "surface"]{  _id,   title,   "image": imageObject.asset->url,   "type": type -> {      title,      _id  },  caliber,  price,  "formats": formats[]->{      height,       width    },    code,    description}
+// Query: *[_type == "surface"]{  _id,   title,   "image": imageObject,   "type": type -> {      title,      _id  },  caliber,  price,  "formats": formats[]->{      height,       width    },    code,    description}
 export type CATALOGO_QUERYResult = Array<{
   _id: string;
   title: string;
-  image: string | null;
+  image: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt: string;
+    _type: "image";
+  };
   type: {
     title: string;
     _id: string;
@@ -2358,7 +2369,7 @@ declare module "@sanity/client" {
     "*[_type == 'pages'][0]{\n  aboutPage\n}": ABOUTPAGE_QUERYResult;
     "*[_type == \"post\" ][0...12]{\n  _id, \n  title, \n  description,   \n  \"image\": {\n    \"url\": image.asset->url,\n    \"alt\": image.alt\n    },\n}": BLOGS_QUERYResult;
     "*[_type == \"post\" && _id == $id][0]{\n  title, \n  description, \n  body, \n  \"image\": {\n    \"url\": image.asset->url,\n    \"alt\": image.alt\n    }, \n  categories, \n  publishedAt\n}": BLOG_QUERYResult;
-    "*[_type == \"surface\"]{\n  _id, \n  title, \n  \"image\": imageObject.asset->url, \n  \"type\": type -> {\n      title,\n      _id\n  },\n  caliber,\n  price,\n  \"formats\": formats[]->{\n      height, \n      width\n    },\n    code,\n    description\n}": CATALOGO_QUERYResult;
+    "*[_type == \"surface\"]{\n  _id, \n  title, \n  \"image\": imageObject, \n  \"type\": type -> {\n      title,\n      _id\n  },\n  caliber,\n  price,\n  \"formats\": formats[]->{\n      height, \n      width\n    },\n    code,\n    description\n}": CATALOGO_QUERYResult;
     "*[_type == \"surfaceTypes\"]{\n  _id, \n  title\n} ": ALL_SURFACE_TYPES_QUERYResult;
     "*[_type == 'pages'][0]{\n  homePage[] {\n    ...,\n    primarySurfaces[]->,\n    surfaceList[]->,\n    faqs []->,\n  }\n}": HOMEPAGE_QUERYResult;
     "*[_type == 'pages'][0].homePage[_type == 'contactSection'][0].contactCard": CONTACTCARD_QUERYResult;

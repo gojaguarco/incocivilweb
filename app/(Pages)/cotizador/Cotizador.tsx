@@ -47,7 +47,7 @@ const CotizadorUi = ({ surfaceTypes, catalogo }: {
 
 
   const addSurfaceId = (id: string) => {
-    router.push(`?${createQueryString('surfaceId', id, 'add')}`)
+    router.push(`?${createQueryString('surfaceId', id, 'add')}`, {scroll: false})
   }
 
   const removeSurfaceId = (id: string) => {
@@ -55,9 +55,9 @@ const CotizadorUi = ({ surfaceTypes, catalogo }: {
       // remove surfaceId from url search params
       const params = new URLSearchParams(searchParams.toString());
       params.delete('surfaceId');
-      router.push(`?${params.toString()}`);
+      router.push(`?${params.toString()}`, {scroll: false});
     } else {
-      router.push(`?${createQueryString('surfaceId', id, 'remove')}`);
+      router.push(`?${createQueryString('surfaceId', id, 'remove')}`, {scroll: false});
     }
   }
 

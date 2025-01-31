@@ -3,7 +3,7 @@ import { defineQuery } from "next-sanity";
 export const CATALOGO_QUERY = defineQuery(`*[_type == "surface"]{
   _id, 
   title, 
-  "image": imageObject.asset->url, 
+  "image": imageObject, 
   "type": type -> {
       title,
       _id

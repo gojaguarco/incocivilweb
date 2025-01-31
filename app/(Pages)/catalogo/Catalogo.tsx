@@ -27,7 +27,7 @@ const CatalogoUi = ({ catalogo }: {
         const title = item.title.toLowerCase().replace(item.type.title.toLowerCase(), "");
         return (
           <li key={item._id}>
-            <Link scroll={false} href={`/surface-type/${item.type._id}`} >
+            <Link scroll={false} href={`/surface/${item._id}/catalogue/${surfaceTypeId ?? "0"}`} >
               <ItemCard
                 title={title}
                 description={item.type.title}

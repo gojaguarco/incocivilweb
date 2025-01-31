@@ -8,6 +8,9 @@ export const SURFACESBYTYPE_QUERY = defineQuery(`*[_type == 'surface' && type._r
 
 export const SURFACESBYTYPE_IDS_QUERY = defineQuery(`*[_type == 'surface' && type._ref == $id ][]._id`)
 
+export const CATALOGUE_SURFACES_IDS_QUERY = defineQuery(`*[_type == "surfaceTypes"][]._id`);
+
+
 export const SURFACES_QUERY = defineQuery(`*[_type == 'surface'][]`)
 export const SURFACE_QUERY = defineQuery(`*[_type == 'surface' && _id == $id ][0]{
   _id,
