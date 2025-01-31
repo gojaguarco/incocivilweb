@@ -14,7 +14,7 @@ const ItemCard = ({ title, image, imageAlt, description }: {
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     alt: string;
-    _type: "image";
+    _type: "image" | "imageObject";
 } | null;
   imageAlt: string;
   title: string;

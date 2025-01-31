@@ -5,10 +5,7 @@ export const BLOGS_QUERY =
   _id, 
   title, 
   description,   
-  "image": {
-    "url": image.asset->url,
-    "alt": image.alt
-    },
+  image
 }`);
 
 export const BLOG_QUERY =

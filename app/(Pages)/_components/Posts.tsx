@@ -14,7 +14,7 @@ export function Posts({ posts }: { posts: BLOGS_QUERYResult }) {
           >
             <Card
               description={post.description}
-              image={post.image.url}
+              image={post.image}
               imageAlt={post.image.alt || post.title}
               title={post.title}
             />

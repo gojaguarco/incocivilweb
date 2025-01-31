@@ -1349,14 +1349,22 @@ export type ABOUTPAGE_QUERYResult = {
 
 // Source: ./sanity/queries/blogQueries.ts
 // Variable: BLOGS_QUERY
-// Query: *[_type == "post" ][0...12]{  _id,   title,   description,     "image": {    "url": image.asset->url,    "alt": image.alt    },}
+// Query: *[_type == "post" ][0...12]{  _id,   title,   description,     image}
 export type BLOGS_QUERYResult = Array<{
   _id: string;
   title: string;
   description: string;
   image: {
-    url: string | null;
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
     alt: string;
+    _type: "imageObject";
   };
 }>;
 // Variable: BLOG_QUERY
@@ -2294,6 +2302,9 @@ export type SURFACESBYTYPE_QUERYResult = Array<{
 // Variable: SURFACESBYTYPE_IDS_QUERY
 // Query: *[_type == 'surface' && type._ref == $id ][]._id
 export type SURFACESBYTYPE_IDS_QUERYResult = Array<string>;
+// Variable: CATALOGUE_SURFACES_IDS_QUERY
+// Query: *[_type == "surface"][]._id
+export type CATALOGUE_SURFACES_IDS_QUERYResult = Array<string>;
 // Variable: SURFACES_QUERY
 // Query: *[_type == 'surface'][]
 export type SURFACES_QUERYResult = Array<{
@@ -2367,7 +2378,7 @@ import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
     "*[_type == 'pages'][0]{\n  aboutPage\n}": ABOUTPAGE_QUERYResult;
-    "*[_type == \"post\" ][0...12]{\n  _id, \n  title, \n  description,   \n  \"image\": {\n    \"url\": image.asset->url,\n    \"alt\": image.alt\n    },\n}": BLOGS_QUERYResult;
+    "*[_type == \"post\" ][0...12]{\n  _id, \n  title, \n  description,   \n  image\n}": BLOGS_QUERYResult;
     "*[_type == \"post\" && _id == $id][0]{\n  title, \n  description, \n  body, \n  \"image\": {\n    \"url\": image.asset->url,\n    \"alt\": image.alt\n    }, \n  categories, \n  publishedAt\n}": BLOG_QUERYResult;
     "*[_type == \"surface\"]{\n  _id, \n  title, \n  \"image\": imageObject, \n  \"type\": type -> {\n      title,\n      _id\n  },\n  caliber,\n  price,\n  \"formats\": formats[]->{\n      height, \n      width\n    },\n    code,\n    description\n}": CATALOGO_QUERYResult;
     "*[_type == \"surfaceTypes\"]{\n  _id, \n  title\n} ": ALL_SURFACE_TYPES_QUERYResult;
@@ -2384,6 +2395,7 @@ declare module "@sanity/client" {
     "*[_type == 'surfaceTypes' && _id == $id][0]": SURFACETYPEBYID_QUERYResult;
     "*[_type == 'surface' && type._ref == $id ][0...10]": SURFACESBYTYPE_QUERYResult;
     "*[_type == 'surface' && type._ref == $id ][]._id": SURFACESBYTYPE_IDS_QUERYResult;
+    "*[_type == \"surface\"][]._id": CATALOGUE_SURFACES_IDS_QUERYResult;
     "*[_type == 'surface'][]": SURFACES_QUERYResult;
     "*[_type == 'surface' && _id == $id ][0]{\n  _id,\n  title,\n  imageObject,\n  type -> {\n    title\n  }\n}": SURFACE_QUERYResult;
     "*[_type == 'surface'][]._id": ALLSURFACEIDS_QUERYResult;
