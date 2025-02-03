@@ -65,9 +65,6 @@ const Select = ({ filterName, options, allTitle, allValue, className, ...rest }:
   );
 }
 
-
-type SelectFilterProps = ComponentPropsWithoutRef<'select'> 
-
 const SelectFilter = ({ filterName, options, allTitle, allValue, ...rest }: Props) => {
   return (
     <Suspense>
