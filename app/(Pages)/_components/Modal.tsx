@@ -6,16 +6,20 @@ import { useEffect } from "react"
 
 const Modal = ({
   children,
+  backUrl
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
+  backUrl?: string;
 }) => {
 
   const router = useRouter()
 
   const handleOpenChange = () => {
-    router.push("/", {
-      scroll: false
-    })
+    if (backUrl) {
+      router.push(backUrl)
+    } else {
+      router.back()
+    }
   }
 
   const stopPropagation = (event: React.MouseEvent) => {

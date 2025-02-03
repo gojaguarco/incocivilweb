@@ -64,7 +64,7 @@ export const surfaceType = defineType({
       components: { input: ColombianPrice },
     }),
     defineField({
-      name: "formatos",
+      name: "formats",
       title: "Formatos",
       type: "array",
       of: [
