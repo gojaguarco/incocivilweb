@@ -35,7 +35,7 @@ export const sendEmail = async (formState: TFormState, formData: FormData) => {
     }
   }
 
-  console.log({data});
+  // console.log({data});
 
   return {
     success: true,
