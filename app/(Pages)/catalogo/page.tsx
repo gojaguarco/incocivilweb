@@ -22,12 +22,13 @@ export default async function Page() {
           <h2 className="text-2xl md:text-4xl font-semibold mt-1">Catálogo</h2>
           <p className="text-sm sm:text-base font-thin tracking-[3px] uppercase">Encuentra el material que se ajuste a tu proyecto.</p>
         </header>
-        <LightCard>
+        <LightCard className="bg-primary-light">
           <div className="flex justify-between items-center">
-            <span className="text-xl font-montserrat">
+            <span className="text-xl font-montserrat text-slate-200">
               Filtra por superficie
             </span>
             <SelectFilter
+              className="bg-primary text-slate-300"
               allTitle="Ver Todos"
               filterName="surfaceType"
               options={surfaceTypes.map(surface => ({

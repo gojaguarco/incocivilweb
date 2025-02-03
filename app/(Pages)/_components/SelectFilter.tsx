@@ -1,8 +1,8 @@
 "use client";
 import { useRouter, useSearchParams } from "next/navigation";
-import { Suspense, useCallback } from "react";
-
-const Select = ({ filterName, options, allTitle, allValue }: {
+import { ComponentPropsWithoutRef, Suspense, useCallback } from "react";
+import { cn } from "../_lib/cn";
+type Props = ComponentPropsWithoutRef<'select'> & {
   filterName: string;
   options: {
     value: string;
@@ -10,7 +10,9 @@ const Select = ({ filterName, options, allTitle, allValue }: {
   }[];
   allTitle: string;
   allValue?: string;
-}) => {
+};
+
+const Select = ({ filterName, options, allTitle, allValue, className, ...rest }: Props) => {
 
   const searchParams = useSearchParams();
 
@@ -47,7 +49,10 @@ const Select = ({ filterName, options, allTitle, allValue }: {
 
   const selectedOptionLabel = options.find(option => option.value === selectedOption)?.label;
   return (
-    <select onChange={onSelectChange} className="bg-light text-dark px-4 py-2 rounded-lg flex items-center gap-2 text-lg">
+    <select onChange={onSelectChange}
+      className={cn(`bg-light text-dark px-4 py-2 rounded-lg flex items-center gap-2 text-lg`, className)}
+      {...rest}
+    >
       <option value={selectedOption ?? allValue ?? "all"}>
         {selectedOptionLabel ?? allTitle}
       </option>
@@ -61,15 +66,9 @@ const Select = ({ filterName, options, allTitle, allValue }: {
 }
 
 
-const SelectFilter = ({ filterName, options, allTitle, allValue }: {
-  filterName: string;
-  options: {
-    value: string;
-    label: string;
-  }[];
-  allTitle: string;
-  allValue?: string;
-}) => {
+type SelectFilterProps = ComponentPropsWithoutRef<'select'> 
+
+const SelectFilter = ({ filterName, options, allTitle, allValue, ...rest }: Props) => {
   return (
     <Suspense>
       <Select
@@ -77,6 +76,7 @@ const SelectFilter = ({ filterName, options, allTitle, allValue }: {
         options={options}
         allTitle={allTitle}
         allValue={allValue}
+        {...rest}
       />
     </Suspense>
   );
