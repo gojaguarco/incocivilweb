@@ -20,7 +20,7 @@ export const sendEmail = async (formState: TFormState, formData: FormData) => {
     adminData: JSON.parse(formData.get("adminData") as string) as { phone: string, email: string },
   }
 
-  const { data, error } = await resend.emails.send({
+  const { error } = await resend.emails.send({
     from: 'Incocivil <noreply@incocivil.com>',
     to: [rawFormData.email],
     bcc: [rawFormData.adminData.email],
