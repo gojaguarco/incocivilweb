@@ -6,7 +6,7 @@ import Burger from "../Burger";
 import Esquina from "../../_components/Esquina";
 import Menu from "../menu";
 import { useState } from "react";
-import { usePathname } from "next/navigation";
+// import { usePathname } from "next/navigation";
 
 type Props = {
   className?: string;
@@ -15,7 +15,7 @@ type Props = {
 const MobileNavBar = ({ className }: Props) => {
 
   const [isNavOpen, setIsNavOpen] = useState(false);
-  const pathname = usePathname();
+  // const pathname = usePathname();
 
   return(
     <nav className={`${className} flex items-center justify-between`}>
