@@ -112,6 +112,7 @@ const CotizadorUi = ({ surfaceTypes, catalogo }: {
                 <th className="text-left p-2">Tipo</th>
                 <th className="text-left p-2">Calibre</th>
                 <th className="text-left p-2">Descripción</th>
+                <th className="text-left p-2">Precio</th>
                 <th className="text-left p-2">Acciones</th>
               </tr>
             </thead>
@@ -130,6 +131,7 @@ const CotizadorUi = ({ surfaceTypes, catalogo }: {
                     <td className="p-2">{surface.type.title}</td>
                     <td className="p-2">{surface.caliber}</td>
                     <td className="p-2">{surface.description}</td>
+                    <td className="p-2">{surface.price}</td>
                     <td className="p-2">
                       <button
                         onClick={() => removeSurfaceId(id)}
