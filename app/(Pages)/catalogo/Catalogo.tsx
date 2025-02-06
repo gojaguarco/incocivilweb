@@ -22,7 +22,7 @@ const CatalogoUi = ({ catalogo }: {
     return item.type._id === surfaceTypeId;
   });
   return (
-    <ul className="w-full grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+    <ul className="w-full grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-4">
       {filteredCatalogo.map((item) => {
         const title = item.title.toLowerCase().replace(item.type.title.toLowerCase(), "");
         return (
