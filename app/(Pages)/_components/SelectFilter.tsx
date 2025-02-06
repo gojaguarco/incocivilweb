@@ -1,6 +1,11 @@
 "use client";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { ComponentPropsWithoutRef, Suspense, useCallback, useEffect } from "react";
+import {
+  ComponentPropsWithoutRef,
+  Suspense,
+  useCallback,
+  useEffect,
+} from "react";
 import { cn } from "../_lib/cn";
 type Props = ComponentPropsWithoutRef<"select"> & {
   filterName: string;
@@ -72,9 +77,9 @@ const Select = ({
 
   useEffect(() => {
     if (pathname === "/cotizador") {
-      router.push("/cotizador?surfaceType=all")
+      router.push("/cotizador?surfaceType=all");
     }
-  }, [])
+  }, []);
 
   return (
     <select
