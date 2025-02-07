@@ -2,10 +2,11 @@ import BackButton from "@/app/(Pages)/_components/BackButton";
 import Modal from "@/app/(Pages)/_components/Modal";
 import NavButtons from "@/app/(Pages)/_components/NavButtons";
 import SurfaceTypeSlider from "@/app/(Pages)/_components/SurfaceTypeSlider";
+import TextBlock from "@/app/(Pages)/_components/TextBlock";
 import { client, sanityFetch } from "@/sanity/lib/client";
 import { urlFor } from "@/sanity/lib/image";
 import { ALLSURFACETYPES_QUERY, SURFACESBYTYPE_QUERY, SURFACETYPEBYID_QUERY } from "@/sanity/queries/surfaceQueries";
-import { PortableText, QueryParams } from "next-sanity";
+import { QueryParams } from "next-sanity";
 import Image from "next/image";
 
 export async function generateStaticParams() {
@@ -64,7 +65,7 @@ export default async function Page(props: { params: Promise<QueryParams> }) {
             <h2>{surfaceType.title}</h2>
             <BackButton />
             <section className="w-full min-h-1 flex-shrink overflow-y-scroll no-scrollbar">
-              <PortableText value={surfaceType.description} />
+              <TextBlock value={surfaceType.description} />
             </section>
           </div>
         </div>

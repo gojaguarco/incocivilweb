@@ -1,10 +1,10 @@
 import { client, sanityFetch } from "@/sanity/lib/client";
 import { SERVICE_QUERY, SERVICES_QUERY } from "@/sanity/queries/serviceQueries";
-import { PortableText } from "next-sanity";
 import { QueryParams } from "sanity";
 import ImageOrVideo from "../../_components/ImageOrVideo";
 import LinkButton from "../../_components/LinkButton";
 import Link from "next/link";
+import TextBlock from "../../_components/TextBlock";
 
 
 
@@ -45,7 +45,7 @@ export default async function Page(props: { params: Promise<QueryParams> }) {
         </Link>
         <h1>{service.title}</h1>
         <ImageOrVideo className="aspect-video object-cover my-8" content={service.ImageOrVideo} />
-        <PortableText value={service.body}/>
+        <TextBlock value={service.body}/>
         <div className="w-full mt-8">
         <LinkButton color="claro" size="mediano" link="/services" text="Todos los Servicios" />
         </div>

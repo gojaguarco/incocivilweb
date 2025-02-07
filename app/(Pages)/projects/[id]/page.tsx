@@ -1,12 +1,12 @@
 import { sanityFetch } from '@/sanity/lib/client';
 import { urlFor } from '@/sanity/lib/image';
 import { PROJECT_QUERY } from '@/sanity/queries/projectQueries';
-import { PortableText } from 'next-sanity';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react'
 import { QueryParams } from 'sanity';
 import LinkButton from '../../_components/LinkButton';
+import TextBlock from '../../_components/TextBlock';
 
 export default async function Page(props: { params: Promise<QueryParams> }) {
 
@@ -33,7 +33,7 @@ return(
         </Link>
         <h1>{project.title}</h1>
         <Image className="w-full rounded-2xl max-w-screen-xl" src={urlFor(project.image).width(2000).height(1000).format('webp').url()} alt={project.image.alt} width={2000} height={1000}/>
-        <PortableText value={project.body}/>
+        <TextBlock value={project.body}/>
         <div className="w-full mt-8">
         <LinkButton color="claro" size="mediano" link="/projects" text="Todos los Proyectos" />
         </div>
