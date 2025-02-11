@@ -1,14 +1,16 @@
 import Link from "next/link";
+import { ComponentPropsWithoutRef } from "react";
+import { cn } from "../_lib/cn";
 
-type TProps = {
+type TProps = ComponentPropsWithoutRef<'a'> & {
   text: string;
   color: 'naranja' | 'amarillo' | 'claro' | 'oscuro';
   size: 'pequeño' | 'mediano' | 'grande';
   link: string;
-  scroll?: boolean
+  scroll?: boolean;
 }
 
-const LinkButton = ({ text, color, size, link, scroll }: TProps) => {
+const LinkButton = ({ text, color, size, link, scroll, className }: TProps) => {
 
   const sizeClasses = {
     grande: 'py-1.5 px-[17px] xs:px-6 sm:px-8 sm:py-2 text-base sm:text-lg',
@@ -24,7 +26,7 @@ const LinkButton = ({ text, color, size, link, scroll }: TProps) => {
     oscuro: 'bg-primary text-light',
   };
 
-  const buttonClasses = `${colorClasses[color]} ${sizeClasses[size]} flex flex-col items-center justify-center rounded-lg text-nowrap flex-shrink-0 hover:-translate-y-0.5 hover:el-shadow`;
+  const buttonClasses = cn(`${colorClasses[color]} ${sizeClasses[size]} flex flex-col items-center justify-center rounded-lg text-nowrap flex-shrink-0 hover:-translate-y-0.5 hover:el-shadow`, className);
 
   return (
     <Link href={link} className={buttonClasses} scroll={scroll}>
