@@ -8,31 +8,33 @@ import { numberToColombianPriceString } from "@/app/helpers";
 import { SurfaceToSendAdminEmail } from "./captureInfoZods";
 import NumberInput from "./NumberInput";
 
-
 const SelectedSurfacesTable = ({
   catalogo,
   removeSurfaceId,
   selectedSurfaceIds,
   setSurfaceFormats,
   surfaceFormats,
-  showTotal
+  showTotal,
 }: {
-
   selectedSurfaceIds: string[];
   catalogo: AVAILABLE_SURFACES_QUERYResult;
   removeSurfaceId: (id: string) => void;
   surfaceFormats: {
     [surfaceId: string]: SurfaceToSendAdminEmail;
   };
-  setSurfaceFormats: Dispatch<SetStateAction<{
-    [surfaceId: string]: SurfaceToSendAdminEmail;
-  }>>
+  setSurfaceFormats: Dispatch<
+    SetStateAction<{
+      [surfaceId: string]: SurfaceToSendAdminEmail;
+    }>
+  >;
   showTotal: boolean;
 }) => {
-
   return (
     <>
-      <table id="selected-surfaces" className="hidden xl:block table-fixed w-full border-collapse bg-light rounded shadow-sm overflow-hidden">
+      <table
+        id="selected-surfaces"
+        className="hidden xl:block table-fixed w-full border-collapse bg-light rounded shadow-sm overflow-hidden"
+      >
         <thead className="w-full">
           <tr className="border-b">
             <Th>Material</Th>
@@ -49,57 +51,81 @@ const SelectedSurfacesTable = ({
         </thead>
         <tbody className="w-full">
           {selectedSurfaceIds.map((id, index) => {
-
             const surface = catalogo.find((item) => item._id === id);
             if (!surface) return null;
 
             return (
-              <DesktopSurface showTotal={!!showTotal} surfaceFormats={surfaceFormats} setSurfaceFormats={setSurfaceFormats} key={id} id={id} index={index} removeSurfaceId={removeSurfaceId} surface={surface} />
+              <DesktopSurface
+                showTotal={!!showTotal}
+                surfaceFormats={surfaceFormats}
+                setSurfaceFormats={setSurfaceFormats}
+                key={id}
+                id={id}
+                index={index}
+                removeSurfaceId={removeSurfaceId}
+                surface={surface}
+              />
             );
           })}
         </tbody>
-      </table >
-      <ul id="selected-surfaces" className="xl:hidden w-full border-collapse bg-light rounded shadow-sm overflow-hidden flex flex-col">
+      </table>
+      <ul
+        id="selected-surfaces"
+        className="xl:hidden w-full border-collapse bg-light rounded shadow-sm overflow-hidden flex flex-col"
+      >
         {selectedSurfaceIds.map((id, index) => {
           const surface = catalogo.find((item) => item._id === id);
           if (!surface) return null;
           return (
-            <MobileSurface showTotal={showTotal} setSurfaceFormats={setSurfaceFormats} surfaceFormats={surfaceFormats} key={id} index={index} surface={surface} id={id} removeSurfaceId={removeSurfaceId} />
-          )
+            <MobileSurface
+              showTotal={showTotal}
+              setSurfaceFormats={setSurfaceFormats}
+              surfaceFormats={surfaceFormats}
+              key={id}
+              index={index}
+              surface={surface}
+              id={id}
+              removeSurfaceId={removeSurfaceId}
+            />
+          );
         })}
       </ul>
       {/* {JSON.stringify(selectedSurfaces)} */}
     </>
   );
-}
+};
 
 export default SelectedSurfacesTable;
 
-
-const Th = ({ className, children, ...rest }: ComponentPropsWithoutRef<"th"> & {
+const Th = ({
+  className,
+  children,
+  ...rest
+}: ComponentPropsWithoutRef<"th"> & {
   children: React.ReactNode;
 }) => {
   return (
     <th className={cn("text-center p-2 md:py-5", className)} {...rest}>
-      <h4 className="font-normal">
-        {children}
-      </h4>
+      <h4 className="font-normal">{children}</h4>
     </th>
-  )
+  );
 };
 
-const Td = ({ className, children, ...rest }: ComponentPropsWithoutRef<"td"> & {
+const Td = ({
+  className,
+  children,
+  ...rest
+}: ComponentPropsWithoutRef<"td"> & {
   children: React.ReactNode;
 }) => {
   return (
     <td className={cn("p-2 md:p-5", className)} {...rest}>
       <div className="flex flex-col items-center justify-center">
-
         {children}
       </div>
     </td>
-  )
-}
+  );
+};
 
 const DesktopSurface = ({
   id,
@@ -108,7 +134,7 @@ const DesktopSurface = ({
   removeSurfaceId,
   setSurfaceFormats,
   surfaceFormats,
-  showTotal
+  showTotal,
 }: {
   showTotal: boolean;
   id: string;
@@ -116,18 +142,17 @@ const DesktopSurface = ({
   surface: AVAILABLE_SURFACES_QUERYResult[number];
   removeSurfaceId: (id: string) => void;
   surfaceFormats: {
-    [surfaceId: string]: SurfaceToSendAdminEmail
-  }
-  setSurfaceFormats: Dispatch<SetStateAction<{
     [surfaceId: string]: SurfaceToSendAdminEmail;
-  }>>
-
+  };
+  setSurfaceFormats: Dispatch<
+    SetStateAction<{
+      [surfaceId: string]: SurfaceToSendAdminEmail;
+    }>
+  >;
 }) => {
-
   const onFormatChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const format = JSON.parse(e.target.value);
     if (format) {
-
       setSurfaceFormats({
         ...surfaceFormats,
         [surface._id]: {
@@ -140,8 +165,8 @@ const DesktopSurface = ({
           image: surface.image ? urlFor(surface.image).url() : "",
           quanity: 1,
           formatPrice: format.price,
-        }
-      })
+        },
+      });
     }
   };
 
@@ -153,17 +178,28 @@ const DesktopSurface = ({
       [surface._id]: {
         ...surfaceFormats[surface._id],
         quanity: quantity,
-        totalSurface: newTotal
-      }
-    })
+        totalSurface: newTotal,
+      },
+    });
   };
 
-
-  const rowBg = (index % 2 === 0 ? "bg-tableGray" : "bg-light")
+  const rowBg = index % 2 === 0 ? "bg-tableGray" : "bg-light";
   return (
     <tr className={cn("border-b", rowBg)}>
       <Td>
-        {surface.image && <Image className="rounded-lg w-[116.25px] h-[47px] object-cover" src={urlFor(surface.image).width(116).height(47).format('webp').url()} alt={surface.title} width={116} height={47} />}
+        {surface.image && (
+          <Image
+            className="rounded-lg w-[116.25px] h-[47px] object-cover"
+            src={urlFor(surface.image)
+              .width(116)
+              .height(47)
+              .format("webp")
+              .url()}
+            alt={surface.title}
+            width={116}
+            height={47}
+          />
+        )}
         {surface.title}
       </Td>
       <Td className="code">{surface.code}</Td>
@@ -172,10 +208,23 @@ const DesktopSurface = ({
       <Td className="max-w-[20ch] text-xs ">{surface.description}</Td>
       <Td>${surface.price}</Td>
       <Td>
-        <select onChange={onFormatChange} value={JSON.stringify({ height: surfaceFormats[surface._id]?.height || 0, width: surfaceFormats[surface._id]?.width || 0, price: surfaceFormats[surface._id]?.formatPrice || 0 })} className="p-2 rounded">
+        <select
+          onChange={onFormatChange}
+          value={JSON.stringify({
+            height: surfaceFormats[surface._id]?.height || 0,
+            width: surfaceFormats[surface._id]?.width || 0,
+            price: surfaceFormats[surface._id]?.formatPrice || 0,
+          })}
+          className="p-2 rounded"
+        >
           {surface.formats?.map((format, index) => {
             return (
-              <option key={`${format.height}-${format.width}-${index}`} value={JSON.stringify(format)}>{format.height}cm * {format.width}cm</option>
+              <option
+                key={`${format.height}-${format.width}-${index}`}
+                value={JSON.stringify(format)}
+              >
+                {format.height}cm * {format.width}cm
+              </option>
             );
           })}
         </select>
@@ -185,16 +234,32 @@ const DesktopSurface = ({
       </Td>
       <Td className="relative">
         {!showTotal && (
-          <div className={`w-full h-full absolute z-10 top-0 left-0 ${rowBg}`}>$0</div>
+          <div className={`w-full h-full absolute z-10 top-0 left-0 ${rowBg}`}>
+            $0
+          </div>
         )}
-        <span className="">{numberToColombianPriceString(surfaceFormats[surface._id]?.totalSurface || 0)}</span>
+        <span className="">
+          {numberToColombianPriceString(
+            surfaceFormats[surface._id]?.totalSurface || 0
+          )}
+        </span>
       </Td>
       <Td>
         <button
           onClick={() => removeSurfaceId(id)}
           className="p-2 text-red-500 hover:text-red-700"
         >
-          <svg xmlns="http://www.w3.org/2000/svg" width={20} height={20} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width={20}
+            height={20}
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth={2}
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
             <path d="M4 7h16" />
             <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
@@ -204,24 +269,32 @@ const DesktopSurface = ({
         </button>
       </Td>
     </tr>
-  )
-}
+  );
+};
 
-const MobileSurface = ({ index, surface, removeSurfaceId, id, setSurfaceFormats, surfaceFormats, showTotal }: {
+const MobileSurface = ({
+  index,
+  surface,
+  removeSurfaceId,
+  id,
+  setSurfaceFormats,
+  surfaceFormats,
+  showTotal,
+}: {
   id: string;
   index: number;
   surface: AVAILABLE_SURFACES_QUERYResult[number];
   removeSurfaceId: (id: string) => void;
   surfaceFormats: {
-    [surfaceId: string]: SurfaceToSendAdminEmail
-  }
-  setSurfaceFormats: Dispatch<SetStateAction<{
     [surfaceId: string]: SurfaceToSendAdminEmail;
-  }>>;
+  };
+  setSurfaceFormats: Dispatch<
+    SetStateAction<{
+      [surfaceId: string]: SurfaceToSendAdminEmail;
+    }>
+  >;
   showTotal: boolean;
-
 }) => {
-
   const onFormatChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const format = JSON.parse(e.target.value);
     if (format) {
@@ -232,19 +305,20 @@ const MobileSurface = ({ index, surface, removeSurfaceId, id, setSurfaceFormats,
         [surface._id]: {
           height: format.height,
           width: format.width,
-          totalSurface: area * parseInt(surface.price?.replaceAll(".", "") || ""),
+          totalSurface:
+            area * parseInt(surface.price?.replaceAll(".", "") || ""),
           id: surface._id,
           code: String(surface.code || ""),
           name: surface.title || "",
           image: surface.image ? urlFor(surface.image).url() : "",
           quanity: 1,
-          formatPrice: format.price
-        }
-      })
+          formatPrice: format.price,
+        },
+      });
     }
   };
 
-  const onQuantityChange = (quantity:  number) => {
+  const onQuantityChange = (quantity: number) => {
     const newTotal = surfaceFormats[surface._id]?.formatPrice * quantity;
 
     setSurfaceFormats({
@@ -252,33 +326,57 @@ const MobileSurface = ({ index, surface, removeSurfaceId, id, setSurfaceFormats,
       [surface._id]: {
         ...surfaceFormats[surface._id],
         quanity: quantity,
-        totalSurface: newTotal
-      }
-    })
+        totalSurface: newTotal,
+      },
+    });
   };
 
-  const itemBg = (index % 2 === 0 ? "bg-tableGray" : "bg-light");
+  const itemBg = index % 2 === 0 ? "bg-tableGray" : "bg-light";
 
   return (
     <li className={cn("border-b p-5 pb-8 relative flex flex-col", itemBg)}>
-
-      {surface.image && <Image className="rounded-lg w-full h-[150px] object-cover mb-5"
-        src={urlFor(surface.image).width(500).height(300).format('webp').url()}
-        alt={surface.title}
-        width={500}
-        height={300}
-      />}
+      {surface.image && (
+        <Image
+          className="rounded-lg w-full h-[150px] object-cover mb-5"
+          src={urlFor(surface.image)
+            .width(500)
+            .height(300)
+            .format("webp")
+            .url()}
+          alt={surface.title}
+          width={500}
+          height={300}
+        />
+      )}
       <div className="grid grid-cols-2 gap-2">
         <div className="flex flex-col gap-2">
-          <InfoItem><strong>Título: </strong></InfoItem>
-          <InfoItem className="code"><strong>Código: </strong></InfoItem>
-          <InfoItem><strong>Tipo de superficie: </strong></InfoItem>
-          <InfoItem><strong>Calibre: </strong></InfoItem>
-          <InfoItem ><strong>Descripción: </strong></InfoItem>
-          <InfoItem><strong>Precio por m2:</strong></InfoItem>
-          <InfoItem className="h-[39.2px]"><strong>Selecciona formato: </strong></InfoItem>
-          <InfoItem className=""><strong>Selecciona Cantidad: </strong></InfoItem>
-          <InfoItem className=""><strong>Total: </strong></InfoItem>
+          <InfoItem>
+            <strong>Título: </strong>
+          </InfoItem>
+          <InfoItem className="code">
+            <strong>Código: </strong>
+          </InfoItem>
+          <InfoItem>
+            <strong>Tipo de superficie: </strong>
+          </InfoItem>
+          <InfoItem>
+            <strong>Calibre: </strong>
+          </InfoItem>
+          <InfoItem>
+            <strong>Descripción: </strong>
+          </InfoItem>
+          <InfoItem>
+            <strong>Precio por m2:</strong>
+          </InfoItem>
+          <InfoItem className="h-[39.2px]">
+            <strong>Selecciona formato: </strong>
+          </InfoItem>
+          <InfoItem className="">
+            <strong>Selecciona Cantidad: </strong>
+          </InfoItem>
+          <InfoItem className="">
+            <strong>Total: </strong>
+          </InfoItem>
         </div>
         <div className="flex flex-col gap-2">
           <InfoItem>{surface.title}</InfoItem>
@@ -300,10 +398,23 @@ const MobileSurface = ({ index, surface, removeSurfaceId, id, setSurfaceFormats,
           </InfoItem>
           <InfoItem>${surface.price}</InfoItem>
           <InfoItem>
-            <select onChange={onFormatChange} value={JSON.stringify({ height: surfaceFormats[surface._id]?.height || 0, width: surfaceFormats[surface._id]?.width || 0, price: surfaceFormats[surface._id]?.formatPrice || 0 })} className="p-2 rounded">
+            <select
+              onChange={onFormatChange}
+              value={JSON.stringify({
+                height: surfaceFormats[surface._id]?.height || 0,
+                width: surfaceFormats[surface._id]?.width || 0,
+                price: surfaceFormats[surface._id]?.formatPrice || 0,
+              })}
+              className="p-2 rounded"
+            >
               {surface.formats?.map((format, index) => {
                 return (
-                  <option key={`<span class="math-inline">\{format\.height\}\*</span>{format.width}-${index}`} value={JSON.stringify(format)}>{format.height}cm * {format.width}cm</option>
+                  <option
+                    key={`<span class="math-inline">\{format\.height\}\*</span>{format.width}-${index}`}
+                    value={JSON.stringify(format)}
+                  >
+                    {format.height}cm * {format.width}cm
+                  </option>
                 );
               })}
             </select>
@@ -314,16 +425,34 @@ const MobileSurface = ({ index, surface, removeSurfaceId, id, setSurfaceFormats,
 
           <InfoItem className="relative">
             {!showTotal && (
-              <div className={`w-full h-full absolute z-10 top-0 left-0 ${itemBg}`}>$0</div>
+              <div
+                className={`w-full h-full absolute z-10 top-0 left-0 ${itemBg}`}
+              >
+                $0
+              </div>
             )}
-            <span className="">{numberToColombianPriceString(surfaceFormats[surface._id]?.totalSurface || 0)}</span>
+            <span className="">
+              {numberToColombianPriceString(
+                surfaceFormats[surface._id]?.totalSurface || 0
+              )}
+            </span>
           </InfoItem>
         </div>
         <button
           onClick={() => removeSurfaceId(id)}
           className="p-2 text-red-500 hover:text-red-700 absolute z-20 bottom-0 right-0"
         >
-          <svg xmlns="http://www.w3.org/2000/svg" width={20} height={20} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width={20}
+            height={20}
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth={2}
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
             <path stroke="none" d="M0 0h24v24H0z" fill="none" />
             <path d="M4 7h16" />
             <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
@@ -333,15 +462,19 @@ const MobileSurface = ({ index, surface, removeSurfaceId, id, setSurfaceFormats,
         </button>
       </div>
     </li>
-  )
-}
+  );
+};
 
-const InfoItem = ({ children, className, ...rest }: ComponentPropsWithoutRef<"div"> & {
+const InfoItem = ({
+  children,
+  className,
+  ...rest
+}: ComponentPropsWithoutRef<"div"> & {
   children: React.ReactNode;
 }) => {
   return (
     <div className={cn("flex gap-[1ch] items-center", className)} {...rest}>
       {children}
     </div>
-  )
-}
+  );
+};
