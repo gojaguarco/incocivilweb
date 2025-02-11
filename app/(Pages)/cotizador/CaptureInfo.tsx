@@ -38,7 +38,7 @@ const CaptureInfo = ({
 
           <LightCard
             onClick={e => e.stopPropagation()}
-            className="bg-light-dark p-10 relative z-[200] rounded-md px-10 flex flex-col w-[85dvw] h-[75dvh] lg:h-[85dvh] mx-auto gap-5"
+            className="bg-light-dark p-10 relative z-[200] rounded-md px-10 flex flex-col w-[85dvw] mx-auto gap-5"
           >
             <form className="flex flex-col gap-5">
 
@@ -58,7 +58,6 @@ const CaptureInfo = ({
               <Input label="Apellido" type="text" />
               <Input label="Email" type="text" />
               <Input label="Teléfono" type="text" />
-              <Input label="Mensaje (opcional)" type="text" />
               <label className="flex flex-col gap-2">
                 <h4>
                   Mensaje (opcional):
