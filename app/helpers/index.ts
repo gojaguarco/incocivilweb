@@ -13,3 +13,5 @@ export const numberToColombianPriceString = function (number: number) {
   }
   return `$${result}`;
 };
+
+export const colombianPriceStringToNumber = (price: string) => parseInt(price.replace("$", "").replaceAll(".", ""));
