@@ -1,10 +1,11 @@
 import { client, sanityFetch } from "@/sanity/lib/client";
 import { urlFor } from "@/sanity/lib/image";
 import { ALLSURFACETYPES_QUERY, SURFACESBYTYPE_QUERY, SURFACETYPEBYID_QUERY } from "@/sanity/queries/surfaceQueries";
-import { PortableText, QueryParams } from "next-sanity";
+import { QueryParams } from "next-sanity";
 import Image from "next/image";
 import Link from "next/link";
 import SurfaceTypeSlider from "../../_components/SurfaceTypeSlider";
+import TextBlock from "../../_components/TextBlock";
 
 
 
@@ -54,7 +55,7 @@ export default async function Page(props: { params: Promise<QueryParams> }) {
     <Image className="w-full lg:w-1/2 object-cover rounded-lg h-40 sm:h-auto" src={urlFor(surfaceType.imageObject).width(800).height(400).format('webp').url()} alt={surfaceType.imageObject.alt} width={800} height={400}/>
     <div className="flex flex-col gap-4 w-full lg:w-1/2">
       <h2>{surfaceType.title}</h2>
-      <PortableText value={surfaceType.description}/>
+      <TextBlock value={surfaceType.description}/>
     </div>
     </div>
 

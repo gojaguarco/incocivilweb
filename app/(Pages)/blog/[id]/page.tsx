@@ -1,11 +1,11 @@
 import Image from "next/image";
 import { urlFor } from "@/sanity/lib/image";
 import Link from "next/link";
-import { PortableText } from "next-sanity";
 import { BLOG_QUERY } from "@/sanity/queries/blogQueries";
 import { sanityFetch } from "@/sanity/lib/client";
 import { QueryParams } from "sanity";
 import LinkButton from "../../_components/LinkButton";
+import TextBlock from "../../_components/TextBlock";
 
 
 export default async function Page(props: { params: Promise<QueryParams> }) {
@@ -33,7 +33,7 @@ export default async function Page(props: { params: Promise<QueryParams> }) {
         </Link>
         <h1>{post.title}</h1>
         {post.image.url && <Image className="w-full rounded-2xl max-w-screen-xl" src={urlFor(post.image.url).width(2000).height(1000).format('webp').url()} alt={post.image.alt} width={2000} height={1000} />}
-        <PortableText value={post.body} />
+        <TextBlock value={post.body} />
         <div className="w-full mt-8">
           <LinkButton color="claro" size="mediano" link="/blog" text="Todas las Publicaciones" />
         </div>
