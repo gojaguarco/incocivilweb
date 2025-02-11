@@ -15,6 +15,9 @@ const CotizadorUi = ({ surfaceTypes, catalogo }: {
   catalogo: CATALOGO_QUERYResult;
 }) => {
   const searchParams = useSearchParams();
+  const captureInfo = searchParams.get("capture-info");
+
+  console.log({captureInfo})
   const surfaceTypeId = searchParams.get("surfaceType");
   const selectedSurfaceIds = searchParams.get("surfaceId")?.split(",") ?? []
   const router = useRouter();
@@ -122,7 +125,7 @@ const CotizadorUi = ({ surfaceTypes, catalogo }: {
             Aprende a diseñar tus encimeras, haciendo clic aquí.
           </a>
         </LightCard>
-        <LinkButton scroll={false} text="Cotizar" color="naranja" size="mediano" link={`?${createQueryString("cotizacion", "true")}`} />
+        <LinkButton scroll={false} text="Cotizar" color="naranja" size="mediano" link={`?${createQueryString("capture-info", "true")}`} />
       </div>
     </>
   );
