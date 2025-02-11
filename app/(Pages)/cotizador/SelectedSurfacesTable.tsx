@@ -1,7 +1,7 @@
 import { CATALOGO_QUERYResult } from "@/sanity.types";
 import { urlFor } from "@/sanity/lib/image";
 import Image from "next/image";
-import { ComponentPropsWithoutRef, useState } from "react";
+import { ComponentPropsWithoutRef, useEffect, useState } from "react";
 import { cn } from "../_lib/cn";
 import { numberToColombianPriceString } from "@/app/helpers";
 
@@ -96,6 +96,20 @@ const Tr = ({
     setSelectedFormat(value)
     setSelectedFormatArea(m2);
   }
+  useEffect(() => {
+    if (surface.formats) {
+
+      const defaultHeight = surface.formats[0].height;
+      const defaultWidth = surface.formats[0].width;
+
+      const cm2 = defaultHeight * defaultWidth;
+      const m2 = cm2 / 100
+
+      setSelectedFormat(`${defaultHeight}cm * ${defaultWidth}cm`);
+
+      setSelectedFormatArea(m2);
+    }
+  }, [])
 
   return (
     <tr className={cn("border-b", (index % 2 === 0 ? "bg-tableGray" : ""))}>
@@ -109,13 +123,13 @@ const Tr = ({
       <Td className="max-w-[20ch]">{surface.description}</Td>
       <Td>${surface.price}</Td>
       <Td>
-        <select onChange={onChange} value={selectedFormat || 'choose a format'} className="p-2 rounded">
+        <select onChange={onChange} value={selectedFormat || ''} className="p-2 rounded">
           {surface.formats?.map((format, index) => (
             <option key={`${format.height}*${format.width}-${index}`} value={`${format.height}cm * ${format.height}cm`}>{format.height}cm * {format.height}cm</option>
           ))}
         </select>
       </Td>
-      <Td>{surface.price && selectedFormatArea && numberToColombianPriceString((selectedFormatArea) * parseInt(surface.price.replaceAll(".", "")))}</Td>
+      <Td className="surface-total">{surface.price && selectedFormatArea && numberToColombianPriceString((selectedFormatArea) * parseInt(surface.price.replaceAll(".", "")))}</Td>
       <Td>
         <button
           onClick={() => removeSurfaceId(id)}

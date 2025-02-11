@@ -8,7 +8,6 @@ import Image from "next/image";
 import { urlFor } from "@/sanity/lib/image";
 import { Suspense, useCallback } from "react";
 import SelectedSurfacesTable from "./SelectedSurfacesTable";
-import LinkButton from "../_components/LinkButton";
 import CaptureInfo from "./CaptureInfo";
 
 const CotizadorUi = ({ surfaceTypes, catalogo }: {

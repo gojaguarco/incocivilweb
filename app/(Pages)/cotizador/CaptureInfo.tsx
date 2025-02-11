@@ -1,25 +1,36 @@
 import { useRouter } from "next/navigation";
 import LinkButton from "../_components/LinkButton";
-import { ComponentPropsWithoutRef } from "react";
+import { ComponentPropsWithoutRef, useEffect, useState } from "react";
 import LightCard from "../_components/LightCard";
 import { cn } from "../_lib/cn";
+import { colombianPriceStringToNumber, numberToColombianPriceString } from "@/app/helpers";
 
 const CaptureInfo = ({
   createQueryString,
   captureInfoOpen,
-  total
 }: {
   createQueryString: (name: string, value: string, action: 'add' | 'remove' | 'replace') => string;
   captureInfoOpen: boolean;
-  total: number;
 }) => {
+  const [totalToShow, setTotalToShow] = useState(0);
   const router = useRouter();
+
+  useEffect(() => {
+    const surfaceTotals = Array.from(document.getElementsByClassName("surface-total"));
+    let total = 0;
+    surfaceTotals.forEach((surfaceTotal) => {
+      const textContent = surfaceTotal.textContent ?? '';
+      const price = colombianPriceStringToNumber(textContent);
+      total += price;
+    });
+    setTotalToShow(total);
+  }, [captureInfoOpen]);
   return (
     <>
       <LinkButton scroll={false} text="Cotizar" color="naranja" size="mediano" link={`?${createQueryString("capture-info", "true", "add")}`} />
       {captureInfoOpen && (
         <section
-          onClick={(e) => {
+          onClick={() => {
             router.back()
           }}
           className="fixed top-0 z-10 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center"
@@ -36,7 +47,7 @@ const CaptureInfo = ({
                 <strong className="mx-[0.5ch]">
                   TOTAL
                 </strong>
-                de los materiales que seleccionaste es de ${total} de pesos colombianos.
+                de los materiales que seleccionaste es de {numberToColombianPriceString(totalToShow)} de pesos colombianos.
               </p>
               <p>Si deseas verlo a detalle y recibir una asesoría personalizada solo
                 <strong className="mx-[0.5ch]">
