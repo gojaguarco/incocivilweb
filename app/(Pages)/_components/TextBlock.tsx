@@ -13,7 +13,7 @@ const PortableTextBlockComponents: Partial<PortableTextReactComponents> = {
           alt={value.alt}
           width={600}
           height={350}
-          className="w-full h-full object-cover"
+          className="w-full object-contain max-w-[500px] aspect-video mx-auto"
         />
       )
     },
@@ -27,7 +27,7 @@ const PortableTextBlockComponents: Partial<PortableTextReactComponents> = {
         return <p>Video URL not found.</p>;
       } else {
         return (
-          <video controls className="w-full h-full object-cover">
+          <video controls className="w-full object-contain max-w-[500px] aspect-video mx-auto">
             <source src={posterUrl} type="video/webm" />
             <source src={videoUrlMP4} type="video/mp4" />
             <p>
