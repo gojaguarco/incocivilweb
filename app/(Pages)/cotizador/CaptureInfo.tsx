@@ -27,6 +27,7 @@ const CaptureInfo = ({
   formTitle: string;
   successMessage: string;
 }) => {
+  const [totalToShow, setTotalToShow] = useState(0);
   const router = useRouter();
 
   let total = 0;
