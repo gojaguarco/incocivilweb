@@ -7,6 +7,8 @@ import { useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
 import { urlFor } from "@/sanity/lib/image";
 import { Suspense, useCallback } from "react";
+import SelectedSurfacesTable from "./SelectedSurfacesTable";
+import LinkButton from "../_components/LinkButton";
 
 const CotizadorUi = ({ surfaceTypes, catalogo }: {
   surfaceTypes: ALL_SURFACE_TYPES_QUERYResult;
@@ -47,7 +49,7 @@ const CotizadorUi = ({ surfaceTypes, catalogo }: {
 
 
   const addSurfaceId = (id: string) => {
-    router.push(`?${createQueryString('surfaceId', id, 'add')}`, {scroll: false})
+    router.push(`?${createQueryString('surfaceId', id, 'add')}`, { scroll: false })
   }
 
   const removeSurfaceId = (id: string) => {
@@ -55,9 +57,9 @@ const CotizadorUi = ({ surfaceTypes, catalogo }: {
       // remove surfaceId from url search params
       const params = new URLSearchParams(searchParams.toString());
       params.delete('surfaceId');
-      router.push(`?${params.toString()}`, {scroll: false});
+      router.push(`?${params.toString()}`, { scroll: false });
     } else {
-      router.push(`?${createQueryString('surfaceId', id, 'remove')}`, {scroll: false});
+      router.push(`?${createQueryString('surfaceId', id, 'remove')}`, { scroll: false });
     }
   }
 
@@ -104,55 +106,24 @@ const CotizadorUi = ({ surfaceTypes, catalogo }: {
           <h2 className="text-lg font-light">
             3. Selecciona los formatos que necesitas para tu proyecto.
           </h2>
-          <table className="w-full border-collapse">
-            <thead>
-              <tr className="border-b">
-                <th className="text-left p-2">Material</th>
-                <th className="text-left p-2">Código</th>
-                <th className="text-left p-2">Tipo</th>
-                <th className="text-left p-2">Calibre</th>
-                <th className="text-left p-2">Descripción</th>
-                <th className="text-left p-2">Precio</th>
-                <th className="text-left p-2">Acciones</th>
-              </tr>
-            </thead>
-            <tbody>
-              {selectedSurfaceIds.map((id) => {
-                const surface = catalogo.find((item) => item._id === id);
-                if (!surface) return null;
-
-                return (
-                  <tr key={id} className="border-b">
-                    <td className="p-2">
-                      {surface.image && <Image className="rounded-lg w-[116.25px] h-[47px] object-cover" src={urlFor(surface.image).width(116).height(47).format('webp').url()} alt={surface.title} width={116} height={47} />}
-                      {surface.title}
-                    </td>
-                    <td className="p-2">{surface.code}</td>
-                    <td className="p-2">{surface.type.title}</td>
-                    <td className="p-2">{surface.caliber}</td>
-                    <td className="p-2">{surface.description}</td>
-                    <td className="p-2">{surface.price}</td>
-                    <td className="p-2">
-                      <button
-                        onClick={() => removeSurfaceId(id)}
-                        className="p-2 text-red-500 hover:text-red-700"
-                      >
-                        <svg xmlns="http://www.w3.org/2000/svg" width={20} height={20} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
-                          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                          <path d="M4 7h16" />
-                          <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
-                          <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
-                          <path d="M10 12l4 4m0 -4l-4 4" />
-                        </svg>
-                      </button>
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
+          <SelectedSurfacesTable
+            catalogo={catalogo}
+            removeSurfaceId={removeSurfaceId}
+            selectedSurfaceIds={selectedSurfaceIds}
+          />
         </LightCard>
       )}
+      <div className="w-full items-center flex justify-between">
+        <LightCard>
+          <h6 className="font-inter">
+            ¿No sabes qué formato seleccionar?
+          </h6>
+          <a href="" className="underline">
+            Aprende a diseñar tus encimeras, haciendo clic aquí.
+          </a>
+        </LightCard>
+        <LinkButton scroll={false} text="Cotizar" color="naranja" size="mediano" link={`?${createQueryString("cotizacion", "true")}`} />
+      </div>
     </>
   );
 }

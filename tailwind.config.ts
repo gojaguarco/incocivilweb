@@ -28,6 +28,7 @@ const config: Config = {
         'light-dark': '#E0E3EC',
         'logo-red': '#9F1F00',
         'logo-yellow': '#FCC172',
+        tableGray: '#e8eefe'
       },
       fontFamily: {
   			inter: 'var(--font-inter)',
