@@ -11,7 +11,7 @@ import Image from "next/image";
 import { urlFor } from "@/sanity/lib/image";
 import { Suspense, useCallback } from "react";
 import SelectedSurfacesTable from "./SelectedSurfacesTable";
-import LinkButton from "../_components/LinkButton";
+import CaptureInfo from "./CaptureInfo";
 
 const CotizadorUi = ({
   surfaceTypes,
@@ -21,9 +21,9 @@ const CotizadorUi = ({
   catalogo: CATALOGO_QUERYResult;
 }) => {
   const searchParams = useSearchParams();
-  const captureInfo = searchParams.get("capture-info");
+  const captureInfoOpen = searchParams.get("capture-info") === "true";
 
-  console.log({ captureInfo });
+  console.log({ captureInfoOpen });
   const surfaceTypeId = searchParams.get("surfaceType");
   const selectedSurfaceIds = searchParams.get("surfaceId")?.split(",") ?? [];
   const router = useRouter();
@@ -172,12 +172,10 @@ const CotizadorUi = ({
             Aprende a diseñar tus encimeras, haciendo clic aquí.
           </a>
         </LightCard>
-        <LinkButton
-          scroll={false}
-          text="Cotizar"
-          color="naranja"
-          size="mediano"
-          link={`?${createQueryString("capture-info", "true")}`}
+        <CaptureInfo
+          createQueryString={createQueryString}
+          captureInfoOpen={captureInfoOpen}
+          total={15000000}
         />
       </div>
     </>
