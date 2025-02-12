@@ -16,7 +16,7 @@ const SelectedSurfacesTable = ({
   removeSurfaceId: (id: string) => void;
 }) => {
   return (
-    <table className="w-full border-collapse bg-white rounded shadow-sm">
+    <table className="w-full border-collapse bg-light rounded shadow-sm overflow-hidden">
       <thead>
         <tr className="border-b">
           <Th>Material</Th>
@@ -112,7 +112,7 @@ const Tr = ({
   }, [])
 
   return (
-    <tr className={cn("border-b", (index % 2 === 0 ? "bg-tableGray" : ""))}>
+    <tr className={cn("border-b", (index % 2 === 0 ? "bg-tableGray" : "bg-light"))}>
       <Td>
         {surface.image && <Image className="rounded-lg w-[116.25px] h-[47px] object-cover" src={urlFor(surface.image).width(116).height(47).format('webp').url()} alt={surface.title} width={116} height={47} />}
         {surface.title}
