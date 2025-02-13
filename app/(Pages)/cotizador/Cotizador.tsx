@@ -175,7 +175,7 @@ const CotizadorUi = ({
         <CaptureInfo
           createQueryString={createQueryString}
           captureInfoOpen={captureInfoOpen}
-          total={15000000}
+          // total={15000000}
         />
       </div>
     </>
