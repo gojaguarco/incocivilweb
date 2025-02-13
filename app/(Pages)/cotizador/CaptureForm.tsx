@@ -43,6 +43,7 @@ const CaptureForm = ({ totalToShow }: {
       localStorage.setItem('formData', JSON.stringify(data));
     }
   }, [data]); 
+  
   const onInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const value = e.target.value;
 
