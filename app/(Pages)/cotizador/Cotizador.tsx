@@ -125,7 +125,7 @@ const CotizadorUi = ({ surfaceTypes, catalogo }: {
             Aprende a diseñar tus encimeras, haciendo clic aquí.
           </a>
         </LightCard>
-        <CaptureInfo createQueryString={createQueryString} captureInfoOpen={captureInfoOpen} total={15000000} />
+        <CaptureInfo createQueryString={createQueryString} captureInfoOpen={captureInfoOpen} />
       </div>
     </>
   );
