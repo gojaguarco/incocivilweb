@@ -1,5 +1,5 @@
 "use server";
-import {z, ZodError, ZodFormattedError} from 'zod';
+import {z, ZodFormattedError} from 'zod';
 
 type FormState = {
   success: boolean;

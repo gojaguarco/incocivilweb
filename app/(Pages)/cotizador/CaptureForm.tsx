@@ -43,7 +43,7 @@ const CaptureForm = ({ totalToShow }: {
       localStorage.setItem('formData', JSON.stringify(data));
     }
   }, [data]); 
-  
+
   const onInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const value = e.target.value;
 
@@ -129,8 +129,8 @@ const CaptureForm = ({ totalToShow }: {
       </label>
       {state.errors?.mensaje && <p className="text-red-500">{state.errors?.mensaje._errors}</p>}
 
-      <button formAction={formAction} className="bg-accent1 text-light px-4 sm:px-6 py-1.5 xs:py-2 text-sm sm:text-base w-fit self-end flex flex-col items-center justify-center rounded-lg text-nowrap flex-shrink-0 hover:-translate-y-0.5 hover:el-shadow">
-        Ver Cotización
+      <button disabled={isPending} formAction={formAction} className="bg-accent1 text-light px-4 sm:px-6 py-1.5 xs:py-2 text-sm sm:text-base w-fit self-end flex flex-col items-center justify-center rounded-lg text-nowrap flex-shrink-0 hover:-translate-y-0.5 hover:el-shadow">
+        {isPending ? "Enviando Cotización" : "Ver Cotización"}
       </button>
     </form>
   );
@@ -138,7 +138,7 @@ const CaptureForm = ({ totalToShow }: {
 
 export default CaptureForm;
 
-const Input = ({ type, className, label, ...rest }: ComponentPropsWithoutRef<"input"> & {
+const Input = ({ className, label, ...rest }: ComponentPropsWithoutRef<"input"> & {
   label: string;
 }) => {
 
