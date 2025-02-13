@@ -26,7 +26,6 @@ export const captureInfoAction = async (
   formState: FormState,
   formData: FormData
 ): Promise<FormState> => {
-
   const rawData = {
     nombre: formData.get("nombre") as string,
     apellido: formData.get("apellido") as string,
@@ -98,4 +97,3 @@ export const captureInfoAction = async (
     errors: null,
   };
 };
-

@@ -1,22 +1,34 @@
 "use client";
 import { numberToColombianPriceString } from "@/app/helpers";
-import { ComponentPropsWithoutRef, Dispatch, SetStateAction, useActionState, useCallback, useEffect, useState } from "react";
+import {
+  ComponentPropsWithoutRef,
+  Dispatch,
+  SetStateAction,
+  useActionState,
+  useCallback,
+  useEffect,
+  useState,
+} from "react";
 import { cn } from "../_lib/cn";
 import { captureInfoAction } from "./captureInfoAction";
 import { useRouter, useSearchParams } from "next/navigation";
 import { SurfaceToSendAdminEmail } from "./captureInfoZods";
 
-
-const CaptureForm = ({ totalToShow, selectedFormats, setShowTotal, formTitle, successMessage }: {
+const CaptureForm = ({
+  totalToShow,
+  selectedFormats,
+  setShowTotal,
+  formTitle,
+  successMessage,
+}: {
   totalToShow: number;
   selectedFormats: {
-    [surfaceId: string]: SurfaceToSendAdminEmail
+    [surfaceId: string]: SurfaceToSendAdminEmail;
   };
   setShowTotal: Dispatch<SetStateAction<boolean>>;
   formTitle: string;
   successMessage: string;
 }) => {
-
   const router = useRouter();
   const searchParams = useSearchParams();
   const [formState, formAction, isPending] = useActionState(captureInfoAction, {
@@ -24,17 +36,19 @@ const CaptureForm = ({ totalToShow, selectedFormats, setShowTotal, formTitle, su
     errors: null,
   });
 
-  const [showSuccessMessage, setShowSuccessMessage] = useState(false)
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
 
   const [data, setData] = useState(() => {
-    const savedData = localStorage && localStorage.getItem('formData');
-    return savedData ? JSON.parse(savedData) : {
-      nombre: '',
-      apellido: '',
-      email: '',
-      telefono: '',
-      mensaje: '',
-    };
+    const savedData = localStorage && localStorage.getItem("formData");
+    return savedData
+      ? JSON.parse(savedData)
+      : {
+          nombre: "",
+          apellido: "",
+          email: "",
+          telefono: "",
+          mensaje: "",
+        };
   });
 
   // useEffect(() => {
@@ -43,78 +57,84 @@ const CaptureForm = ({ totalToShow, selectedFormats, setShowTotal, formTitle, su
   //   // }
   // }, [data]);
 
-  const onInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const onInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { value, name } = e.target;
 
-
-    setData((prev: {
-      nombre: string;
-      apellido: string;
-      email: string;
-      telefono: string;
-      mensaje: string;
-    }) => ({
-      ...prev,
-      [name]: value
-    }))
+    setData(
+      (prev: {
+        nombre: string;
+        apellido: string;
+        email: string;
+        telefono: string;
+        mensaje: string;
+      }) => ({
+        ...prev,
+        [name]: value,
+      })
+    );
   };
   const createQueryString = useCallback(
-    (name: string, value: string, action: 'add' | 'remove' | 'replace' = 'add') => {
-      const params = new URLSearchParams(searchParams.toString())
-      const currentValues = params.get(name)?.split(',').filter(Boolean) || []
+    (
+      name: string,
+      value: string,
+      action: "add" | "remove" | "replace" = "add"
+    ) => {
+      const params = new URLSearchParams(searchParams.toString());
+      const currentValues = params.get(name)?.split(",").filter(Boolean) || [];
 
-      if (action === 'add' && !currentValues.includes(value)) {
-        params.set(name, [...currentValues, value].join(','))
-      } else if (action === 'remove') {
-        params.set(name, currentValues.filter(v => v !== value).join(','))
+      if (action === "add" && !currentValues.includes(value)) {
+        params.set(name, [...currentValues, value].join(","));
+      } else if (action === "remove") {
+        params.set(name, currentValues.filter((v) => v !== value).join(","));
       } else if (action === "replace") {
-        params.set(name, value)
-      };
+        params.set(name, value);
+      }
 
-      return params.toString()
+      return params.toString();
     },
     [searchParams]
-  )
-
+  );
 
   useEffect(() => {
     if (formState.success) {
-      alert("Correo enviado.")
+      alert("Correo enviado.");
       setShowSuccessMessage(true);
 
       const timeout = setTimeout(() => {
         setShowSuccessMessage(false);
-        router.push(`?${createQueryString("capture-info", "true", "remove")}`)
-      }, 3000)
+        router.push(`?${createQueryString("capture-info", "true", "remove")}`);
+      }, 3000);
 
-      setShowTotal(true)
+      setShowTotal(true);
 
-      return () => clearTimeout(timeout)
+      return () => clearTimeout(timeout);
     }
-  }, [formState.success])
+  }, [formState.success]);
 
   return (
     <form className="flex flex-col gap-5">
       <h1>{formTitle}</h1>
-      <p>El valor
-        <strong className="mx-[0.5ch]">
-          TOTAL
-        </strong>
-        de los materiales que seleccionaste es de {numberToColombianPriceString(totalToShow)} de pesos colombianos.
+      <p>
+        El valor
+        <strong className="mx-[0.5ch]">TOTAL</strong>
+        de los materiales que seleccionaste es de{" "}
+        {numberToColombianPriceString(totalToShow)} de pesos colombianos.
       </p>
-      <p>Si deseas verlo a detalle y recibir una asesoría personalizada solo
-        <strong className="mx-[0.5ch]">
-          ingresa los siguientes datos:
-        </strong>
+      <p>
+        Si deseas verlo a detalle y recibir una asesoría personalizada solo
+        <strong className="mx-[0.5ch]">ingresa los siguientes datos:</strong>
       </p>
-      {selectedFormats && Object.keys(selectedFormats).map((surfaceId, index) => (
-        <input
-          key={index}
-          type="hidden"
-          name={`selectedSurfaces`}
-          value={JSON.stringify({ ...selectedFormats[surfaceId], surfaceId })}
-        />
-      ))}
+      {selectedFormats &&
+        Object.keys(selectedFormats).map((surfaceId, index) => (
+          <input
+            key={index}
+            type="hidden"
+            name={`selectedSurfaces`}
+            value={JSON.stringify({ ...selectedFormats[surfaceId], surfaceId })}
+          />
+        ))}
       <Input
         onChange={onInputChange}
         label="Nombre"
@@ -124,7 +144,9 @@ const CaptureForm = ({ totalToShow, selectedFormats, setShowTotal, formTitle, su
         required
         placeholder="Juan"
       />
-      {formState.errors?.nombre && <p className="text-red-500">{formState.errors.nombre._errors}</p>}
+      {formState.errors?.nombre && (
+        <p className="text-red-500">{formState.errors.nombre._errors}</p>
+      )}
       <Input
         onChange={onInputChange}
         label="Apellido"
@@ -134,7 +156,9 @@ const CaptureForm = ({ totalToShow, selectedFormats, setShowTotal, formTitle, su
         required
         placeholder="Pérez"
       />
-      {formState.errors?.apellido && <p className="text-red-500">{formState.errors.apellido._errors}</p>}
+      {formState.errors?.apellido && (
+        <p className="text-red-500">{formState.errors.apellido._errors}</p>
+      )}
       <Input
         onChange={onInputChange}
         label="Email"
@@ -145,7 +169,9 @@ const CaptureForm = ({ totalToShow, selectedFormats, setShowTotal, formTitle, su
         required
         placeholder="tunombre@incocivil.com"
       />
-      {formState.errors?.email && <p className="text-red-500">{formState.errors.email._errors}</p>}
+      {formState.errors?.email && (
+        <p className="text-red-500">{formState.errors.email._errors}</p>
+      )}
       <Input
         onChange={onInputChange}
         label="Teléfono"
@@ -155,11 +181,11 @@ const CaptureForm = ({ totalToShow, selectedFormats, setShowTotal, formTitle, su
         placeholder="300 123 4567"
         required
       />
-      {formState.errors?.telefono && <p className="text-red-500">{formState.errors?.telefono._errors}</p>}
+      {formState.errors?.telefono && (
+        <p className="text-red-500">{formState.errors?.telefono._errors}</p>
+      )}
       <label className="flex flex-col gap-2">
-        <h4>
-          Mensaje (opcional):
-        </h4>
+        <h4>Mensaje (opcional):</h4>
         <textarea
           onChange={onInputChange}
           className={"px-2 py-1 rounded"}
@@ -168,9 +194,15 @@ const CaptureForm = ({ totalToShow, selectedFormats, setShowTotal, formTitle, su
           placeholder="Deja tu mensaje..."
         />
       </label>
-      {formState.errors?.mensaje && <p className="text-red-500">{formState.errors?.mensaje._errors}</p>}
+      {formState.errors?.mensaje && (
+        <p className="text-red-500">{formState.errors?.mensaje._errors}</p>
+      )}
 
-      <button disabled={isPending} formAction={formAction} className="bg-accent1 text-light px-4 sm:px-6 py-1.5 xs:py-2 text-sm sm:text-base w-fit self-end flex flex-col items-center justify-center rounded-lg text-nowrap flex-shrink-0 hover:-translate-y-0.5 hover:el-shadow">
+      <button
+        disabled={isPending}
+        formAction={formAction}
+        className="bg-accent1 text-light px-4 sm:px-6 py-1.5 xs:py-2 text-sm sm:text-base w-fit self-end flex flex-col items-center justify-center rounded-lg text-nowrap flex-shrink-0 hover:-translate-y-0.5 hover:el-shadow"
+      >
         {isPending ? "Enviando Cotización" : "Ver Cotización"}
       </button>
       {formState.success && showSuccessMessage && (
@@ -178,20 +210,27 @@ const CaptureForm = ({ totalToShow, selectedFormats, setShowTotal, formTitle, su
       )}
     </form>
   );
-}
+};
 
 export default CaptureForm;
 
-const Input = ({ className, label, ...rest }: ComponentPropsWithoutRef<"input"> & {
+const Input = ({
+  className,
+  label,
+  ...rest
+}: ComponentPropsWithoutRef<"input"> & {
   label: string;
 }) => {
-
   return (
     <label className="flex flex-col gap-2">
-      <span className="text-gray-900">
-        {label}:
-      </span>
-      <input {...rest} className={cn("bg-light border border-slate-300 text-gray-900 text-sm rounded-lg  focus-visible:outline-slate-500 block w-full py-2 px-3", className)} />
+      <span className="text-gray-900">{label}:</span>
+      <input
+        {...rest}
+        className={cn(
+          "bg-light border border-slate-300 text-gray-900 text-sm rounded-lg  focus-visible:outline-slate-500 block w-full py-2 px-3",
+          className
+        )}
+      />
     </label>
-  )
-}
+  );
+};
