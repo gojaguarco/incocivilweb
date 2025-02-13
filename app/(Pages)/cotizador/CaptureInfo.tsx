@@ -1,9 +1,8 @@
 import { useRouter } from "next/navigation";
 import LinkButton from "../_components/LinkButton";
-import { ComponentPropsWithoutRef, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import LightCard from "../_components/LightCard";
-import { cn } from "../_lib/cn";
-import { colombianPriceStringToNumber, numberToColombianPriceString } from "@/app/helpers";
+import { colombianPriceStringToNumber } from "@/app/helpers";
 import CaptureForm from "./CaptureForm";
 
 const CaptureInfo = ({
