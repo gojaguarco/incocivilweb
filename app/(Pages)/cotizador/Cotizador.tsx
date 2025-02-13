@@ -105,28 +105,30 @@ const CotizadorUi = ({ surfaceTypes, catalogo }: {
         </LightCard>
       )}
       {surfaceTypeId && selectedSurfaceIds && selectedSurfaceIds.length >= 1 && (
-        <LightCard>
-          <h2 className="text-lg font-light">
-            3. Selecciona los formatos que necesitas para tu proyecto.
-          </h2>
-          <SelectedSurfacesTable
-            catalogo={catalogo}
-            removeSurfaceId={removeSurfaceId}
-            selectedSurfaceIds={selectedSurfaceIds}
-          />
-        </LightCard>
+        <>
+          <LightCard>
+            <h2 className="text-lg font-light">
+              3. Selecciona los formatos que necesitas para tu proyecto.
+            </h2>
+            <SelectedSurfacesTable
+              catalogo={catalogo}
+              removeSurfaceId={removeSurfaceId}
+              selectedSurfaceIds={selectedSurfaceIds}
+            />
+          </LightCard>
+          <div className="w-full items-center flex justify-between">
+            <LightCard>
+              <h6 className="font-inter">
+                ¿No sabes qué formato seleccionar?
+              </h6>
+              <a href="" className="underline">
+                Aprende a diseñar tus encimeras, haciendo clic aquí.
+              </a>
+            </LightCard>
+            <CaptureInfo createQueryString={createQueryString} captureInfoOpen={captureInfoOpen} />
+          </div>
+        </>
       )}
-      <div className="w-full items-center flex justify-between">
-        <LightCard>
-          <h6 className="font-inter">
-            ¿No sabes qué formato seleccionar?
-          </h6>
-          <a href="" className="underline">
-            Aprende a diseñar tus encimeras, haciendo clic aquí.
-          </a>
-        </LightCard>
-        <CaptureInfo createQueryString={createQueryString} captureInfoOpen={captureInfoOpen} />
-      </div>
     </>
   );
 }
