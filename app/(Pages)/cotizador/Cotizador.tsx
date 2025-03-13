@@ -36,7 +36,6 @@ const CotizadorUi = ({
   }>(() => {
     const initialState: { [surfaceId: string]: SurfaceFormat } = {};
     for (const surfaceId of selectedSurfaceIds) {
-      console.log("here");
       const surface = catalogo.find((item) => item._id === surfaceId);
       const area = surface?.formats
         ? (surface.formats[0].width * surface.formats[0].height) / 100

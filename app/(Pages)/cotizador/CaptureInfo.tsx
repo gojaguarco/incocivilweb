@@ -29,7 +29,7 @@ const CaptureInfo = ({
     <>
       <LinkButton
         // scroll={false}
-        text="Cotizar"
+        text={`Cotizar ${total}`}
         color="naranja"
         size="mediano"
         link={`?${createQueryString("capture-info", "true", "add")}`}
