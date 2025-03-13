@@ -146,7 +146,7 @@ const DesktopSurface = ({
       <Td className="code">{surface.code}</Td>
       <Td>{surface.type.title}</Td>
       <Td>{surface.caliber}</Td>
-      <Td className="max-w-[20ch]">{surface.description}</Td>
+      <Td className="max-w-[20ch] text-xs ">{surface.description}</Td>
       <Td>${surface.price}</Td>
       <Td>
         <select onChange={onChange} value={JSON.stringify({ height: surfaceFormats[surface._id]?.height || 0, width: surfaceFormats[surface._id]?.width || 0 })} className="p-2 rounded">

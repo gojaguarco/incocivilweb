@@ -133,7 +133,9 @@ const CotizadorUi = ({
     <section className="flex flex-col gap-[60px]">
       <LightCard>
         <div className="flex justify-between items-center gap-3">
-          <h2 className="">1. Selecciona el tipo de superficie.</h2>
+          <h2 className="lg:font-montserrat lg:font-normal">
+            1. Selecciona el tipo de superficie.
+          </h2>
           <SelectFilter
             allTitle="Todos"
             filterName="surfaceType"
@@ -147,7 +149,7 @@ const CotizadorUi = ({
       </LightCard>
       {surfaceTypeId && (
         <LightCard className="pr-0 flex flex-col gap-2">
-          <h2 className="">
+          <h2 className="lg:font-montserrat lg:font-normal">
             2. Selecciona las superficies que deseas cotizar.
           </h2>
           <div className="overflow-x-scroll no-scrollbar">
@@ -205,7 +207,7 @@ const CotizadorUi = ({
         selectedSurfaceIds &&
         selectedSurfaceIds.length >= 1 && (
           <LightCard>
-            <h2 className="">
+            <h2 className="lg:font-montserrat lg:font-normal">
               3. Selecciona los formatos que necesitas para tu proyecto.
             </h2>
             <SelectedSurfacesTable

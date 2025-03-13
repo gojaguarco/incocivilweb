@@ -48,7 +48,7 @@ const CaptureInfo = ({
             onClick={e => e.stopPropagation()}
             className="max-w-screen-sm bg-light-dark p-10 relative z-[200] rounded-xl px-10 flex flex-col w-[85dvw] mx-auto gap-5"
           >
-            <CaptureForm totalToShow={total} />
+            <CaptureForm selectedFormats={surfaceFormats} totalToShow={total} />
           </LightCard>
         </section>
       )}
