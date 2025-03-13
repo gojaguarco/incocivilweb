@@ -102,7 +102,7 @@ const CotizadorUi = ({
         width: surface?.formats ? surface.formats[0].width : 0,
         height: surface?.formats ? surface.formats[0].height : 0,
         totalSurface: surface?.price
-          ? Number(surface.price.replace(".", "")) * area
+          ? parseInt(surface.price.replaceAll(".", "")) * area
           : 0,
       },
     }));
