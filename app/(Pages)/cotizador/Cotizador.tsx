@@ -32,12 +32,13 @@ const CotizadorUi = ({ surfaceTypes, catalogo }: {
     for (const surfaceId of selectedSurfaceIds) {
       const surface = catalogo.find((item) => item._id === surfaceId);
       const area = surface?.formats ? (surface.formats[0].width * surface.formats[0].height) / 100 : 0;
-      const price = surface?.price?.replace(".", "")
-      console.log({surface, area, price})
+      const price = Number(surface?.price?.replaceAll(".", ""))
+      const totalSurface = area * price
+      console.log({surface, area, price, totalSurface})
       initialState[surfaceId] = {
         width: surface?.formats ? surface.formats[0].width : 0,
         height: surface?.formats ? surface.formats[0].height : 0,
-        totalSurface: surface?.price ? Number(surface.price.replace(".", "")) * area : 0,
+        totalSurface
       };
     }
     return initialState;
