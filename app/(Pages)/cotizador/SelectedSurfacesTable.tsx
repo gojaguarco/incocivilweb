@@ -175,7 +175,7 @@ const DesktopSurface = ({
       </Td>
       <Td className="relative">
         <div className={`w-full h-full absolute z-10 top-0 left-0 ${rowBg}`}></div>
-        <span className="">{numberToColombianPriceString(surfaceFormats[surface._id].totalSurface)}</span>
+        <span className="">{numberToColombianPriceString(surfaceFormats[surface._id]?.totalSurface || 0)}</span>
       </Td>
       <Td>
         <button
@@ -270,7 +270,6 @@ const MobileSurface = ({ index, surface, removeSurfaceId, id, setSurfaceFormats,
           <InfoItem>
             <select onChange={onChange} value={JSON.stringify({ height: surfaceFormats[surface._id]?.height || 0, width: surfaceFormats[surface._id]?.width || 0 })} className="p-2 rounded">
               {surface.formats?.map((format, index) => {
-                console.log(JSON.stringify(format), 'Option Value'); // Log option value
                 return (
                   <option key={`<span class="math-inline">\{format\.height\}\*</span>{format.width}-${index}`} value={JSON.stringify(format)}>{format.height}cm * {format.width}cm</option>
                 );
@@ -280,7 +279,7 @@ const MobileSurface = ({ index, surface, removeSurfaceId, id, setSurfaceFormats,
 
           <InfoItem className="relative">
             <div className={`w-full h-full absolute z-10 top-0 left-0 ${itemBg}`}></div>
-            <span className="">{numberToColombianPriceString(surfaceFormats[surface._id].totalSurface)}</span>
+            <span className="">{numberToColombianPriceString(surfaceFormats[surface._id]?.totalSurface || 0)}</span>
           </InfoItem>
         </div>
         <button
