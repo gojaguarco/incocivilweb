@@ -91,6 +91,7 @@ export const captureInfoAction = async (
       },
     };
   }
+  console.log({ data, surfaces: data.data?.selectedSurfaces });
 
   return {
     success: true,
