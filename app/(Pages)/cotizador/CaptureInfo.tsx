@@ -21,8 +21,10 @@ const CaptureInfo = ({
   let total = 0;
 
   for (const surfaceFormatIn in surfaceFormats) {
-    const surfaceFormat = surfaceFormats[surfaceFormatIn]
 
+
+    const surfaceFormat = surfaceFormats[surfaceFormatIn]
+    console.log({surfaceFormat, surfaceFormats, surfaceFormatIn})
     total += surfaceFormat.totalSurface;
   }
   return (
