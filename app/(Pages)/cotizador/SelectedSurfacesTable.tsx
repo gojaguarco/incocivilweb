@@ -28,19 +28,6 @@ const SelectedSurfacesTable = ({
 
 
 }) => {
-  const [totals, setTotals] = useState<number[]>([]);
-
-
-  useEffect(() => {
-    for (const surfaceId of selectedSurfaceIds) {
-      const surface = catalogo.find((item) => item._id === surfaceId);
-      const surfacePriceInNumber = parseInt(surface?.price?.replaceAll(".", "").replace("$", "") || "")
-      const areaPrice = surface?.formats && (surface?.formats[0].height * surface.formats[0].width) / 100
-      const surfaceTotal = surfacePriceInNumber * (areaPrice || 0);
-      setTotals([...totals, surfaceTotal])
-    }
-  }, [selectedSurfaceIds])
-
 
   return (
     <>
@@ -65,7 +52,7 @@ const SelectedSurfacesTable = ({
             if (!surface) return null;
 
             return (
-              <DesktopSurface surfaceFormats={surfaceFormats} setSurfaceFormats={setSurfaceFormats} totals={totals} setTotals={setTotals} key={id} id={id} index={index} removeSurfaceId={removeSurfaceId} surface={surface} />
+              <DesktopSurface surfaceFormats={surfaceFormats} setSurfaceFormats={setSurfaceFormats} key={id} id={id} index={index} removeSurfaceId={removeSurfaceId} surface={surface} />
             );
           })}
         </tbody>
@@ -75,7 +62,7 @@ const SelectedSurfacesTable = ({
           const surface = catalogo.find((item) => item._id === id);
           if (!surface) return null;
           return (
-            <MobileSurface setSurfaceFormats={setSurfaceFormats} surfaceFormats={surfaceFormats} totals={totals} setTotals={setTotals} key={id} index={index} surface={surface} id={id} removeSurfaceId={removeSurfaceId} />
+            <MobileSurface setSurfaceFormats={setSurfaceFormats} surfaceFormats={surfaceFormats} key={id} index={index} surface={surface} id={id} removeSurfaceId={removeSurfaceId} />
           )
         })}
       </ul>
@@ -124,8 +111,6 @@ const DesktopSurface = ({
   index: number;
   surface: CATALOGO_QUERYResult[number];
   removeSurfaceId: (id: string) => void;
-  setTotals: Dispatch<SetStateAction<number[]>>
-  totals: number[];
   surfaceFormats: {
     [surfaceId: string]: SurfaceFormat
   }
@@ -166,9 +151,8 @@ const DesktopSurface = ({
       <Td>
         <select onChange={onChange} value={JSON.stringify({ height: surfaceFormats[surface._id]?.height || 0, width: surfaceFormats[surface._id]?.width || 0 })} className="p-2 rounded">
           {surface.formats?.map((format, index) => {
-            console.log(JSON.stringify(format), 'Option Value'); // Log option value
             return (
-              <option key={`<span class="math-inline">\{format\.height\}\*</span>{format.width}-${index}`} value={JSON.stringify(format)}>{format.height}cm * {format.width}cm</option>
+              <option key={`${format.height}-${format.width}-${index}`} value={JSON.stringify(format)}>{format.height}cm * {format.width}cm</option>
             );
           })}
         </select>
@@ -200,8 +184,6 @@ const MobileSurface = ({ index, surface, removeSurfaceId, id, setSurfaceFormats,
   index: number;
   surface: CATALOGO_QUERYResult[number];
   removeSurfaceId: (id: string) => void;
-  setTotals: Dispatch<SetStateAction<number[]>>
-  totals: number[];
   surfaceFormats: {
     [surfaceId: string]: SurfaceFormat
   }
