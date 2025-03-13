@@ -15,7 +15,7 @@ const CaptureForm = ({ totalToShow }: {
   });
 
   const [data, setData] = useState(() => {
-    const savedData = localStorage.getItem('formData');
+    const savedData = localStorage && localStorage.getItem('formData');
     return savedData ? JSON.parse(savedData) : {
       nombre: '',
       apellido: '',
