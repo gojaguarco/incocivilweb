@@ -9,9 +9,15 @@ import SelectFilter from "../_components/SelectFilter";
 import { useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
 import { urlFor } from "@/sanity/lib/image";
-import { Suspense, useCallback } from "react";
+import { Suspense, useCallback, useState } from "react";
 import SelectedSurfacesTable from "./SelectedSurfacesTable";
 import CaptureInfo from "./CaptureInfo";
+
+export type SurfaceFormat = {
+  width: number;
+  height: number;
+  totalSurface: number;
+};
 
 const CotizadorUi = ({
   surfaceTypes,
@@ -22,10 +28,30 @@ const CotizadorUi = ({
 }) => {
   const searchParams = useSearchParams();
   const captureInfoOpen = searchParams.get("capture-info") === "true";
-
-  console.log({ captureInfoOpen });
   const surfaceTypeId = searchParams.get("surfaceType");
   const selectedSurfaceIds = searchParams.get("surfaceId")?.split(",") ?? [];
+
+  const [surfaceFormats, setSurfaceFormats] = useState<{
+    [surfaceId: string]: SurfaceFormat;
+  }>(() => {
+    const initialState: { [surfaceId: string]: SurfaceFormat } = {};
+    for (const surfaceId of selectedSurfaceIds) {
+      console.log("here");
+      const surface = catalogo.find((item) => item._id === surfaceId);
+      const area = surface?.formats
+        ? (surface.formats[0].width * surface.formats[0].height) / 100
+        : 0;
+      initialState[surfaceId] = {
+        width: surface?.formats ? surface.formats[0].width : 0,
+        height: surface?.formats ? surface.formats[0].height : 0,
+        totalSurface: surface?.price
+          ? Number(surface.price.replace(".", "")) * area
+          : 0,
+      };
+    }
+    return initialState;
+  });
+
   const router = useRouter();
   const filteredCatalogo = catalogo.filter((item) => {
     if (!surfaceTypeId) {
@@ -60,6 +86,20 @@ const CotizadorUi = ({
   );
 
   const addSurfaceId = (id: string) => {
+    const surface = catalogo.find((item) => item._id === id);
+    const area = surface?.formats
+      ? (surface.formats[0].width * surface.formats[0].height) / 100
+      : 0;
+    setSurfaceFormats((prev) => ({
+      ...prev,
+      [id]: {
+        width: surface?.formats ? surface.formats[0].width : 0,
+        height: surface?.formats ? surface.formats[0].height : 0,
+        totalSurface: surface?.price
+          ? Number(surface.price.replace(".", "")) * area
+          : 0,
+      },
+    }));
     router.push(`?${createQueryString("surfaceId", id, "add")}`, {
       scroll: false,
     });
@@ -76,18 +116,22 @@ const CotizadorUi = ({
         scroll: false,
       });
     }
+    setSurfaceFormats((prevSurfaceFormats) => {
+      const updatedSurfaceFormats = { ...prevSurfaceFormats };
+      delete updatedSurfaceFormats[id];
+      return updatedSurfaceFormats;
+    });
   };
 
   return (
-    <>
+    <section className="flex flex-col gap-[60px]">
       <LightCard>
-        <div className="flex justify-between items-center">
-          <h2 className="text-lg font-light">
-            1. Selecciona el tipo de superficie.
-          </h2>
+        <div className="flex justify-between items-center gap-3">
+          <h2 className="">1. Selecciona el tipo de superficie.</h2>
           <SelectFilter
             allTitle="Todos"
             filterName="surfaceType"
+            className="text-lg"
             options={surfaceTypes.map((surface) => ({
               value: surface._id,
               label: surface.title,
@@ -97,11 +141,11 @@ const CotizadorUi = ({
       </LightCard>
       {surfaceTypeId && (
         <LightCard className="pr-0 flex flex-col gap-2">
-          <h2 className="text-lg font-light font-montserrat">
+          <h2 className="">
             2. Selecciona las superficies que deseas cotizar.
           </h2>
           <div className="overflow-x-scroll no-scrollbar">
-            <ul className="flex gap-4 w-fit">
+            <ul className="flex gap-4 w-fit pr-5">
               {filteredCatalogo.map((item) => (
                 <li
                   key={item._id}
@@ -155,10 +199,12 @@ const CotizadorUi = ({
         selectedSurfaceIds &&
         selectedSurfaceIds.length >= 1 && (
           <LightCard>
-            <h2 className="text-lg font-light">
+            <h2 className="">
               3. Selecciona los formatos que necesitas para tu proyecto.
             </h2>
             <SelectedSurfacesTable
+              surfaceFormats={surfaceFormats}
+              setSurfaceFormats={setSurfaceFormats}
               catalogo={catalogo}
               removeSurfaceId={removeSurfaceId}
               selectedSurfaceIds={selectedSurfaceIds}
@@ -176,9 +222,10 @@ const CotizadorUi = ({
           createQueryString={createQueryString}
           captureInfoOpen={captureInfoOpen}
           // total={15000000}
+          surfaceFormats={surfaceFormats}
         />
       </div>
-    </>
+    </section>
   );
 };
 

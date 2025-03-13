@@ -17,18 +17,19 @@ export const captureInfoAction = async (
   formData: FormData
 ): Promise<FormState> => { 
   console.log({formData})
-
-
-  const data = formSchame.safeParse({
+  const rawData = {
     nombre: formData.get("nombre") as string,
     apellido: formData.get("apellido") as string,
     email: formData.get("email") as string,
     telefono: formData.get("telefono") as string,
     mensaje: formData.get("mensaje") as string,
-  })
+    selectedSurfaces: formData.getAll("selectedSurfaces") as string[],
+  }
+  
+  console.log({rawData})
+  const data = formSchame.safeParse(rawData)
 
-  console.log({data})
-
+  
   if (!data.success) {
     const errors =   data.error.format();
     console.log({errors})
@@ -37,6 +38,7 @@ export const captureInfoAction = async (
       errors: errors
     }
   }
+  console.log({data, surfaces: data.data?.selectedSurfaces})
 
   return {
     success: true,
@@ -52,4 +54,7 @@ const formSchame = z.object({
   email: z.string().email("Ese no es un email válido!").min(1, "El email es requerido"),
   telefono: z.string().min(7, "Ese no es un número de teléfono válido"),
   mensaje: z.string().optional().nullable(),
+  selectedSurfaces: z.array(z.string()).transform((strings) => 
+    strings.map(str => JSON.parse(str))  // Parse each string into an object
+  )
 })

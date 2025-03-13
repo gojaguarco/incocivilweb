@@ -1,45 +1,30 @@
+"use client";
 import { useRouter } from "next/navigation";
 import LinkButton from "../_components/LinkButton";
-import { useEffect, useState } from "react";
 import LightCard from "../_components/LightCard";
-import { colombianPriceStringToNumber } from "@/app/helpers";
 import CaptureForm from "./CaptureForm";
+import { SurfaceFormat } from "./Cotizador";
 
 const CaptureInfo = ({
   createQueryString,
   captureInfoOpen,
+  surfaceFormats
 }: {
+  surfaceFormats: {
+    [surfaceId: string]: SurfaceFormat;
+  }
   createQueryString: (name: string, value: string, action: 'add' | 'remove' | 'replace') => string;
   captureInfoOpen: boolean;
 }) => {
-  const [totalToShow, setTotalToShow] = useState(0);
   const router = useRouter();
 
-  useEffect(() => {
-    const surfaceTotals = document.getElementsByClassName("surface-total");
-    const observer = new MutationObserver(calculateTotal); // Create the observer
+  let total = 0;
 
-    // Observe changes to the child list (nodes within the element) and character data (text content)
-    Array.from(surfaceTotals).forEach(surfaceTotal => {
-      observer.observe(surfaceTotal, { childList: true, characterData: true, subtree: true });
-    });
+  for (const surfaceFormatIn in surfaceFormats) {
+    const surfaceFormat = surfaceFormats[surfaceFormatIn]
 
-    function calculateTotal() {
-      let total = 0;
-      Array.from(surfaceTotals).forEach(surfaceTotal => {
-        const textContent = surfaceTotal.textContent ? surfaceTotal.textContent.trim() : ''; // Trim whitespace!
-        const price = colombianPriceStringToNumber(textContent);
-        total += price;
-      });
-      setTotalToShow(total);
-    }
-
-    calculateTotal(); // Calculate initial total in case content is already there
-
-    return () => {
-      observer.disconnect(); // Clean up the observer on unmount
-    };
-  }, []);
+    total += surfaceFormat.totalSurface;
+  }
   return (
     <>
       <LinkButton
@@ -59,9 +44,9 @@ const CaptureInfo = ({
 
           <LightCard
             onClick={e => e.stopPropagation()}
-            className="bg-light-dark p-10 relative z-[200] rounded-md px-10 flex flex-col w-[85dvw] mx-auto gap-5"
+            className="max-w-screen-sm bg-light-dark p-10 relative z-[200] rounded-xl px-10 flex flex-col w-[85dvw] mx-auto gap-5"
           >
-            <CaptureForm totalToShow={totalToShow} />
+            <CaptureForm totalToShow={total} />
           </LightCard>
         </section>
       )}
