@@ -40,7 +40,7 @@ const CotizadorUi = ({
       const area = surface?.formats
         ? (surface.formats[0].width * surface.formats[0].height) / 100
         : 0;
-      const price = +(surface?.price?.replaceAll(".", "") || "");
+      const price = parseInt(surface?.price?.replaceAll(".", "") || "");
       const totalSurface = area * price;
       console.log({
         surface,
