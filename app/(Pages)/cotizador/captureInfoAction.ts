@@ -3,8 +3,7 @@ import { sanityFetch } from "@/sanity/lib/client";
 import { ADMIN_EMAIL_QUERY } from "@/sanity/queries/settingsQueries";
 import { Resend } from "resend";
 import { z, ZodFormattedError } from "zod";
-
-const ADMIN_EMAIL = "julian.m.bustos@gmail.com";
+import { QuoteEmailTemplate } from "../_components/email-template";
 
 type FormState = {
   success: boolean;
@@ -64,18 +63,51 @@ export const captureInfoAction = async (
     }
   }
   try {
-    // await resend.emails.send({
-    //   from: data.email,
-    //   to: [ADMIN_EMAIL],
-    //   subject: "Mensaje de cliente",
-    // })
-  } catch (error) {}
+    const resendResp = await resend.emails.send({
+      from: 'Incocivil <cotizador@incocivil.com>',
+      to: ["julian.m.bustos@gmail.com"],
+      subject: "Mensaje de cliente",
+      react: QuoteEmailTemplate({
+        data: {
+          email: data.email,
+          message: data.mensaje,
+          name: `${data.nombre} ${data.apellido}`,
+          tel: data.telefono,
+          selectedSurfaces: data.selectedSurfaces
+        }
+      })
+    })
+
+    console.log({resendResp})
+  } catch (error) {
+    console.log({error})
+    return {
+      success: false,
+      errors: {
+        _errors: ["something went wrong"],
+      }
+    }
+  }
 
   return {
     success: true,
     errors: null,
   };
 };
+
+
+
+const selectedSurfacesSchema =  z.array(
+  z.object({
+    width: z.number(),
+    height: z.number(),
+    totalSurface: z.number(),
+    surfaceId: z.string()
+  })
+)
+
+export type SelectedSurfaces = z.infer<typeof selectedSurfacesSchema>;
+
 
 const formSchema = z.object({
   nombre: z.string().min(1, "El nombre es requerido"),
@@ -90,15 +122,10 @@ const formSchema = z.object({
     .array(z.string())
     .transform((strings) => strings.map((str) => JSON.parse(str)))
     .pipe(
-      z.array(
-        z.object({
-          width: z.number(),
-          height: z.number(),
-          totalSurface: z.number(),
-        })
-      )
+      selectedSurfacesSchema
     ),
 });
+
 
 
 const adminEmailSchema = z.string() 
