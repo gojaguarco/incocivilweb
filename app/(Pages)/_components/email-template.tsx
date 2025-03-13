@@ -164,8 +164,7 @@ export const QuoteEmailTemplate: React.FC<
                 </Column>
                 <Column style={productPriceWrapper} align="right">
                   <Text style={productPrice}>
-                    Valor:{" "}
-                    {numberToColombianPriceString(surface.totalSurface)}
+                    Valor: {numberToColombianPriceString(surface.totalSurface)}
                   </Text>
                 </Column>
               </Row>
@@ -177,7 +176,9 @@ export const QuoteEmailTemplate: React.FC<
                 </Column>
                 <Column style={productPriceVerticalLine} />
                 <Column style={productPriceLargeWrapper}>
-                  <Text style={productPriceLarge}>{numberToColombianPriceString(total)}</Text>
+                  <Text style={productPriceLarge}>
+                    {numberToColombianPriceString(total)}
+                  </Text>
                 </Column>
               </Row>
             </Section>

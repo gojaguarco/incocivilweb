@@ -213,7 +213,7 @@ const CotizadorUi = ({
         selectedSurfaceIds &&
         selectedSurfaceIds.length >= 1 && (
           <LightCard>
-            <h2 className="">
+            <h2 className="lg:font-montserrat lg:font-normal">
               3. Selecciona los formatos que necesitas para tu proyecto.
             </h2>
             <table className="w-full border-collapse">
