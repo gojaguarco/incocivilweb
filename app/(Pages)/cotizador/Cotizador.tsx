@@ -83,7 +83,7 @@ const CotizadorUi = ({ surfaceTypes, catalogo }: {
       [id]: {
         width: surface?.formats ? surface.formats[0].width : 0,
         height: surface?.formats ? surface.formats[0].height : 0,
-        totalSurface: surface?.price ? Number(surface.price.replace(".", "")) * area : 0,
+        totalSurface: surface?.price ? parseInt(surface.price.replaceAll(".", "")) * area : 0,
       }
     }))
     router.push(`?${createQueryString('surfaceId', id, 'add')}`, { scroll: false })
