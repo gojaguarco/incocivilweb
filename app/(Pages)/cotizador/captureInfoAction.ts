@@ -65,6 +65,7 @@ export const captureInfoAction = async (
   try {
     const resendResp = await resend.emails.send({
       from: 'Incocivil <cotizador@incocivil.com>',
+      // TODO change email to admin email
       to: ["julian.m.bustos@gmail.com"],
       subject: "Mensaje de cliente",
       react: QuoteEmailTemplate({
