@@ -2100,11 +2100,11 @@ export type FOOTERSETTINGS_QUERYResult = {
   }>;
 } | null;
 // Variable: METADATA_QUERY
-// Query: *[_type == 'config'][0].metadata
-export type METADATA_QUERYResult = {
-  title?: string;
-  description?: string;
-} | null;
+// Query: *[_type == 'config'][0].information.email
+export type METADATA_QUERYResult = string | null;
+// Variable: ADMIN_EMAIL_QUERY
+// Query: *[_type == "config"][0].information.email
+export type ADMIN_EMAIL_QUERYResult = string | null;
 
 // Source: ./sanity/queries/surfaceQueries.ts
 // Variable: ALLSURFACETYPES_QUERY
@@ -2390,7 +2390,8 @@ declare module "@sanity/client" {
     "*[_type == 'service' && _id == $id][0]": SERVICE_QUERYResult;
     "*[_type == 'config'][0].information{\n  phone,\n  email\n}": EMAILSENDING_QUERYResult;
     "*[_type == 'config'][0]{\n  information,\n  socialLinks\n}": FOOTERSETTINGS_QUERYResult;
-    "*[_type == 'config'][0].metadata": METADATA_QUERYResult;
+    "*[_type == 'config'][0].information.email": METADATA_QUERYResult;
+    "*[_type == \"config\"][0].information.email": ADMIN_EMAIL_QUERYResult;
     "*[_type == 'surfaceTypes'][]": ALLSURFACETYPES_QUERYResult;
     "*[_type == 'surfaceTypes' && _id == $id][0]": SURFACETYPEBYID_QUERYResult;
     "*[_type == 'surface' && type._ref == $id ][0...10]": SURFACESBYTYPE_QUERYResult;

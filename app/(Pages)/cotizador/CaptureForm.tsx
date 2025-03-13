@@ -3,10 +3,14 @@ import { numberToColombianPriceString } from "@/app/helpers";
 import { ComponentPropsWithoutRef, useActionState, useEffect, useState } from "react";
 import { cn } from "../_lib/cn";
 import { captureInfoAction } from "./captureInfoAction";
+import { SurfaceFormat } from "./Cotizador";
 
 
-const CaptureForm = ({ totalToShow }: {
+const CaptureForm = ({ totalToShow, selectedFormats }: {
   totalToShow: number;
+  selectedFormats: {
+    [surfaceId: string]: SurfaceFormat
+  }
 }) => {
 
   const [state, formAction, isPending] = useActionState(captureInfoAction, {
@@ -25,10 +29,12 @@ const CaptureForm = ({ totalToShow }: {
     };
   });
 
-  const [selectedSurfaces, setSelectedSurfaces] = useState<Array<{
-    id: string;
-    formatSelected: string;
-  }>>([])
+
+
+  // const [selectedSurfaces, setSelectedSurfaces] = useState<Array<{
+  //   id: string;
+  //   formatSelected: string;
+  // }>>([])
 
 
 
@@ -39,38 +45,38 @@ const CaptureForm = ({ totalToShow }: {
     // }
   }, [data]);
 
-  useEffect(() => {
-    const selectedSurfacesTable = document.getElementById("selected-surfaces")
+  // useEffect(() => {
+  //   const selectedSurfacesTable = document.getElementById("selected-surfaces")
 
-    if (selectedSurfacesTable) {
-      const rows = selectedSurfacesTable.querySelectorAll("tr");
+  //   if (selectedSurfacesTable) {
+  //     const rows = selectedSurfacesTable.querySelectorAll("tr");
 
-      const selectedSurfaces: Array<{
-        id: string;
-        formatSelected: string;
-      }> = [];
+  //     const selectedSurfaces: Array<{
+  //       id: string;
+  //       formatSelected: string;
+  //     }> = [];
 
-      rows.forEach((row) => {
-        const codeCell = row.querySelector("td.code");  
-        const code = codeCell ? codeCell.textContent : null;
+  //     rows.forEach((row) => {
+  //       const codeCell = row.querySelector("td.code");  
+  //       const code = codeCell ? codeCell.textContent : null;
 
-        const selectElement = row.querySelector("td select") as HTMLSelectElement;  
-        const selectedFormat = selectElement ? selectElement.value : null;
-
-
-        if (!code || code === "" || !selectedFormat || selectedFormat === "") return;
-
-        selectedSurfaces.push({
-          id: code,
-          formatSelected: selectedFormat
-        });
+  //       const selectElement = row.querySelector("td select") as HTMLSelectElement;  
+  //       const selectedFormat = selectElement ? selectElement.value : null;
 
 
-      });
+  //       if (!code || code === "" || !selectedFormat || selectedFormat === "") return;
 
-      setSelectedSurfaces(selectedSurfaces);
-    }
-  }, [])
+  //       selectedSurfaces.push({
+  //         id: code,
+  //         formatSelected: selectedFormat
+  //       });
+
+
+  //     });
+
+  //     setSelectedSurfaces(selectedSurfaces);
+  //   }
+  // }, [])
 
 
   const onInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -105,14 +111,18 @@ const CaptureForm = ({ totalToShow }: {
           ingresa los siguientes datos:
         </strong>
       </p>
-      {selectedSurfaces.map((surface, index) => (
-        <input
-          key={index}
-          type="hidden"
-          name={`selectedSurfaces`}
-          value={JSON.stringify(surface)}
-        />
+      {selectedFormats && Object.keys(selectedFormats).map((surfaceId, index) => (
+        <>
+          <input
+            key={index}
+            type="hidden"
+            name={`selectedSurfaces`}
+            value={JSON.stringify(selectedFormats[surfaceId])}
+          />
+          {JSON.stringify(selectedFormats[surfaceId])}
+        </>
       ))}
+      {JSON.stringify(selectedFormats)}
       <Input
         onChange={onInputChange}
         label="Nombre"

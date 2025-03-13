@@ -9,7 +9,8 @@
     "lint": "next lint",
     "schema": "sanity schema extract --enforce-required-fields",
     "query": "sanity typegen generate",
-    "sanityupdate": "pnpm schema && pnpm query"
+    "sanityupdate": "pnpm schema && pnpm query",
+    "g": "pnpm schema && pnpm query"
   },
   "dependencies": {
     "@react-email/components": "0.0.32",

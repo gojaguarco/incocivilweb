@@ -13,7 +13,7 @@ type EmailTemplateProps = {
   };
 };
 
-export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
+export const ContactEmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
   data,
 }) => {
 
