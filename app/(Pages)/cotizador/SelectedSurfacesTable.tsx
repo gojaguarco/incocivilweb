@@ -130,7 +130,7 @@ const DesktopSurface = ({
         [surface._id]: {
           height: format.height,
           width: format.width,
-          totalSurface: area * Number(surface.price?.replace(".", "") || 0)
+          totalSurface: area * parseInt(surface.price?.replaceAll(".", "") || "")
         }
       })
     }
@@ -203,7 +203,7 @@ const MobileSurface = ({ index, surface, removeSurfaceId, id, setSurfaceFormats,
         [surface._id]: {
           height: format.height,
           width: format.width,
-          totalSurface: area * Number(surface.price?.replace(".", "") || 0)
+          totalSurface: area * parseInt(surface.price?.replaceAll(".", "") || "")
         }
       })
     }
