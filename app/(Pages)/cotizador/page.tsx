@@ -13,7 +13,7 @@ const page = async () => {
 
 
   return (
-    <section className="bg-light w-full relative z-20 flex flex-col gap-5 py-10 px-10">
+    <section className="bg-light-dark md:bg-light w-full relative z-20 flex flex-col gap-5 py-10 px-5 md:px-10 max-w-6xl mx-auto">
       <header>
         <h1>
           Cotiza tu proyecto

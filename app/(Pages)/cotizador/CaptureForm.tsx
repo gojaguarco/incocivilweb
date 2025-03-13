@@ -1,21 +1,8 @@
+"use client";
 import { numberToColombianPriceString } from "@/app/helpers";
 import { ComponentPropsWithoutRef, useActionState, useEffect, useState } from "react";
 import { cn } from "../_lib/cn";
 import { captureInfoAction } from "./captureInfoAction";
-
-
-
-// const useLocalStorage = (key: string, initialValue: any) => {
-//   const storedValue = localStorage.getItem(`incocivil-${key}`);
-//   const initial = storedValue ? JSON.parse(storedValue) : initialValue;
-//   const [value, setValue] = useState(initial);
-
-//   useEffect(() => {
-//     localStorage.setItem(`incocivil-${key}`, JSON.stringify(value));
-//   }, [`incocivil-${key}`, value]);
-
-//   return [value, setValue];
-// };
 
 
 const CaptureForm = ({ totalToShow }: {
@@ -38,18 +25,57 @@ const CaptureForm = ({ totalToShow }: {
     };
   });
 
+  const [selectedSurfaces, setSelectedSurfaces] = useState<Array<{
+    id: string;
+    formatSelected: string;
+  }>>([])
+
+
+
   useEffect(() => {
-    if (data) {
-      localStorage.setItem('formData', JSON.stringify(data));
+    // if (data) {
+    if (!localStorage) return;
+    localStorage.setItem('formData', JSON.stringify(data));
+    // }
+  }, [data]);
+
+  useEffect(() => {
+    const selectedSurfacesTable = document.getElementById("selected-surfaces")
+
+    if (selectedSurfacesTable) {
+      const rows = selectedSurfacesTable.querySelectorAll("tr");
+
+      const selectedSurfaces: Array<{
+        id: string;
+        formatSelected: string;
+      }> = [];
+
+      rows.forEach((row) => {
+        const codeCell = row.querySelector("td.code");  
+        const code = codeCell ? codeCell.textContent : null;
+
+        const selectElement = row.querySelector("td select") as HTMLSelectElement;  
+        const selectedFormat = selectElement ? selectElement.value : null;
+
+
+        if (!code || code === "" || !selectedFormat || selectedFormat === "") return;
+
+        selectedSurfaces.push({
+          id: code,
+          formatSelected: selectedFormat
+        });
+
+
+      });
+
+      setSelectedSurfaces(selectedSurfaces);
     }
-  }, [data]); 
+  }, [])
+
 
   const onInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const value = e.target.value;
+    const { value, name } = e.target;
 
-    const inputName = e.target.name;
-
-    if (!value || !inputName) return;
 
     setData((prev: {
       nombre: string;
@@ -59,7 +85,7 @@ const CaptureForm = ({ totalToShow }: {
       mensaje: string;
     }) => ({
       ...prev,
-      [inputName]: value
+      [name]: value
     }))
   };
 
@@ -79,6 +105,14 @@ const CaptureForm = ({ totalToShow }: {
           ingresa los siguientes datos:
         </strong>
       </p>
+      {selectedSurfaces.map((surface, index) => (
+        <input
+          key={index}
+          type="hidden"
+          name={`selectedSurfaces`}
+          value={JSON.stringify(surface)}
+        />
+      ))}
       <Input
         onChange={onInputChange}
         label="Nombre"
@@ -86,6 +120,7 @@ const CaptureForm = ({ totalToShow }: {
         value={data.nombre}
         autoComplete="given-name"
         required
+        placeholder="Juan"
       />
       {state.errors?.nombre && <p className="text-red-500">{state.errors.nombre._errors}</p>}
       <Input
@@ -95,6 +130,7 @@ const CaptureForm = ({ totalToShow }: {
         value={data.apellido}
         autoComplete="family-name"
         required
+        placeholder="Pérez"
       />
       {state.errors?.apellido && <p className="text-red-500">{state.errors.apellido._errors}</p>}
       <Input
@@ -105,6 +141,7 @@ const CaptureForm = ({ totalToShow }: {
         value={data.email}
         autoComplete="email"
         required
+        placeholder="tunombre@incocivil.com"
       />
       {state.errors?.email && <p className="text-red-500">{state.errors.email._errors}</p>}
       <Input
@@ -113,6 +150,7 @@ const CaptureForm = ({ totalToShow }: {
         name="telefono"
         value={data.telefono}
         autoComplete="tel"
+        placeholder="300 123 4567"
         required
       />
       {state.errors?.telefono && <p className="text-red-500">{state.errors?.telefono._errors}</p>}
@@ -125,6 +163,7 @@ const CaptureForm = ({ totalToShow }: {
           className={"px-2 py-1 rounded"}
           value={data.mensaje}
           name="mensaje"
+          placeholder="Deja tu mensaje..."
         />
       </label>
       {state.errors?.mensaje && <p className="text-red-500">{state.errors?.mensaje._errors}</p>}
@@ -144,10 +183,10 @@ const Input = ({ className, label, ...rest }: ComponentPropsWithoutRef<"input"> 
 
   return (
     <label className="flex flex-col gap-2">
-      <h4>
+      <span className="text-gray-900">
         {label}:
-      </h4>
-      <input {...rest} className={cn("px-2 py-1 rounded", className)} />
+      </span>
+      <input {...rest} className={cn("bg-light border border-slate-300 text-gray-900 text-sm rounded-lg  focus-visible:outline-slate-500 block w-full py-2 px-3", className)} />
     </label>
   )
 }
