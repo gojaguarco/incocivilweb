@@ -117,9 +117,9 @@ const CaptureForm = ({ totalToShow, selectedFormats }: {
             key={index}
             type="hidden"
             name={`selectedSurfaces`}
-            value={JSON.stringify(selectedFormats[surfaceId])}
+            value={JSON.stringify({...selectedFormats[surfaceId], surfaceId })}
           />
-          {JSON.stringify(selectedFormats[surfaceId])}
+          {/* {JSON.stringify(selectedFormats[surfaceId])} */}
         </>
       ))}
       {JSON.stringify(selectedFormats)}
