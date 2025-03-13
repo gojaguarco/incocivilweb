@@ -2,7 +2,7 @@
 import { CATALOGO_QUERYResult } from "@/sanity.types";
 import { urlFor } from "@/sanity/lib/image";
 import Image from "next/image";
-import { ComponentPropsWithoutRef, Dispatch, SetStateAction, useEffect, useState } from "react";
+import { ComponentPropsWithoutRef, Dispatch, SetStateAction } from "react";
 import { cn } from "../_lib/cn";
 import { numberToColombianPriceString } from "@/app/helpers";
 import { SurfaceFormat } from "./Cotizador";
