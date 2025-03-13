@@ -40,6 +40,7 @@ const CotizadorUi = ({
       const area = surface?.formats
         ? (surface.formats[0].width * surface.formats[0].height) / 100
         : 0;
+      console.log({ surface, area, price: surface?.price });
       initialState[surfaceId] = {
         width: surface?.formats ? surface.formats[0].width : 0,
         height: surface?.formats ? surface.formats[0].height : 0,
