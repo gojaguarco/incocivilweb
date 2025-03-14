@@ -23,7 +23,9 @@ const CotizadorUi = ({ surfaceTypes, catalogo }: {
   const searchParams = useSearchParams();
   const captureInfoOpen = searchParams.get("capture-info") === "true";
   const surfaceTypeId = searchParams.get("surfaceType");
-  const selectedSurfaceIds = searchParams.get("surfaceId")?.split(",") ?? []
+  const selectedSurfaceIds = searchParams.get("surfaceId")?.split(",") ?? [];
+
+  const [showTotal, setShowTotal] = useState(false);
 
   const [surfaceFormats, setSurfaceFormats] = useState<{
     [surfaceId: string]: SurfaceFormat;
@@ -34,7 +36,7 @@ const CotizadorUi = ({ surfaceTypes, catalogo }: {
       const area = surface?.formats ? (surface.formats[0].width * surface.formats[0].height) / 100 : 0;
       const price = parseInt(surface?.price?.replaceAll(".", "") || "")
       const totalSurface = area * price
-      console.log({surface, area, price, totalSurface, priceString: surface?.price?.replaceAll(".", "")})
+      console.log({ surface, area, price, totalSurface, priceString: surface?.price?.replaceAll(".", "") })
       initialState[surfaceId] = {
         width: surface?.formats ? surface.formats[0].width : 0,
         height: surface?.formats ? surface.formats[0].height : 0,
@@ -152,6 +154,7 @@ const CotizadorUi = ({ surfaceTypes, catalogo }: {
               3. Selecciona los formatos que necesitas para tu proyecto.
             </h2>
             <SelectedSurfacesTable
+              showTotal={showTotal}
               surfaceFormats={surfaceFormats}
               setSurfaceFormats={setSurfaceFormats}
               catalogo={catalogo}
@@ -168,7 +171,7 @@ const CotizadorUi = ({ surfaceTypes, catalogo }: {
                 Aprende a diseñar tus encimeras, haciendo clic aquí.
               </a>
             </LightCard>
-            <CaptureInfo surfaceFormats={surfaceFormats} createQueryString={createQueryString} captureInfoOpen={captureInfoOpen} />
+            <CaptureInfo setShowTotal={setShowTotal} surfaceFormats={surfaceFormats} createQueryString={createQueryString} captureInfoOpen={captureInfoOpen} />
           </div>
         </>
       )}

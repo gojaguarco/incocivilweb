@@ -22,13 +22,13 @@ const montserrat = Montserrat({
 
 export async function generateMetadata() {
 
-  const Metadata = await sanityFetch({
+  const metadata = await sanityFetch({
     query: METADATA_QUERY,
   })
 
   return {
-    title: Metadata?.title,
-    description: Metadata?.description,
+    title: metadata?.title,
+    description: metadata?.description,
   };
 }
 
