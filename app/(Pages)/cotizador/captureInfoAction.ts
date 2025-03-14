@@ -35,7 +35,6 @@ export const captureInfoAction = async (
     selectedSurfaces: formData.getAll("selectedSurfaces") as string[],
   };
 
-  console.log({ rawData });
   const { data, success, error } = formSchema.safeParse(rawData);
 
   if (!success) {
@@ -46,7 +45,6 @@ export const captureInfoAction = async (
       errors: errors,
     };
   }
-  console.log({ data, surfaces: data.selectedSurfaces });
 
   const rawAdminEmail = await sanityFetch({
     query: ADMIN_EMAIL_QUERY,
@@ -63,10 +61,9 @@ export const captureInfoAction = async (
     }
   }
   try {
-    const resendResp = await resend.emails.send({
+    await resend.emails.send({
       from: 'Incocivil <cotizador@incocivil.com>',
-      // TODO change email to admin email
-      to: ["julian.m.bustos@gmail.com"],
+      to: [adminEmail],
       subject: "Mensaje de cliente",
       react: QuoteEmailTemplate({
         data: {
@@ -79,7 +76,7 @@ export const captureInfoAction = async (
       })
     })
 
-    console.log({resendResp})
+    // console.log({resendResp})
   } catch (error) {
     console.log({error})
     return {

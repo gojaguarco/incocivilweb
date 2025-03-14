@@ -1,22 +1,25 @@
 "use client";
 import { numberToColombianPriceString } from "@/app/helpers";
-import { ComponentPropsWithoutRef, useActionState, useEffect, useState } from "react";
+import { ComponentPropsWithoutRef, Dispatch, SetStateAction, useActionState, useEffect, useState } from "react";
 import { cn } from "../_lib/cn";
 import { captureInfoAction } from "./captureInfoAction";
 import { SurfaceFormat } from "./Cotizador";
 
 
-const CaptureForm = ({ totalToShow, selectedFormats }: {
+const CaptureForm = ({ totalToShow, selectedFormats, setShowTotal }: {
   totalToShow: number;
   selectedFormats: {
     [surfaceId: string]: SurfaceFormat
-  }
+  };
+  setShowTotal: Dispatch<SetStateAction<boolean>>;
 }) => {
 
-  const [state, formAction, isPending] = useActionState(captureInfoAction, {
+  const [formState, formAction, isPending] = useActionState(captureInfoAction, {
     success: false,
     errors: null,
   });
+
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false)
 
   const [data, setData] = useState(() => {
     const savedData = localStorage && localStorage.getItem('formData');
@@ -29,55 +32,11 @@ const CaptureForm = ({ totalToShow, selectedFormats }: {
     };
   });
 
-
-
-  // const [selectedSurfaces, setSelectedSurfaces] = useState<Array<{
-  //   id: string;
-  //   formatSelected: string;
-  // }>>([])
-
-
-
-  useEffect(() => {
-    // if (data) {
-    if (!localStorage) return;
-    localStorage.setItem('formData', JSON.stringify(data));
-    // }
-  }, [data]);
-
   // useEffect(() => {
-  //   const selectedSurfacesTable = document.getElementById("selected-surfaces")
-
-  //   if (selectedSurfacesTable) {
-  //     const rows = selectedSurfacesTable.querySelectorAll("tr");
-
-  //     const selectedSurfaces: Array<{
-  //       id: string;
-  //       formatSelected: string;
-  //     }> = [];
-
-  //     rows.forEach((row) => {
-  //       const codeCell = row.querySelector("td.code");  
-  //       const code = codeCell ? codeCell.textContent : null;
-
-  //       const selectElement = row.querySelector("td select") as HTMLSelectElement;  
-  //       const selectedFormat = selectElement ? selectElement.value : null;
-
-
-  //       if (!code || code === "" || !selectedFormat || selectedFormat === "") return;
-
-  //       selectedSurfaces.push({
-  //         id: code,
-  //         formatSelected: selectedFormat
-  //       });
-
-
-  //     });
-
-  //     setSelectedSurfaces(selectedSurfaces);
-  //   }
-  // }, [])
-
+  //   // if (data) {
+  //   setShowTotal(true)
+  //   // }
+  // }, [data]);
 
   const onInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { value, name } = e.target;
@@ -96,6 +55,19 @@ const CaptureForm = ({ totalToShow, selectedFormats }: {
   };
 
 
+  useEffect(() => {
+    if (formState.success) {
+      setShowSuccessMessage(true);
+
+      const timeout = setTimeout(() => {
+        setShowSuccessMessage(false)
+      }, 5000)
+
+      setShowTotal(true)
+
+      return () => clearTimeout(timeout)
+    }
+  }, [formState.success])
 
   return (
     <form className="flex flex-col gap-5">
@@ -112,17 +84,13 @@ const CaptureForm = ({ totalToShow, selectedFormats }: {
         </strong>
       </p>
       {selectedFormats && Object.keys(selectedFormats).map((surfaceId, index) => (
-        <>
-          <input
-            key={index}
-            type="hidden"
-            name={`selectedSurfaces`}
-            value={JSON.stringify({...selectedFormats[surfaceId], surfaceId })}
-          />
-          {/* {JSON.stringify(selectedFormats[surfaceId])} */}
-        </>
+        <input
+          key={index}
+          type="hidden"
+          name={`selectedSurfaces`}
+          value={JSON.stringify({ ...selectedFormats[surfaceId], surfaceId })}
+        />
       ))}
-      {JSON.stringify(selectedFormats)}
       <Input
         onChange={onInputChange}
         label="Nombre"
@@ -132,7 +100,7 @@ const CaptureForm = ({ totalToShow, selectedFormats }: {
         required
         placeholder="Juan"
       />
-      {state.errors?.nombre && <p className="text-red-500">{state.errors.nombre._errors}</p>}
+      {formState.errors?.nombre && <p className="text-red-500">{formState.errors.nombre._errors}</p>}
       <Input
         onChange={onInputChange}
         label="Apellido"
@@ -142,7 +110,7 @@ const CaptureForm = ({ totalToShow, selectedFormats }: {
         required
         placeholder="Pérez"
       />
-      {state.errors?.apellido && <p className="text-red-500">{state.errors.apellido._errors}</p>}
+      {formState.errors?.apellido && <p className="text-red-500">{formState.errors.apellido._errors}</p>}
       <Input
         onChange={onInputChange}
         label="Email"
@@ -153,7 +121,7 @@ const CaptureForm = ({ totalToShow, selectedFormats }: {
         required
         placeholder="tunombre@incocivil.com"
       />
-      {state.errors?.email && <p className="text-red-500">{state.errors.email._errors}</p>}
+      {formState.errors?.email && <p className="text-red-500">{formState.errors.email._errors}</p>}
       <Input
         onChange={onInputChange}
         label="Teléfono"
@@ -163,7 +131,7 @@ const CaptureForm = ({ totalToShow, selectedFormats }: {
         placeholder="300 123 4567"
         required
       />
-      {state.errors?.telefono && <p className="text-red-500">{state.errors?.telefono._errors}</p>}
+      {formState.errors?.telefono && <p className="text-red-500">{formState.errors?.telefono._errors}</p>}
       <label className="flex flex-col gap-2">
         <h4>
           Mensaje (opcional):
@@ -176,11 +144,14 @@ const CaptureForm = ({ totalToShow, selectedFormats }: {
           placeholder="Deja tu mensaje..."
         />
       </label>
-      {state.errors?.mensaje && <p className="text-red-500">{state.errors?.mensaje._errors}</p>}
+      {formState.errors?.mensaje && <p className="text-red-500">{formState.errors?.mensaje._errors}</p>}
 
       <button disabled={isPending} formAction={formAction} className="bg-accent1 text-light px-4 sm:px-6 py-1.5 xs:py-2 text-sm sm:text-base w-fit self-end flex flex-col items-center justify-center rounded-lg text-nowrap flex-shrink-0 hover:-translate-y-0.5 hover:el-shadow">
         {isPending ? "Enviando Cotización" : "Ver Cotización"}
       </button>
+      {formState.success && showSuccessMessage && (
+        <p className="text-center">✔️ Su cotización fue enviada exitosamente</p>
+      )}
     </form>
   );
 }

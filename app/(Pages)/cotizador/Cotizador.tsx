@@ -31,6 +31,8 @@ const CotizadorUi = ({
   const surfaceTypeId = searchParams.get("surfaceType");
   const selectedSurfaceIds = searchParams.get("surfaceId")?.split(",") ?? [];
 
+  const [showTotal, setShowTotal] = useState(false);
+
   const [surfaceFormats, setSurfaceFormats] = useState<{
     [surfaceId: string]: SurfaceFormat;
   }>(() => {
@@ -206,33 +208,38 @@ const CotizadorUi = ({
       {surfaceTypeId &&
         selectedSurfaceIds &&
         selectedSurfaceIds.length >= 1 && (
-          <LightCard>
-            <h2 className="lg:font-montserrat lg:font-normal">
-              3. Selecciona los formatos que necesitas para tu proyecto.
-            </h2>
-            <SelectedSurfacesTable
-              surfaceFormats={surfaceFormats}
-              setSurfaceFormats={setSurfaceFormats}
-              catalogo={catalogo}
-              removeSurfaceId={removeSurfaceId}
-              selectedSurfaceIds={selectedSurfaceIds}
-            />
-          </LightCard>
+          <>
+            <LightCard>
+              <h2 className="lg:font-montserrat lg:font-normal">
+                3. Selecciona los formatos que necesitas para tu proyecto.
+              </h2>
+              <SelectedSurfacesTable
+                showTotal={showTotal}
+                surfaceFormats={surfaceFormats}
+                setSurfaceFormats={setSurfaceFormats}
+                catalogo={catalogo}
+                removeSurfaceId={removeSurfaceId}
+                selectedSurfaceIds={selectedSurfaceIds}
+              />
+            </LightCard>
+            <div className="w-full items-center flex flex-col md:flex-row gap-2 justify-between">
+              <LightCard>
+                <h6 className="font-inter">
+                  ¿No sabes qué formato seleccionar?
+                </h6>
+                <a href="" className="underline">
+                  Aprende a diseñar tus encimeras, haciendo clic aquí.
+                </a>
+              </LightCard>
+              <CaptureInfo
+                setShowTotal={setShowTotal}
+                surfaceFormats={surfaceFormats}
+                createQueryString={createQueryString}
+                captureInfoOpen={captureInfoOpen}
+              />
+            </div>
+          </>
         )}
-      <div className="w-full items-center flex justify-between">
-        <LightCard>
-          <h6 className="font-inter">¿No sabes qué formato seleccionar?</h6>
-          <a href="" className="underline">
-            Aprende a diseñar tus encimeras, haciendo clic aquí.
-          </a>
-        </LightCard>
-        <CaptureInfo
-          createQueryString={createQueryString}
-          captureInfoOpen={captureInfoOpen}
-          // total={15000000}
-          surfaceFormats={surfaceFormats}
-        />
-      </div>
     </section>
   );
 };

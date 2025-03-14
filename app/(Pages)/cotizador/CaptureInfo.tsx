@@ -4,17 +4,20 @@ import LinkButton from "../_components/LinkButton";
 import LightCard from "../_components/LightCard";
 import CaptureForm from "./CaptureForm";
 import { SurfaceFormat } from "./Cotizador";
+import { Dispatch, SetStateAction } from "react";
 
 const CaptureInfo = ({
   createQueryString,
   captureInfoOpen,
-  surfaceFormats
+  surfaceFormats,
+  setShowTotal
 }: {
   surfaceFormats: {
     [surfaceId: string]: SurfaceFormat;
   }
   createQueryString: (name: string, value: string, action: 'add' | 'remove' | 'replace') => string;
   captureInfoOpen: boolean;
+  setShowTotal: Dispatch<SetStateAction<boolean>>;
 }) => {
   const router = useRouter();
 
@@ -24,7 +27,7 @@ const CaptureInfo = ({
 
 
     const surfaceFormat = surfaceFormats[surfaceFormatIn]
-    console.log({surfaceFormat, surfaceFormats, surfaceFormatIn})
+    console.log({ surfaceFormat, surfaceFormats, surfaceFormatIn })
     total += surfaceFormat.totalSurface;
   }
   return (
@@ -48,7 +51,7 @@ const CaptureInfo = ({
             onClick={e => e.stopPropagation()}
             className="max-w-screen-sm bg-light-dark p-10 relative z-[200] rounded-xl px-10 flex flex-col w-[85dvw] mx-auto gap-5"
           >
-            <CaptureForm selectedFormats={surfaceFormats} totalToShow={total} />
+            <CaptureForm setShowTotal={setShowTotal} selectedFormats={surfaceFormats} totalToShow={total} />
           </LightCard>
         </section>
       )}

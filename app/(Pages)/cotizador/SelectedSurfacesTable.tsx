@@ -13,7 +13,8 @@ const SelectedSurfacesTable = ({
   removeSurfaceId,
   selectedSurfaceIds,
   setSurfaceFormats,
-  surfaceFormats
+  surfaceFormats,
+  showTotal
 }: {
 
   selectedSurfaceIds: string[];
@@ -25,12 +26,13 @@ const SelectedSurfacesTable = ({
   setSurfaceFormats: Dispatch<SetStateAction<{
     [surfaceId: string]: SurfaceFormat;
   }>>
-
-
+  showTotal: boolean;
 }) => {
+  console.log({ showTotal })
 
   return (
     <>
+      {showTotal ? "yei" : "nei"}
       <table id="selected-surfaces" className="hidden md:block table-fixed w-full border-collapse bg-light rounded shadow-sm overflow-hidden">
         <thead className="w-full">
           <tr className="border-b">
@@ -52,7 +54,7 @@ const SelectedSurfacesTable = ({
             if (!surface) return null;
 
             return (
-              <DesktopSurface surfaceFormats={surfaceFormats} setSurfaceFormats={setSurfaceFormats} key={id} id={id} index={index} removeSurfaceId={removeSurfaceId} surface={surface} />
+              <DesktopSurface showTotal={!!showTotal} surfaceFormats={surfaceFormats} setSurfaceFormats={setSurfaceFormats} key={id} id={id} index={index} removeSurfaceId={removeSurfaceId} surface={surface} />
             );
           })}
         </tbody>
@@ -105,8 +107,10 @@ const DesktopSurface = ({
   surface,
   removeSurfaceId,
   setSurfaceFormats,
-  surfaceFormats
+  surfaceFormats,
+  showTotal
 }: {
+  showTotal: boolean;
   id: string;
   index: number;
   surface: CATALOGO_QUERYResult[number];
@@ -158,7 +162,9 @@ const DesktopSurface = ({
         </select>
       </Td>
       <Td className="relative">
+      {!showTotal && (
         <div className={`w-full h-full absolute z-10 top-0 left-0 ${rowBg}`}></div>
+      )}
         <span className="">{numberToColombianPriceString(surfaceFormats[surface._id]?.totalSurface || 0)}</span>
       </Td>
       <Td>
