@@ -12,11 +12,11 @@ export const SurfaceToSendAdminEmailSchema = z.object({
   formatPrice: z.number(),
 });
 
-
-export type SurfaceToSendAdminEmail = z.infer<typeof SurfaceToSendAdminEmailSchema>
+export type SurfaceToSendAdminEmail = z.infer<
+  typeof SurfaceToSendAdminEmailSchema
+>;
 
 export const selectedSurfacesSchema = z.array(SurfaceToSendAdminEmailSchema);
-
 
 export type SelectedSurfaces = z.infer<typeof selectedSurfacesSchema>;
 
