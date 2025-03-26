@@ -9,12 +9,8 @@ import { urlFor } from "@/sanity/lib/image";
 import { Suspense, useCallback, useState } from "react";
 import SelectedSurfacesTable from "./SelectedSurfacesTable";
 import CaptureInfo from "./CaptureInfo";
+import { SurfaceToSendAdminEmail } from "./captureInfoZods";
 
-export type SurfaceFormat = {
-  width: number;
-  height: number;
-  totalSurface: number;
-};
 
 const CotizadorUi = ({ surfaceTypes, catalogo }: {
   surfaceTypes: ALL_SURFACE_TYPES_QUERYResult;
@@ -28,19 +24,23 @@ const CotizadorUi = ({ surfaceTypes, catalogo }: {
   const [showTotal, setShowTotal] = useState(false);
 
   const [surfaceFormats, setSurfaceFormats] = useState<{
-    [surfaceId: string]: SurfaceFormat;
+    [surfaceId: string]: SurfaceToSendAdminEmail;
   }>(() => {
-    const initialState: { [surfaceId: string]: SurfaceFormat } = {};
+    const initialState: { [surfaceId: string]: SurfaceToSendAdminEmail } = {};
     for (const surfaceId of selectedSurfaceIds) {
       const surface = catalogo.find((item) => item._id === surfaceId);
       const area = surface?.formats ? (surface.formats[0].width * surface.formats[0].height) / 100 : 0;
       const price = parseInt(surface?.price?.replaceAll(".", "") || "")
       const totalSurface = area * price
-      console.log({ surface, area, price, totalSurface, priceString: surface?.price?.replaceAll(".", "") })
+      // console.log({ surface, area, price, totalSurface, priceString: surface?.price?.replaceAll(".", "") })
       initialState[surfaceId] = {
         width: surface?.formats ? surface.formats[0].width : 0,
         height: surface?.formats ? surface.formats[0].height : 0,
-        totalSurface
+        totalSurface,
+        code: surface?.code ? String(surface.code) : "",
+        id: surface?._id || "",
+        image: surface?.image ? urlFor(surface.image).url() : "",
+        name: surface?.title || ""
       };
     }
     return initialState;
@@ -81,13 +81,17 @@ const CotizadorUi = ({ surfaceTypes, catalogo }: {
     const surface = catalogo.find((item) => item._id === id);
     const area = surface?.formats ? (surface.formats[0].width * surface.formats[0].height) / 100 : 0;
     setSurfaceFormats(prev => ({
-      ...prev,
-      [id]: {
-        width: surface?.formats ? surface.formats[0].width : 0,
-        height: surface?.formats ? surface.formats[0].height : 0,
-        totalSurface: surface?.price ? parseInt(surface.price.replaceAll(".", "")) * area : 0,
-      }
-    }))
+          ...prev,
+          [id]: {
+            width: surface?.formats ? surface.formats[0].width : 0,
+            height: surface?.formats ? surface.formats[0].height : 0,
+            totalSurface: surface?.price ? parseInt(surface.price.replaceAll(".", "")) * area : 0,
+            id: surface?._id || "",
+            code: surface?.code ? String(surface.code) : "",
+            name: surface?.title || "",
+            image: surface?.image ? urlFor(surface.image).url() : "",
+          }
+        }))
     router.push(`?${createQueryString('surfaceId', id, 'add')}`, { scroll: false })
   }
 
@@ -112,7 +116,7 @@ const CotizadorUi = ({ surfaceTypes, catalogo }: {
     <section className="flex flex-col gap-[60px]">
       <LightCard>
         <div className="flex justify-between items-center gap-3">
-          <h2 className="lg:font-montserrat lg:font-normal">
+          <h2 className="my-5 md:font-montserrat md:font-normal">
             1. Selecciona el tipo de superficie.
           </h2>
           <SelectFilter
@@ -128,7 +132,7 @@ const CotizadorUi = ({ surfaceTypes, catalogo }: {
       </LightCard>
       {surfaceTypeId && (
         <LightCard className="pr-0 flex flex-col gap-2">
-          <h2 className="lg:font-montserrat lg:font-normal">2. Selecciona las superficies que deseas cotizar.</h2>
+          <h2 className="my-5 md:font-montserrat md:font-normal">2. Selecciona las superficies que deseas cotizar.</h2>
           <div className="overflow-x-scroll no-scrollbar">
             <ul className="flex gap-4 w-fit pr-5">
               {filteredCatalogo.map((item) => (
@@ -150,7 +154,7 @@ const CotizadorUi = ({ surfaceTypes, catalogo }: {
       {surfaceTypeId && selectedSurfaceIds && selectedSurfaceIds.length >= 1 && (
         <>
           <LightCard>
-            <h2 className="lg:font-montserrat lg:font-normal">
+            <h2 className="my-5 md:font-montserrat md:font-normal">
               3. Selecciona los formatos que necesitas para tu proyecto.
             </h2>
             <SelectedSurfacesTable
