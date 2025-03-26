@@ -161,7 +161,7 @@ export const QuoteEmailTemplate: React.FC<
                 </Column>
                 <Column style={productPriceWrapper} align="right">
                   <Text style={productPrice}>
-                    Total cotizado:{" "}
+                    Valor:{" "}
                     {numberToColombianPriceString(surface.totalSurface)}
                   </Text>
                 </Column>
