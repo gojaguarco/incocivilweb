@@ -3,8 +3,8 @@ import { useRouter } from "next/navigation";
 import LinkButton from "../_components/LinkButton";
 import LightCard from "../_components/LightCard";
 import CaptureForm from "./CaptureForm";
-import { SurfaceFormat } from "./Cotizador";
 import { Dispatch, SetStateAction } from "react";
+import { SurfaceToSendAdminEmail } from "./captureInfoZods";
 
 const CaptureInfo = ({
   createQueryString,
@@ -13,7 +13,7 @@ const CaptureInfo = ({
   setShowTotal
 }: {
   surfaceFormats: {
-    [surfaceId: string]: SurfaceFormat;
+    [surfaceId: string]: SurfaceToSendAdminEmail;
   }
   createQueryString: (name: string, value: string, action: 'add' | 'remove' | 'replace') => string;
   captureInfoOpen: boolean;
@@ -27,7 +27,6 @@ const CaptureInfo = ({
 
 
     const surfaceFormat = surfaceFormats[surfaceFormatIn]
-    console.log({ surfaceFormat, surfaceFormats, surfaceFormatIn })
     total += surfaceFormat.totalSurface;
   }
   return (

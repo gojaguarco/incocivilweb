@@ -1,19 +1,22 @@
 "use client";
 import { numberToColombianPriceString } from "@/app/helpers";
-import { ComponentPropsWithoutRef, Dispatch, SetStateAction, useActionState, useEffect, useState } from "react";
+import { ComponentPropsWithoutRef, Dispatch, SetStateAction, useActionState, useCallback, useEffect, useState } from "react";
 import { cn } from "../_lib/cn";
 import { captureInfoAction } from "./captureInfoAction";
-import { SurfaceFormat } from "./Cotizador";
+import { useRouter, useSearchParams } from "next/navigation";
+import { SurfaceToSendAdminEmail } from "./captureInfoZods";
 
 
 const CaptureForm = ({ totalToShow, selectedFormats, setShowTotal }: {
   totalToShow: number;
   selectedFormats: {
-    [surfaceId: string]: SurfaceFormat
+    [surfaceId: string]: SurfaceToSendAdminEmail
   };
   setShowTotal: Dispatch<SetStateAction<boolean>>;
 }) => {
 
+  const router = useRouter();
+  const searchParams = useSearchParams();
   const [formState, formAction, isPending] = useActionState(captureInfoAction, {
     success: false,
     errors: null,
@@ -53,6 +56,23 @@ const CaptureForm = ({ totalToShow, selectedFormats, setShowTotal }: {
       [name]: value
     }))
   };
+  const createQueryString = useCallback(
+    (name: string, value: string, action: 'add' | 'remove' | 'replace' = 'add') => {
+      const params = new URLSearchParams(searchParams.toString())
+      const currentValues = params.get(name)?.split(',').filter(Boolean) || []
+
+      if (action === 'add' && !currentValues.includes(value)) {
+        params.set(name, [...currentValues, value].join(','))
+      } else if (action === 'remove') {
+        params.set(name, currentValues.filter(v => v !== value).join(','))
+      } else if (action === "replace") {
+        params.set(name, value)
+      };
+
+      return params.toString()
+    },
+    [searchParams]
+  )
 
 
   useEffect(() => {
@@ -60,7 +80,8 @@ const CaptureForm = ({ totalToShow, selectedFormats, setShowTotal }: {
       setShowSuccessMessage(true);
 
       const timeout = setTimeout(() => {
-        setShowSuccessMessage(false)
+        setShowSuccessMessage(false);
+        router.push(`?${createQueryString("capture-info", "true", "remove")}`)
       }, 5000)
 
       setShowTotal(true)

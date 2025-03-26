@@ -5,7 +5,7 @@ import Image from "next/image";
 import { ComponentPropsWithoutRef, Dispatch, SetStateAction } from "react";
 import { cn } from "../_lib/cn";
 import { numberToColombianPriceString } from "@/app/helpers";
-import { SurfaceFormat } from "./Cotizador";
+import { SurfaceToSendAdminEmail } from "./captureInfoZods";
 
 
 const SelectedSurfacesTable = ({
@@ -21,19 +21,17 @@ const SelectedSurfacesTable = ({
   catalogo: CATALOGO_QUERYResult;
   removeSurfaceId: (id: string) => void;
   surfaceFormats: {
-    [surfaceId: string]: SurfaceFormat;
+    [surfaceId: string]: SurfaceToSendAdminEmail;
   };
   setSurfaceFormats: Dispatch<SetStateAction<{
-    [surfaceId: string]: SurfaceFormat;
+    [surfaceId: string]: SurfaceToSendAdminEmail;
   }>>
   showTotal: boolean;
 }) => {
-  console.log({ showTotal })
 
   return (
     <>
-      {showTotal ? "yei" : "nei"}
-      <table id="selected-surfaces" className="hidden md:block table-fixed w-full border-collapse bg-light rounded shadow-sm overflow-hidden">
+      <table id="selected-surfaces" className="hidden lg:block table-fixed w-full border-collapse bg-light rounded shadow-sm overflow-hidden">
         <thead className="w-full">
           <tr className="border-b">
             <Th>Material</Th>
@@ -59,7 +57,7 @@ const SelectedSurfacesTable = ({
           })}
         </tbody>
       </table >
-      <ul id="selected-surfaces" className="md:hidden w-full border-collapse bg-light rounded shadow-sm overflow-hidden flex flex-col">
+      <ul id="selected-surfaces" className="lg:hidden w-full border-collapse bg-light rounded shadow-sm overflow-hidden flex flex-col">
         {selectedSurfaceIds.map((id, index) => {
           const surface = catalogo.find((item) => item._id === id);
           if (!surface) return null;
@@ -116,10 +114,10 @@ const DesktopSurface = ({
   surface: CATALOGO_QUERYResult[number];
   removeSurfaceId: (id: string) => void;
   surfaceFormats: {
-    [surfaceId: string]: SurfaceFormat
+    [surfaceId: string]: SurfaceToSendAdminEmail
   }
   setSurfaceFormats: Dispatch<SetStateAction<{
-    [surfaceId: string]: SurfaceFormat;
+    [surfaceId: string]: SurfaceToSendAdminEmail;
   }>>
 
 }) => {
@@ -134,7 +132,11 @@ const DesktopSurface = ({
         [surface._id]: {
           height: format.height,
           width: format.width,
-          totalSurface: area * parseInt(surface.price?.replaceAll(".", "") || "")
+          totalSurface: area * parseInt(surface.price?.replaceAll(".", "") || ""),
+          id: surface._id,
+          code: String(surface.code || ""),
+          name: surface.title || "",
+          image: surface.image ? urlFor(surface.image).url() : ""
         }
       })
     }
@@ -162,9 +164,9 @@ const DesktopSurface = ({
         </select>
       </Td>
       <Td className="relative">
-      {!showTotal && (
-        <div className={`w-full h-full absolute z-10 top-0 left-0 ${rowBg}`}></div>
-      )}
+        {!showTotal && (
+          <div className={`w-full h-full absolute z-10 top-0 left-0 ${rowBg}`}></div>
+        )}
         <span className="">{numberToColombianPriceString(surfaceFormats[surface._id]?.totalSurface || 0)}</span>
       </Td>
       <Td>
@@ -191,10 +193,10 @@ const MobileSurface = ({ index, surface, removeSurfaceId, id, setSurfaceFormats,
   surface: CATALOGO_QUERYResult[number];
   removeSurfaceId: (id: string) => void;
   surfaceFormats: {
-    [surfaceId: string]: SurfaceFormat
+    [surfaceId: string]: SurfaceToSendAdminEmail
   }
   setSurfaceFormats: Dispatch<SetStateAction<{
-    [surfaceId: string]: SurfaceFormat;
+    [surfaceId: string]: SurfaceToSendAdminEmail;
   }>>
 
 }) => {
@@ -209,7 +211,11 @@ const MobileSurface = ({ index, surface, removeSurfaceId, id, setSurfaceFormats,
         [surface._id]: {
           height: format.height,
           width: format.width,
-          totalSurface: area * parseInt(surface.price?.replaceAll(".", "") || "")
+          totalSurface: area * parseInt(surface.price?.replaceAll(".", "") || ""),
+          id: surface._id,
+          code: String(surface.code || ""),
+          name: surface.title || "",
+          image: surface.image ? urlFor(surface.image).url() : ""
         }
       })
     }
