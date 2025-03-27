@@ -10,7 +10,9 @@ const CaptureInfo = ({
   createQueryString,
   captureInfoOpen,
   surfaceFormats,
-  setShowTotal
+  setShowTotal,
+  formTitle, 
+  successMessage
 }: {
   surfaceFormats: {
     [surfaceId: string]: SurfaceToSendAdminEmail;
@@ -18,6 +20,8 @@ const CaptureInfo = ({
   createQueryString: (name: string, value: string, action: 'add' | 'remove' | 'replace') => string;
   captureInfoOpen: boolean;
   setShowTotal: Dispatch<SetStateAction<boolean>>;
+  formTitle: string;
+  successMessage: string;
 }) => {
   const router = useRouter();
 
@@ -50,7 +54,7 @@ const CaptureInfo = ({
             onClick={e => e.stopPropagation()}
             className="max-w-screen-sm bg-light-dark p-10 relative z-[200] rounded-xl px-10 flex flex-col w-[85dvw] mx-auto gap-5"
           >
-            <CaptureForm setShowTotal={setShowTotal} selectedFormats={surfaceFormats} totalToShow={total} />
+            <CaptureForm formTitle={formTitle} successMessage={successMessage} setShowTotal={setShowTotal} selectedFormats={surfaceFormats} totalToShow={total} />
           </LightCard>
         </section>
       )}

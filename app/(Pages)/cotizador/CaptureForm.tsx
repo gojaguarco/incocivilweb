@@ -7,12 +7,14 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { SurfaceToSendAdminEmail } from "./captureInfoZods";
 
 
-const CaptureForm = ({ totalToShow, selectedFormats, setShowTotal }: {
+const CaptureForm = ({ totalToShow, selectedFormats, setShowTotal, formTitle, successMessage }: {
   totalToShow: number;
   selectedFormats: {
     [surfaceId: string]: SurfaceToSendAdminEmail
   };
   setShowTotal: Dispatch<SetStateAction<boolean>>;
+  formTitle: string;
+  successMessage: string;
 }) => {
 
   const router = useRouter();
@@ -92,7 +94,7 @@ const CaptureForm = ({ totalToShow, selectedFormats, setShowTotal }: {
 
   return (
     <form className="flex flex-col gap-5">
-      <h1>¡Casi está lista tu cotización!</h1>
+      <h1>{formTitle}</h1>
       <p>El valor
         <strong className="mx-[0.5ch]">
           TOTAL
@@ -171,7 +173,7 @@ const CaptureForm = ({ totalToShow, selectedFormats, setShowTotal }: {
         {isPending ? "Enviando Cotización" : "Ver Cotización"}
       </button>
       {formState.success && showSuccessMessage && (
-        <p className="text-center">✔️ Su cotización fue enviada exitosamente</p>
+        <p className="text-center">{successMessage}</p>
       )}
     </form>
   );
