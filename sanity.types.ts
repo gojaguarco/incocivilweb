@@ -994,6 +994,26 @@ export type Pages = {
     _type: "projectContactSection";
     _key: string;
   }>;
+  cotizador?: {
+    surfaceSelection?: {
+      title: string;
+      subtitle: string;
+      surfaceTypeSelection: string;
+      surfaceSelection: string;
+      formatSelection: string;
+      footer?: {
+        title: string;
+        link?: {
+          title: string;
+          link: string;
+        };
+      };
+    };
+    formContent?: {
+      title: string;
+      successMessage: string;
+    };
+  };
 };
 
 export type VideoObject = {
@@ -1477,6 +1497,32 @@ export type ALL_SURFACE_TYPES_QUERYResult = Array<{
   _id: string;
   title: string;
 }>;
+
+// Source: ./sanity/queries/cotizadorQueries.ts
+// Variable: COTIZADOR_QUERY
+// Query: *[_type == 'pages'][0]{  cotizador}
+export type COTIZADOR_QUERYResult = {
+  cotizador: {
+    surfaceSelection?: {
+      title: string;
+      subtitle: string;
+      surfaceTypeSelection: string;
+      surfaceSelection: string;
+      formatSelection: string;
+      footer?: {
+        title: string;
+        link?: {
+          title: string;
+          link: string;
+        };
+      };
+    };
+    formContent?: {
+      title: string;
+      successMessage: string;
+    };
+  } | null;
+} | null;
 
 // Source: ./sanity/queries/homeQueries.ts
 // Variable: HOMEPAGE_QUERY
@@ -2385,6 +2431,7 @@ declare module "@sanity/client" {
     "*[_type == \"post\" && _id == $id][0]{\n  title, \n  description, \n  body, \n  \"image\": {\n    \"url\": image.asset->url,\n    \"alt\": image.alt\n    }, \n  categories, \n  publishedAt\n}": BLOG_QUERYResult;
     "*[_type == \"surface\"]{\n  _id, \n  title, \n  \"image\": imageObject, \n  \"type\": type -> {\n      title,\n      _id\n  },\n  caliber,\n  price,\n  \"formats\": formats[]->{\n      height, \n      width\n    },\n    code,\n    description\n}": CATALOGO_QUERYResult;
     "*[_type == \"surfaceTypes\"]{\n  _id, \n  title\n} ": ALL_SURFACE_TYPES_QUERYResult;
+    "*[_type == 'pages'][0]{\n  cotizador\n}": COTIZADOR_QUERYResult;
     "*[_type == 'pages'][0]{\n  homePage[] {\n    ...,\n    primarySurfaces[]->,\n    surfaceList[]->,\n    faqs []->,\n  }\n}": HOMEPAGE_QUERYResult;
     "*[_type == 'pages'][0].homePage[_type == 'contactSection'][0].contactCard": CONTACTCARD_QUERYResult;
     "*[_type == 'pages'][0]{\n  projectsPage[]{\n    ...,\n    projects[] -> {\n      _id,\n      image,\n      title,\n    }\n  }\n}": PROJECTS_QUERYResult;

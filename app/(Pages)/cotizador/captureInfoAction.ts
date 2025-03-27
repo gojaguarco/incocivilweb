@@ -68,7 +68,7 @@ export const captureInfoAction = async (
   try {
     await resend.emails.send({
       from: "Incocivil <cotizador@incocivil.com>",
-      to: [adminEmail],
+      to: [adminEmail, data.email],
       // to: ["julian.m.bustos@gmail.com"],
       subject: "Mensaje de cliente",
       react: QuoteEmailTemplate({

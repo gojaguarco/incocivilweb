@@ -1,16 +1,36 @@
 import { DesktopIcon } from "@sanity/icons";
 import { defineField, defineType } from "sanity";
+import { cotizadorSchema } from "./cotizadorSchema";
 
 export const pagesType = defineType({
   name: "pages",
   title: "Páginas",
   type: "document",
   icon: DesktopIcon,
+  groups: [
+    {
+      name: "home",
+      title: "Home"
+    },
+    {
+      name: "sobreNosotros",
+      title: "Sobre Nosotros"
+    },
+    {
+      name: "proyectos",
+      title: "Nuestros Proyectos"
+    },
+    {
+      name: "cotizador",
+      title: "Cotizador"
+    },
+  ],
   fields: [
     defineField({
       name: "homePage",
       title: "Home",
       type: "array",
+      group: "home",
       of: [{ type: "homeHeroSection" }, { type: "servicesSection" }, { type: 'whyusSection' }, { type: 'surfaceSliderSection' }, { type: 'faqSection' }, { type: 'contactSection' }],
       validation: (Rule) => [
         Rule.custom((content) => {
@@ -51,6 +71,7 @@ export const pagesType = defineType({
       name: "aboutPage",
       title: "Sobre Nosotros",
       type: "array",
+      group: "sobreNosotros",
       of: [{ type: "aboutHeroSection" }, { type: 'whatwedoSection'}, { type: 'imageSection' }],
       validation: Rule => [
         Rule.custom(content => {
@@ -81,6 +102,7 @@ export const pagesType = defineType({
     defineField({
       name: "projectsPage",
       title: "Nuestros Proyectos",
+      group: "proyectos",
       type: "array",
       of: [{ type: 'projectSection' }, { type: 'projectContactSection' }],
       validation: Rule => [
@@ -109,5 +131,6 @@ export const pagesType = defineType({
       Rule.max(8)
     ]
     }),
+    cotizadorSchema
   ],
 });

@@ -3,6 +3,7 @@
 import {
   ALL_SURFACE_TYPES_QUERYResult,
   CATALOGO_QUERYResult,
+  COTIZADOR_QUERYResult,
 } from "@/sanity.types";
 import LightCard from "../_components/LightCard";
 import SelectFilter from "../_components/SelectFilter";
@@ -17,9 +18,11 @@ import { SurfaceToSendAdminEmail } from "./captureInfoZods";
 const CotizadorUi = ({
   surfaceTypes,
   catalogo,
+  cotizadorContent,
 }: {
   surfaceTypes: ALL_SURFACE_TYPES_QUERYResult;
   catalogo: CATALOGO_QUERYResult;
+  cotizadorContent: COTIZADOR_QUERYResult;
 }) => {
   const searchParams = useSearchParams();
   const captureInfoOpen = searchParams.get("capture-info") === "true";
@@ -133,7 +136,10 @@ const CotizadorUi = ({
       <LightCard>
         <div className="flex justify-between items-center gap-3">
           <h2 className="my-5 md:font-montserrat md:font-normal">
-            1. Selecciona el tipo de superficie.
+            {
+              cotizadorContent?.cotizador?.surfaceSelection
+                ?.surfaceTypeSelection
+            }
           </h2>
           <SelectFilter
             allTitle="Todos"
@@ -149,7 +155,7 @@ const CotizadorUi = ({
       {surfaceTypeId && (
         <LightCard className="pr-0 flex flex-col gap-2">
           <h2 className="my-5 md:font-montserrat md:font-normal">
-            2. Selecciona las superficies que deseas cotizar.
+            {cotizadorContent?.cotizador?.surfaceSelection?.surfaceSelection}
           </h2>
           <div className="overflow-x-scroll no-scrollbar">
             <ul className="flex gap-4 w-fit pr-5">
@@ -180,7 +186,6 @@ const CotizadorUi = ({
                     className="w-[50px] h-[50px] rounded-full absolute bottom-5 right-5 bg-white z-10 flex items-center justify-center"
                   >
                     <svg
-                      xmlns="http://www.w3.org/2000/svg"
                       width={24}
                       height={24}
                       viewBox="0 0 24 24"
@@ -208,7 +213,7 @@ const CotizadorUi = ({
           <>
             <LightCard>
               <h2 className="my-5 md:font-montserrat md:font-normal">
-                3. Selecciona los formatos que necesitas para tu proyecto.
+                {cotizadorContent?.cotizador?.surfaceSelection?.formatSelection}
               </h2>
               <SelectedSurfacesTable
                 showTotal={showTotal}
@@ -221,34 +226,34 @@ const CotizadorUi = ({
             </LightCard>
             <div className="w-full items-center flex flex-col md:flex-row gap-2 justify-between">
               <LightCard>
-                <h2 className="lg:font-montserrat lg:font-normal">
-                  3. Selecciona los formatos que necesitas para tu proyecto.
-                </h2>
-                <SelectedSurfacesTable
-                  showTotal={showTotal}
-                  surfaceFormats={surfaceFormats}
-                  setSurfaceFormats={setSurfaceFormats}
-                  catalogo={catalogo}
-                  removeSurfaceId={removeSurfaceId}
-                  selectedSurfaceIds={selectedSurfaceIds}
-                />
+                <h6 className="font-inter">
+                  {cotizadorContent?.cotizador?.surfaceSelection?.footer?.title}
+                </h6>
+                <a
+                  href={
+                    cotizadorContent?.cotizador?.surfaceSelection?.footer?.link
+                      ?.link
+                  }
+                  className="underline"
+                >
+                  {
+                    cotizadorContent?.cotizador?.surfaceSelection?.footer?.link
+                      ?.title
+                  }
+                </a>
               </LightCard>
-              <div className="w-full items-center flex flex-col md:flex-row gap-2 justify-between">
-                <LightCard>
-                  <h6 className="font-inter">
-                    ¿No sabes qué formato seleccionar?
-                  </h6>
-                  <a href="" className="underline">
-                    Aprende a diseñar tus encimeras, haciendo clic aquí.
-                  </a>
-                </LightCard>
-                <CaptureInfo
-                  setShowTotal={setShowTotal}
-                  surfaceFormats={surfaceFormats}
-                  createQueryString={createQueryString}
-                  captureInfoOpen={captureInfoOpen}
-                />
-              </div>
+              <CaptureInfo
+                formTitle={
+                  cotizadorContent?.cotizador?.formContent?.title || ""
+                }
+                successMessage={
+                  cotizadorContent?.cotizador?.formContent?.successMessage || ""
+                }
+                setShowTotal={setShowTotal}
+                surfaceFormats={surfaceFormats}
+                createQueryString={createQueryString}
+                captureInfoOpen={captureInfoOpen}
+              />
             </div>
           </>
         )}
@@ -259,13 +264,19 @@ const CotizadorUi = ({
 const Cotizador = ({
   surfaceTypes,
   catalogo,
+  cotizadorContent,
 }: {
   surfaceTypes: ALL_SURFACE_TYPES_QUERYResult;
   catalogo: CATALOGO_QUERYResult;
+  cotizadorContent: COTIZADOR_QUERYResult;
 }) => {
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <CotizadorUi catalogo={catalogo} surfaceTypes={surfaceTypes} />
+      <CotizadorUi
+        cotizadorContent={cotizadorContent}
+        catalogo={catalogo}
+        surfaceTypes={surfaceTypes}
+      />
     </Suspense>
   );
 };
