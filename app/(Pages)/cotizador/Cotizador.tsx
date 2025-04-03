@@ -134,7 +134,7 @@ const CotizadorUi = ({
   return (
     <section className="flex flex-col gap-[60px]">
       <LightCard>
-        <div className="flex justify-between items-center gap-3">
+        <div className="md:flex justify-between items-center gap-3">
           <h2 className="my-5 md:font-montserrat md:font-normal">
             {
               cotizadorContent?.cotizador?.surfaceSelection
