@@ -10,7 +10,7 @@ type TProps = ComponentPropsWithoutRef<'a'> & {
   scroll?: boolean;
 }
 
-const LinkButton = ({ text, color, size, link, scroll, className }: TProps) => {
+const LinkButton = ({ text, color, size = "mediano", link, scroll, className }: TProps) => {
 
   const sizeClasses = {
     grande: 'py-1.5 px-[17px] xs:px-6 sm:px-8 sm:py-2 text-base sm:text-lg',
