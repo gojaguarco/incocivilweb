@@ -79,12 +79,13 @@ const CaptureForm = ({ totalToShow, selectedFormats, setShowTotal, formTitle, su
 
   useEffect(() => {
     if (formState.success) {
+      alert("Correo enviado.")
       setShowSuccessMessage(true);
 
       const timeout = setTimeout(() => {
         setShowSuccessMessage(false);
         router.push(`?${createQueryString("capture-info", "true", "remove")}`)
-      }, 5000)
+      }, 3000)
 
       setShowTotal(true)
 
