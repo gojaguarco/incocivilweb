@@ -220,57 +220,6 @@
     }
   },
   {
-    "name": "surfaceFormat",
-    "type": "document",
-    "attributes": {
-      "_id": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        }
-      },
-      "_type": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string",
-          "value": "surfaceFormat"
-        }
-      },
-      "_createdAt": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        }
-      },
-      "_updatedAt": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        }
-      },
-      "_rev": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
-        }
-      },
-      "height": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "number"
-        },
-        "optional": false
-      },
-      "width": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "number"
-        },
-        "optional": false
-      }
-    }
-  },
-  {
     "name": "config",
     "type": "document",
     "attributes": {
@@ -3437,28 +3386,35 @@
           "of": {
             "type": "object",
             "attributes": {
-              "_ref": {
+              "width": {
                 "type": "objectAttribute",
                 "value": {
-                  "type": "string"
-                }
+                  "type": "number"
+                },
+                "optional": false
+              },
+              "height": {
+                "type": "objectAttribute",
+                "value": {
+                  "type": "number"
+                },
+                "optional": false
+              },
+              "formatPrice": {
+                "type": "objectAttribute",
+                "value": {
+                  "type": "number"
+                },
+                "optional": false
               },
               "_type": {
                 "type": "objectAttribute",
                 "value": {
                   "type": "string",
-                  "value": "reference"
+                  "value": "formato"
                 }
-              },
-              "_weak": {
-                "type": "objectAttribute",
-                "value": {
-                  "type": "boolean"
-                },
-                "optional": true
               }
             },
-            "dereferencesTo": "surfaceFormat",
             "rest": {
               "type": "object",
               "attributes": {
@@ -3472,7 +3428,7 @@
             }
           }
         },
-        "optional": true
+        "optional": false
       },
       "description": {
         "type": "objectAttribute",

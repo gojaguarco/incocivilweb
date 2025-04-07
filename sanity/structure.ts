@@ -26,7 +26,6 @@ export const structure: StructureResolver = (S) =>
             .title('Superficies')
             .items([
               S.documentTypeListItem('surfaceTypes').title('Tipos de Superficie').icon(ThLargeIcon),
-              S.documentTypeListItem('surfaceFormat').title('Formatos de Superficie').icon(UlistIcon),
               S.documentTypeListItem('surface').title('Superficies').icon(TiersIcon)
             ])
         ),

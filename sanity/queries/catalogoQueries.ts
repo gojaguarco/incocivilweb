@@ -10,9 +10,10 @@ export const CATALOGO_QUERY = defineQuery(`*[_type == "surface"]{
   },
   caliber,
   price,
-  "formats": formats[]->{
+  "formats": formats[] {
       height, 
-      width
+      width,
+      "price": formatPrice
     },
     code,
     description
