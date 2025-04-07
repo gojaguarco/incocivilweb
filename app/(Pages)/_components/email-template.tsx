@@ -158,6 +158,9 @@ export const QuoteEmailTemplate: React.FC<
                   <Text style={productDescription}>
                     Formato: {surface.width}x{surface.height}
                   </Text>
+                  <Text style={productDescription}>
+                    Cantidad: {surface.quanity}
+                  </Text>
                 </Column>
                 <Column style={productPriceWrapper} align="right">
                   <Text style={productPrice}>

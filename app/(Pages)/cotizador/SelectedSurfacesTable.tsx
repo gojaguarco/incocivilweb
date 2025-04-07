@@ -41,6 +41,7 @@ const SelectedSurfacesTable = ({
             <Th>Descripción</Th>
             <Th>Precio m2</Th>
             <Th>Formato</Th>
+            <Th>Cantidad</Th>
             <Th className="">Total</Th>
             {/* <Th>Acciones</Th> */}
           </tr>
@@ -62,7 +63,7 @@ const SelectedSurfacesTable = ({
           const surface = catalogo.find((item) => item._id === id);
           if (!surface) return null;
           return (
-            <MobileSurface setSurfaceFormats={setSurfaceFormats} surfaceFormats={surfaceFormats} key={id} index={index} surface={surface} id={id} removeSurfaceId={removeSurfaceId} />
+            <MobileSurface showTotal={showTotal} setSurfaceFormats={setSurfaceFormats} surfaceFormats={surfaceFormats} key={id} index={index} surface={surface} id={id} removeSurfaceId={removeSurfaceId} />
           )
         })}
       </ul>
@@ -122,7 +123,7 @@ const DesktopSurface = ({
 
 }) => {
 
-  const onChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+  const onFormatChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const format = JSON.parse(e.target.value);
     if (format) {
       const area = (format.height * format.width) / 100;
@@ -136,11 +137,28 @@ const DesktopSurface = ({
           id: surface._id,
           code: String(surface.code || ""),
           name: surface.title || "",
-          image: surface.image ? urlFor(surface.image).url() : ""
+          image: surface.image ? urlFor(surface.image).url() : "",
+          quanity: 1
         }
       })
     }
   };
+
+  const onQuantityChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const quantity = parseInt(e.target.value);
+    const area = (surfaceFormats[surface._id]?.height || 0) * (surfaceFormats[surface._id]?.width || 0) / 100;
+    const newTotal = area * parseInt(surface.price?.replaceAll(".", "") || "") * quantity;
+
+    setSurfaceFormats({
+      ...surfaceFormats,
+      [surface._id]: {
+        ...surfaceFormats[surface._id],
+        quanity: quantity,
+        totalSurface: newTotal
+      }
+    })
+  };
+
 
   const rowBg = (index % 2 === 0 ? "bg-tableGray" : "bg-light")
   return (
@@ -155,12 +173,21 @@ const DesktopSurface = ({
       <Td className="max-w-[20ch] text-xs ">{surface.description}</Td>
       <Td>${surface.price}</Td>
       <Td>
-        <select onChange={onChange} value={JSON.stringify({ height: surfaceFormats[surface._id]?.height || 0, width: surfaceFormats[surface._id]?.width || 0 })} className="p-2 rounded">
+        <select onChange={onFormatChange} value={JSON.stringify({ height: surfaceFormats[surface._id]?.height || 0, width: surfaceFormats[surface._id]?.width || 0 })} className="p-2 rounded">
           {surface.formats?.map((format, index) => {
             return (
               <option key={`${format.height}-${format.width}-${index}`} value={JSON.stringify(format)}>{format.height}cm * {format.width}cm</option>
             );
           })}
+        </select>
+      </Td>
+      <Td>
+        <select onChange={onQuantityChange} name="quantity" className="p-2 rounded">
+          {Array.from({ length: 10 }, (_, i) => i + 1).map((quantity) => (
+            <option key={quantity} value={quantity}>
+              {quantity}
+            </option>
+          ))}
         </select>
       </Td>
       <Td className="relative">
@@ -187,7 +214,7 @@ const DesktopSurface = ({
   )
 }
 
-const MobileSurface = ({ index, surface, removeSurfaceId, id, setSurfaceFormats, surfaceFormats }: {
+const MobileSurface = ({ index, surface, removeSurfaceId, id, setSurfaceFormats, surfaceFormats, showTotal }: {
   id: string;
   index: number;
   surface: CATALOGO_QUERYResult[number];
@@ -197,11 +224,12 @@ const MobileSurface = ({ index, surface, removeSurfaceId, id, setSurfaceFormats,
   }
   setSurfaceFormats: Dispatch<SetStateAction<{
     [surfaceId: string]: SurfaceToSendAdminEmail;
-  }>>
+  }>>;
+  showTotal: boolean;
 
 }) => {
 
-  const onChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+  const onFormatChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const format = JSON.parse(e.target.value);
     if (format) {
       const area = (format.height * format.width) / 100;
@@ -215,11 +243,28 @@ const MobileSurface = ({ index, surface, removeSurfaceId, id, setSurfaceFormats,
           id: surface._id,
           code: String(surface.code || ""),
           name: surface.title || "",
-          image: surface.image ? urlFor(surface.image).url() : ""
+          image: surface.image ? urlFor(surface.image).url() : "",
+          quanity: 1
         }
       })
     }
   };
+
+  const onQuantityChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const quantity = parseInt(e.target.value);
+    const area = (surfaceFormats[surface._id]?.height || 0) * (surfaceFormats[surface._id]?.width || 0) / 100;
+    const newTotal = area * parseInt(surface.price?.replaceAll(".", "") || "") * quantity;
+
+    setSurfaceFormats({
+      ...surfaceFormats,
+      [surface._id]: {
+        ...surfaceFormats[surface._id],
+        quanity: quantity,
+        totalSurface: newTotal
+      }
+    })
+  };
+
   const itemBg = (index % 2 === 0 ? "bg-tableGray" : "bg-light");
 
   return (
@@ -240,6 +285,7 @@ const MobileSurface = ({ index, surface, removeSurfaceId, id, setSurfaceFormats,
           <InfoItem ><strong>Descripción: </strong></InfoItem>
           <InfoItem><strong>Precio por m2:</strong></InfoItem>
           <InfoItem className="h-[39.2px]"><strong>Selecciona formato: </strong></InfoItem>
+          <InfoItem className=""><strong>Selecciona Cantidad: </strong></InfoItem>
           <InfoItem className=""><strong>Total: </strong></InfoItem>
         </div>
         <div className="flex flex-col gap-2">
@@ -262,7 +308,7 @@ const MobileSurface = ({ index, surface, removeSurfaceId, id, setSurfaceFormats,
           </InfoItem>
           <InfoItem>${surface.price}</InfoItem>
           <InfoItem>
-            <select onChange={onChange} value={JSON.stringify({ height: surfaceFormats[surface._id]?.height || 0, width: surfaceFormats[surface._id]?.width || 0 })} className="p-2 rounded">
+            <select onChange={onFormatChange} value={JSON.stringify({ height: surfaceFormats[surface._id]?.height || 0, width: surfaceFormats[surface._id]?.width || 0 })} className="p-2 rounded">
               {surface.formats?.map((format, index) => {
                 return (
                   <option key={`<span class="math-inline">\{format\.height\}\*</span>{format.width}-${index}`} value={JSON.stringify(format)}>{format.height}cm * {format.width}cm</option>
@@ -270,9 +316,20 @@ const MobileSurface = ({ index, surface, removeSurfaceId, id, setSurfaceFormats,
               })}
             </select>
           </InfoItem>
+          <InfoItem>
+            <select onChange={onQuantityChange} name="quantity" className="p-2 rounded">
+              {Array.from({ length: 10 }, (_, i) => i + 1).map((quantity) => (
+                <option key={quantity} value={quantity}>
+                  {quantity}
+                </option>
+              ))}
+            </select>
+          </InfoItem>
 
           <InfoItem className="relative">
-            <div className={`w-full h-full absolute z-10 top-0 left-0 ${itemBg}`}></div>
+            {!showTotal && (
+              <div className={`w-full h-full absolute z-10 top-0 left-0 ${itemBg}`}></div>
+            )}
             <span className="">{numberToColombianPriceString(surfaceFormats[surface._id]?.totalSurface || 0)}</span>
           </InfoItem>
         </div>
