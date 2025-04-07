@@ -6,6 +6,7 @@ import { ComponentPropsWithoutRef, Dispatch, SetStateAction } from "react";
 import { cn } from "../_lib/cn";
 import { numberToColombianPriceString } from "@/app/helpers";
 import { SurfaceToSendAdminEmail } from "./captureInfoZods";
+import NumberInput from "./NumberInput";
 
 
 const SelectedSurfacesTable = ({
@@ -31,7 +32,7 @@ const SelectedSurfacesTable = ({
 
   return (
     <>
-      <table id="selected-surfaces" className="hidden lg:block table-fixed w-full border-collapse bg-light rounded shadow-sm overflow-hidden">
+      <table id="selected-surfaces" className="hidden xl:block table-fixed w-full border-collapse bg-light rounded shadow-sm overflow-hidden">
         <thead className="w-full">
           <tr className="border-b">
             <Th>Material</Th>
@@ -58,7 +59,7 @@ const SelectedSurfacesTable = ({
           })}
         </tbody>
       </table >
-      <ul id="selected-surfaces" className="lg:hidden w-full border-collapse bg-light rounded shadow-sm overflow-hidden flex flex-col">
+      <ul id="selected-surfaces" className="xl:hidden w-full border-collapse bg-light rounded shadow-sm overflow-hidden flex flex-col">
         {selectedSurfaceIds.map((id, index) => {
           const surface = catalogo.find((item) => item._id === id);
           if (!surface) return null;
@@ -144,8 +145,7 @@ const DesktopSurface = ({
     }
   };
 
-  const onQuantityChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const quantity = parseInt(e.target.value);
+  const onQuantityChange = (quantity: number) => {
     const newTotal = surfaceFormats[surface._id]?.formatPrice * quantity;
 
     setSurfaceFormats({
@@ -181,13 +181,7 @@ const DesktopSurface = ({
         </select>
       </Td>
       <Td>
-        <select onChange={onQuantityChange} name="quantity" className="p-2 rounded">
-          {Array.from({ length: 10 }, (_, i) => i + 1).map((quantity) => (
-            <option key={quantity} value={quantity}>
-              {quantity}
-            </option>
-          ))}
-        </select>
+        <NumberInput onChange={onQuantityChange} />
       </Td>
       <Td className="relative">
         {!showTotal && (
@@ -250,8 +244,7 @@ const MobileSurface = ({ index, surface, removeSurfaceId, id, setSurfaceFormats,
     }
   };
 
-  const onQuantityChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const quantity = parseInt(e.target.value);
+  const onQuantityChange = (quantity:  number) => {
     const newTotal = surfaceFormats[surface._id]?.formatPrice * quantity;
 
     setSurfaceFormats({
@@ -316,13 +309,7 @@ const MobileSurface = ({ index, surface, removeSurfaceId, id, setSurfaceFormats,
             </select>
           </InfoItem>
           <InfoItem>
-            <select onChange={onQuantityChange} name="quantity" className="p-2 rounded">
-              {Array.from({ length: 10 }, (_, i) => i + 1).map((quantity) => (
-                <option key={quantity} value={quantity}>
-                  {quantity}
-                </option>
-              ))}
-            </select>
+            <NumberInput onChange={onQuantityChange} />
           </InfoItem>
 
           <InfoItem className="relative">
