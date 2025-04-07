@@ -44,6 +44,7 @@ const CotizadorUi = ({
       const totalSurface = area * price;
       // console.log({ surface, area, price, totalSurface, priceString: surface?.price?.replaceAll(".", "") })
       initialState[surfaceId] = {
+        quanity: 1,
         width: surface?.formats ? surface.formats[0].width : 0,
         height: surface?.formats ? surface.formats[0].height : 0,
         totalSurface,
@@ -106,6 +107,7 @@ const CotizadorUi = ({
         code: surface?.code ? String(surface.code) : "",
         name: surface?.title || "",
         image: surface?.image ? urlFor(surface.image).url() : "",
+        quanity: 1,
       },
     }));
     router.push(`?${createQueryString("surfaceId", id, "add")}`, {
