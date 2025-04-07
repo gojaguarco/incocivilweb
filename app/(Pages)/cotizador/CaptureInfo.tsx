@@ -47,7 +47,7 @@ const CaptureInfo = ({
           onClick={() => {
             router.push(`?${createQueryString("capture-info", "true", "remove")}`, { scroll: false })
           }}
-          className="absolute top-0 z-[200] left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center"
+          className="fixed top-0 z-[200] left-0 w-screen h-full bg-black bg-opacity-50 flex justify-center items-center"
         >
 
           <LightCard

@@ -9,6 +9,7 @@ export const SurfaceToSendAdminEmailSchema = z.object({
   name: z.string(),
   image: z.string(),
   quanity: z.number(),
+  formatPrice: z.number(),
 });
 
 

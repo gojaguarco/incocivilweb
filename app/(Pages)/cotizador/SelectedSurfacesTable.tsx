@@ -126,19 +126,19 @@ const DesktopSurface = ({
   const onFormatChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const format = JSON.parse(e.target.value);
     if (format) {
-      const area = (format.height * format.width) / 100;
 
       setSurfaceFormats({
         ...surfaceFormats,
         [surface._id]: {
           height: format.height,
           width: format.width,
-          totalSurface: area * parseInt(surface.price?.replaceAll(".", "") || ""),
+          totalSurface: format.price,
           id: surface._id,
           code: String(surface.code || ""),
           name: surface.title || "",
           image: surface.image ? urlFor(surface.image).url() : "",
-          quanity: 1
+          quanity: 1,
+          formatPrice: format.price,
         }
       })
     }
@@ -146,8 +146,7 @@ const DesktopSurface = ({
 
   const onQuantityChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const quantity = parseInt(e.target.value);
-    const area = (surfaceFormats[surface._id]?.height || 0) * (surfaceFormats[surface._id]?.width || 0) / 100;
-    const newTotal = area * parseInt(surface.price?.replaceAll(".", "") || "") * quantity;
+    const newTotal = surfaceFormats[surface._id]?.formatPrice * quantity;
 
     setSurfaceFormats({
       ...surfaceFormats,
@@ -173,7 +172,7 @@ const DesktopSurface = ({
       <Td className="max-w-[20ch] text-xs ">{surface.description}</Td>
       <Td>${surface.price}</Td>
       <Td>
-        <select onChange={onFormatChange} value={JSON.stringify({ height: surfaceFormats[surface._id]?.height || 0, width: surfaceFormats[surface._id]?.width || 0 })} className="p-2 rounded">
+        <select onChange={onFormatChange} value={JSON.stringify({ height: surfaceFormats[surface._id]?.height || 0, width: surfaceFormats[surface._id]?.width || 0, price: surfaceFormats[surface._id]?.formatPrice || 0 })} className="p-2 rounded">
           {surface.formats?.map((format, index) => {
             return (
               <option key={`${format.height}-${format.width}-${index}`} value={JSON.stringify(format)}>{format.height}cm * {format.width}cm</option>
@@ -244,7 +243,8 @@ const MobileSurface = ({ index, surface, removeSurfaceId, id, setSurfaceFormats,
           code: String(surface.code || ""),
           name: surface.title || "",
           image: surface.image ? urlFor(surface.image).url() : "",
-          quanity: 1
+          quanity: 1,
+          formatPrice: format.price
         }
       })
     }
@@ -252,8 +252,7 @@ const MobileSurface = ({ index, surface, removeSurfaceId, id, setSurfaceFormats,
 
   const onQuantityChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const quantity = parseInt(e.target.value);
-    const area = (surfaceFormats[surface._id]?.height || 0) * (surfaceFormats[surface._id]?.width || 0) / 100;
-    const newTotal = area * parseInt(surface.price?.replaceAll(".", "") || "") * quantity;
+    const newTotal = surfaceFormats[surface._id]?.formatPrice * quantity;
 
     setSurfaceFormats({
       ...surfaceFormats,
@@ -308,7 +307,7 @@ const MobileSurface = ({ index, surface, removeSurfaceId, id, setSurfaceFormats,
           </InfoItem>
           <InfoItem>${surface.price}</InfoItem>
           <InfoItem>
-            <select onChange={onFormatChange} value={JSON.stringify({ height: surfaceFormats[surface._id]?.height || 0, width: surfaceFormats[surface._id]?.width || 0 })} className="p-2 rounded">
+            <select onChange={onFormatChange} value={JSON.stringify({ height: surfaceFormats[surface._id]?.height || 0, width: surfaceFormats[surface._id]?.width || 0, price: surfaceFormats[surface._id]?.formatPrice || 0 })} className="p-2 rounded">
               {surface.formats?.map((format, index) => {
                 return (
                   <option key={`<span class="math-inline">\{format\.height\}\*</span>{format.width}-${index}`} value={JSON.stringify(format)}>{format.height}cm * {format.width}cm</option>

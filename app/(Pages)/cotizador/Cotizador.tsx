@@ -37,11 +37,9 @@ const CotizadorUi = ({
     const initialState: { [surfaceId: string]: SurfaceToSendAdminEmail } = {};
     for (const surfaceId of selectedSurfaceIds) {
       const surface = catalogo.find((item) => item._id === surfaceId);
-      const area = surface?.formats
-        ? (surface.formats[0].width * surface.formats[0].height) / 100
-        : 0;
-      const price = parseInt(surface?.price?.replaceAll(".", "") || "");
-      const totalSurface = area * price;
+      if (!surface) continue;
+      
+      const totalSurface = surface.formats[0].price;
       // console.log({ surface, area, price, totalSurface, priceString: surface?.price?.replaceAll(".", "") })
       initialState[surfaceId] = {
         quanity: 1,
@@ -52,6 +50,7 @@ const CotizadorUi = ({
         id: surface?._id || "",
         image: surface?.image ? urlFor(surface.image).url() : "",
         name: surface?.title || "",
+        formatPrice: surface?.formats ? surface.formats[0].price : 0,
       };
     }
     return initialState;
@@ -108,6 +107,7 @@ const CotizadorUi = ({
         name: surface?.title || "",
         image: surface?.image ? urlFor(surface.image).url() : "",
         quanity: 1,
+        formatPrice: surface?.formats ? surface.formats[0].price : 0,
       },
     }));
     router.push(`?${createQueryString("surfaceId", id, "add")}`, {
