@@ -38,7 +38,6 @@ const CotizadorUi = ({
     for (const surfaceId of selectedSurfaceIds) {
       const surface = catalogo.find((item) => item._id === surfaceId);
       if (!surface) continue;
-
       const totalSurface = surface.formats[0].price;
       // console.log({ surface, area, price, totalSurface, priceString: surface?.price?.replaceAll(".", "") })
       initialState[surfaceId] = {
