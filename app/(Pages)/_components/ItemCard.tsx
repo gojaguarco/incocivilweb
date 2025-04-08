@@ -2,29 +2,41 @@ import { urlFor } from "@/sanity/lib/image";
 import Image from "next/image";
 import Esquina from "./Esquina";
 import { internalGroqTypeReferenceTo, SanityImageCrop, SanityImageHotspot } from "@/sanity.types";
+import LinkButton from "./LinkButton";
+import Link from "next/link";
+import LightIndicator from "./LightIndicator";
 
-const ItemCard = ({ title, image, imageAlt, description }: {
+const ItemCard = ({ title, image, imageAlt, description, availability, surfaceId, surfaceTypeId }: {
   image: {
     asset?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
     };
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     alt: string;
     _type: "image" | "imageObject";
-} | null;
+  } | null;
   imageAlt: string;
   title: string;
   description: string;
+  availability?: boolean | null;
+  surfaceId: string;
+  surfaceTypeId?: string | null;
 }) => {
   return (
     <div className="p-2 bg-primary-light rounded-2xl flex items-center justify-center h-48 lg:h-56 el-shadow group relative text-light">
-      {image ? <Image className="rounded-xl w-full h-full object-cover" src={urlFor(image).width(500).height(500).format('webp').url()} alt={imageAlt} width={500} height={500} /> : (
+      {image ? (
+        <Link scroll={false} className="rounded-xl w-full h-full" href={`/surface/${surfaceId}/catalogue/${surfaceTypeId ?? "0"}`} >
+          <Image className="rounded-xl w-full h-full object-cover" src={urlFor(image).width(500).height(500).format('webp').url()} alt={imageAlt} width={500} height={500} />
+        </Link>
+      ) : (
         <div className="w-full h-full bg-primary rounded-xl flex items-center justify-center">
-          <h2 className="text-4xl">📸</h2>
+          <Link scroll={false} href={`/surface/${surfaceId}/catalogue/${surfaceTypeId ?? "0"}`} >
+            <h2 className="text-4xl">📸</h2>
+          </Link>
         </div>
       )}
       <footer className="absolute bottom-2 left-2 right-2 flex flex-col items-start">
@@ -45,6 +57,24 @@ const ItemCard = ({ title, image, imageAlt, description }: {
           {description}
           <Esquina className="absolute rotate-180 w-2.5 h-2.5 -top-2.5 left-0" colorHex={`414553`} />
         </p>
+        <div className="bg-primary-light w-full px-2">
+          {availability ? (
+            <div className="flex w-full justify-between items-center">
+              <LightIndicator color="green" />
+              <LinkButton
+                color="naranja"
+                link={`/cotizador?surfaceType=${surfaceTypeId ?? "0"}&surfaceId=${surfaceId}`}
+                className="mt-2"
+                size="pequeño"
+                text="Cotizar"
+              >
+                Cotizar
+              </LinkButton>
+            </div>
+          ) : (
+            <p>Disponible Online</p>
+          )}
+        </div>
       </footer>
     </div>
   );
