@@ -124,7 +124,6 @@ export default async function Page(props: { params: Promise<QueryParams> }) {
         <div className="max-w-[70%] absolute bottom-2 right-2 bg-light rounded-tl-xl flex flex-col p-2 gap-0.5">
           <h2 className="text-base sm:text-xl">{surface.title}</h2>
           <div className="flex flex-col">
-
             <div className="flex items-center gap-2">
               <div className="w-5 h-[3px] bg-accent1 rounded-full" />
               <h6 className="text-accent1">{surface.type.title}</h6>

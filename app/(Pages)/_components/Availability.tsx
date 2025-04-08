@@ -1,7 +1,11 @@
 import LightIndicator from "./LightIndicator";
 import LinkButton from "./LinkButton";
 
-const Availability = ({ availability, surfaceId, surfaceTypeId }: {
+const Availability = ({
+  availability,
+  surfaceId,
+  surfaceTypeId,
+}: {
   availability: boolean | null;
   surfaceTypeId: string;
   surfaceId: string;
@@ -21,12 +25,10 @@ const Availability = ({ availability, surfaceId, surfaceTypeId }: {
           Cotizar
         </LinkButton>
       </div>
-    )
+    );
   } else {
-    return (
-      <p>{"Exótico - disponible bajo pedido"}</p>
-    )
+    return <p>{"Exótico - disponible bajo pedido"}</p>;
   }
-}
+};
 
 export default Availability;
