@@ -11,6 +11,8 @@ import Modal from "@/app/(Pages)/_components/Modal";
 import Esquina from "@/app/(Pages)/_components/Esquina";
 import BackButton from "@/app/(Pages)/_components/BackButton";
 import NavButtons from "@/app/(Pages)/_components/NavButtons";
+// import LinkButton from "@/app/(Pages)/_components/LinkButton";
+// import Availability from "@/app/(Pages)/_components/Availability";
 
 export async function generateStaticParams() {
   const surfaces = await client.fetch(
