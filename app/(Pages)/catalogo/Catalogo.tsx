@@ -1,6 +1,5 @@
 "use client";
 import { CATALOGO_QUERYResult } from "@/sanity.types";
-import Link from "next/link";
 import ItemCard from "../_components/ItemCard";
 import { useSearchParams } from "next/navigation";
 import { Suspense } from "react";
