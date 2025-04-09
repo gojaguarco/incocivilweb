@@ -15,7 +15,14 @@ export const ImageSchema = defineField({
       validation: (Rule) => Rule.required(),
     },
   ],
-  validation: (Rule) => Rule.required(),
+  validation: (Rule) =>
+    Rule.custom((value) => {
+      console.log({value})
+      if (!value?.asset?._ref) {
+        return 'La imagen es requerida.'; // Or your preferred error message
+      }
+      return true;
+    }),
 });
 
 export const VideoSchema = defineField({

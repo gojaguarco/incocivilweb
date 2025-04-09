@@ -95,7 +95,7 @@ export type Project = {
   _updatedAt: string;
   _rev: string;
   title: string;
-  image: {
+  image?: {
     asset?: {
       _ref: string;
       _type: "reference";
@@ -146,7 +146,7 @@ export type Project = {
       };
       _type: "file";
     };
-    imagenDeCarga: {
+    imagenDeCarga?: {
       asset?: {
         _ref: string;
         _type: "reference";
@@ -189,7 +189,7 @@ export type ProjectContactSection = {
   _rev: string;
   titleDescription?: string;
   title: string;
-  imageObject: {
+  imageObject?: {
     asset?: {
       _ref: string;
       _type: "reference";
@@ -299,7 +299,7 @@ export type ContactSection = {
   _rev: string;
   title: string;
   sectionName: string;
-  imageObject: {
+  imageObject?: {
     asset?: {
       _ref: string;
       _type: "reference";
@@ -345,7 +345,7 @@ export type FaqSection = {
   title: string;
   sectionName: string;
   sectionDescription: string;
-  imageObject: {
+  imageObject?: {
     asset?: {
       _ref: string;
       _type: "reference";
@@ -455,7 +455,7 @@ export type SecondaryService = {
   _rev: string;
   title: string;
   description: string;
-  imageObject: {
+  imageObject?: {
     asset?: {
       _ref: string;
       _type: "reference";
@@ -538,7 +538,7 @@ export type Service = {
       };
       _type: "file";
     };
-    imagenDeCarga: {
+    imagenDeCarga?: {
       asset?: {
         _ref: string;
         _type: "reference";
@@ -564,7 +564,7 @@ export type Surface = {
   available?: boolean;
   title: string;
   code?: number;
-  imageObject: {
+  imageObject?: {
     asset?: {
       _ref: string;
       _type: "reference";
@@ -640,7 +640,7 @@ export type SurfaceTypes = {
       };
       _type: "file";
     };
-    imagenDeCarga: {
+    imagenDeCarga?: {
       asset?: {
         _ref: string;
         _type: "reference";
@@ -655,7 +655,7 @@ export type SurfaceTypes = {
     _type: "video";
     _key: string;
   }>;
-  imageObject: {
+  imageObject?: {
     asset?: {
       _ref: string;
       _type: "reference";
@@ -686,7 +686,7 @@ export type ServicesSection = {
   secondaryServices: Array<{
     title: string;
     description: string;
-    imageObject: {
+    imageObject?: {
       asset?: {
         _ref: string;
         _type: "reference";
@@ -837,7 +837,7 @@ export type Pages = {
     title: string;
     sectionName: string;
     sectionDescription: string;
-    imageObject: {
+    imageObject?: {
       asset?: {
         _ref: string;
         _type: "reference";
@@ -861,7 +861,7 @@ export type Pages = {
   } | {
     title: string;
     sectionName: string;
-    imageObject: {
+    imageObject?: {
       asset?: {
         _ref: string;
         _type: "reference";
@@ -974,7 +974,7 @@ export type Pages = {
   } | {
     titleDescription?: string;
     title: string;
-    imageObject: {
+    imageObject?: {
       asset?: {
         _ref: string;
         _type: "reference";
@@ -1007,7 +1007,7 @@ export type VideoObject = {
     };
     _type: "file";
   };
-  imagenDeCarga: {
+  imagenDeCarga?: {
     asset?: {
       _ref: string;
       _type: "reference";
@@ -1096,7 +1096,7 @@ export type Post = {
       };
       _type: "file";
     };
-    imagenDeCarga: {
+    imagenDeCarga?: {
       asset?: {
         _ref: string;
         _type: "reference";
@@ -1162,7 +1162,7 @@ export type BlockContent = Array<{
     };
     _type: "file";
   };
-  imagenDeCarga: {
+  imagenDeCarga?: {
     asset?: {
       _ref: string;
       _type: "reference";
@@ -1411,7 +1411,7 @@ export type BLOG_QUERYResult = {
       };
       _type: "file";
     };
-    imagenDeCarga: {
+    imagenDeCarga?: {
       asset?: {
         _ref: string;
         _type: "reference";
@@ -1457,7 +1457,7 @@ export type CATALOGO_QUERYResult = Array<{
     crop?: SanityImageCrop;
     alt: string;
     _type: "image";
-  };
+  } | null;
   type: {
     title: string;
     _id: string;
@@ -1485,7 +1485,7 @@ export type HOMEPAGE_QUERYResult = {
   homePage: Array<{
     title: string;
     sectionName: string;
-    imageObject: {
+    imageObject?: {
       asset?: {
         _ref: string;
         _type: "reference";
@@ -1519,7 +1519,7 @@ export type HOMEPAGE_QUERYResult = {
     title: string;
     sectionName: string;
     sectionDescription: string;
-    imageObject: {
+    imageObject?: {
       asset?: {
         _ref: string;
         _type: "reference";
@@ -1630,7 +1630,7 @@ export type HOMEPAGE_QUERYResult = {
           };
           _type: "file";
         };
-        imagenDeCarga: {
+        imagenDeCarga?: {
           asset?: {
             _ref: string;
             _type: "reference";
@@ -1645,7 +1645,7 @@ export type HOMEPAGE_QUERYResult = {
         _type: "video";
         _key: string;
       }>;
-      imageObject: {
+      imageObject?: {
         asset?: {
           _ref: string;
           _type: "reference";
@@ -1661,7 +1661,7 @@ export type HOMEPAGE_QUERYResult = {
     secondaryServices: Array<{
       title: string;
       description: string;
-      imageObject: {
+      imageObject?: {
         asset?: {
           _ref: string;
           _type: "reference";
@@ -1697,7 +1697,7 @@ export type HOMEPAGE_QUERYResult = {
       available?: boolean;
       title: string;
       code?: number;
-      imageObject: {
+      imageObject?: {
         asset?: {
           _ref: string;
           _type: "reference";
@@ -1790,7 +1790,7 @@ export type PROJECTS_QUERYResult = {
   projectsPage: Array<{
     titleDescription?: string;
     title: string;
-    imageObject: {
+    imageObject?: {
       asset?: {
         _ref: string;
         _type: "reference";
@@ -1827,7 +1827,7 @@ export type PROJECTS_QUERYResult = {
         crop?: SanityImageCrop;
         alt: string;
         _type: "imageObject";
-      };
+      } | null;
       title: string;
     }>;
     _type: "projectSection";
@@ -1843,7 +1843,7 @@ export type PROJECT_QUERYResult = {
   _updatedAt: string;
   _rev: string;
   title: string;
-  image: {
+  image?: {
     asset?: {
       _ref: string;
       _type: "reference";
@@ -1894,7 +1894,7 @@ export type PROJECT_QUERYResult = {
       };
       _type: "file";
     };
-    imagenDeCarga: {
+    imagenDeCarga?: {
       asset?: {
         _ref: string;
         _type: "reference";
@@ -1977,7 +1977,7 @@ export type SERVICES_QUERYResult = Array<{
       };
       _type: "file";
     };
-    imagenDeCarga: {
+    imagenDeCarga?: {
       asset?: {
         _ref: string;
         _type: "reference";
@@ -2058,7 +2058,7 @@ export type SERVICE_QUERYResult = {
       };
       _type: "file";
     };
-    imagenDeCarga: {
+    imagenDeCarga?: {
       asset?: {
         _ref: string;
         _type: "reference";
@@ -2155,7 +2155,7 @@ export type ALLSURFACETYPES_QUERYResult = Array<{
       };
       _type: "file";
     };
-    imagenDeCarga: {
+    imagenDeCarga?: {
       asset?: {
         _ref: string;
         _type: "reference";
@@ -2170,7 +2170,7 @@ export type ALLSURFACETYPES_QUERYResult = Array<{
     _type: "video";
     _key: string;
   }>;
-  imageObject: {
+  imageObject?: {
     asset?: {
       _ref: string;
       _type: "reference";
@@ -2231,7 +2231,7 @@ export type SURFACETYPEBYID_QUERYResult = {
       };
       _type: "file";
     };
-    imagenDeCarga: {
+    imagenDeCarga?: {
       asset?: {
         _ref: string;
         _type: "reference";
@@ -2246,7 +2246,7 @@ export type SURFACETYPEBYID_QUERYResult = {
     _type: "video";
     _key: string;
   }>;
-  imageObject: {
+  imageObject?: {
     asset?: {
       _ref: string;
       _type: "reference";
@@ -2270,7 +2270,7 @@ export type SURFACESBYTYPE_QUERYResult = Array<{
   available?: boolean;
   title: string;
   code?: number;
-  imageObject: {
+  imageObject?: {
     asset?: {
       _ref: string;
       _type: "reference";
@@ -2316,7 +2316,7 @@ export type SURFACES_QUERYResult = Array<{
   available?: boolean;
   title: string;
   code?: number;
-  imageObject: {
+  imageObject?: {
     asset?: {
       _ref: string;
       _type: "reference";
@@ -2361,7 +2361,7 @@ export type SURFACE_QUERYResult = {
     crop?: SanityImageCrop;
     alt: string;
     _type: "image";
-  };
+  } | null;
   type: {
     title: string;
   };
