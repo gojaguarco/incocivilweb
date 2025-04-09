@@ -8,7 +8,7 @@ const Availability = ({ availability, surfaceId, surfaceTypeId }: {
 }) => {
   if (availability) {
     return (
-      <div className="mt-2 flex items-center">
+      <div className="mt-2 flex gap-2 items-center justify-between">
         <LightIndicator color="green" />
         <span>Disponible Online</span>
         <LinkButton

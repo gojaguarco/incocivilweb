@@ -7,6 +7,7 @@ import LinkButton from "./LinkButton";
 import Link from "next/link";
 import LightIndicator from "./LightIndicator";
 import { usePathname } from "next/navigation";
+import Availability from "./Availability";
 
 const ItemCard = ({ title, image, imageAlt, description, availability, surfaceId, surfaceTypeId }: {
   image: {
@@ -60,24 +61,13 @@ const ItemCard = ({ title, image, imageAlt, description, availability, surfaceId
           {description}
           <Esquina className="absolute rotate-180 w-2.5 h-2.5 -top-2.5 left-0" colorHex={`414553`} />
         </p>
-        {pathname !== "/blog" && (
-          <div className="bg-primary-light w-full px-2">
-            {availability ? (
-              <div className="flex w-full justify-between items-center">
-                <LightIndicator color="green" />
-                <LinkButton
-                  color="naranja"
-                  link={`/cotizador?surfaceType=${surfaceTypeId ?? "0"}&surfaceId=${surfaceId}`}
-                  className="mt-2"
-                  size="pequeño"
-                  text="Cotizar"
-                >
-                  Cotizar
-                </LinkButton>
-              </div>
-            ) : (
-              <p>Disponible Online</p>
-            )}
+        {pathname !== "/blog" && surfaceId && surfaceTypeId && (
+          <div className="bg-primary-light w-full">
+            <Availability
+              availability={availability ?? false}
+              surfaceId={surfaceId}
+              surfaceTypeId={surfaceTypeId}
+            />
           </div>
         )}
       </footer>
