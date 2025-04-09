@@ -17,8 +17,10 @@ export const SURFACE_QUERY = defineQuery(`*[_type == 'surface' && _id == $id ][0
   title,
   imageObject,
   type -> {
-    title
-  }
+    title,
+    _id
+  },
+  "availability": available
 }`)
 
 export const ALLSURFACEIDS_QUERY = defineQuery(`*[_type == 'surface'][]._id`)

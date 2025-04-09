@@ -11,3 +11,5 @@ export const FOOTERSETTINGS_QUERY = defineQuery(`*[_type == 'config'][0]{
 }`)
 
 export const METADATA_QUERY = defineQuery(`*[_type == 'config'][0].metadata`)
+
+export const ADMIN_EMAIL_QUERY = defineQuery(`*[_type == "config"][0].information.email`)

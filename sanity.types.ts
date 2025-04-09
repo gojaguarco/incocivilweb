@@ -52,16 +52,6 @@ export type Slug = {
   source?: string;
 };
 
-export type SurfaceFormat = {
-  _id: string;
-  _type: "surfaceFormat";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  height: number;
-  width: number;
-};
-
 export type Config = {
   _id: string;
   _type: "config";
@@ -584,12 +574,12 @@ export type Surface = {
   };
   caliber?: string;
   price?: string;
-  formats?: Array<{
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
+  formats: Array<{
+    width: number;
+    height: number;
+    formatPrice: number;
+    _type: "formato";
     _key: string;
-    [internalGroqTypeReferenceTo]?: "surfaceFormat";
   }>;
   description?: string;
 };
@@ -994,6 +984,26 @@ export type Pages = {
     _type: "projectContactSection";
     _key: string;
   }>;
+  cotizador?: {
+    surfaceSelection?: {
+      title: string;
+      subtitle: string;
+      surfaceTypeSelection: string;
+      surfaceSelection: string;
+      formatSelection: string;
+      footer?: {
+        title: string;
+        link?: {
+          title: string;
+          link: string;
+        };
+      };
+    };
+    formContent?: {
+      title: string;
+      successMessage: string;
+    };
+  };
 };
 
 export type VideoObject = {
@@ -1270,7 +1280,7 @@ export type SanityImageMetadata = {
   isOpaque?: boolean;
 };
 
-export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | Geopoint | Slug | SurfaceFormat | Config | Project | ProjectSection | ProjectContactSection | AboutHeroSection | ImageSection | WhatwedoSection | ContactSection | Faq | FaqSection | SurfaceSliderSection | ImageOrVideo | WhyusSection | SecondaryService | Service | Surface | SurfaceTypes | ServicesSection | HomeHeroSection | Pages | VideoObject | Button | Post | Category | BlockContent | ImageObject | SanityFileAsset | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata;
+export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | Geopoint | Slug | Config | Project | ProjectSection | ProjectContactSection | AboutHeroSection | ImageSection | WhatwedoSection | ContactSection | Faq | FaqSection | SurfaceSliderSection | ImageOrVideo | WhyusSection | SecondaryService | Service | Surface | SurfaceTypes | ServicesSection | HomeHeroSection | Pages | VideoObject | Button | Post | Category | BlockContent | ImageObject | SanityFileAsset | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./sanity/queries/aboutQueries.ts
 // Variable: ABOUTPAGE_QUERY
@@ -1442,7 +1452,7 @@ export type BLOG_QUERYResult = {
 
 // Source: ./sanity/queries/catalogoQueries.ts
 // Variable: CATALOGO_QUERY
-// Query: *[_type == "surface"]{  _id,   title,   "image": imageObject,   "type": type -> {      title,      _id  },  caliber,  price,  "formats": formats[]->{      height,       width    },    code,    description}
+// Query: *[_type == "surface" && available]{  _id,   title,   "image": imageObject,   "type": type -> {      title,      _id  },  caliber,  price,  "formats": formats[] {      height,       width,      "price": formatPrice    },    code,    description,    available}
 export type CATALOGO_QUERYResult = Array<{
   _id: string;
   title: string;
@@ -1467,9 +1477,11 @@ export type CATALOGO_QUERYResult = Array<{
   formats: Array<{
     height: number;
     width: number;
-  }> | null;
+    price: number;
+  }>;
   code: number | null;
   description: string | null;
+  available: boolean | null;
 }>;
 // Variable: ALL_SURFACE_TYPES_QUERY
 // Query: *[_type == "surfaceTypes"]{  _id,   title}
@@ -1477,6 +1489,32 @@ export type ALL_SURFACE_TYPES_QUERYResult = Array<{
   _id: string;
   title: string;
 }>;
+
+// Source: ./sanity/queries/cotizadorQueries.ts
+// Variable: COTIZADOR_QUERY
+// Query: *[_type == 'pages'][0]{  cotizador}
+export type COTIZADOR_QUERYResult = {
+  cotizador: {
+    surfaceSelection?: {
+      title: string;
+      subtitle: string;
+      surfaceTypeSelection: string;
+      surfaceSelection: string;
+      formatSelection: string;
+      footer?: {
+        title: string;
+        link?: {
+          title: string;
+          link: string;
+        };
+      };
+    };
+    formContent?: {
+      title: string;
+      successMessage: string;
+    };
+  } | null;
+} | null;
 
 // Source: ./sanity/queries/homeQueries.ts
 // Variable: HOMEPAGE_QUERY
@@ -1717,12 +1755,12 @@ export type HOMEPAGE_QUERYResult = {
       };
       caliber?: string;
       price?: string;
-      formats?: Array<{
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
+      formats: Array<{
+        width: number;
+        height: number;
+        formatPrice: number;
+        _type: "formato";
         _key: string;
-        [internalGroqTypeReferenceTo]?: "surfaceFormat";
       }>;
       description?: string;
     }>;
@@ -2105,6 +2143,9 @@ export type METADATA_QUERYResult = {
   title?: string;
   description?: string;
 } | null;
+// Variable: ADMIN_EMAIL_QUERY
+// Query: *[_type == "config"][0].information.email
+export type ADMIN_EMAIL_QUERYResult = string | null;
 
 // Source: ./sanity/queries/surfaceQueries.ts
 // Variable: ALLSURFACETYPES_QUERY
@@ -2290,12 +2331,12 @@ export type SURFACESBYTYPE_QUERYResult = Array<{
   };
   caliber?: string;
   price?: string;
-  formats?: Array<{
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
+  formats: Array<{
+    width: number;
+    height: number;
+    formatPrice: number;
+    _type: "formato";
     _key: string;
-    [internalGroqTypeReferenceTo]?: "surfaceFormat";
   }>;
   description?: string;
 }>;
@@ -2336,17 +2377,17 @@ export type SURFACES_QUERYResult = Array<{
   };
   caliber?: string;
   price?: string;
-  formats?: Array<{
-    _ref: string;
-    _type: "reference";
-    _weak?: boolean;
+  formats: Array<{
+    width: number;
+    height: number;
+    formatPrice: number;
+    _type: "formato";
     _key: string;
-    [internalGroqTypeReferenceTo]?: "surfaceFormat";
   }>;
   description?: string;
 }>;
 // Variable: SURFACE_QUERY
-// Query: *[_type == 'surface' && _id == $id ][0]{  _id,  title,  imageObject,  type -> {    title  }}
+// Query: *[_type == 'surface' && _id == $id ][0]{  _id,  title,  imageObject,  type -> {    title,    _id  },  "availability": available}
 export type SURFACE_QUERYResult = {
   _id: string;
   title: string;
@@ -2364,7 +2405,9 @@ export type SURFACE_QUERYResult = {
   };
   type: {
     title: string;
+    _id: string;
   };
+  availability: boolean | null;
 } | null;
 // Variable: ALLSURFACEIDS_QUERY
 // Query: *[_type == 'surface'][]._id
@@ -2380,8 +2423,9 @@ declare module "@sanity/client" {
     "*[_type == 'pages'][0]{\n  aboutPage\n}": ABOUTPAGE_QUERYResult;
     "*[_type == \"post\" ][0...12]{\n  _id, \n  title, \n  description,   \n  image\n}": BLOGS_QUERYResult;
     "*[_type == \"post\" && _id == $id][0]{\n  title, \n  description, \n  body, \n  \"image\": {\n    \"url\": image.asset->url,\n    \"alt\": image.alt\n    }, \n  categories, \n  publishedAt\n}": BLOG_QUERYResult;
-    "*[_type == \"surface\"]{\n  _id, \n  title, \n  \"image\": imageObject, \n  \"type\": type -> {\n      title,\n      _id\n  },\n  caliber,\n  price,\n  \"formats\": formats[]->{\n      height, \n      width\n    },\n    code,\n    description\n}": CATALOGO_QUERYResult;
+    "*[_type == \"surface\" && available]{\n  _id, \n  title, \n  \"image\": imageObject, \n  \"type\": type -> {\n      title,\n      _id\n  },\n  caliber,\n  price,\n  \"formats\": formats[] {\n      height, \n      width,\n      \"price\": formatPrice\n    },\n    code,\n    description,\n    available\n}": CATALOGO_QUERYResult;
     "*[_type == \"surfaceTypes\"]{\n  _id, \n  title\n} ": ALL_SURFACE_TYPES_QUERYResult;
+    "*[_type == 'pages'][0]{\n  cotizador\n}": COTIZADOR_QUERYResult;
     "*[_type == 'pages'][0]{\n  homePage[] {\n    ...,\n    primarySurfaces[]->,\n    surfaceList[]->,\n    faqs []->,\n  }\n}": HOMEPAGE_QUERYResult;
     "*[_type == 'pages'][0].homePage[_type == 'contactSection'][0].contactCard": CONTACTCARD_QUERYResult;
     "*[_type == 'pages'][0]{\n  projectsPage[]{\n    ...,\n    projects[] -> {\n      _id,\n      image,\n      title,\n    }\n  }\n}": PROJECTS_QUERYResult;
@@ -2391,13 +2435,14 @@ declare module "@sanity/client" {
     "*[_type == 'config'][0].information{\n  phone,\n  email\n}": EMAILSENDING_QUERYResult;
     "*[_type == 'config'][0]{\n  information,\n  socialLinks\n}": FOOTERSETTINGS_QUERYResult;
     "*[_type == 'config'][0].metadata": METADATA_QUERYResult;
+    "*[_type == \"config\"][0].information.email": ADMIN_EMAIL_QUERYResult;
     "*[_type == 'surfaceTypes'][]": ALLSURFACETYPES_QUERYResult;
     "*[_type == 'surfaceTypes' && _id == $id][0]": SURFACETYPEBYID_QUERYResult;
     "*[_type == 'surface' && type._ref == $id ][0...10]": SURFACESBYTYPE_QUERYResult;
     "*[_type == 'surface' && type._ref == $id ][]._id": SURFACESBYTYPE_IDS_QUERYResult;
     "*[_type == \"surface\"][]._id": CATALOGUE_SURFACES_IDS_QUERYResult;
     "*[_type == 'surface'][]": SURFACES_QUERYResult;
-    "*[_type == 'surface' && _id == $id ][0]{\n  _id,\n  title,\n  imageObject,\n  type -> {\n    title\n  }\n}": SURFACE_QUERYResult;
+    "*[_type == 'surface' && _id == $id ][0]{\n  _id,\n  title,\n  imageObject,\n  type -> {\n    title,\n    _id\n  },\n  \"availability\": available\n}": SURFACE_QUERYResult;
     "*[_type == 'surface'][]._id": ALLSURFACEIDS_QUERYResult;
     "*[_type == 'pages'][0].homePage[_type == 'surfaceSliderSection'][0].surfaceList[]._ref\n": HOMESURFACEIDS_QUERYResult;
   }

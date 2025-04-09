@@ -12,7 +12,7 @@ export function Posts({ posts }: { posts: BLOGS_QUERYResult }) {
           <Link
             href={`/blog/${post._id}`}
           >
-            <Card
+            <Card 
               description={post.description}
               image={post.image}
               imageAlt={post.image.alt || post.title}
