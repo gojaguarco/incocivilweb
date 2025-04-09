@@ -1,6 +1,6 @@
 "use client";
 import { useRouter, useSearchParams } from "next/navigation";
-import { ComponentPropsWithoutRef, Suspense, useCallback } from "react";
+import { ComponentPropsWithoutRef, Suspense, useCallback, useEffect } from "react";
 import { cn } from "../_lib/cn";
 type Props = ComponentPropsWithoutRef<"select"> & {
   filterName: string;
@@ -68,6 +68,10 @@ const Select = ({
     (option) => option.value === selectedOption
   )?.label;
 
+  useEffect(() => {
+    router.push("/cotizador?surfaceType=all")
+  }, [])
+  
   return (
     <select
       onChange={onSelectChange}

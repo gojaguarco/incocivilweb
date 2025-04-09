@@ -1,3 +1,4 @@
+"use client";
 import { urlFor } from "@/sanity/lib/image";
 import Image from "next/image";
 import Esquina from "./Esquina";
@@ -5,6 +6,7 @@ import { internalGroqTypeReferenceTo, SanityImageCrop, SanityImageHotspot } from
 import LinkButton from "./LinkButton";
 import Link from "next/link";
 import LightIndicator from "./LightIndicator";
+import { usePathname } from "next/navigation";
 
 const ItemCard = ({ title, image, imageAlt, description, availability, surfaceId, surfaceTypeId }: {
   image: {
@@ -23,9 +25,10 @@ const ItemCard = ({ title, image, imageAlt, description, availability, surfaceId
   title: string;
   description: string;
   availability?: boolean | null;
-  surfaceId: string;
+  surfaceId?: string;
   surfaceTypeId?: string | null;
 }) => {
+  const pathname = usePathname();
   return (
     <div className="p-2 bg-primary-light rounded-2xl flex items-center justify-center h-48 lg:h-56 el-shadow group relative text-light">
       {image ? (
@@ -57,24 +60,26 @@ const ItemCard = ({ title, image, imageAlt, description, availability, surfaceId
           {description}
           <Esquina className="absolute rotate-180 w-2.5 h-2.5 -top-2.5 left-0" colorHex={`414553`} />
         </p>
-        <div className="bg-primary-light w-full px-2">
-          {availability ? (
-            <div className="flex w-full justify-between items-center">
-              <LightIndicator color="green" />
-              <LinkButton
-                color="naranja"
-                link={`/cotizador?surfaceType=${surfaceTypeId ?? "0"}&surfaceId=${surfaceId}`}
-                className="mt-2"
-                size="pequeño"
-                text="Cotizar"
-              >
-                Cotizar
-              </LinkButton>
-            </div>
-          ) : (
-            <p>Disponible Online</p>
-          )}
-        </div>
+        {pathname !== "/blog" && (
+          <div className="bg-primary-light w-full px-2">
+            {availability ? (
+              <div className="flex w-full justify-between items-center">
+                <LightIndicator color="green" />
+                <LinkButton
+                  color="naranja"
+                  link={`/cotizador?surfaceType=${surfaceTypeId ?? "0"}&surfaceId=${surfaceId}`}
+                  className="mt-2"
+                  size="pequeño"
+                  text="Cotizar"
+                >
+                  Cotizar
+                </LinkButton>
+              </div>
+            ) : (
+              <p>Disponible Online</p>
+            )}
+          </div>
+        )}
       </footer>
     </div>
   );

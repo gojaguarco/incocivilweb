@@ -185,7 +185,7 @@ const DesktopSurface = ({
       </Td>
       <Td className="relative">
         {!showTotal && (
-          <div className={`w-full h-full absolute z-10 top-0 left-0 ${rowBg}`}></div>
+          <div className={`w-full h-full absolute z-10 top-0 left-0 ${rowBg}`}>$0</div>
         )}
         <span className="">{numberToColombianPriceString(surfaceFormats[surface._id]?.totalSurface || 0)}</span>
       </Td>
@@ -314,7 +314,7 @@ const MobileSurface = ({ index, surface, removeSurfaceId, id, setSurfaceFormats,
 
           <InfoItem className="relative">
             {!showTotal && (
-              <div className={`w-full h-full absolute z-10 top-0 left-0 ${itemBg}`}></div>
+              <div className={`w-full h-full absolute z-10 top-0 left-0 ${itemBg}`}>$0</div>
             )}
             <span className="">{numberToColombianPriceString(surfaceFormats[surface._id]?.totalSurface || 0)}</span>
           </InfoItem>
