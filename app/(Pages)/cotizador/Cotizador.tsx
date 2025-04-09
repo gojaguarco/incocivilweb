@@ -38,7 +38,7 @@ const CotizadorUi = ({
     for (const surfaceId of selectedSurfaceIds) {
       const surface = catalogo.find((item) => item._id === surfaceId);
       if (!surface) continue;
-      
+
       const totalSurface = surface.formats[0].price;
       // console.log({ surface, area, price, totalSurface, priceString: surface?.price?.replaceAll(".", "") })
       initialState[surfaceId] = {
@@ -58,14 +58,12 @@ const CotizadorUi = ({
 
   const router = useRouter();
   const filteredCatalogo = catalogo.filter((item) => {
-    if (!surfaceTypeId) {
-      return true;
-    }
-    if (surfaceTypeId === "all") {
+    if (!surfaceTypeId || surfaceTypeId === "all" || surfaceTypeId === "") {
       return true;
     }
     return item.type._id === surfaceTypeId;
   });
+
 
   const createQueryString = useCallback(
     (
@@ -164,99 +162,102 @@ const CotizadorUi = ({
               {filteredCatalogo.map((item) => (
                 <li
                   key={item._id}
-                  className="w-[200px] p-1 bg-light rounded-xl relative"
+                  className="w-[200px] p-1 bg-light rounded-xl relative flex flex-col"
                 >
                   {item.image ? (
-                    <Image
-                      className="rounded-lg w-full h-full object-cover"
-                      src={urlFor(item.image)
-                        .width(200)
-                        .height(200)
-                        .format("webp")
-                        .url()}
-                      alt={item.title}
-                      width={200}
-                      height={200}
-                    />
+                    <div className="relative">
+                      <Image
+                        className="rounded-lg w-full flex-grow object-cover"
+                        src={urlFor(item.image)
+                          .width(200)
+                          .height(200)
+                          .format("webp")
+                          .url()}
+                        alt={item.title}
+                        width={200}
+                        height={200}
+                      />
+                      <button
+                        onClick={() => addSurfaceId(item._id)}
+                        className="w-[50px] h-[50px] rounded-full absolute bottom-5 right-5 bg-white z-10 flex items-center justify-center"
+                      >
+                        <svg
+                          width={24}
+                          height={24}
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth={2}
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          className="icon icon-tabler icons-tabler-outline icon-tabler-plus"
+                        >
+                          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                          <path d="M12 5l0 14" />
+                          <path d="M5 12l14 0" />
+                        </svg>
+                      </button>
+                    </div>
                   ) : (
                     <div className="w-[200px] h-[200px] bg-primary rounded-xl flex items-center justify-center">
                       <h2 className="text-4xl">📸</h2>
                     </div>
                   )}
-                  <button
-                    onClick={() => addSurfaceId(item._id)}
-                    className="w-[50px] h-[50px] rounded-full absolute bottom-5 right-5 bg-white z-10 flex items-center justify-center"
-                  >
-                    <svg
-                      width={24}
-                      height={24}
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth={2}
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      className="icon icon-tabler icons-tabler-outline icon-tabler-plus"
-                    >
-                      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                      <path d="M12 5l0 14" />
-                      <path d="M5 12l14 0" />
-                    </svg>
-                  </button>
+                  <p>
+                    {item.title}
+                  </p>
                 </li>
               ))}
             </ul>
           </div>
         </LightCard>
       )}
-      {surfaceTypeId &&
-        selectedSurfaceIds &&
-        selectedSurfaceIds.length >= 1 && (
-          <>
+      {surfaceTypeId && (
+        <>
+          <LightCard>
+            <h2 className="my-5 md:font-montserrat md:font-normal">
+              {cotizadorContent?.cotizador?.surfaceSelection?.formatSelection}
+            </h2>
+            <SelectedSurfacesTable
+              showTotal={showTotal}
+              surfaceFormats={surfaceFormats}
+              setSurfaceFormats={setSurfaceFormats}
+              catalogo={catalogo}
+              removeSurfaceId={removeSurfaceId}
+              selectedSurfaceIds={selectedSurfaceIds}
+            />
+          </LightCard>
+          <div className="w-full items-center flex flex-col md:flex-row gap-2 justify-between">
             <LightCard>
-              <h2 className="my-5 md:font-montserrat md:font-normal">
-                {cotizadorContent?.cotizador?.surfaceSelection?.formatSelection}
-              </h2>
-              <SelectedSurfacesTable
-                showTotal={showTotal}
-                surfaceFormats={surfaceFormats}
-                setSurfaceFormats={setSurfaceFormats}
-                catalogo={catalogo}
-                removeSurfaceId={removeSurfaceId}
-                selectedSurfaceIds={selectedSurfaceIds}
-              />
-            </LightCard>
-            <div className="w-full items-center flex flex-col md:flex-row gap-2 justify-between">
-              <LightCard>
-                <h6 className="font-inter">
-                  {cotizadorContent?.cotizador?.surfaceSelection?.footer?.title}
-                </h6>
-                <a
-                  href={
-                    cotizadorContent?.cotizador?.surfaceSelection?.footer?.link
-                      ?.link
-                  }
-                  className="underline"
-                >
-                  {
-                    cotizadorContent?.cotizador?.surfaceSelection?.footer?.link
-                      ?.title
-                  }
-                </a>
-              </LightCard>
-              <CaptureInfo
-                formTitle={
-                  cotizadorContent?.cotizador?.formContent?.title || ""
+              <h6 className="font-inter">
+                {cotizadorContent?.cotizador?.surfaceSelection?.footer?.title}
+              </h6>
+              <a
+                href={
+                  cotizadorContent?.cotizador?.surfaceSelection?.footer?.link
+                    ?.link
                 }
-                successMessage={cotizadorContent?.cotizador?.formContent?.successMessage || ""}
-                setShowTotal={setShowTotal}
-                surfaceFormats={surfaceFormats}
-                createQueryString={createQueryString}
-                captureInfoOpen={captureInfoOpen}
-              />
-            </div>
-          </>
-        )}
+                className="underline"
+              >
+                {
+                  cotizadorContent?.cotizador?.surfaceSelection?.footer?.link
+                    ?.title
+                }
+              </a>
+            </LightCard>
+            <CaptureInfo
+              formTitle={
+                cotizadorContent?.cotizador?.formContent?.title || ""
+              }
+              successMessage={cotizadorContent?.cotizador?.formContent?.successMessage || ""}
+              setShowTotal={setShowTotal}
+              surfaceFormats={surfaceFormats}
+              createQueryString={createQueryString}
+              captureInfoOpen={captureInfoOpen}
+            />
+          </div>
+        </>
+      )}
     </section>
   );
 };
