@@ -1,11 +1,11 @@
 "use client";
-import { CATALOGO_QUERYResult } from "@/sanity.types";
+import { All_SURFACES_QUERYResult } from "@/sanity.types";
 import ItemCard from "../_components/ItemCard";
 import { useSearchParams } from "next/navigation";
 import { Suspense } from "react";
 
 const CatalogoUi = ({ catalogo }: {
-  catalogo: CATALOGO_QUERYResult;
+  catalogo: All_SURFACES_QUERYResult;
 }) => {
   const searchParams = useSearchParams();
 
@@ -46,7 +46,7 @@ const CatalogoUi = ({ catalogo }: {
 
 
 const Catalogo = ({ catalogo }: {
-  catalogo: CATALOGO_QUERYResult;
+  catalogo: All_SURFACES_QUERYResult;
 }) => {
   return (
     <Suspense fallback={<div>Loading...</div>}>

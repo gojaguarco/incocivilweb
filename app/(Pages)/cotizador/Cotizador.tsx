@@ -2,7 +2,7 @@
 
 import {
   ALL_SURFACE_TYPES_QUERYResult,
-  CATALOGO_QUERYResult,
+  AVAILABLE_SURFACES_QUERYResult,
   COTIZADOR_QUERYResult,
 } from "@/sanity.types";
 import LightCard from "../_components/LightCard";
@@ -21,7 +21,7 @@ const CotizadorUi = ({
   cotizadorContent,
 }: {
   surfaceTypes: ALL_SURFACE_TYPES_QUERYResult;
-  catalogo: CATALOGO_QUERYResult;
+  catalogo: AVAILABLE_SURFACES_QUERYResult;
   cotizadorContent: COTIZADOR_QUERYResult;
 }) => {
   const searchParams = useSearchParams();
@@ -268,7 +268,7 @@ const Cotizador = ({
   cotizadorContent,
 }: {
   surfaceTypes: ALL_SURFACE_TYPES_QUERYResult;
-  catalogo: CATALOGO_QUERYResult;
+  catalogo: AVAILABLE_SURFACES_QUERYResult;
   cotizadorContent: COTIZADOR_QUERYResult;
 }) => {
   return (

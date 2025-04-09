@@ -1,7 +1,7 @@
 import { sanityFetch } from "@/sanity/lib/client";
 import {
   ALL_SURFACE_TYPES_QUERY,
-  CATALOGO_QUERY,
+  AVAILABLE_SURFACES_QUERY,
 } from "@/sanity/queries/catalogoQueries";
 import Cotizador from "./Cotizador";
 import { COTIZADOR_QUERY } from "@/sanity/queries/cotizadorQueries";
@@ -13,7 +13,7 @@ const page = async () => {
   });
 
   const catalogo = await sanityFetch({
-    query: CATALOGO_QUERY,
+    query: AVAILABLE_SURFACES_QUERY,
   });
 
   const cotizadorContent = await sanityFetch({
