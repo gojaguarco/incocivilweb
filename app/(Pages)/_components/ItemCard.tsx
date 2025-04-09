@@ -3,9 +3,7 @@ import { urlFor } from "@/sanity/lib/image";
 import Image from "next/image";
 import Esquina from "./Esquina";
 import { internalGroqTypeReferenceTo, SanityImageCrop, SanityImageHotspot } from "@/sanity.types";
-import LinkButton from "./LinkButton";
 import Link from "next/link";
-import LightIndicator from "./LightIndicator";
 import { usePathname } from "next/navigation";
 import Availability from "./Availability";
 
