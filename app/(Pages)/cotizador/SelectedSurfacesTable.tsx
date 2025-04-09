@@ -425,11 +425,15 @@ const MobileSurface = ({
 
           <InfoItem className="relative">
             {!showTotal && (
+<<<<<<< HEAD
               <div
                 className={`w-full h-full absolute z-10 top-0 left-0 ${itemBg}`}
               >
                 $0
               </div>
+=======
+              <div className={`w-full h-full absolute z-10 top-0 left-0 ${itemBg}`}>$0</div>
+>>>>>>> 4dee5de (makes the requested ui updates)
             )}
             <span className="">
               {numberToColombianPriceString(

@@ -81,6 +81,10 @@ const Select = ({
     }
   }, []);
 
+  useEffect(() => {
+    router.push("/cotizador?surfaceType=all");
+  }, []);
+
   return (
     <select
       onChange={onSelectChange}
