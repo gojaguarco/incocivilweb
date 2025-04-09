@@ -1,5 +1,5 @@
 "use client";
-import { CATALOGO_QUERYResult } from "@/sanity.types";
+import { AVAILABLE_SURFACES_QUERYResult } from "@/sanity.types";
 import { urlFor } from "@/sanity/lib/image";
 import Image from "next/image";
 import { ComponentPropsWithoutRef, Dispatch, SetStateAction } from "react";
@@ -19,7 +19,7 @@ const SelectedSurfacesTable = ({
 }: {
 
   selectedSurfaceIds: string[];
-  catalogo: CATALOGO_QUERYResult;
+  catalogo: AVAILABLE_SURFACES_QUERYResult;
   removeSurfaceId: (id: string) => void;
   surfaceFormats: {
     [surfaceId: string]: SurfaceToSendAdminEmail;
@@ -113,7 +113,7 @@ const DesktopSurface = ({
   showTotal: boolean;
   id: string;
   index: number;
-  surface: CATALOGO_QUERYResult[number];
+  surface: AVAILABLE_SURFACES_QUERYResult[number];
   removeSurfaceId: (id: string) => void;
   surfaceFormats: {
     [surfaceId: string]: SurfaceToSendAdminEmail
@@ -210,7 +210,7 @@ const DesktopSurface = ({
 const MobileSurface = ({ index, surface, removeSurfaceId, id, setSurfaceFormats, surfaceFormats, showTotal }: {
   id: string;
   index: number;
-  surface: CATALOGO_QUERYResult[number];
+  surface: AVAILABLE_SURFACES_QUERYResult[number];
   removeSurfaceId: (id: string) => void;
   surfaceFormats: {
     [surfaceId: string]: SurfaceToSendAdminEmail

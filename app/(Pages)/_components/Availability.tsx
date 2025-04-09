@@ -10,6 +10,7 @@ const Availability = ({ availability, surfaceId, surfaceTypeId }: {
     return (
       <div className="mt-2 flex items-center">
         <LightIndicator color="green" />
+        <span>Disponible Online</span>
         <LinkButton
           color="naranja"
           link={`/cotizador?surfaceType=${surfaceTypeId}&surfaceId=${surfaceId}`}
@@ -23,7 +24,7 @@ const Availability = ({ availability, surfaceId, surfaceTypeId }: {
     )
   } else {
     return (
-      <p>Disponible Online</p>
+      <p>{"Exótico - disponible bajo pedido"}</p>
     )
   }
 }

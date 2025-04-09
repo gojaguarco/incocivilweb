@@ -1,5 +1,5 @@
 "use client";
-import { useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { ComponentPropsWithoutRef, Suspense, useCallback, useEffect } from "react";
 import { cn } from "../_lib/cn";
 type Props = ComponentPropsWithoutRef<"select"> & {
@@ -68,10 +68,14 @@ const Select = ({
     (option) => option.value === selectedOption
   )?.label;
 
+  const pathname = usePathname();
+
   useEffect(() => {
-    router.push("/cotizador?surfaceType=all")
+    if (pathname === "/cotizador") {
+      router.push("/cotizador?surfaceType=all")
+    }
   }, [])
-  
+
   return (
     <select
       onChange={onSelectChange}
