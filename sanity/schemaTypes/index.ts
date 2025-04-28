@@ -23,7 +23,6 @@ import { projectContactSectionType } from "./projectTypes/projectContactSectionT
 import { projectSectionType } from "./projectTypes/projectSectionType";
 import { projectType } from "./projectTypes/projectType";
 import { configType } from "./configType";
-import { surfaceFormatType } from "./surfaceFormatType";
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
@@ -53,6 +52,5 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     projectSectionType,
     projectType,
     configType,
-    surfaceFormatType,
   ],
 };

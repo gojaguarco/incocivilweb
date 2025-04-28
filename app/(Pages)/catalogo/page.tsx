@@ -1,5 +1,5 @@
 import { sanityFetch } from "@/sanity/lib/client";
-import { ALL_SURFACE_TYPES_QUERY, CATALOGO_QUERY } from "@/sanity/queries/catalogoQueries";
+import { ALL_SURFACE_TYPES_QUERY, All_SURFACES_QUERY } from "@/sanity/queries/catalogoQueries";
 import Catalogo from "./Catalogo";
 import SelectFilter from "../_components/SelectFilter";
 import LightCard from "../_components/LightCard";
@@ -7,7 +7,7 @@ import LightCard from "../_components/LightCard";
 export default async function Page() {
 
   const catalogo = await sanityFetch({
-    query: CATALOGO_QUERY,
+    query: All_SURFACES_QUERY,
   });
 
 

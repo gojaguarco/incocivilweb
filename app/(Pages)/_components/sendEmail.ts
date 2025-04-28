@@ -1,6 +1,6 @@
 "use server"
 import { ErrorResponse, Resend } from 'resend';
-import { EmailTemplate } from './email-template';
+import { ContactEmailTemplate } from './email-template';
 
 type TFormState = {
   success: boolean;
@@ -25,7 +25,7 @@ export const sendEmail = async (formState: TFormState, formData: FormData) => {
     to: [rawFormData.email],
     bcc: [rawFormData.adminData.email],
     subject: 'Mensaje de cliente.',
-    react: EmailTemplate({ data: rawFormData }),
+    react: ContactEmailTemplate({ data: rawFormData }),
   });
 
   if (error) {

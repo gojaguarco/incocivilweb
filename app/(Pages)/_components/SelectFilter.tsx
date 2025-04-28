@@ -1,6 +1,6 @@
 "use client";
-import { useRouter, useSearchParams } from "next/navigation";
-import { ComponentPropsWithoutRef, Suspense, useCallback } from "react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { ComponentPropsWithoutRef, Suspense, useCallback, useEffect } from "react";
 import { cn } from "../_lib/cn";
 type Props = ComponentPropsWithoutRef<'select'> & {
   filterName: string;
@@ -48,14 +48,25 @@ const Select = ({ filterName, options, allTitle, allValue, className, ...rest }:
   const filteredOptions = optionsWiithAll.filter(option => option.value !== selectedOption);
 
   const selectedOptionLabel = options.find(option => option.value === selectedOption)?.label;
+
+  const pathname = usePathname();
+
+  useEffect(() => {
+    if (pathname === "/cotizador") {
+      router.push("/cotizador?surfaceType=all")
+    }
+  }, [])
+
   return (
     <select onChange={onSelectChange}
       className={cn(`bg-light text-dark px-4 py-2 rounded-lg flex items-center gap-2 text-sm md:text-base lg:text-lg`, className)}
       {...rest}
     >
-      <option value={selectedOption ?? allValue ?? "all"}>
-        {selectedOptionLabel ?? allTitle}
-      </option>
+      {selectedOption && (
+        <option value={selectedOption ?? allValue ?? "all"}>
+          {selectedOptionLabel ?? allTitle}
+        </option>
+      )}
       {filteredOptions.map((option) => (
         <option key={option.value} value={option.value}>
           {option.label}

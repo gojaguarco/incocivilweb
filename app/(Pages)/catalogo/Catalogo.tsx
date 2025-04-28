@@ -1,12 +1,11 @@
 "use client";
-import { CATALOGO_QUERYResult } from "@/sanity.types";
-import Link from "next/link";
+import { All_SURFACES_QUERYResult } from "@/sanity.types";
 import ItemCard from "../_components/ItemCard";
 import { useSearchParams } from "next/navigation";
 import { Suspense } from "react";
 
 const CatalogoUi = ({ catalogo }: {
-  catalogo: CATALOGO_QUERYResult;
+  catalogo: All_SURFACES_QUERYResult;
 }) => {
   const searchParams = useSearchParams();
 
@@ -27,14 +26,16 @@ const CatalogoUi = ({ catalogo }: {
         const title = item.title.toLowerCase().replace(item.type.title.toLowerCase(), "");
         return (
           <li key={item._id}>
-            <Link scroll={false} href={`/surface/${item._id}/catalogue/${surfaceTypeId ?? "0"}`} >
-              <ItemCard
-                title={title}
-                description={item.type.title}
-                image={item.image}
-                imageAlt={item.title}
-              />
-            </Link>
+
+            <ItemCard
+              surfaceId={item._id}
+              surfaceTypeId={item.type._id}
+              title={title}
+              description={item.type.title}
+              image={item.image}
+              imageAlt={item.title}
+              availability={item.available}
+            />
           </li>
         )
       })}
@@ -45,7 +46,7 @@ const CatalogoUi = ({ catalogo }: {
 
 
 const Catalogo = ({ catalogo }: {
-  catalogo: CATALOGO_QUERYResult;
+  catalogo: All_SURFACES_QUERYResult;
 }) => {
   return (
     <Suspense fallback={<div>Loading...</div>}>
