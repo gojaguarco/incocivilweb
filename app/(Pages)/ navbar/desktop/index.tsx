@@ -22,7 +22,7 @@ const DesktopNavBar = ({ className }: Props) => {
       </Link>
       <div className="w-full h-full flex items-center justify-end prose gap-6 xl:gap-9 pr-10 nav-font">
         {navOptions.map((option) => (
-          <Link key={option.title} className={`${pathname === option.url && 'underline underline-offset-2 pointer-events-none'}`} href={option.url}>{option.title}</Link>
+          <Link key={option.title} className={`${pathname === option.url ? 'underline underline-offset-2 !font-medium pointer-events-none !text-white' :'!text-light-dark'}`} href={option.url}>{option.title}</Link>
         ))}
       </div>
       <section className="relative bg-light-dark rounded-bl-xl h-full pl-4 pr-10 xl:pr-20 2xl:pr-60 flex items-center justify-center">
