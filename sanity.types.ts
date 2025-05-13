@@ -92,6 +92,7 @@ export type Project = {
       _weak?: boolean;
       [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
     };
+    media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     alt: string;
@@ -121,6 +122,7 @@ export type Project = {
       _weak?: boolean;
       [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
     };
+    media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     alt: string;
@@ -134,6 +136,7 @@ export type Project = {
         _weak?: boolean;
         [internalGroqTypeReferenceTo]?: "sanity.fileAsset";
       };
+      media?: unknown;
       _type: "file";
     };
     imagenDeCarga?: {
@@ -143,6 +146,7 @@ export type Project = {
         _weak?: boolean;
         [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
       };
+      media?: unknown;
       hotspot?: SanityImageHotspot;
       crop?: SanityImageCrop;
       alt: string;
@@ -186,6 +190,7 @@ export type ProjectContactSection = {
       _weak?: boolean;
       [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
     };
+    media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     alt: string;
@@ -218,6 +223,7 @@ export type AboutHeroSection = {
         _weak?: boolean;
         [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
       };
+      media?: unknown;
       hotspot?: SanityImageHotspot;
       crop?: SanityImageCrop;
       alt: string;
@@ -247,6 +253,7 @@ export type ImageSection = {
         _weak?: boolean;
         [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
       };
+      media?: unknown;
       hotspot?: SanityImageHotspot;
       crop?: SanityImageCrop;
       alt: string;
@@ -273,6 +280,7 @@ export type WhatwedoSection = {
       _weak?: boolean;
       [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
     };
+    media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     alt: string;
@@ -296,6 +304,7 @@ export type ContactSection = {
       _weak?: boolean;
       [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
     };
+    media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     alt: string;
@@ -342,6 +351,7 @@ export type FaqSection = {
       _weak?: boolean;
       [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
     };
+    media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     alt: string;
@@ -384,6 +394,7 @@ export type ImageOrVideo = {
       _weak?: boolean;
       [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
     };
+    media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     alt: string;
@@ -409,6 +420,7 @@ export type WhyusSection = {
         _weak?: boolean;
         [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
       };
+      media?: unknown;
       hotspot?: SanityImageHotspot;
       crop?: SanityImageCrop;
       alt: string;
@@ -426,6 +438,7 @@ export type WhyusSection = {
         _weak?: boolean;
         [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
       };
+      media?: unknown;
       hotspot?: SanityImageHotspot;
       crop?: SanityImageCrop;
       alt: string;
@@ -452,6 +465,7 @@ export type SecondaryService = {
       _weak?: boolean;
       [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
     };
+    media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     alt: string;
@@ -482,6 +496,7 @@ export type Service = {
         _weak?: boolean;
         [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
       };
+      media?: unknown;
       hotspot?: SanityImageHotspot;
       crop?: SanityImageCrop;
       alt: string;
@@ -513,6 +528,7 @@ export type Service = {
       _weak?: boolean;
       [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
     };
+    media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     alt: string;
@@ -526,6 +542,7 @@ export type Service = {
         _weak?: boolean;
         [internalGroqTypeReferenceTo]?: "sanity.fileAsset";
       };
+      media?: unknown;
       _type: "file";
     };
     imagenDeCarga?: {
@@ -535,6 +552,7 @@ export type Service = {
         _weak?: boolean;
         [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
       };
+      media?: unknown;
       hotspot?: SanityImageHotspot;
       crop?: SanityImageCrop;
       alt: string;
@@ -561,6 +579,7 @@ export type Surface = {
       _weak?: boolean;
       [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
     };
+    media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     alt: string;
@@ -615,6 +634,7 @@ export type SurfaceTypes = {
       _weak?: boolean;
       [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
     };
+    media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     alt: string;
@@ -628,6 +648,7 @@ export type SurfaceTypes = {
         _weak?: boolean;
         [internalGroqTypeReferenceTo]?: "sanity.fileAsset";
       };
+      media?: unknown;
       _type: "file";
     };
     imagenDeCarga?: {
@@ -637,6 +658,7 @@ export type SurfaceTypes = {
         _weak?: boolean;
         [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
       };
+      media?: unknown;
       hotspot?: SanityImageHotspot;
       crop?: SanityImageCrop;
       alt: string;
@@ -652,6 +674,7 @@ export type SurfaceTypes = {
       _weak?: boolean;
       [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
     };
+    media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     alt: string;
@@ -683,6 +706,7 @@ export type ServicesSection = {
         _weak?: boolean;
         [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
       };
+      media?: unknown;
       hotspot?: SanityImageHotspot;
       crop?: SanityImageCrop;
       alt: string;
@@ -722,6 +746,7 @@ export type HomeHeroSection = {
         _weak?: boolean;
         [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
       };
+      media?: unknown;
       hotspot?: SanityImageHotspot;
       crop?: SanityImageCrop;
       alt: string;
@@ -757,6 +782,7 @@ export type Pages = {
           _weak?: boolean;
           [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
         };
+        media?: unknown;
         hotspot?: SanityImageHotspot;
         crop?: SanityImageCrop;
         alt: string;
@@ -782,6 +808,7 @@ export type Pages = {
           _weak?: boolean;
           [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
         };
+        media?: unknown;
         hotspot?: SanityImageHotspot;
         crop?: SanityImageCrop;
         alt: string;
@@ -799,6 +826,7 @@ export type Pages = {
           _weak?: boolean;
           [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
         };
+        media?: unknown;
         hotspot?: SanityImageHotspot;
         crop?: SanityImageCrop;
         alt: string;
@@ -834,6 +862,7 @@ export type Pages = {
         _weak?: boolean;
         [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
       };
+      media?: unknown;
       hotspot?: SanityImageHotspot;
       crop?: SanityImageCrop;
       alt: string;
@@ -858,6 +887,7 @@ export type Pages = {
         _weak?: boolean;
         [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
       };
+      media?: unknown;
       hotspot?: SanityImageHotspot;
       crop?: SanityImageCrop;
       alt: string;
@@ -894,6 +924,7 @@ export type Pages = {
           _weak?: boolean;
           [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
         };
+        media?: unknown;
         hotspot?: SanityImageHotspot;
         crop?: SanityImageCrop;
         alt: string;
@@ -915,6 +946,7 @@ export type Pages = {
         _weak?: boolean;
         [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
       };
+      media?: unknown;
       hotspot?: SanityImageHotspot;
       crop?: SanityImageCrop;
       alt: string;
@@ -938,6 +970,7 @@ export type Pages = {
           _weak?: boolean;
           [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
         };
+        media?: unknown;
         hotspot?: SanityImageHotspot;
         crop?: SanityImageCrop;
         alt: string;
@@ -971,6 +1004,7 @@ export type Pages = {
         _weak?: boolean;
         [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
       };
+      media?: unknown;
       hotspot?: SanityImageHotspot;
       crop?: SanityImageCrop;
       alt: string;
@@ -1015,6 +1049,7 @@ export type VideoObject = {
       _weak?: boolean;
       [internalGroqTypeReferenceTo]?: "sanity.fileAsset";
     };
+    media?: unknown;
     _type: "file";
   };
   imagenDeCarga?: {
@@ -1024,6 +1059,7 @@ export type VideoObject = {
       _weak?: boolean;
       [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
     };
+    media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     alt: string;
@@ -1054,6 +1090,7 @@ export type Post = {
       _weak?: boolean;
       [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
     };
+    media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     alt: string;
@@ -1091,6 +1128,7 @@ export type Post = {
       _weak?: boolean;
       [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
     };
+    media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     alt: string;
@@ -1104,6 +1142,7 @@ export type Post = {
         _weak?: boolean;
         [internalGroqTypeReferenceTo]?: "sanity.fileAsset";
       };
+      media?: unknown;
       _type: "file";
     };
     imagenDeCarga?: {
@@ -1113,6 +1152,7 @@ export type Post = {
         _weak?: boolean;
         [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
       };
+      media?: unknown;
       hotspot?: SanityImageHotspot;
       crop?: SanityImageCrop;
       alt: string;
@@ -1157,6 +1197,7 @@ export type BlockContent = Array<{
     _weak?: boolean;
     [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
   };
+  media?: unknown;
   hotspot?: SanityImageHotspot;
   crop?: SanityImageCrop;
   alt: string;
@@ -1170,6 +1211,7 @@ export type BlockContent = Array<{
       _weak?: boolean;
       [internalGroqTypeReferenceTo]?: "sanity.fileAsset";
     };
+    media?: unknown;
     _type: "file";
   };
   imagenDeCarga?: {
@@ -1179,6 +1221,7 @@ export type BlockContent = Array<{
       _weak?: boolean;
       [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
     };
+    media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     alt: string;
@@ -1196,6 +1239,7 @@ export type ImageObject = {
     _weak?: boolean;
     [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
   };
+  media?: unknown;
   hotspot?: SanityImageHotspot;
   crop?: SanityImageCrop;
   alt: string;
@@ -1301,6 +1345,7 @@ export type ABOUTPAGE_QUERYResult = {
           _weak?: boolean;
           [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
         };
+        media?: unknown;
         hotspot?: SanityImageHotspot;
         crop?: SanityImageCrop;
         alt: string;
@@ -1325,6 +1370,7 @@ export type ABOUTPAGE_QUERYResult = {
           _weak?: boolean;
           [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
         };
+        media?: unknown;
         hotspot?: SanityImageHotspot;
         crop?: SanityImageCrop;
         alt: string;
@@ -1346,6 +1392,7 @@ export type ABOUTPAGE_QUERYResult = {
         _weak?: boolean;
         [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
       };
+      media?: unknown;
       hotspot?: SanityImageHotspot;
       crop?: SanityImageCrop;
       alt: string;
@@ -1371,6 +1418,7 @@ export type BLOGS_QUERYResult = Array<{
       _weak?: boolean;
       [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
     };
+    media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     alt: string;
@@ -1406,6 +1454,7 @@ export type BLOG_QUERYResult = {
       _weak?: boolean;
       [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
     };
+    media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     alt: string;
@@ -1419,6 +1468,7 @@ export type BLOG_QUERYResult = {
         _weak?: boolean;
         [internalGroqTypeReferenceTo]?: "sanity.fileAsset";
       };
+      media?: unknown;
       _type: "file";
     };
     imagenDeCarga?: {
@@ -1428,6 +1478,7 @@ export type BLOG_QUERYResult = {
         _weak?: boolean;
         [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
       };
+      media?: unknown;
       hotspot?: SanityImageHotspot;
       crop?: SanityImageCrop;
       alt: string;
@@ -1463,6 +1514,7 @@ export type All_SURFACES_QUERYResult = Array<{
       _weak?: boolean;
       [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
     };
+    media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     alt: string;
@@ -1495,6 +1547,7 @@ export type AVAILABLE_SURFACES_QUERYResult = Array<{
       _weak?: boolean;
       [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
     };
+    media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     alt: string;
@@ -1562,6 +1615,7 @@ export type HOMEPAGE_QUERYResult = {
         _weak?: boolean;
         [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
       };
+      media?: unknown;
       hotspot?: SanityImageHotspot;
       crop?: SanityImageCrop;
       alt: string;
@@ -1596,6 +1650,7 @@ export type HOMEPAGE_QUERYResult = {
         _weak?: boolean;
         [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
       };
+      media?: unknown;
       hotspot?: SanityImageHotspot;
       crop?: SanityImageCrop;
       alt: string;
@@ -1632,6 +1687,7 @@ export type HOMEPAGE_QUERYResult = {
           _weak?: boolean;
           [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
         };
+        media?: unknown;
         hotspot?: SanityImageHotspot;
         crop?: SanityImageCrop;
         alt: string;
@@ -1685,6 +1741,7 @@ export type HOMEPAGE_QUERYResult = {
           _weak?: boolean;
           [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
         };
+        media?: unknown;
         hotspot?: SanityImageHotspot;
         crop?: SanityImageCrop;
         alt: string;
@@ -1698,6 +1755,7 @@ export type HOMEPAGE_QUERYResult = {
             _weak?: boolean;
             [internalGroqTypeReferenceTo]?: "sanity.fileAsset";
           };
+          media?: unknown;
           _type: "file";
         };
         imagenDeCarga?: {
@@ -1707,6 +1765,7 @@ export type HOMEPAGE_QUERYResult = {
             _weak?: boolean;
             [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
           };
+          media?: unknown;
           hotspot?: SanityImageHotspot;
           crop?: SanityImageCrop;
           alt: string;
@@ -1722,6 +1781,7 @@ export type HOMEPAGE_QUERYResult = {
           _weak?: boolean;
           [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
         };
+        media?: unknown;
         hotspot?: SanityImageHotspot;
         crop?: SanityImageCrop;
         alt: string;
@@ -1738,6 +1798,7 @@ export type HOMEPAGE_QUERYResult = {
           _weak?: boolean;
           [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
         };
+        media?: unknown;
         hotspot?: SanityImageHotspot;
         crop?: SanityImageCrop;
         alt: string;
@@ -1774,6 +1835,7 @@ export type HOMEPAGE_QUERYResult = {
           _weak?: boolean;
           [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
         };
+        media?: unknown;
         hotspot?: SanityImageHotspot;
         crop?: SanityImageCrop;
         alt: string;
@@ -1812,6 +1874,7 @@ export type HOMEPAGE_QUERYResult = {
           _weak?: boolean;
           [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
         };
+        media?: unknown;
         hotspot?: SanityImageHotspot;
         crop?: SanityImageCrop;
         alt: string;
@@ -1829,6 +1892,7 @@ export type HOMEPAGE_QUERYResult = {
           _weak?: boolean;
           [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
         };
+        media?: unknown;
         hotspot?: SanityImageHotspot;
         crop?: SanityImageCrop;
         alt: string;
@@ -1867,6 +1931,7 @@ export type PROJECTS_QUERYResult = {
         _weak?: boolean;
         [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
       };
+      media?: unknown;
       hotspot?: SanityImageHotspot;
       crop?: SanityImageCrop;
       alt: string;
@@ -1893,6 +1958,7 @@ export type PROJECTS_QUERYResult = {
           _weak?: boolean;
           [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
         };
+        media?: unknown;
         hotspot?: SanityImageHotspot;
         crop?: SanityImageCrop;
         alt: string;
@@ -1920,6 +1986,7 @@ export type PROJECT_QUERYResult = {
       _weak?: boolean;
       [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
     };
+    media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     alt: string;
@@ -1949,6 +2016,7 @@ export type PROJECT_QUERYResult = {
       _weak?: boolean;
       [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
     };
+    media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     alt: string;
@@ -1962,6 +2030,7 @@ export type PROJECT_QUERYResult = {
         _weak?: boolean;
         [internalGroqTypeReferenceTo]?: "sanity.fileAsset";
       };
+      media?: unknown;
       _type: "file";
     };
     imagenDeCarga?: {
@@ -1971,6 +2040,7 @@ export type PROJECT_QUERYResult = {
         _weak?: boolean;
         [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
       };
+      media?: unknown;
       hotspot?: SanityImageHotspot;
       crop?: SanityImageCrop;
       alt: string;
@@ -2001,6 +2071,7 @@ export type SERVICES_QUERYResult = Array<{
         _weak?: boolean;
         [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
       };
+      media?: unknown;
       hotspot?: SanityImageHotspot;
       crop?: SanityImageCrop;
       alt: string;
@@ -2032,6 +2103,7 @@ export type SERVICES_QUERYResult = Array<{
       _weak?: boolean;
       [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
     };
+    media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     alt: string;
@@ -2045,6 +2117,7 @@ export type SERVICES_QUERYResult = Array<{
         _weak?: boolean;
         [internalGroqTypeReferenceTo]?: "sanity.fileAsset";
       };
+      media?: unknown;
       _type: "file";
     };
     imagenDeCarga?: {
@@ -2054,6 +2127,7 @@ export type SERVICES_QUERYResult = Array<{
         _weak?: boolean;
         [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
       };
+      media?: unknown;
       hotspot?: SanityImageHotspot;
       crop?: SanityImageCrop;
       alt: string;
@@ -2082,6 +2156,7 @@ export type SERVICE_QUERYResult = {
         _weak?: boolean;
         [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
       };
+      media?: unknown;
       hotspot?: SanityImageHotspot;
       crop?: SanityImageCrop;
       alt: string;
@@ -2113,6 +2188,7 @@ export type SERVICE_QUERYResult = {
       _weak?: boolean;
       [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
     };
+    media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     alt: string;
@@ -2126,6 +2202,7 @@ export type SERVICE_QUERYResult = {
         _weak?: boolean;
         [internalGroqTypeReferenceTo]?: "sanity.fileAsset";
       };
+      media?: unknown;
       _type: "file";
     };
     imagenDeCarga?: {
@@ -2135,6 +2212,7 @@ export type SERVICE_QUERYResult = {
         _weak?: boolean;
         [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
       };
+      media?: unknown;
       hotspot?: SanityImageHotspot;
       crop?: SanityImageCrop;
       alt: string;
@@ -2213,6 +2291,7 @@ export type ALLSURFACETYPES_QUERYResult = Array<{
       _weak?: boolean;
       [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
     };
+    media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     alt: string;
@@ -2226,6 +2305,7 @@ export type ALLSURFACETYPES_QUERYResult = Array<{
         _weak?: boolean;
         [internalGroqTypeReferenceTo]?: "sanity.fileAsset";
       };
+      media?: unknown;
       _type: "file";
     };
     imagenDeCarga?: {
@@ -2235,6 +2315,7 @@ export type ALLSURFACETYPES_QUERYResult = Array<{
         _weak?: boolean;
         [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
       };
+      media?: unknown;
       hotspot?: SanityImageHotspot;
       crop?: SanityImageCrop;
       alt: string;
@@ -2250,6 +2331,7 @@ export type ALLSURFACETYPES_QUERYResult = Array<{
       _weak?: boolean;
       [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
     };
+    media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     alt: string;
@@ -2289,6 +2371,7 @@ export type SURFACETYPEBYID_QUERYResult = {
       _weak?: boolean;
       [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
     };
+    media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     alt: string;
@@ -2302,6 +2385,7 @@ export type SURFACETYPEBYID_QUERYResult = {
         _weak?: boolean;
         [internalGroqTypeReferenceTo]?: "sanity.fileAsset";
       };
+      media?: unknown;
       _type: "file";
     };
     imagenDeCarga?: {
@@ -2311,6 +2395,7 @@ export type SURFACETYPEBYID_QUERYResult = {
         _weak?: boolean;
         [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
       };
+      media?: unknown;
       hotspot?: SanityImageHotspot;
       crop?: SanityImageCrop;
       alt: string;
@@ -2326,6 +2411,7 @@ export type SURFACETYPEBYID_QUERYResult = {
       _weak?: boolean;
       [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
     };
+    media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     alt: string;
@@ -2350,6 +2436,7 @@ export type SURFACESBYTYPE_QUERYResult = Array<{
       _weak?: boolean;
       [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
     };
+    media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     alt: string;
@@ -2396,6 +2483,7 @@ export type SURFACES_QUERYResult = Array<{
       _weak?: boolean;
       [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
     };
+    media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     alt: string;
@@ -2430,6 +2518,7 @@ export type SURFACE_QUERYResult = {
       _weak?: boolean;
       [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
     };
+    media?: unknown;
     hotspot?: SanityImageHotspot;
     crop?: SanityImageCrop;
     alt: string;
