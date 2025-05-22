@@ -19,6 +19,7 @@ const ItemCard = ({
   availability,
   surfaceId,
   surfaceTypeId,
+  href,
 }: {
   image: {
     asset?: {
@@ -38,6 +39,7 @@ const ItemCard = ({
   availability?: boolean | null;
   surfaceId?: string;
   surfaceTypeId?: string | null;
+  href: string;
 }) => {
   const pathname = usePathname();
   return (
@@ -46,7 +48,8 @@ const ItemCard = ({
         <Link
           scroll={false}
           className="rounded-xl w-full h-full"
-          href={`/surface/${surfaceId}/catalogue/${surfaceTypeId ?? "0"}`}
+          // href={`/surface/${surfaceId}/catalogue/${surfaceTypeId ?? "0"}`}
+          href={href}
         >
           <Image
             className="rounded-xl w-full h-full object-cover"
@@ -55,12 +58,14 @@ const ItemCard = ({
             width={500}
             height={500}
           />
+          {surfaceId}
         </Link>
       ) : (
         <div className="w-full h-full bg-primary rounded-xl flex items-center justify-center">
           <Link
             scroll={false}
-            href={`/surface/${surfaceId}/catalogue/${surfaceTypeId ?? "0"}`}
+            // href={`/surface/${surfaceId}/catalogue/${surfaceTypeId ?? "0"}`}
+            href={href}
           >
             <h2 className="text-4xl">📸</h2>
           </Link>
