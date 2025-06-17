@@ -3,8 +3,8 @@ import { sanityFetch } from "@/sanity/lib/client";
 import { ADMIN_EMAIL_QUERY } from "@/sanity/queries/settingsQueries";
 import { Resend } from "resend";
 import { ZodFormattedError } from "zod";
-import { QuoteEmailTemplate } from "../_components/email-template";
 import { adminEmailSchema, formSchema } from "./captureInfoZods";
+import { QuoteEmailTemplate } from "@/emails/QuoteEmail";
 
 type FormState = {
   success: boolean;
@@ -91,7 +91,7 @@ export const captureInfoAction = async (
       },
     };
   }
-  console.log({ data, surfaces: data.data?.selectedSurfaces });
+  // console.log({ data, surfaces: data.data?.selectedSurfaces });
 
   return {
     success: true,

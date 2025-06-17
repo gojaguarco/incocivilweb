@@ -1,10 +1,10 @@
 "use client";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import {
   ComponentPropsWithoutRef,
   Suspense,
   useCallback,
-  useEffect,
+  // useEffect,
 } from "react";
 import { cn } from "../_lib/cn";
 type Props = ComponentPropsWithoutRef<"select"> & {
@@ -73,17 +73,13 @@ const Select = ({
     (option) => option.value === selectedOption
   )?.label;
 
-  const pathname = usePathname();
+  // const pathname = usePathname();
 
-  useEffect(() => {
-    if (pathname === "/cotizador") {
-      router.push("/cotizador?surfaceType=all");
-    }
-  }, []);
-
-  useEffect(() => {
-    router.push("/cotizador?surfaceType=all");
-  }, []);
+  // useEffect(() => {
+  //   if (pathname === "/cotizador") {
+  //     router.push("/cotizador?surfaceType=all");
+  //   }
+  // }, []);
 
   return (
     <select

@@ -32,8 +32,8 @@ const page = async () => {
   );
 
   return (
-    <div className="bg-light w-full z-10">
-      <section className="bg-light-dark md:bg-light min-h-screen w-full relative z-20 flex flex-col gap-5 py-10 px-5 md:px-10 max-w-6xl mx-auto">
+    <div className="w-full z-10">
+      <section className="bg-light-dark min-h-screen w-full relative z-20 flex flex-col gap-5 py-10 px-5 md:px-10 xl:px-48 mx-auto">
         <header>
           <h1>{cotizadorContent?.cotizador?.surfaceSelection?.title}</h1>
           <p className="font-montserrat">
@@ -41,7 +41,7 @@ const page = async () => {
           </p>
           <LinkButton
             text={"Reiniciar Calculadora"}
-            size="grande"
+            size="mediano"
             color="naranja"
             link="/cotizador"
             className="w-fit mt-2"

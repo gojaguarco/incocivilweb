@@ -7,6 +7,7 @@ import { cn } from "../_lib/cn";
 import { numberToColombianPriceString } from "@/app/helpers";
 import { SurfaceToSendAdminEmail } from "./captureInfoZods";
 import NumberInput from "./NumberInput";
+import SelectSurfaceButton from "./SelectSurfaceButton";
 
 const SelectedSurfacesTable = ({
   catalogo,
@@ -30,47 +31,63 @@ const SelectedSurfacesTable = ({
   showTotal: boolean;
 }) => {
   return (
-    <>
-      <table
-        id="selected-surfaces"
-        className="hidden xl:block table-fixed w-full border-collapse bg-light rounded shadow-sm overflow-hidden"
-      >
-        <thead className="w-full">
-          <tr className="border-b">
-            <Th>Material</Th>
-            <Th>Código</Th>
-            <Th>Tipo</Th>
-            <Th>Calibre</Th>
-            <Th>Descripción</Th>
-            <Th>Precio m2</Th>
-            <Th>Formato</Th>
-            <Th>Cantidad</Th>
-            <Th className="">Total</Th>
-            {/* <Th>Acciones</Th> */}
-          </tr>
-        </thead>
-        <tbody className="w-full">
-          {selectedSurfaceIds.map((id, index) => {
-            const surface = catalogo.find((item) => item._id === id);
-            if (!surface) return null;
+    <div className="">
+      {selectedSurfaceIds && selectedSurfaceIds.length > 0 ? (
+        <table className="hidden xl:block table-fixed w-fit border-collapse bg-light rounded shadow-sm overflow-hidden">
+          <thead className="w-full">
+            <tr className="border-b">
+              <Th>Material</Th>
+              <Th>Código</Th>
+              <Th>Tipo</Th>
+              <Th>Calibre</Th>
+              <Th>Descripción</Th>
+              <Th className="">Precio m2</Th>
+              <Th>Formato</Th>
+              <Th>Cantidad</Th>
+              <Th className="">Total</Th>
+              {/* <Th>Acciones</Th> */}
+            </tr>
+          </thead>
+          <tbody className="w-full">
+            {selectedSurfaceIds.map((id, index) => {
+              const surface = catalogo.find((item) => item._id === id);
+              if (!surface) return null;
 
-            return (
-              <DesktopSurface
-                showTotal={!!showTotal}
-                surfaceFormats={surfaceFormats}
-                setSurfaceFormats={setSurfaceFormats}
-                key={id}
-                id={id}
-                index={index}
-                removeSurfaceId={removeSurfaceId}
-                surface={surface}
-              />
-            );
-          })}
-        </tbody>
-      </table>
+              return (
+                <DesktopSurface
+                  showTotal={!!showTotal}
+                  surfaceFormats={surfaceFormats}
+                  setSurfaceFormats={setSurfaceFormats}
+                  key={id}
+                  id={id}
+                  index={index}
+                  removeSurfaceId={removeSurfaceId}
+                  surface={surface}
+                />
+              );
+            })}
+          </tbody>
+        </table>
+      ) : (
+        <section className="block">
+          <div className="hidden lg:flex py-10 gap-10 justify-between px-10 w-full border-collapse bg-light rounded shadow-sm overflow-hidden">
+            <h4>Material</h4>
+            <h4>Código</h4>
+            <h4>Tipo</h4>
+            <h4>Calibre</h4>
+            <h4>Descripción</h4>
+            <h4 className="">Precio m2</h4>
+            <h4>Formato</h4>
+            <h4>Cantidad</h4>
+            <h4 className="">Total</h4>
+          </div>
+          <div className="bg-tableGray p-10 grid place-content-center">
+            <SelectSurfaceButton />
+          </div>
+        </section>
+      )}
       <ul
-        id="selected-surfaces"
+        id=""
         className="xl:hidden w-full border-collapse bg-light rounded shadow-sm overflow-hidden flex flex-col"
       >
         {selectedSurfaceIds.map((id, index) => {
@@ -91,7 +108,7 @@ const SelectedSurfacesTable = ({
         })}
       </ul>
       {/* {JSON.stringify(selectedSurfaces)} */}
-    </>
+    </div>
   );
 };
 
@@ -105,7 +122,10 @@ const Th = ({
   children: React.ReactNode;
 }) => {
   return (
-    <th className={cn("text-center p-2 md:py-5", className)} {...rest}>
+    <th
+      className={cn("text-center p-2 md:py-5 border-slate-400", className)}
+      {...rest}
+    >
       <h4 className="font-normal">{children}</h4>
     </th>
   );
@@ -163,7 +183,7 @@ const DesktopSurface = ({
           code: String(surface.code || ""),
           name: surface.title || "",
           image: surface.image ? urlFor(surface.image).url() : "",
-          quanity: 1,
+          quantity: format.quantity ?? 1,
           formatPrice: format.price,
         },
       });
@@ -172,12 +192,11 @@ const DesktopSurface = ({
 
   const onQuantityChange = (quantity: number) => {
     const newTotal = surfaceFormats[surface._id]?.formatPrice * quantity;
-
     setSurfaceFormats({
       ...surfaceFormats,
       [surface._id]: {
         ...surfaceFormats[surface._id],
-        quanity: quantity,
+        quantity: quantity,
         totalSurface: newTotal,
       },
     });
@@ -185,14 +204,14 @@ const DesktopSurface = ({
 
   const rowBg = index % 2 === 0 ? "bg-tableGray" : "bg-light";
   return (
-    <tr className={cn("border-b", rowBg)}>
+    <tr className={cn("border-b text-xs", rowBg)}>
       <Td>
         {surface.image && (
           <Image
             className="rounded-lg w-[116.25px] h-[47px] object-cover"
             src={urlFor(surface.image)
-              .width(116)
-              .height(47)
+              .width(500)
+              .height(500)
               .format("webp")
               .url()}
             alt={surface.title}
@@ -200,7 +219,12 @@ const DesktopSurface = ({
             height={47}
           />
         )}
-        {surface.title}
+        <h6 className="capitalize text-xs self-start">
+          {surface.title
+            .toLowerCase()
+            .replace(surface.type.title.toLowerCase(), "")}
+        </h6>
+        {/* <p className="text-xs self-start">{surface.type.title}</p>{" "} */}
       </Td>
       <Td className="code">{surface.code}</Td>
       <Td>{surface.type.title}</Td>
@@ -212,8 +236,8 @@ const DesktopSurface = ({
           onChange={onFormatChange}
           value={JSON.stringify({
             height: surfaceFormats[surface._id]?.height || 0,
-            width: surfaceFormats[surface._id]?.width || 0,
             price: surfaceFormats[surface._id]?.formatPrice || 0,
+            width: surfaceFormats[surface._id]?.width || 0,
           })}
           className="p-2 rounded"
         >
@@ -230,11 +254,16 @@ const DesktopSurface = ({
         </select>
       </Td>
       <Td>
-        <NumberInput onChange={onQuantityChange} />
+        <NumberInput
+          amount={surfaceFormats[surface._id]?.quantity}
+          onChange={onQuantityChange}
+        />
       </Td>
       <Td className="relative">
         {!showTotal && (
-          <div className={`w-full h-full absolute z-10 top-0 left-0 ${rowBg}`}>
+          <div
+            className={`w-full h-full grid place-content-center absolute z-10 top-0 left-0 ${rowBg}`}
+          >
             $0
           </div>
         )}
@@ -311,7 +340,7 @@ const MobileSurface = ({
           code: String(surface.code || ""),
           name: surface.title || "",
           image: surface.image ? urlFor(surface.image).url() : "",
-          quanity: 1,
+          quantity: format.quantity ?? 1,
           formatPrice: format.price,
         },
       });
@@ -325,7 +354,7 @@ const MobileSurface = ({
       ...surfaceFormats,
       [surface._id]: {
         ...surfaceFormats[surface._id],
-        quanity: quantity,
+        quantity: quantity,
         totalSurface: newTotal,
       },
     });
@@ -339,13 +368,13 @@ const MobileSurface = ({
         <Image
           className="rounded-lg w-full h-[150px] object-cover mb-5"
           src={urlFor(surface.image)
-            .width(500)
-            .height(300)
+            .width(1500)
+            .height(600)
             .format("webp")
             .url()}
           alt={surface.title}
-          width={500}
-          height={300}
+          width={1500}
+          height={600}
         />
       )}
       <div className="grid grid-cols-2 gap-2">
@@ -379,7 +408,14 @@ const MobileSurface = ({
           </InfoItem>
         </div>
         <div className="flex flex-col gap-2">
-          <InfoItem>{surface.title}</InfoItem>
+          <InfoItem>
+            {" "}
+            <h6 className="capitalize">
+              {surface.title
+                .toLowerCase()
+                .replace(surface.type.title.toLowerCase(), "")}
+            </h6>
+          </InfoItem>
           <InfoItem className="code">{surface.code}</InfoItem>
           <InfoItem>{surface.type.title}</InfoItem>
           <InfoItem>{surface.caliber}</InfoItem>
@@ -402,8 +438,8 @@ const MobileSurface = ({
               onChange={onFormatChange}
               value={JSON.stringify({
                 height: surfaceFormats[surface._id]?.height || 0,
-                width: surfaceFormats[surface._id]?.width || 0,
                 price: surfaceFormats[surface._id]?.formatPrice || 0,
+                width: surfaceFormats[surface._id]?.width || 0,
               })}
               className="p-2 rounded"
             >
@@ -420,20 +456,19 @@ const MobileSurface = ({
             </select>
           </InfoItem>
           <InfoItem>
-            <NumberInput onChange={onQuantityChange} />
+            <NumberInput
+              amount={surfaceFormats[surface._id]?.quantity}
+              onChange={onQuantityChange}
+            />
           </InfoItem>
 
           <InfoItem className="relative">
             {!showTotal && (
-<<<<<<< HEAD
               <div
                 className={`w-full h-full absolute z-10 top-0 left-0 ${itemBg}`}
               >
                 $0
               </div>
-=======
-              <div className={`w-full h-full absolute z-10 top-0 left-0 ${itemBg}`}>$0</div>
->>>>>>> 4dee5de (makes the requested ui updates)
             )}
             <span className="">
               {numberToColombianPriceString(

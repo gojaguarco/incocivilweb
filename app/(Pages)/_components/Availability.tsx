@@ -12,13 +12,15 @@ const Availability = ({
 }) => {
   if (availability) {
     return (
-      <div className="mt-2 flex gap-2 items-center justify-between">
-        <LightIndicator color="green" />
-        <span>Disponible Online</span>
+      <div className="flex gap-2 items-center justify-between">
+        <div className="flex items-center">
+          <LightIndicator color="green" />
+          <span className="text-xs">Disponible Online</span>
+        </div>
         <LinkButton
           color="naranja"
           link={`/cotizador?surfaceType=${surfaceTypeId}&surfaceId=${surfaceId}`}
-          className=""
+          className="py-0.5 px-1"
           size="pequeño"
           text="Cotizar"
         >
@@ -27,7 +29,7 @@ const Availability = ({
       </div>
     );
   } else {
-    return <p>{"Exótico - disponible bajo pedido"}</p>;
+    return <p className="text-xs ">{"* Exótico - disponible bajo pedido"}</p>;
   }
 };
 

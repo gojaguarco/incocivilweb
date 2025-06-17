@@ -1,28 +1,35 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+html {
+  scroll-behavior: smooth;
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
 
 @layer base {
-  .no-scrollbar::-webkit-scrollbar{
+  .no-scrollbar::-webkit-scrollbar {
     width: 0px;
     height: 0px;
   }
-  .no-scrollbar::-webkit-scrollbar-thumb{
+  .no-scrollbar::-webkit-scrollbar-thumb {
     width: 0px;
     height: 0px;
     background-color: rgba(0, 0, 0, 0.048);
     border-radius: 6px;
   }
-  .no-scrollbar::-webkit-scrollbar-corner{
+  .no-scrollbar::-webkit-scrollbar-corner {
     background-color: #f1f1f1;
   }
-  .no-scrollbar::-webkit-scrollbar-button{
+  .no-scrollbar::-webkit-scrollbar-button {
     display: none;
   }
-  .main-background{
-    background: linear-gradient(120deg, #363942 2%, #1F2127 98%);
+  .main-background {
+    background: linear-gradient(120deg, #363942 2%, #1f2127 98%);
   }
   .text-balance {
     text-wrap: balance;
@@ -34,49 +41,50 @@
 
 @layer base {
   .default-paddings {
-    @apply px-4 xs:px-8 sm:px-14 md:px-20 xl:px-5 2xl:px-0
+    @apply px-4 xs:px-8 sm:px-14 md:px-20 xl:px-5 2xl:px-0;
   }
   .nav-font {
-    a{
-      @apply text-light font-inter font-extralight text-sm xl:text-base text-nowrap
+    a {
+      @apply text-light font-inter font-extralight text-sm xl:text-base text-nowrap;
     }
   }
   a {
-    @apply font-montserrat font-extralight text-sm hover:underline underline-offset-2 whitespace-pre-line 
+    @apply font-montserrat font-extralight text-sm hover:underline underline-offset-2 whitespace-pre-line;
   }
   h1 {
-    @apply text-[26px] xs:text-[32px] sm:text-[45px] lg:text-[38px] xl:text-[45px] font-montserrat font-extrabold tracking-wider whitespace-pre-line 
+    @apply text-[26px] xs:text-[32px] sm:text-[45px] lg:text-[38px] xl:text-[45px] font-montserrat font-extrabold tracking-wider whitespace-pre-line;
   }
   h2 {
-    @apply text-2xl sm:text-[34px] font-montserrat font-extrabold tracking-wide whitespace-pre-line 
+    @apply text-2xl sm:text-[34px] font-montserrat font-extrabold tracking-wide whitespace-pre-line;
   }
   h3 {
-    @apply text-[20px] xs:text-[25px] font-montserrat font-medium whitespace-pre-line 
+    @apply text-[20px] xs:text-[25px] font-montserrat font-medium whitespace-pre-line;
   }
   h4 {
-    @apply text-sm leading-none sm:text-base font-montserrat font-medium whitespace-pre-line 
+    @apply text-sm leading-none sm:text-base font-montserrat font-medium whitespace-pre-line;
   }
   h5 {
-    @apply text-base font-montserrat font-light uppercase tracking-wider whitespace-pre-line 
+    @apply text-base font-montserrat font-light uppercase tracking-wider whitespace-pre-line;
   }
   h6 {
-    @apply text-sm font-montserrat font-semibold whitespace-pre-line 
+    @apply text-sm font-montserrat font-semibold whitespace-pre-line;
   }
   h7 {
-    @apply text-sm font-montserrat font-medium whitespace-pre-line 
+    @apply text-sm font-montserrat font-medium whitespace-pre-line;
   }
   p {
-    @apply text-[13px] xs:text-sm font-inter font-extralight whitespace-pre-line leading-normal
+    @apply text-[13px] xs:text-sm font-inter font-extralight whitespace-pre-line leading-normal;
   }
   p:empty:before {
-    content: ' ';
+    content: " ";
     white-space: pre;
   }
   label {
-    @apply text-sm font-light font-montserrat whitespace-pre-line 
+    @apply text-sm font-light font-montserrat whitespace-pre-line;
   }
-  input, textarea {
-    @apply placeholder:text-xs font-inter font-light placeholder:text-slate-400 whitespace-pre-line
+  input,
+  textarea {
+    @apply placeholder:text-xs font-inter font-light placeholder:text-slate-400 whitespace-pre-line;
   }
 }
 
@@ -87,7 +95,7 @@
     transform: perspective(3000px);
   }
   .surface-object {
-    transition: .3s;
+    transition: 0.3s;
     filter: brightness(1);
     width: 120px;
   }
@@ -95,15 +103,14 @@
     transform: translateZ(200px);
     filter: brightness(1);
     width: 250px;
-    
   }
-  .surface-object:hover + *{
+  .surface-object:hover + * {
     transform: translateZ(150px) rotateY(40deg);
   }
-  .surface-object:hover + * + *{
+  .surface-object:hover + * + * {
     transform: translateZ(70px) rotateY(20deg);
   }
-  .surface-object:hover + * + * + *{
+  .surface-object:hover + * + * + * {
     transform: translateZ(30px) rotateY(10deg);
   }
   .surface-object:has(+ *:hover) {

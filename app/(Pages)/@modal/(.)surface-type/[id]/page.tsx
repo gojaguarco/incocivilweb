@@ -73,7 +73,7 @@ export default async function Page(props: { params: Promise<QueryParams> }) {
     surfaceTypesArray[0]?._id;
 
   return (
-    <Modal>
+    <Modal backUrl="/">
       <article className="relative no-scrollbar bg-light-dark z-10 gap-2 md:gap-10 p-3 sm:p-5 md:p-8 flex flex-col w-full rounded-2xl max-h-[90vh] overflow-y-scroll">
         <NavButtons
           className="hidden lg:block"

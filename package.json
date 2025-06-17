@@ -10,7 +10,8 @@
     "schema": "sanity schema extract --enforce-required-fields",
     "query": "sanity typegen generate",
     "sanityupdate": "pnpm schema && pnpm query",
-    "g": "pnpm schema && pnpm query"
+    "g": "pnpm schema && pnpm query",
+    "devEmail": "pnpm dlx react-email dev"
   },
   "dependencies": {
     "@react-email/components": "0.0.32",
@@ -26,6 +27,7 @@
     "next-sanity": "^9.8.8",
     "react": "19.0.0-rc-02c0e824-20241028",
     "react-dom": "19.0.0-rc-02c0e824-20241028",
+    "react-email": "^4.0.16",
     "resend": "^4.0.1",
     "sanity": "^3.62.3",
     "styled-components": "^6.1.13",

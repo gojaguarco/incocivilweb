@@ -1,24 +1,22 @@
-"use client";
-import { useState } from "react";
-
-const NumberInput = ({onChange}: {
+const NumberInput = ({
+  onChange,
+  amount = 1,
+}: {
   onChange: (value: number) => void;
+  amount?: number;
 }) => {
-  const [value, setValue] = useState<number>(1);
   const handleIncrement = () => {
-    onChange(value + 1);
-    setValue(value + 1);
+    onChange(amount + 1);
   };
   const handleDecrement = () => {
-    onChange(value - 1);
-    setValue(value - 1);
-  }
+    onChange(amount - 1);
+  };
 
   return (
     <div className="relative flex items-center">
       <button
         onClick={handleDecrement}
-        disabled={value <= 0}
+        disabled={amount <= 1}
         type="button"
         className="bg-gray-100 hover:bg-gray-200 border border-gray-300 rounded-s-lg px-3 py-2 h-9 focus:ring-gray-100 focus:ring-2 focus:outline-none"
       >
@@ -46,15 +44,14 @@ const NumberInput = ({onChange}: {
         className="bg-gray-50 border-x-0 border-gray-300 h-9 text-center text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-[4ch] py-2.5"
         placeholder="999"
         required
-        value={value}
+        value={amount}
+        min={1}
         onChange={(e) => {
           const value = e.target.value;
           if (/^\d*$/.test(value)) {
             onChange(Number(value));
-            setValue(Number(value));
           }
-        }
-        }
+        }}
       />
       <button
         type="button"

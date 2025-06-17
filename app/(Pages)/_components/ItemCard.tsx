@@ -58,7 +58,7 @@ const ItemCard = ({
             width={500}
             height={500}
           />
-          {surfaceId}
+          {/* {surfaceId} */}
         </Link>
       ) : (
         <div className="w-full h-full bg-primary rounded-xl flex items-center justify-center">
@@ -71,60 +71,66 @@ const ItemCard = ({
           </Link>
         </div>
       )}
-      <footer className="absolute bottom-2 left-2 right-2 flex flex-col items-start">
+      <div className="absolute bottom-2 left-2 right-2 flex flex-col items-start">
         <div
-          className={`bg-primary-light rounded-tr-xl flex px-2 pt-1 items-center gap-1.5 max-w-[80%] relative`}
+          className={`bg-primary-light rounded-tr-xl flex flex-col pt-1 gap-1.5 w-fit pr-3 relative`}
         >
-          <h6
-            className={`text-light group-hover:underline underline-offset-2 capitalize`}
-          >
-            {title}
-          </h6>
-          <div className="w-4 h-4 rounded-full bg-accent1 group-hover:rotate-90 transition-all flex items-center justify-center">
-            <svg
-              className="w-3.5 h-3.5 -rotate-45"
-              xmlns="http://www.w3.org/2000/svg"
-              width={24}
-              height={24}
-              viewBox="0 0 24 24"
-              fill=""
-              stroke="#fff"
-              strokeWidth={2}
-              strokeLinecap="round"
-              strokeLinejoin="round"
+          <div className="flex gap-[1ch]">
+            <h6
+              className={`text-light text-left text-xs group-hover:underline underline-offset-2 capitalize`}
             >
-              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-              <path d="M12 5l0 14" />
-              <path d="M18 11l-6 -6" />
-              <path d="M6 11l6 -6" />
-            </svg>
+              {title}
+            </h6>
+            <div className="w-4 h-4 rounded-full bg-accent1 group-hover:rotate-90 transition-all flex items-center justify-center">
+              <svg
+                className="w-3.5 h-3.5 -rotate-45"
+                xmlns="http://www.w3.org/2000/svg"
+                width={24}
+                height={24}
+                viewBox="0 0 24 24"
+                fill=""
+                stroke="#fff"
+                strokeWidth={2}
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <path d="M12 5l0 14" />
+                <path d="M18 11l-6 -6" />
+                <path d="M6 11l6 -6" />
+              </svg>
+            </div>
           </div>
           <Esquina
             className="absolute rotate-180 w-2.5 h-2.5 -top-2 left-0"
             colorHex={`414553`}
           />
+          <p className="bg-primary-light w-full text-xs relative">
+            {description}
+            <Esquina
+              className="absolute rotate-180 w-2.5 h-2.5 -top-2.5 left-0"
+              colorHex={`414553`}
+            />
+          </p>
           <Esquina
             className="absolute rotate-180 w-2.5 h-2.5 -right-2.5 -bottom-1"
             colorHex={`414553`}
           />
         </div>
-        <p className="bg-primary-light w-full px-2 relative">
-          {description}
-          <Esquina
-            className="absolute rotate-180 w-2.5 h-2.5 -top-2.5 left-0"
-            colorHex={`414553`}
-          />
-        </p>
         {pathname !== "/blog" && surfaceId && surfaceTypeId && (
-          <div className="bg-primary-light w-full">
+          <div className="bg-primary-light w-full pr-2 pt-2 relative">
             <Availability
               availability={availability ?? false}
               surfaceId={surfaceId}
               surfaceTypeId={surfaceTypeId}
             />
+            <Esquina
+              className="absolute rotate-90 w-2.5 h-2.5 bottom-full right-0"
+              colorHex={`414553`}
+            />
           </div>
         )}
-      </footer>
+      </div>
     </div>
   );
 };

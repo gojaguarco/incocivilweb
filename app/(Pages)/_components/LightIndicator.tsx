@@ -12,7 +12,9 @@ type AvailableColor = keyof typeof availableColors;
 
 const LightIndicator = ({ color = "white" }: { color: AvailableColor }) => {
   return (
-    <span className={`${availableColors[color]} flex w-3 h-3 me-3 rounded-full`}></span>
+    <span
+      className={`${availableColors[color]} flex w-2 h-2 me-3 rounded-full`}
+    ></span>
   );
 };
 

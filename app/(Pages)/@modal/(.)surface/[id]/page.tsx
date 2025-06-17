@@ -11,6 +11,7 @@ import Modal from "@/app/(Pages)/_components/Modal";
 import Esquina from "@/app/(Pages)/_components/Esquina";
 import BackButton from "@/app/(Pages)/_components/BackButton";
 import NavButtons from "@/app/(Pages)/_components/NavButtons";
+import Availability from "@/app/(Pages)/_components/Availability";
 // import LinkButton from "@/app/(Pages)/_components/LinkButton";
 // import Availability from "@/app/(Pages)/_components/Availability";
 
@@ -65,7 +66,7 @@ export default async function Page(props: { params: Promise<QueryParams> }) {
   };
 
   return (
-    <Modal>
+    <Modal backUrl="/">
       <article className="h-[80svh] sm:h-[70svh] md:h-[60svh] w-[90vw] max-w-screen-xl p-2 rounded-3xl bg-light relative overflow-hidden">
         {surfacesArray && (
           <NavButtons
@@ -93,7 +94,12 @@ export default async function Page(props: { params: Promise<QueryParams> }) {
             <div className="w-5 h-[3px] bg-accent1 rounded-full" />
             <h6 className="text-accent1">{surface.type.title}</h6>
           </div>
-          <BackButton />
+          <Availability
+            availability={surface.availability ?? false}
+            surfaceId={surface._id}
+            surfaceTypeId={surface.type._id}
+          />
+          <BackButton url="/" />
           <Esquina
             className="absolute rotate-90 w-2.5 h-2.5 -top-2.5 right-0"
             colorHex="f1f4fe"

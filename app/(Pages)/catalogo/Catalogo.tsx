@@ -34,6 +34,7 @@ const CatalogoUi = ({ catalogo }: { catalogo: All_SURFACES_QUERYResult }) => {
               image={item.image}
               imageAlt={item.title}
               availability={item.available}
+              href={`/surface/${item._id}/catalogue/${surfaceTypeId ?? "0"}`}
             />
           </li>
         );

@@ -11,6 +11,7 @@ import Modal from "@/app/(Pages)/_components/Modal";
 import Esquina from "@/app/(Pages)/_components/Esquina";
 import BackButton from "@/app/(Pages)/_components/BackButton";
 import NavButtons from "@/app/(Pages)/_components/NavButtons";
+import Availability from "@/app/(Pages)/_components/Availability";
 
 export async function generateStaticParams() {
   const surfaces = await client.fetch(
@@ -64,7 +65,7 @@ export default async function Page(props: { params: Promise<QueryParams> }) {
   };
 
   return (
-    <Modal>
+    <Modal backUrl="/">
       <article className="h-[80svh] sm:h-[70svh] md:h-[60svh] w-[90vw] max-w-screen-xl p-2 rounded-3xl bg-light relative overflow-hidden">
         <NavButtons
           backLink={`/surface-type-surface/${surfaceTypeId}!${
@@ -92,8 +93,13 @@ export default async function Page(props: { params: Promise<QueryParams> }) {
           <h2 className="text-base sm:text-xl">{surface.title}</h2>
           <div className="flex items-center gap-2">
             <div className="w-5 h-[3px] bg-accent1 rounded-full" />
-            <h6 className="text-accent1">{surface.type.title}</h6>
+            <h6 className="text-accent1">{surface.type.title} modal</h6>
           </div>
+          <Availability
+            availability={surface.availability ?? false}
+            surfaceId={surfaceId}
+            surfaceTypeId={surfaceTypeId}
+          />
           <BackButton url={`/surface-type/${surfaceTypeId}`} />
           <Esquina
             className="absolute rotate-90 w-2.5 h-2.5 -top-2.5 right-0"

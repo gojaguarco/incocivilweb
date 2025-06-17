@@ -2,7 +2,7 @@ import { defineField } from "sanity";
 
 export const ImageSchema = defineField({
   name: "imageObject",
-  title: 'Imagen',
+  title: "Imagen",
   type: "image",
   options: {
     hotspot: true,
@@ -17,9 +17,9 @@ export const ImageSchema = defineField({
   ],
   validation: (Rule) =>
     Rule.custom((value) => {
-      console.log({value})
+      // console.log({value})
       if (!value?.asset?._ref) {
-        return 'La imagen es requerida.'; // Or your preferred error message
+        return "La imagen es requerida."; // Or your preferred error message
       }
       return true;
     }),
@@ -44,15 +44,15 @@ export const VideoSchema = defineField({
       name: "imagenDeCarga",
       title: "Imagen de Carga",
       type: "imageObject",
-    })
+    }),
   ],
   validation: (Rule) => Rule.required(),
-})
+});
 
 export const ImageOrVideoSchema = defineField({
-  name: 'ImageOrVideo',
-  title: 'Contenido Audiovisual',
-  type: 'object',
+  name: "ImageOrVideo",
+  title: "Contenido Audiovisual",
+  type: "object",
   fields: [
     defineField({
       name: "imagenOVideo",
@@ -68,8 +68,15 @@ export const ImageOrVideoSchema = defineField({
       options: {
         collapsible: false,
       },
-      //@ts-ignore
-      validation: Rule => Rule.custom((_, context) => (context.parent?.imagenOVideo === true && context.parent?.imagen === undefined) ? "La Imagen es Requerida" : true)
+      validation: (Rule) =>
+        Rule.custom((_, context) =>
+          // @ts-expect-error it does exist
+          context.parent?.imagenOVideo === true &&
+          // @ts-expect-error it does exist
+          context.parent?.imagen === undefined
+            ? "La Imagen es Requerida"
+            : true
+        ),
     }),
     defineField({
       name: "video",
@@ -79,9 +86,16 @@ export const ImageOrVideoSchema = defineField({
       options: {
         collapsible: false,
       },
-      //@ts-ignore
-      validation: Rule => Rule.custom((_, context) => (context.parent?.imagenOVideo === false && context.parent?.video === undefined) ? "El Video es Requerido" : true)
-    })
+      validation: (Rule) =>
+        Rule.custom((_, context) =>
+          // @ts-expect-error it does exist
+          context.parent?.imagenOVideo === false &&
+          // @ts-expect-error it does exist
+          context.parent?.video === undefined
+            ? "El Video es Requerido"
+            : true
+        ),
+    }),
   ],
   validation: (Rule) => Rule.required(),
-})
+});
