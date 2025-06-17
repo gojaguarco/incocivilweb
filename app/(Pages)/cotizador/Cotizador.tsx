@@ -10,9 +10,9 @@ import { useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
 import { urlFor } from "@/sanity/lib/image";
 import { Suspense, useCallback, useState } from "react";
-import SelectedSurfacesTable from "./SelectedSurfacesTable";
 import CaptureInfo from "./CaptureInfo";
 import { SurfaceToSendAdminEmail } from "./captureInfoZods";
+import SelectedSurfacesTable from "./SelectedSurfacesTable";
 
 const CotizadorUi = ({
   surfaceTypes,
