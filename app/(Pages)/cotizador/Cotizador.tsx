@@ -199,12 +199,14 @@ const CotizadorUi = ({
                     <h3 className="text-4xl">📸</h3>
                   </div>
                 )}
-                <h6 className="capitalize">
-                  {item.title
-                    .toLowerCase()
-                    .replace(item.type.title.toLowerCase(), "")}
-                </h6>
-                <p>{item.type.title}</p>
+                <div className="p-1.5">
+                  <h6 className="capitalize">
+                    {item.title
+                      .toLowerCase()
+                      .replace(item.type.title.toLowerCase(), "")}
+                  </h6>
+                  <p>{item.type.title}</p>
+                </div>
               </li>
             ))}
           </ul>

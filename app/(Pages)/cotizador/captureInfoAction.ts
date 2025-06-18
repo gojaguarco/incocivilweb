@@ -1,7 +1,7 @@
 "use server";
 import { sanityFetch } from "@/sanity/lib/client";
 import { ADMIN_EMAIL_QUERY } from "@/sanity/queries/settingsQueries";
-import { Resend } from "resend";
+// import { Resend } from "resend";
 import { ZodFormattedError } from "zod";
 import { adminEmailSchema, formSchema } from "./captureInfoZods";
 import { QuoteEmailTemplate } from "@/emails/QuoteEmail";
@@ -20,7 +20,7 @@ type FormState = {
     | undefined;
 };
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+// const resend = new Resend(process.env.RESEND_API_KEY);
 
 export const captureInfoAction = async (
   formState: FormState,
@@ -65,7 +65,7 @@ export const captureInfoAction = async (
     };
   }
   try {
-    await resend.emails.send({
+    console.log({
       from: "Incocivil <cotizador@incocivil.com>",
       to: [adminEmail, data.email],
       // to: ["julian.m.bustos@gmail.com"],
@@ -80,6 +80,29 @@ export const captureInfoAction = async (
         },
       }),
     });
+
+    console.log({
+      email: data.email,
+      message: data.mensaje,
+      name: `${data.nombre} ${data.apellido}`,
+      tel: data.telefono,
+      selectedSurfaces: data.selectedSurfaces,
+    });
+    // await resend.emails.send({
+    //   from: "Incocivil <cotizador@incocivil.com>",
+    //   to: [adminEmail, data.email],
+    //   // to: ["julian.m.bustos@gmail.com"],
+    //   subject: "Mensaje de cliente",
+    //   react: QuoteEmailTemplate({
+    //     data: {
+    //       email: data.email,
+    //       message: data.mensaje,
+    //       name: `${data.nombre} ${data.apellido}`,
+    //       tel: data.telefono,
+    //       selectedSurfaces: data.selectedSurfaces,
+    //     },
+    //   }),
+    // });
 
     // console.log({resendResp})
   } catch (error) {

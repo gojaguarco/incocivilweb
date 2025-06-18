@@ -17,6 +17,7 @@ const LinkButton = ({
   link,
   scroll,
   className,
+  ...rest
 }: TProps) => {
   const sizeClasses = {
     grande: "py-1.5 px-[17px] xs:px-6 sm:px-8 sm:py-2 text-base sm:text-lg",
@@ -38,7 +39,7 @@ const LinkButton = ({
   );
 
   return (
-    <Link href={link} className={buttonClasses} scroll={scroll}>
+    <Link {...rest} href={link} className={buttonClasses} scroll={scroll}>
       {text}
     </Link>
   );

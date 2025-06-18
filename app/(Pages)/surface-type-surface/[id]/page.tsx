@@ -82,12 +82,12 @@ export default async function Page(props: { params: Promise<QueryParams> }) {
             <h2 className="text-base sm:text-xl">{surface.title}</h2>
             <div className="flex items-center gap-2">
               <div className="w-5 h-[3px] bg-accent1 rounded-full" />
-              <h6 className="text-accent1">{surface.type.title} page</h6>
+              <h6 className="text-accent1">{surface.type.title}</h6>
             </div>
             <Availability
               availability={surface.availability ?? false}
               surfaceId={surfaceId}
-              surfaceTypeId={surface.type._id}
+              // surfaceTypeId={surface.type._id}
             />
             <Esquina
               className="absolute rotate-90 w-2.5 h-2.5 -top-2.5 right-0"

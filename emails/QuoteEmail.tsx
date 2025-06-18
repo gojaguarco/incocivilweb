@@ -122,9 +122,35 @@ const QuoteEmailPreview = () => {
     <QuoteEmailTemplate
       data={{
         email: "julian.m.bustos@gmail.com",
-        name: "Julian Bustos",
-        selectedSurfaces: [],
-        tel: "987234982734",
+        message: "asdasdasd",
+        name: "juan Pereza",
+        tel: "3001220367",
+        selectedSurfaces: [
+          {
+            width: 60,
+            height: 120,
+            totalSurface: 500000,
+            id: "9717989b-f990-4d7a-81c4-068921474942",
+            code: "27",
+            name: "Cuarzo Gris polar",
+            image:
+              "https://cdn.sanity.io/images/fwylo0af/development/0cbbed2c892c19d84ca1aa5bd75379e7ad9f1f68-3060x4080.jpg?rect=367,765,2693,2315",
+            quantity: 1,
+            formatPrice: 500000,
+          },
+          {
+            width: 10,
+            height: 10,
+            totalSurface: 10000,
+            id: "73e5f61e-b0ad-495f-a3df-f458e2e39227",
+            code: "3",
+            name: "Mármol Marron emperador",
+            image:
+              "https://cdn.sanity.io/images/fwylo0af/development/9ad7b81eba91aec5565cee8cc209db95fca66de5-800x533.jpg",
+            quantity: 1,
+            formatPrice: 10000,
+          },
+        ],
       }}
     />
   );

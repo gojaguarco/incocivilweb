@@ -93,23 +93,25 @@ export default async function Page(props: { params: Promise<QueryParams> }) {
           <h2 className="text-base sm:text-xl">{surface.title}</h2>
           <div className="flex items-center gap-2">
             <div className="w-5 h-[3px] bg-accent1 rounded-full" />
-            <h6 className="text-accent1">{surface.type.title} modal</h6>
+            <h6 className="text-accent1">{surface.type.title}</h6>
           </div>
+          {/* <div className="flex items-center justify-between"> */}
+          <BackButton url={`/surface-type/${surfaceTypeId}`} />
           <Availability
             availability={surface.availability ?? false}
             surfaceId={surfaceId}
-            surfaceTypeId={surfaceTypeId}
-          />
-          <BackButton url={`/surface-type/${surfaceTypeId}`} />
-          <Esquina
-            className="absolute rotate-90 w-2.5 h-2.5 -top-2.5 right-0"
-            colorHex="f1f4fe"
-          />
-          <Esquina
-            className="absolute rotate-90 w-2.5 h-2.5 -left-2.5 bottom-0"
-            colorHex="f1f4fe"
+            // surfaceTypeId={surfaceTypeId}
           />
         </div>
+        <Esquina
+          className="absolute rotate-90 w-2.5 h-2.5 -top-2.5 right-0"
+          colorHex="f1f4fe"
+        />
+        <Esquina
+          className="absolute rotate-90 w-2.5 h-2.5 -left-2.5 bottom-0"
+          colorHex="f1f4fe"
+        />
+        {/* </div> */}
       </article>
     </Modal>
   );

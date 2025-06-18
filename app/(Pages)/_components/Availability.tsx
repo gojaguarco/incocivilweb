@@ -4,10 +4,8 @@ import LinkButton from "./LinkButton";
 const Availability = ({
   availability,
   surfaceId,
-  surfaceTypeId,
 }: {
   availability: boolean | null;
-  surfaceTypeId: string;
   surfaceId: string;
 }) => {
   if (availability) {
@@ -19,7 +17,7 @@ const Availability = ({
         </div>
         <LinkButton
           color="naranja"
-          link={`/cotizador?surfaceType=${surfaceTypeId}&surfaceId=${surfaceId}`}
+          link={`/cotizador?surfaceId=${surfaceId}`}
           className="py-0.5 px-1"
           size="pequeño"
           text="Cotizar"

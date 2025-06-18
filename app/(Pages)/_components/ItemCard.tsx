@@ -122,7 +122,7 @@ const ItemCard = ({
             <Availability
               availability={availability ?? false}
               surfaceId={surfaceId}
-              surfaceTypeId={surfaceTypeId}
+              // surfaceTypeId={surfaceTypeId}
             />
             <Esquina
               className="absolute rotate-90 w-2.5 h-2.5 bottom-full right-0"

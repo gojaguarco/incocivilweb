@@ -80,7 +80,7 @@ export default async function Page(props: { params: Promise<QueryParams> }) {
             <Availability
               availability={surface.availability ?? false}
               surfaceId={surface._id}
-              surfaceTypeId={surface.type._id}
+              // surfaceTypeId={surface.type._id}
             />
             <Esquina
               className="absolute rotate-90 w-2.5 h-2.5 -top-2.5 right-0"

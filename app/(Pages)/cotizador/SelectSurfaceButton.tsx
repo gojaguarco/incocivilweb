@@ -14,7 +14,6 @@ const SelectSurfaceButton = () => {
       surfaceSelectorElem.classList.add("animate-outline-blink-red");
 
       const blinkDuration = 2000;
-
       setTimeout(() => {
         surfaceSelectorElem.classList.remove("animate-outline-blink-red");
 

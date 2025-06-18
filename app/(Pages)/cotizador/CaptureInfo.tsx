@@ -37,13 +37,15 @@ const CaptureInfo = ({
   }
   return (
     <>
-      <LinkButton
-        // scroll={false}
-        text={`Cotizar`}
-        color="naranja"
-        size="mediano"
-        link={`?${createQueryString("capture-info", "true", "add")}`}
-      />
+      {Object.keys(surfaceFormats).length > 0 && (
+        <LinkButton
+          // scroll={false}
+          text={`Cotizar`}
+          color="naranja"
+          size="mediano"
+          link={`?${createQueryString("capture-info", "true", "add")}`}
+        />
+      )}
       {captureInfoOpen && (
         <section
           onClick={() => {

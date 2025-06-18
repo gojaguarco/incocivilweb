@@ -131,7 +131,7 @@ export default async function Page(props: { params: Promise<QueryParams> }) {
             <Availability
               availability={surface.availability}
               surfaceId={surface._id}
-              surfaceTypeId={surface.type._id}
+              // surfaceTypeId={surface.type._id}
             />
           </div>
           <BackButton url={backUrl} />

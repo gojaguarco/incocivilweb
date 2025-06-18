@@ -31,6 +31,7 @@ const CaptureForm = ({
 }) => {
   const router = useRouter();
   const searchParams = useSearchParams();
+
   const [formState, formAction, isPending] = useActionState(captureInfoAction, {
     success: false,
     errors: null,
@@ -100,6 +101,7 @@ const CaptureForm = ({
   useEffect(() => {
     if (formState.success) {
       alert("Correo enviado.");
+
       setShowSuccessMessage(true);
 
       const timeout = setTimeout(() => {
@@ -197,16 +199,17 @@ const CaptureForm = ({
       {formState.errors?.mensaje && (
         <p className="text-red-500">{formState.errors?.mensaje._errors}</p>
       )}
-
-      <button
-        disabled={isPending}
-        formAction={formAction}
-        className="bg-accent1 text-light px-4 sm:px-6 py-1.5 xs:py-2 text-sm sm:text-base w-fit self-end flex flex-col items-center justify-center rounded-lg text-nowrap flex-shrink-0 hover:-translate-y-0.5 hover:el-shadow"
-      >
-        {isPending ? "Enviando Cotización" : "Ver Cotización"}
-      </button>
+      {!formState.success && (
+        <button
+          disabled={isPending}
+          formAction={formAction}
+          className="bg-accent1 text-light px-4 sm:px-6 py-1.5 xs:py-2 text-sm sm:text-base w-fit self-end flex flex-col items-center justify-center rounded-lg text-nowrap flex-shrink-0 hover:-translate-y-0.5 hover:el-shadow"
+        >
+          {isPending ? "Enviando Cotización" : "Ver Cotización"}
+        </button>
+      )}
       {formState.success && showSuccessMessage && (
-        <p className="text-center">{successMessage}</p>
+        <p className="text-center text-lg">{successMessage}</p>
       )}
     </form>
   );
