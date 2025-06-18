@@ -3,7 +3,7 @@ import { z } from "zod";
 export const SurfaceToSendAdminEmailSchema = z.object({
   width: z.number(),
   height: z.number(),
-  totalSurface: z.number(),
+  totalSurface: z.coerce.number(),
   id: z.string(),
   code: z.string(),
   name: z.string(),

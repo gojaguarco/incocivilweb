@@ -13,6 +13,11 @@ import { Suspense, useCallback, useState } from "react";
 import CaptureInfo from "./CaptureInfo";
 import { SurfaceToSendAdminEmail } from "./captureInfoZods";
 import SelectedSurfacesTable from "./SelectedSurfacesTable";
+import {
+  calculateTotalSurface,
+  colombianPriceStringToNumber,
+  numberToColombianPriceString,
+} from "@/app/helpers";
 
 const CotizadorUi = ({
   surfaceTypes,
@@ -38,7 +43,9 @@ const CotizadorUi = ({
       const surface = catalogo.find((item) => item._id === surfaceId);
       if (!surface) continue;
 
-      const totalSurface = surface.formats[0].price;
+      const totalSurface = colombianPriceStringToNumber(
+        surface.formats[0].price
+      );
       // console.log({ surface, area, price, totalSurface, priceString: surface?.price?.replaceAll(".", "") })
       initialState[surfaceId] = {
         quantity: 1,
@@ -49,7 +56,9 @@ const CotizadorUi = ({
         id: surface?._id || "",
         image: surface?.image ? urlFor(surface.image).url() : "",
         name: surface?.title || "",
-        formatPrice: surface?.formats ? surface.formats[0].price : 0,
+        formatPrice: surface?.formats
+          ? colombianPriceStringToNumber(surface.formats[0].price)
+          : 0,
         type: surface.type.title,
       };
     }
@@ -104,7 +113,9 @@ const CotizadorUi = ({
         name: surface?.title || "",
         image: surface?.image ? urlFor(surface.image).url() : "",
         quantity: 1,
-        formatPrice: surface?.formats ? surface.formats[0].price : 0,
+        formatPrice: surface?.formats
+          ? colombianPriceStringToNumber(surface.formats[0].price)
+          : 0,
         type: surface?.type.title || "",
       },
     }));
@@ -220,17 +231,27 @@ const CotizadorUi = ({
       {/* {surfaceTypeId && ( */}
       <>
         {/* <LightCard> */}
-        <h3 className="my-5">
-          {cotizadorContent?.cotizador?.surfaceSelection?.formatSelection}
-        </h3>
-        <SelectedSurfacesTable
-          showTotal={showTotal}
-          surfaceFormats={surfaceFormats}
-          setSurfaceFormats={setSurfaceFormats}
-          catalogo={catalogo}
-          removeSurfaceId={removeSurfaceId}
-          selectedSurfaceIds={selectedSurfaceIds}
-        />
+        <section className="w-fit">
+          <h3 className="my-5">
+            {cotizadorContent?.cotizador?.surfaceSelection?.formatSelection}
+          </h3>
+          <SelectedSurfacesTable
+            showTotal={showTotal}
+            surfaceFormats={surfaceFormats}
+            setSurfaceFormats={setSurfaceFormats}
+            catalogo={catalogo}
+            removeSurfaceId={removeSurfaceId}
+            selectedSurfaceIds={selectedSurfaceIds}
+          />
+          {showTotal && (
+            <div className="bg-tableGray border rounded-b-md border-slate-300 px-5 py-5 text-right font-semibold">
+              Total:{" "}
+              {numberToColombianPriceString(
+                calculateTotalSurface(Object.values(surfaceFormats))
+              )}
+            </div>
+          )}
+        </section>
         {/* </LightCard> */}
         <div className="w-full items-center flex flex-col md:flex-row gap-2 justify-between">
           {/* <LightCard> */}

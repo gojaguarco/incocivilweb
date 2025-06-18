@@ -1,5 +1,8 @@
 import { SelectedSurfaces } from "@/app/(Pages)/cotizador/captureInfoZods";
-import { numberToColombianPriceString } from "@/app/helpers";
+import {
+  calculateTotalSurface,
+  numberToColombianPriceString,
+} from "@/app/helpers";
 import {
   Body,
   Column,
@@ -78,10 +81,10 @@ export const NewQuoteEmail: React.FC<Readonly<QuoteEmailTemplateProps>> = ({
                 <Row key={surface.id} className="my-10">
                   <Column className="w-[50%]">
                     <Img
-                      className="object-cover aspect-[9/16] max-w-[230px]"
+                      className="object-cover h-[210px] w-[210px]"
                       src={surface.image}
-                      // width="100"
-                      // height="64"
+                      width="210"
+                      height="210"
                       alt={surface.name}
                       style={productIcon}
                     />
@@ -134,6 +137,21 @@ export const NewQuoteEmail: React.FC<Readonly<QuoteEmailTemplateProps>> = ({
                   <Hr style={global.hr} />
                 </Row>
               ))}
+              <Row className="my-10">
+                {" "}
+                <Text
+                  style={{
+                    ...global.heading,
+                    fontSize: "1.5em",
+                    textAlign: "right",
+                  }}
+                >
+                  <>Total: </>
+                  {numberToColombianPriceString(
+                    calculateTotalSurface(data.selectedSurfaces)
+                  )}
+                </Text>
+              </Row>
             </Section>
             <Hr style={global.hr} />
             <Hr style={{ ...global.hr, marginTop: "12px" }} />

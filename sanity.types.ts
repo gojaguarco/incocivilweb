@@ -67,15 +67,7 @@ export type Config = {
     country: string;
   };
   socialLinks: Array<{
-    redSocial:
-      | "facebook"
-      | "X"
-      | "WhatsApp"
-      | "Instagram"
-      | "linkedIn"
-      | "YouTube"
-      | "TikTok"
-      | "Otra";
+    redSocial: "facebook" | "X" | "WhatsApp" | "Instagram" | "linkedIn" | "YouTube" | "TikTok" | "Otra";
     url: string;
     _type: "link";
     _key: string;
@@ -106,67 +98,63 @@ export type Project = {
     alt: string;
     _type: "imageObject";
   };
-  body: Array<
-    | {
-        children?: Array<{
-          marks?: Array<string>;
-          text?: string;
-          _type: "span";
-          _key: string;
-        }>;
-        style?: "normal" | "h1" | "h2" | "h3" | "h4" | "blockquote";
-        listItem?: "bullet";
-        markDefs?: Array<{
-          href?: string;
-          _type: "link";
-          _key: string;
-        }>;
-        level?: number;
-        _type: "block";
-        _key: string;
-      }
-    | {
-        asset?: {
-          _ref: string;
-          _type: "reference";
-          _weak?: boolean;
-          [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-        };
-        media?: unknown;
-        hotspot?: SanityImageHotspot;
-        crop?: SanityImageCrop;
-        alt: string;
-        _type: "imageObject";
-        _key: string;
-      }
-    | {
-        video: {
-          asset?: {
-            _ref: string;
-            _type: "reference";
-            _weak?: boolean;
-            [internalGroqTypeReferenceTo]?: "sanity.fileAsset";
-          };
-          media?: unknown;
-          _type: "file";
-        };
-        imagenDeCarga?: {
-          asset?: {
-            _ref: string;
-            _type: "reference";
-            _weak?: boolean;
-            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-          };
-          media?: unknown;
-          hotspot?: SanityImageHotspot;
-          crop?: SanityImageCrop;
-          alt: string;
-          _type: "imageObject";
-        };
-        _type: "video";
-        _key: string;
-      }
-  >;
+  body: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "normal" | "h1" | "h2" | "h3" | "h4" | "blockquote";
+    listItem?: "bullet";
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  } | {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt: string;
+    _type: "imageObject";
+    _key: string;
+  } | {
+    video: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.fileAsset";
+      };
+      media?: unknown;
+      _type: "file";
+    };
+    imagenDeCarga?: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      alt: string;
+      _type: "imageObject";
+    };
+    _type: "video";
+    _key: string;
+  }>;
 };
 
 export type ProjectSection = {
@@ -516,67 +504,63 @@ export type Service = {
     };
     video?: VideoObject;
   };
-  body: Array<
-    | {
-        children?: Array<{
-          marks?: Array<string>;
-          text?: string;
-          _type: "span";
-          _key: string;
-        }>;
-        style?: "normal" | "h1" | "h2" | "h3" | "h4" | "blockquote";
-        listItem?: "bullet";
-        markDefs?: Array<{
-          href?: string;
-          _type: "link";
-          _key: string;
-        }>;
-        level?: number;
-        _type: "block";
-        _key: string;
-      }
-    | {
-        asset?: {
-          _ref: string;
-          _type: "reference";
-          _weak?: boolean;
-          [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-        };
-        media?: unknown;
-        hotspot?: SanityImageHotspot;
-        crop?: SanityImageCrop;
-        alt: string;
-        _type: "imageObject";
-        _key: string;
-      }
-    | {
-        video: {
-          asset?: {
-            _ref: string;
-            _type: "reference";
-            _weak?: boolean;
-            [internalGroqTypeReferenceTo]?: "sanity.fileAsset";
-          };
-          media?: unknown;
-          _type: "file";
-        };
-        imagenDeCarga?: {
-          asset?: {
-            _ref: string;
-            _type: "reference";
-            _weak?: boolean;
-            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-          };
-          media?: unknown;
-          hotspot?: SanityImageHotspot;
-          crop?: SanityImageCrop;
-          alt: string;
-          _type: "imageObject";
-        };
-        _type: "video";
-        _key: string;
-      }
-  >;
+  body: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "normal" | "h1" | "h2" | "h3" | "h4" | "blockquote";
+    listItem?: "bullet";
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  } | {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt: string;
+    _type: "imageObject";
+    _key: string;
+  } | {
+    video: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.fileAsset";
+      };
+      media?: unknown;
+      _type: "file";
+    };
+    imagenDeCarga?: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      alt: string;
+      _type: "imageObject";
+    };
+    _type: "video";
+    _key: string;
+  }>;
 };
 
 export type Surface = {
@@ -612,7 +596,7 @@ export type Surface = {
   formats: Array<{
     width: number;
     height: number;
-    formatPrice: number;
+    formatPrice: string;
     _type: "formato";
     _key: string;
   }>;
@@ -626,67 +610,63 @@ export type SurfaceTypes = {
   _updatedAt: string;
   _rev: string;
   title: string;
-  description: Array<
-    | {
-        children?: Array<{
-          marks?: Array<string>;
-          text?: string;
-          _type: "span";
-          _key: string;
-        }>;
-        style?: "normal" | "h1" | "h2" | "h3" | "h4" | "blockquote";
-        listItem?: "bullet";
-        markDefs?: Array<{
-          href?: string;
-          _type: "link";
-          _key: string;
-        }>;
-        level?: number;
-        _type: "block";
-        _key: string;
-      }
-    | {
-        asset?: {
-          _ref: string;
-          _type: "reference";
-          _weak?: boolean;
-          [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-        };
-        media?: unknown;
-        hotspot?: SanityImageHotspot;
-        crop?: SanityImageCrop;
-        alt: string;
-        _type: "imageObject";
-        _key: string;
-      }
-    | {
-        video: {
-          asset?: {
-            _ref: string;
-            _type: "reference";
-            _weak?: boolean;
-            [internalGroqTypeReferenceTo]?: "sanity.fileAsset";
-          };
-          media?: unknown;
-          _type: "file";
-        };
-        imagenDeCarga?: {
-          asset?: {
-            _ref: string;
-            _type: "reference";
-            _weak?: boolean;
-            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-          };
-          media?: unknown;
-          hotspot?: SanityImageHotspot;
-          crop?: SanityImageCrop;
-          alt: string;
-          _type: "imageObject";
-        };
-        _type: "video";
-        _key: string;
-      }
-  >;
+  description: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "normal" | "h1" | "h2" | "h3" | "h4" | "blockquote";
+    listItem?: "bullet";
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  } | {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt: string;
+    _type: "imageObject";
+    _key: string;
+  } | {
+    video: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.fileAsset";
+      };
+      media?: unknown;
+      _type: "file";
+    };
+    imagenDeCarga?: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      alt: string;
+      _type: "imageObject";
+    };
+    _type: "video";
+    _key: string;
+  }>;
   imageObject?: {
     asset?: {
       _ref: string;
@@ -784,274 +764,260 @@ export type Pages = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  homePage: Array<
-    | {
-        simpleTitle: string;
-        highlightedTitle: string;
-        descriptionCard: {
-          descriptionTitle: string;
-          projectNumber: number;
-          descriptionText: string;
-          primaryButton: Button;
-          secondaryButton: Button;
-        };
-        expertiseCard: {
-          image: {
-            asset?: {
-              _ref: string;
-              _type: "reference";
-              _weak?: boolean;
-              [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-            };
-            media?: unknown;
-            hotspot?: SanityImageHotspot;
-            crop?: SanityImageCrop;
-            alt: string;
-            _type: "imageObject";
-          };
-          title: string;
-          description: string;
-          ctaButton: Button;
-        };
-        _type: "homeHeroSection";
-        _key: string;
-      }
-    | ({
-        _key: string;
-      } & ServicesSection)
-    | {
-        title: string;
-        sectionName: string;
-        ImageOrVideo: {
-          imagenOVideo?: boolean;
-          imagen?: {
-            asset?: {
-              _ref: string;
-              _type: "reference";
-              _weak?: boolean;
-              [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-            };
-            media?: unknown;
-            hotspot?: SanityImageHotspot;
-            crop?: SanityImageCrop;
-            alt: string;
-            _type: "imageObject";
-          };
-          video?: VideoObject;
-        };
-        benefits: Array<{
-          title: string;
-          description: string;
-          image: {
-            asset?: {
-              _ref: string;
-              _type: "reference";
-              _weak?: boolean;
-              [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-            };
-            media?: unknown;
-            hotspot?: SanityImageHotspot;
-            crop?: SanityImageCrop;
-            alt: string;
-            _type: "imageObject";
-          };
-          _type: "benefit";
-          _key: string;
-        }>;
-        ctaButton: Button;
-        _type: "whyusSection";
-        _key: string;
-      }
-    | {
-        title: string;
-        sectionName: string;
-        sectionDescription: string;
-        surfaceList: Array<{
+  homePage: Array<{
+    simpleTitle: string;
+    highlightedTitle: string;
+    descriptionCard: {
+      descriptionTitle: string;
+      projectNumber: number;
+      descriptionText: string;
+      primaryButton: Button;
+      secondaryButton: Button;
+    };
+    expertiseCard: {
+      image: {
+        asset?: {
           _ref: string;
           _type: "reference";
           _weak?: boolean;
-          _key: string;
-          [internalGroqTypeReferenceTo]?: "surface";
-        }>;
-        _type: "surfaceSliderSection";
-        _key: string;
-      }
-    | {
-        title: string;
-        sectionName: string;
-        sectionDescription: string;
-        imageObject?: {
-          asset?: {
-            _ref: string;
-            _type: "reference";
-            _weak?: boolean;
-            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-          };
-          media?: unknown;
-          hotspot?: SanityImageHotspot;
-          crop?: SanityImageCrop;
-          alt: string;
-          _type: "image";
+          [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
         };
-        faqs: Array<{
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        alt: string;
+        _type: "imageObject";
+      };
+      title: string;
+      description: string;
+      ctaButton: Button;
+    };
+    _type: "homeHeroSection";
+    _key: string;
+  } | {
+    _key: string;
+  } & ServicesSection | {
+    title: string;
+    sectionName: string;
+    ImageOrVideo: {
+      imagenOVideo?: boolean;
+      imagen?: {
+        asset?: {
           _ref: string;
           _type: "reference";
           _weak?: boolean;
-          _key: string;
-          [internalGroqTypeReferenceTo]?: "faq";
-        }>;
-        _type: "faqSection";
-        _key: string;
-      }
-    | {
-        title: string;
-        sectionName: string;
-        imageObject?: {
-          asset?: {
-            _ref: string;
-            _type: "reference";
-            _weak?: boolean;
-            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-          };
-          media?: unknown;
-          hotspot?: SanityImageHotspot;
-          crop?: SanityImageCrop;
-          alt: string;
-          _type: "image";
+          [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
         };
-        homeProject: {
-          text: string;
-          ctaButton: Button;
-        };
-        comercialProject: {
-          text: string;
-          ctaButton: Button;
-        };
-        contactCard: {
-          title: string;
-          description: string;
-          ctaButton: Button;
-        };
-        _type: "contactSection";
-        _key: string;
-      }
-  >;
-  aboutPage: Array<
-    | {
-        titleDescription: string;
-        title1: string;
-        title2: string;
-        highlightedTitle: string;
-        descriptionText: string;
-        ImageOrVideo: {
-          imagenOVideo?: boolean;
-          imagen?: {
-            asset?: {
-              _ref: string;
-              _type: "reference";
-              _weak?: boolean;
-              [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-            };
-            media?: unknown;
-            hotspot?: SanityImageHotspot;
-            crop?: SanityImageCrop;
-            alt: string;
-            _type: "imageObject";
-          };
-          video?: VideoObject;
-        };
-        _type: "aboutHeroSection";
-        _key: string;
-      }
-    | {
-        title: string;
-        sectionName: string;
-        descriptionText: string;
-        ctaButton: Button;
-        imageArray: Array<{
-          asset?: {
-            _ref: string;
-            _type: "reference";
-            _weak?: boolean;
-            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-          };
-          media?: unknown;
-          hotspot?: SanityImageHotspot;
-          crop?: SanityImageCrop;
-          alt: string;
-          _type: "imageObject";
-          _key: string;
-        }>;
-        _type: "whatwedoSection";
-        _key: string;
-      }
-    | {
-        title: string;
-        sectionName?: string;
-        descriptionText: string;
-        ctaButton1: Button;
-        ctaButton2?: Button;
-        ImageOrVideo: {
-          imagenOVideo?: boolean;
-          imagen?: {
-            asset?: {
-              _ref: string;
-              _type: "reference";
-              _weak?: boolean;
-              [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-            };
-            media?: unknown;
-            hotspot?: SanityImageHotspot;
-            crop?: SanityImageCrop;
-            alt: string;
-            _type: "imageObject";
-          };
-          video?: VideoObject;
-        };
-        _type: "imageSection";
-        _key: string;
-      }
-  >;
-  projectsPage: Array<
-    | {
-        titleDescription?: string;
-        title: string;
-        ctaButton1: Button;
-        projects: Array<{
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        alt: string;
+        _type: "imageObject";
+      };
+      video?: VideoObject;
+    };
+    benefits: Array<{
+      title: string;
+      description: string;
+      image: {
+        asset?: {
           _ref: string;
           _type: "reference";
           _weak?: boolean;
-          _key: string;
-          [internalGroqTypeReferenceTo]?: "project";
-        }>;
-        _type: "projectSection";
-        _key: string;
-      }
-    | {
-        titleDescription?: string;
-        title: string;
-        imageObject?: {
-          asset?: {
-            _ref: string;
-            _type: "reference";
-            _weak?: boolean;
-            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-          };
-          media?: unknown;
-          hotspot?: SanityImageHotspot;
-          crop?: SanityImageCrop;
-          alt: string;
-          _type: "image";
+          [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
         };
-        contactCard: {
-          title: string;
-          description: string;
-          ctaButton: Button;
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        alt: string;
+        _type: "imageObject";
+      };
+      _type: "benefit";
+      _key: string;
+    }>;
+    ctaButton: Button;
+    _type: "whyusSection";
+    _key: string;
+  } | {
+    title: string;
+    sectionName: string;
+    sectionDescription: string;
+    surfaceList: Array<{
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      _key: string;
+      [internalGroqTypeReferenceTo]?: "surface";
+    }>;
+    _type: "surfaceSliderSection";
+    _key: string;
+  } | {
+    title: string;
+    sectionName: string;
+    sectionDescription: string;
+    imageObject?: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      alt: string;
+      _type: "image";
+    };
+    faqs: Array<{
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      _key: string;
+      [internalGroqTypeReferenceTo]?: "faq";
+    }>;
+    _type: "faqSection";
+    _key: string;
+  } | {
+    title: string;
+    sectionName: string;
+    imageObject?: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      alt: string;
+      _type: "image";
+    };
+    homeProject: {
+      text: string;
+      ctaButton: Button;
+    };
+    comercialProject: {
+      text: string;
+      ctaButton: Button;
+    };
+    contactCard: {
+      title: string;
+      description: string;
+      ctaButton: Button;
+    };
+    _type: "contactSection";
+    _key: string;
+  }>;
+  aboutPage: Array<{
+    titleDescription: string;
+    title1: string;
+    title2: string;
+    highlightedTitle: string;
+    descriptionText: string;
+    ImageOrVideo: {
+      imagenOVideo?: boolean;
+      imagen?: {
+        asset?: {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
         };
-        _type: "projectContactSection";
-        _key: string;
-      }
-  >;
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        alt: string;
+        _type: "imageObject";
+      };
+      video?: VideoObject;
+    };
+    _type: "aboutHeroSection";
+    _key: string;
+  } | {
+    title: string;
+    sectionName: string;
+    descriptionText: string;
+    ctaButton: Button;
+    imageArray: Array<{
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      alt: string;
+      _type: "imageObject";
+      _key: string;
+    }>;
+    _type: "whatwedoSection";
+    _key: string;
+  } | {
+    title: string;
+    sectionName?: string;
+    descriptionText: string;
+    ctaButton1: Button;
+    ctaButton2?: Button;
+    ImageOrVideo: {
+      imagenOVideo?: boolean;
+      imagen?: {
+        asset?: {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+        };
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        alt: string;
+        _type: "imageObject";
+      };
+      video?: VideoObject;
+    };
+    _type: "imageSection";
+    _key: string;
+  }>;
+  projectsPage: Array<{
+    titleDescription?: string;
+    title: string;
+    ctaButton1: Button;
+    projects: Array<{
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      _key: string;
+      [internalGroqTypeReferenceTo]?: "project";
+    }>;
+    _type: "projectSection";
+    _key: string;
+  } | {
+    titleDescription?: string;
+    title: string;
+    imageObject?: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      alt: string;
+      _type: "image";
+    };
+    contactCard: {
+      title: string;
+      description: string;
+      ctaButton: Button;
+    };
+    _type: "projectContactSection";
+    _key: string;
+  }>;
   cotizador?: {
     surfaceSelection?: {
       title: string;
@@ -1138,67 +1104,63 @@ export type Post = {
     [internalGroqTypeReferenceTo]?: "category";
   }>;
   publishedAt?: string;
-  body: Array<
-    | {
-        children?: Array<{
-          marks?: Array<string>;
-          text?: string;
-          _type: "span";
-          _key: string;
-        }>;
-        style?: "normal" | "h1" | "h2" | "h3" | "h4" | "blockquote";
-        listItem?: "bullet";
-        markDefs?: Array<{
-          href?: string;
-          _type: "link";
-          _key: string;
-        }>;
-        level?: number;
-        _type: "block";
-        _key: string;
-      }
-    | {
-        asset?: {
-          _ref: string;
-          _type: "reference";
-          _weak?: boolean;
-          [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-        };
-        media?: unknown;
-        hotspot?: SanityImageHotspot;
-        crop?: SanityImageCrop;
-        alt: string;
-        _type: "imageObject";
-        _key: string;
-      }
-    | {
-        video: {
-          asset?: {
-            _ref: string;
-            _type: "reference";
-            _weak?: boolean;
-            [internalGroqTypeReferenceTo]?: "sanity.fileAsset";
-          };
-          media?: unknown;
-          _type: "file";
-        };
-        imagenDeCarga?: {
-          asset?: {
-            _ref: string;
-            _type: "reference";
-            _weak?: boolean;
-            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-          };
-          media?: unknown;
-          hotspot?: SanityImageHotspot;
-          crop?: SanityImageCrop;
-          alt: string;
-          _type: "imageObject";
-        };
-        _type: "video";
-        _key: string;
-      }
-  >;
+  body: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "normal" | "h1" | "h2" | "h3" | "h4" | "blockquote";
+    listItem?: "bullet";
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  } | {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt: string;
+    _type: "imageObject";
+    _key: string;
+  } | {
+    video: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.fileAsset";
+      };
+      media?: unknown;
+      _type: "file";
+    };
+    imagenDeCarga?: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      alt: string;
+      _type: "imageObject";
+    };
+    _type: "video";
+    _key: string;
+  }>;
 };
 
 export type Category = {
@@ -1211,67 +1173,63 @@ export type Category = {
   description?: string;
 };
 
-export type BlockContent = Array<
-  | {
-      children?: Array<{
-        marks?: Array<string>;
-        text?: string;
-        _type: "span";
-        _key: string;
-      }>;
-      style?: "normal" | "h1" | "h2" | "h3" | "h4" | "blockquote";
-      listItem?: "bullet";
-      markDefs?: Array<{
-        href?: string;
-        _type: "link";
-        _key: string;
-      }>;
-      level?: number;
-      _type: "block";
-      _key: string;
-    }
-  | {
-      asset?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-      };
-      media?: unknown;
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      alt: string;
-      _type: "imageObject";
-      _key: string;
-    }
-  | {
-      video: {
-        asset?: {
-          _ref: string;
-          _type: "reference";
-          _weak?: boolean;
-          [internalGroqTypeReferenceTo]?: "sanity.fileAsset";
-        };
-        media?: unknown;
-        _type: "file";
-      };
-      imagenDeCarga?: {
-        asset?: {
-          _ref: string;
-          _type: "reference";
-          _weak?: boolean;
-          [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-        };
-        media?: unknown;
-        hotspot?: SanityImageHotspot;
-        crop?: SanityImageCrop;
-        alt: string;
-        _type: "imageObject";
-      };
-      _type: "video";
-      _key: string;
-    }
->;
+export type BlockContent = Array<{
+  children?: Array<{
+    marks?: Array<string>;
+    text?: string;
+    _type: "span";
+    _key: string;
+  }>;
+  style?: "normal" | "h1" | "h2" | "h3" | "h4" | "blockquote";
+  listItem?: "bullet";
+  markDefs?: Array<{
+    href?: string;
+    _type: "link";
+    _key: string;
+  }>;
+  level?: number;
+  _type: "block";
+  _key: string;
+} | {
+  asset?: {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+  };
+  media?: unknown;
+  hotspot?: SanityImageHotspot;
+  crop?: SanityImageCrop;
+  alt: string;
+  _type: "imageObject";
+  _key: string;
+} | {
+  video: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.fileAsset";
+    };
+    media?: unknown;
+    _type: "file";
+  };
+  imagenDeCarga?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt: string;
+    _type: "imageObject";
+  };
+  _type: "video";
+  _key: string;
+}>;
 
 export type ImageObject = {
   _type: "imageObject";
@@ -1366,125 +1324,84 @@ export type SanityImageMetadata = {
   isOpaque?: boolean;
 };
 
-export type AllSanitySchemaTypes =
-  | SanityImagePaletteSwatch
-  | SanityImagePalette
-  | SanityImageDimensions
-  | Geopoint
-  | Slug
-  | Config
-  | Project
-  | ProjectSection
-  | ProjectContactSection
-  | AboutHeroSection
-  | ImageSection
-  | WhatwedoSection
-  | ContactSection
-  | Faq
-  | FaqSection
-  | SurfaceSliderSection
-  | ImageOrVideo
-  | WhyusSection
-  | SecondaryService
-  | Service
-  | Surface
-  | SurfaceTypes
-  | ServicesSection
-  | HomeHeroSection
-  | Pages
-  | VideoObject
-  | Button
-  | Post
-  | Category
-  | BlockContent
-  | ImageObject
-  | SanityFileAsset
-  | SanityImageCrop
-  | SanityImageHotspot
-  | SanityImageAsset
-  | SanityAssetSourceData
-  | SanityImageMetadata;
+export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | Geopoint | Slug | Config | Project | ProjectSection | ProjectContactSection | AboutHeroSection | ImageSection | WhatwedoSection | ContactSection | Faq | FaqSection | SurfaceSliderSection | ImageOrVideo | WhyusSection | SecondaryService | Service | Surface | SurfaceTypes | ServicesSection | HomeHeroSection | Pages | VideoObject | Button | Post | Category | BlockContent | ImageObject | SanityFileAsset | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./sanity/queries/aboutQueries.ts
 // Variable: ABOUTPAGE_QUERY
 // Query: *[_type == 'pages'][0]{  aboutPage}
 export type ABOUTPAGE_QUERYResult = {
-  aboutPage: Array<
-    | {
-        titleDescription: string;
-        title1: string;
-        title2: string;
-        highlightedTitle: string;
-        descriptionText: string;
-        ImageOrVideo: {
-          imagenOVideo?: boolean;
-          imagen?: {
-            asset?: {
-              _ref: string;
-              _type: "reference";
-              _weak?: boolean;
-              [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-            };
-            media?: unknown;
-            hotspot?: SanityImageHotspot;
-            crop?: SanityImageCrop;
-            alt: string;
-            _type: "imageObject";
-          };
-          video?: VideoObject;
+  aboutPage: Array<{
+    titleDescription: string;
+    title1: string;
+    title2: string;
+    highlightedTitle: string;
+    descriptionText: string;
+    ImageOrVideo: {
+      imagenOVideo?: boolean;
+      imagen?: {
+        asset?: {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
         };
-        _type: "aboutHeroSection";
-        _key: string;
-      }
-    | {
-        title: string;
-        sectionName?: string;
-        descriptionText: string;
-        ctaButton1: Button;
-        ctaButton2?: Button;
-        ImageOrVideo: {
-          imagenOVideo?: boolean;
-          imagen?: {
-            asset?: {
-              _ref: string;
-              _type: "reference";
-              _weak?: boolean;
-              [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-            };
-            media?: unknown;
-            hotspot?: SanityImageHotspot;
-            crop?: SanityImageCrop;
-            alt: string;
-            _type: "imageObject";
-          };
-          video?: VideoObject;
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        alt: string;
+        _type: "imageObject";
+      };
+      video?: VideoObject;
+    };
+    _type: "aboutHeroSection";
+    _key: string;
+  } | {
+    title: string;
+    sectionName?: string;
+    descriptionText: string;
+    ctaButton1: Button;
+    ctaButton2?: Button;
+    ImageOrVideo: {
+      imagenOVideo?: boolean;
+      imagen?: {
+        asset?: {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
         };
-        _type: "imageSection";
-        _key: string;
-      }
-    | {
-        title: string;
-        sectionName: string;
-        descriptionText: string;
-        ctaButton: Button;
-        imageArray: Array<{
-          asset?: {
-            _ref: string;
-            _type: "reference";
-            _weak?: boolean;
-            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-          };
-          media?: unknown;
-          hotspot?: SanityImageHotspot;
-          crop?: SanityImageCrop;
-          alt: string;
-          _type: "imageObject";
-          _key: string;
-        }>;
-        _type: "whatwedoSection";
-        _key: string;
-      }
-  >;
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        alt: string;
+        _type: "imageObject";
+      };
+      video?: VideoObject;
+    };
+    _type: "imageSection";
+    _key: string;
+  } | {
+    title: string;
+    sectionName: string;
+    descriptionText: string;
+    ctaButton: Button;
+    imageArray: Array<{
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      alt: string;
+      _type: "imageObject";
+      _key: string;
+    }>;
+    _type: "whatwedoSection";
+    _key: string;
+  }>;
 } | null;
 
 // Source: ./sanity/queries/blogQueries.ts
@@ -1513,67 +1430,63 @@ export type BLOGS_QUERYResult = Array<{
 export type BLOG_QUERYResult = {
   title: string;
   description: string;
-  body: Array<
-    | {
-        children?: Array<{
-          marks?: Array<string>;
-          text?: string;
-          _type: "span";
-          _key: string;
-        }>;
-        style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "normal";
-        listItem?: "bullet";
-        markDefs?: Array<{
-          href?: string;
-          _type: "link";
-          _key: string;
-        }>;
-        level?: number;
-        _type: "block";
-        _key: string;
-      }
-    | {
-        asset?: {
-          _ref: string;
-          _type: "reference";
-          _weak?: boolean;
-          [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-        };
-        media?: unknown;
-        hotspot?: SanityImageHotspot;
-        crop?: SanityImageCrop;
-        alt: string;
-        _type: "imageObject";
-        _key: string;
-      }
-    | {
-        video: {
-          asset?: {
-            _ref: string;
-            _type: "reference";
-            _weak?: boolean;
-            [internalGroqTypeReferenceTo]?: "sanity.fileAsset";
-          };
-          media?: unknown;
-          _type: "file";
-        };
-        imagenDeCarga?: {
-          asset?: {
-            _ref: string;
-            _type: "reference";
-            _weak?: boolean;
-            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-          };
-          media?: unknown;
-          hotspot?: SanityImageHotspot;
-          crop?: SanityImageCrop;
-          alt: string;
-          _type: "imageObject";
-        };
-        _type: "video";
-        _key: string;
-      }
-  >;
+  body: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "normal";
+    listItem?: "bullet";
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  } | {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt: string;
+    _type: "imageObject";
+    _key: string;
+  } | {
+    video: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.fileAsset";
+      };
+      media?: unknown;
+      _type: "file";
+    };
+    imagenDeCarga?: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      alt: string;
+      _type: "imageObject";
+    };
+    _type: "video";
+    _key: string;
+  }>;
   image: {
     url: string | null;
     alt: string;
@@ -1606,7 +1519,7 @@ export type All_SURFACES_QUERYResult = Array<{
     crop?: SanityImageCrop;
     alt: string;
     _type: "image";
-  };
+  } | null;
   type: {
     title: string;
     _id: string;
@@ -1616,7 +1529,7 @@ export type All_SURFACES_QUERYResult = Array<{
   formats: Array<{
     height: number;
     width: number;
-    price: number;
+    price: string;
   }>;
   code: number | null;
   description: string | null;
@@ -1649,7 +1562,7 @@ export type AVAILABLE_SURFACES_QUERYResult = Array<{
   formats: Array<{
     height: number;
     width: number;
-    price: number;
+    price: string;
   }>;
   code: number | null;
   description: string | null;
@@ -1692,409 +1605,119 @@ export type COTIZADOR_QUERYResult = {
 // Variable: HOMEPAGE_QUERY
 // Query: *[_type == 'pages'][0]{  homePage[] {    ...,    primarySurfaces[]->,    surfaceList[]->,    faqs []->,  }}
 export type HOMEPAGE_QUERYResult = {
-  homePage: Array<
-    | {
-        title: string;
-        sectionName: string;
-        imageObject?: {
-          asset?: {
-            _ref: string;
-            _type: "reference";
-            _weak?: boolean;
-            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-          };
-          media?: unknown;
-          hotspot?: SanityImageHotspot;
-          crop?: SanityImageCrop;
-          alt: string;
-          _type: "image";
-        };
-        homeProject: {
-          text: string;
-          ctaButton: Button;
-        };
-        comercialProject: {
-          text: string;
-          ctaButton: Button;
-        };
-        contactCard: {
-          title: string;
-          description: string;
-          ctaButton: Button;
-        };
-        _type: "contactSection";
-        _key: string;
-        primarySurfaces: null;
-        surfaceList: null;
-        faqs: null;
-      }
-    | {
-        title: string;
-        sectionName: string;
-        sectionDescription: string;
-        imageObject?: {
-          asset?: {
-            _ref: string;
-            _type: "reference";
-            _weak?: boolean;
-            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-          };
-          media?: unknown;
-          hotspot?: SanityImageHotspot;
-          crop?: SanityImageCrop;
-          alt: string;
-          _type: "image";
-        };
-        faqs: Array<{
-          _id: string;
-          _type: "faq";
-          _createdAt: string;
-          _updatedAt: string;
-          _rev: string;
-          question: string;
-          answer: string;
-        }>;
-        _type: "faqSection";
-        _key: string;
-        primarySurfaces: null;
-        surfaceList: null;
-      }
-    | {
-        simpleTitle: string;
-        highlightedTitle: string;
-        descriptionCard: {
-          descriptionTitle: string;
-          projectNumber: number;
-          descriptionText: string;
-          primaryButton: Button;
-          secondaryButton: Button;
-        };
-        expertiseCard: {
-          image: {
-            asset?: {
-              _ref: string;
-              _type: "reference";
-              _weak?: boolean;
-              [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-            };
-            media?: unknown;
-            hotspot?: SanityImageHotspot;
-            crop?: SanityImageCrop;
-            alt: string;
-            _type: "imageObject";
-          };
-          title: string;
-          description: string;
-          ctaButton: Button;
-        };
-        _type: "homeHeroSection";
-        _key: string;
-        primarySurfaces: null;
-        surfaceList: null;
-        faqs: null;
-      }
-    | {
-        _key: string;
-        _type: "servicesSection";
-        titleDescription: string;
-        title: string;
-        sectionName: string;
-        description: string;
-        ctaButton: Button;
-        primarySurfaces: Array<{
-          _id: string;
-          _type: "surfaceTypes";
-          _createdAt: string;
-          _updatedAt: string;
-          _rev: string;
-          title: string;
-          description: Array<
-            | {
-                children?: Array<{
-                  marks?: Array<string>;
-                  text?: string;
-                  _type: "span";
-                  _key: string;
-                }>;
-                style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "normal";
-                listItem?: "bullet";
-                markDefs?: Array<{
-                  href?: string;
-                  _type: "link";
-                  _key: string;
-                }>;
-                level?: number;
-                _type: "block";
-                _key: string;
-              }
-            | {
-                asset?: {
-                  _ref: string;
-                  _type: "reference";
-                  _weak?: boolean;
-                  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-                };
-                media?: unknown;
-                hotspot?: SanityImageHotspot;
-                crop?: SanityImageCrop;
-                alt: string;
-                _type: "imageObject";
-                _key: string;
-              }
-            | {
-                video: {
-                  asset?: {
-                    _ref: string;
-                    _type: "reference";
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: "sanity.fileAsset";
-                  };
-                  media?: unknown;
-                  _type: "file";
-                };
-                imagenDeCarga?: {
-                  asset?: {
-                    _ref: string;
-                    _type: "reference";
-                    _weak?: boolean;
-                    [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-                  };
-                  media?: unknown;
-                  hotspot?: SanityImageHotspot;
-                  crop?: SanityImageCrop;
-                  alt: string;
-                  _type: "imageObject";
-                };
-                _type: "video";
-                _key: string;
-              }
-          >;
-          imageObject?: {
-            asset?: {
-              _ref: string;
-              _type: "reference";
-              _weak?: boolean;
-              [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-            };
-            media?: unknown;
-            hotspot?: SanityImageHotspot;
-            crop?: SanityImageCrop;
-            alt: string;
-            _type: "image";
-          };
-        }>;
-        secondaryServices: Array<{
-          title: string;
-          description: string;
-          imageObject?: {
-            asset?: {
-              _ref: string;
-              _type: "reference";
-              _weak?: boolean;
-              [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-            };
-            media?: unknown;
-            hotspot?: SanityImageHotspot;
-            crop?: SanityImageCrop;
-            alt: string;
-            _type: "image";
-          };
-          reference: {
-            _ref: string;
-            _type: "reference";
-            _weak?: boolean;
-            [internalGroqTypeReferenceTo]?: "service";
-          };
-          _type: "secondaryService";
-          _key: string;
-        }>;
-        surfaceList: null;
-        faqs: null;
-      }
-    | {
-        title: string;
-        sectionName: string;
-        sectionDescription: string;
-        surfaceList: Array<{
-          _id: string;
-          _type: "surface";
-          _createdAt: string;
-          _updatedAt: string;
-          _rev: string;
-          available?: boolean;
-          title: string;
-          code?: number;
-          imageObject?: {
-            asset?: {
-              _ref: string;
-              _type: "reference";
-              _weak?: boolean;
-              [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-            };
-            media?: unknown;
-            hotspot?: SanityImageHotspot;
-            crop?: SanityImageCrop;
-            alt: string;
-            _type: "image";
-          };
-          type: {
-            _ref: string;
-            _type: "reference";
-            _weak?: boolean;
-            [internalGroqTypeReferenceTo]?: "surfaceTypes";
-          };
-          caliber?: string;
-          price?: string;
-          formats: Array<{
-            width: number;
-            height: number;
-            formatPrice: number;
-            _type: "formato";
-            _key: string;
-          }>;
-          description?: string;
-        }>;
-        _type: "surfaceSliderSection";
-        _key: string;
-        primarySurfaces: null;
-        faqs: null;
-      }
-    | {
-        title: string;
-        sectionName: string;
-        ImageOrVideo: {
-          imagenOVideo?: boolean;
-          imagen?: {
-            asset?: {
-              _ref: string;
-              _type: "reference";
-              _weak?: boolean;
-              [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-            };
-            media?: unknown;
-            hotspot?: SanityImageHotspot;
-            crop?: SanityImageCrop;
-            alt: string;
-            _type: "imageObject";
-          };
-          video?: VideoObject;
-        };
-        benefits: Array<{
-          title: string;
-          description: string;
-          image: {
-            asset?: {
-              _ref: string;
-              _type: "reference";
-              _weak?: boolean;
-              [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-            };
-            media?: unknown;
-            hotspot?: SanityImageHotspot;
-            crop?: SanityImageCrop;
-            alt: string;
-            _type: "imageObject";
-          };
-          _type: "benefit";
-          _key: string;
-        }>;
-        ctaButton: Button;
-        _type: "whyusSection";
-        _key: string;
-        primarySurfaces: null;
-        surfaceList: null;
-        faqs: null;
-      }
-  >;
-} | null;
-// Variable: CONTACTCARD_QUERY
-// Query: *[_type == 'pages'][0].homePage[_type == 'contactSection'][0].contactCard
-export type CONTACTCARD_QUERYResult = {
-  title: string;
-  description: string;
-  ctaButton: Button;
-} | null;
-
-// Source: ./sanity/queries/projectQueries.ts
-// Variable: PROJECTS_QUERY
-// Query: *[_type == 'pages'][0]{  projectsPage[]{    ...,    projects[] -> {      _id,      image,      title,    }  }}
-export type PROJECTS_QUERYResult = {
-  projectsPage: Array<
-    | {
-        titleDescription?: string;
-        title: string;
-        imageObject?: {
-          asset?: {
-            _ref: string;
-            _type: "reference";
-            _weak?: boolean;
-            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-          };
-          media?: unknown;
-          hotspot?: SanityImageHotspot;
-          crop?: SanityImageCrop;
-          alt: string;
-          _type: "image";
-        };
-        contactCard: {
-          title: string;
-          description: string;
-          ctaButton: Button;
-        };
-        _type: "projectContactSection";
-        _key: string;
-        projects: null;
-      }
-    | {
-        titleDescription?: string;
-        title: string;
-        ctaButton1: Button;
-        projects: Array<{
-          _id: string;
-          image: {
-            asset?: {
-              _ref: string;
-              _type: "reference";
-              _weak?: boolean;
-              [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-            };
-            media?: unknown;
-            hotspot?: SanityImageHotspot;
-            crop?: SanityImageCrop;
-            alt: string;
-            _type: "imageObject";
-          } | null;
-          title: string;
-        }>;
-        _type: "projectSection";
-        _key: string;
-      }
-  >;
-} | null;
-// Variable: PROJECT_QUERY
-// Query: *[_type == 'project' && _id == $id][0]
-export type PROJECT_QUERYResult = {
-  _id: string;
-  _type: "project";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  title: string;
-  image?: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+  homePage: Array<{
+    title: string;
+    sectionName: string;
+    imageObject?: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      alt: string;
+      _type: "image";
     };
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    alt: string;
-    _type: "imageObject";
-  };
-  body: Array<
-    | {
+    homeProject: {
+      text: string;
+      ctaButton: Button;
+    };
+    comercialProject: {
+      text: string;
+      ctaButton: Button;
+    };
+    contactCard: {
+      title: string;
+      description: string;
+      ctaButton: Button;
+    };
+    _type: "contactSection";
+    _key: string;
+    primarySurfaces: null;
+    surfaceList: null;
+    faqs: null;
+  } | {
+    title: string;
+    sectionName: string;
+    sectionDescription: string;
+    imageObject?: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      alt: string;
+      _type: "image";
+    };
+    faqs: Array<{
+      _id: string;
+      _type: "faq";
+      _createdAt: string;
+      _updatedAt: string;
+      _rev: string;
+      question: string;
+      answer: string;
+    }>;
+    _type: "faqSection";
+    _key: string;
+    primarySurfaces: null;
+    surfaceList: null;
+  } | {
+    simpleTitle: string;
+    highlightedTitle: string;
+    descriptionCard: {
+      descriptionTitle: string;
+      projectNumber: number;
+      descriptionText: string;
+      primaryButton: Button;
+      secondaryButton: Button;
+    };
+    expertiseCard: {
+      image: {
+        asset?: {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+        };
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        alt: string;
+        _type: "imageObject";
+      };
+      title: string;
+      description: string;
+      ctaButton: Button;
+    };
+    _type: "homeHeroSection";
+    _key: string;
+    primarySurfaces: null;
+    surfaceList: null;
+    faqs: null;
+  } | {
+    _key: string;
+    _type: "servicesSection";
+    titleDescription: string;
+    title: string;
+    sectionName: string;
+    description: string;
+    ctaButton: Button;
+    primarySurfaces: Array<{
+      _id: string;
+      _type: "surfaceTypes";
+      _createdAt: string;
+      _updatedAt: string;
+      _rev: string;
+      title: string;
+      description: Array<{
         children?: Array<{
           marks?: Array<string>;
           text?: string;
@@ -2111,8 +1734,7 @@ export type PROJECT_QUERYResult = {
         level?: number;
         _type: "block";
         _key: string;
-      }
-    | {
+      } | {
         asset?: {
           _ref: string;
           _type: "reference";
@@ -2125,8 +1747,7 @@ export type PROJECT_QUERYResult = {
         alt: string;
         _type: "imageObject";
         _key: string;
-      }
-    | {
+      } | {
         video: {
           asset?: {
             _ref: string;
@@ -2152,8 +1773,282 @@ export type PROJECT_QUERYResult = {
         };
         _type: "video";
         _key: string;
-      }
-  >;
+      }>;
+      imageObject?: {
+        asset?: {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+        };
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        alt: string;
+        _type: "image";
+      };
+    }>;
+    secondaryServices: Array<{
+      title: string;
+      description: string;
+      imageObject?: {
+        asset?: {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+        };
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        alt: string;
+        _type: "image";
+      };
+      reference: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "service";
+      };
+      _type: "secondaryService";
+      _key: string;
+    }>;
+    surfaceList: null;
+    faqs: null;
+  } | {
+    title: string;
+    sectionName: string;
+    sectionDescription: string;
+    surfaceList: Array<{
+      _id: string;
+      _type: "surface";
+      _createdAt: string;
+      _updatedAt: string;
+      _rev: string;
+      available?: boolean;
+      title: string;
+      code?: number;
+      imageObject?: {
+        asset?: {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+        };
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        alt: string;
+        _type: "image";
+      };
+      type: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "surfaceTypes";
+      };
+      caliber?: string;
+      price?: string;
+      formats: Array<{
+        width: number;
+        height: number;
+        formatPrice: string;
+        _type: "formato";
+        _key: string;
+      }>;
+      description?: string;
+    }>;
+    _type: "surfaceSliderSection";
+    _key: string;
+    primarySurfaces: null;
+    faqs: null;
+  } | {
+    title: string;
+    sectionName: string;
+    ImageOrVideo: {
+      imagenOVideo?: boolean;
+      imagen?: {
+        asset?: {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+        };
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        alt: string;
+        _type: "imageObject";
+      };
+      video?: VideoObject;
+    };
+    benefits: Array<{
+      title: string;
+      description: string;
+      image: {
+        asset?: {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+        };
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        alt: string;
+        _type: "imageObject";
+      };
+      _type: "benefit";
+      _key: string;
+    }>;
+    ctaButton: Button;
+    _type: "whyusSection";
+    _key: string;
+    primarySurfaces: null;
+    surfaceList: null;
+    faqs: null;
+  }>;
+} | null;
+// Variable: CONTACTCARD_QUERY
+// Query: *[_type == 'pages'][0].homePage[_type == 'contactSection'][0].contactCard
+export type CONTACTCARD_QUERYResult = {
+  title: string;
+  description: string;
+  ctaButton: Button;
+} | null;
+
+// Source: ./sanity/queries/projectQueries.ts
+// Variable: PROJECTS_QUERY
+// Query: *[_type == 'pages'][0]{  projectsPage[]{    ...,    projects[] -> {      _id,      image,      title,    }  }}
+export type PROJECTS_QUERYResult = {
+  projectsPage: Array<{
+    titleDescription?: string;
+    title: string;
+    imageObject?: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      alt: string;
+      _type: "image";
+    };
+    contactCard: {
+      title: string;
+      description: string;
+      ctaButton: Button;
+    };
+    _type: "projectContactSection";
+    _key: string;
+    projects: null;
+  } | {
+    titleDescription?: string;
+    title: string;
+    ctaButton1: Button;
+    projects: Array<{
+      _id: string;
+      image: {
+        asset?: {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+        };
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        alt: string;
+        _type: "imageObject";
+      } | null;
+      title: string;
+    }>;
+    _type: "projectSection";
+    _key: string;
+  }>;
+} | null;
+// Variable: PROJECT_QUERY
+// Query: *[_type == 'project' && _id == $id][0]
+export type PROJECT_QUERYResult = {
+  _id: string;
+  _type: "project";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title: string;
+  image?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt: string;
+    _type: "imageObject";
+  };
+  body: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "normal";
+    listItem?: "bullet";
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  } | {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt: string;
+    _type: "imageObject";
+    _key: string;
+  } | {
+    video: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.fileAsset";
+      };
+      media?: unknown;
+      _type: "file";
+    };
+    imagenDeCarga?: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      alt: string;
+      _type: "imageObject";
+    };
+    _type: "video";
+    _key: string;
+  }>;
 } | null;
 
 // Source: ./sanity/queries/serviceQueries.ts
@@ -2184,67 +2079,63 @@ export type SERVICES_QUERYResult = Array<{
     };
     video?: VideoObject;
   };
-  body: Array<
-    | {
-        children?: Array<{
-          marks?: Array<string>;
-          text?: string;
-          _type: "span";
-          _key: string;
-        }>;
-        style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "normal";
-        listItem?: "bullet";
-        markDefs?: Array<{
-          href?: string;
-          _type: "link";
-          _key: string;
-        }>;
-        level?: number;
-        _type: "block";
-        _key: string;
-      }
-    | {
-        asset?: {
-          _ref: string;
-          _type: "reference";
-          _weak?: boolean;
-          [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-        };
-        media?: unknown;
-        hotspot?: SanityImageHotspot;
-        crop?: SanityImageCrop;
-        alt: string;
-        _type: "imageObject";
-        _key: string;
-      }
-    | {
-        video: {
-          asset?: {
-            _ref: string;
-            _type: "reference";
-            _weak?: boolean;
-            [internalGroqTypeReferenceTo]?: "sanity.fileAsset";
-          };
-          media?: unknown;
-          _type: "file";
-        };
-        imagenDeCarga?: {
-          asset?: {
-            _ref: string;
-            _type: "reference";
-            _weak?: boolean;
-            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-          };
-          media?: unknown;
-          hotspot?: SanityImageHotspot;
-          crop?: SanityImageCrop;
-          alt: string;
-          _type: "imageObject";
-        };
-        _type: "video";
-        _key: string;
-      }
-  >;
+  body: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "normal";
+    listItem?: "bullet";
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  } | {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt: string;
+    _type: "imageObject";
+    _key: string;
+  } | {
+    video: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.fileAsset";
+      };
+      media?: unknown;
+      _type: "file";
+    };
+    imagenDeCarga?: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      alt: string;
+      _type: "imageObject";
+    };
+    _type: "video";
+    _key: string;
+  }>;
 }>;
 // Variable: SERVICE_QUERY
 // Query: *[_type == 'service' && _id == $id][0]
@@ -2273,67 +2164,63 @@ export type SERVICE_QUERYResult = {
     };
     video?: VideoObject;
   };
-  body: Array<
-    | {
-        children?: Array<{
-          marks?: Array<string>;
-          text?: string;
-          _type: "span";
-          _key: string;
-        }>;
-        style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "normal";
-        listItem?: "bullet";
-        markDefs?: Array<{
-          href?: string;
-          _type: "link";
-          _key: string;
-        }>;
-        level?: number;
-        _type: "block";
-        _key: string;
-      }
-    | {
-        asset?: {
-          _ref: string;
-          _type: "reference";
-          _weak?: boolean;
-          [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-        };
-        media?: unknown;
-        hotspot?: SanityImageHotspot;
-        crop?: SanityImageCrop;
-        alt: string;
-        _type: "imageObject";
-        _key: string;
-      }
-    | {
-        video: {
-          asset?: {
-            _ref: string;
-            _type: "reference";
-            _weak?: boolean;
-            [internalGroqTypeReferenceTo]?: "sanity.fileAsset";
-          };
-          media?: unknown;
-          _type: "file";
-        };
-        imagenDeCarga?: {
-          asset?: {
-            _ref: string;
-            _type: "reference";
-            _weak?: boolean;
-            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-          };
-          media?: unknown;
-          hotspot?: SanityImageHotspot;
-          crop?: SanityImageCrop;
-          alt: string;
-          _type: "imageObject";
-        };
-        _type: "video";
-        _key: string;
-      }
-  >;
+  body: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "normal";
+    listItem?: "bullet";
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  } | {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt: string;
+    _type: "imageObject";
+    _key: string;
+  } | {
+    video: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.fileAsset";
+      };
+      media?: unknown;
+      _type: "file";
+    };
+    imagenDeCarga?: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      alt: string;
+      _type: "imageObject";
+    };
+    _type: "video";
+    _key: string;
+  }>;
 } | null;
 
 // Source: ./sanity/queries/settingsQueries.ts
@@ -2354,15 +2241,7 @@ export type FOOTERSETTINGS_QUERYResult = {
     country: string;
   };
   socialLinks: Array<{
-    redSocial:
-      | "facebook"
-      | "Instagram"
-      | "linkedIn"
-      | "Otra"
-      | "TikTok"
-      | "WhatsApp"
-      | "X"
-      | "YouTube";
+    redSocial: "facebook" | "Instagram" | "linkedIn" | "Otra" | "TikTok" | "WhatsApp" | "X" | "YouTube";
     url: string;
     _type: "link";
     _key: string;
@@ -2388,67 +2267,63 @@ export type ALLSURFACETYPES_QUERYResult = Array<{
   _updatedAt: string;
   _rev: string;
   title: string;
-  description: Array<
-    | {
-        children?: Array<{
-          marks?: Array<string>;
-          text?: string;
-          _type: "span";
-          _key: string;
-        }>;
-        style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "normal";
-        listItem?: "bullet";
-        markDefs?: Array<{
-          href?: string;
-          _type: "link";
-          _key: string;
-        }>;
-        level?: number;
-        _type: "block";
-        _key: string;
-      }
-    | {
-        asset?: {
-          _ref: string;
-          _type: "reference";
-          _weak?: boolean;
-          [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-        };
-        media?: unknown;
-        hotspot?: SanityImageHotspot;
-        crop?: SanityImageCrop;
-        alt: string;
-        _type: "imageObject";
-        _key: string;
-      }
-    | {
-        video: {
-          asset?: {
-            _ref: string;
-            _type: "reference";
-            _weak?: boolean;
-            [internalGroqTypeReferenceTo]?: "sanity.fileAsset";
-          };
-          media?: unknown;
-          _type: "file";
-        };
-        imagenDeCarga?: {
-          asset?: {
-            _ref: string;
-            _type: "reference";
-            _weak?: boolean;
-            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-          };
-          media?: unknown;
-          hotspot?: SanityImageHotspot;
-          crop?: SanityImageCrop;
-          alt: string;
-          _type: "imageObject";
-        };
-        _type: "video";
-        _key: string;
-      }
-  >;
+  description: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "normal";
+    listItem?: "bullet";
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  } | {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt: string;
+    _type: "imageObject";
+    _key: string;
+  } | {
+    video: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.fileAsset";
+      };
+      media?: unknown;
+      _type: "file";
+    };
+    imagenDeCarga?: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      alt: string;
+      _type: "imageObject";
+    };
+    _type: "video";
+    _key: string;
+  }>;
   imageObject?: {
     asset?: {
       _ref: string;
@@ -2472,67 +2347,63 @@ export type SURFACETYPEBYID_QUERYResult = {
   _updatedAt: string;
   _rev: string;
   title: string;
-  description: Array<
-    | {
-        children?: Array<{
-          marks?: Array<string>;
-          text?: string;
-          _type: "span";
-          _key: string;
-        }>;
-        style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "normal";
-        listItem?: "bullet";
-        markDefs?: Array<{
-          href?: string;
-          _type: "link";
-          _key: string;
-        }>;
-        level?: number;
-        _type: "block";
-        _key: string;
-      }
-    | {
-        asset?: {
-          _ref: string;
-          _type: "reference";
-          _weak?: boolean;
-          [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-        };
-        media?: unknown;
-        hotspot?: SanityImageHotspot;
-        crop?: SanityImageCrop;
-        alt: string;
-        _type: "imageObject";
-        _key: string;
-      }
-    | {
-        video: {
-          asset?: {
-            _ref: string;
-            _type: "reference";
-            _weak?: boolean;
-            [internalGroqTypeReferenceTo]?: "sanity.fileAsset";
-          };
-          media?: unknown;
-          _type: "file";
-        };
-        imagenDeCarga?: {
-          asset?: {
-            _ref: string;
-            _type: "reference";
-            _weak?: boolean;
-            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-          };
-          media?: unknown;
-          hotspot?: SanityImageHotspot;
-          crop?: SanityImageCrop;
-          alt: string;
-          _type: "imageObject";
-        };
-        _type: "video";
-        _key: string;
-      }
-  >;
+  description: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "normal";
+    listItem?: "bullet";
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  } | {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt: string;
+    _type: "imageObject";
+    _key: string;
+  } | {
+    video: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.fileAsset";
+      };
+      media?: unknown;
+      _type: "file";
+    };
+    imagenDeCarga?: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      alt: string;
+      _type: "imageObject";
+    };
+    _type: "video";
+    _key: string;
+  }>;
   imageObject?: {
     asset?: {
       _ref: string;
@@ -2582,7 +2453,7 @@ export type SURFACESBYTYPE_QUERYResult = Array<{
   formats: Array<{
     width: number;
     height: number;
-    formatPrice: number;
+    formatPrice: string;
     _type: "formato";
     _key: string;
   }>;
@@ -2629,7 +2500,7 @@ export type SURFACES_QUERYResult = Array<{
   formats: Array<{
     width: number;
     height: number;
-    formatPrice: number;
+    formatPrice: string;
     _type: "formato";
     _key: string;
   }>;
@@ -2671,11 +2542,11 @@ import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
     "*[_type == 'pages'][0]{\n  aboutPage\n}": ABOUTPAGE_QUERYResult;
-    '*[_type == "post" ][0...12]{\n  _id, \n  title, \n  description,   \n  image\n}': BLOGS_QUERYResult;
-    '*[_type == "post" && _id == $id][0]{\n  title, \n  description, \n  body, \n  "image": {\n    "url": image.asset->url,\n    "alt": image.alt\n    }, \n  categories, \n  publishedAt\n}': BLOG_QUERYResult;
-    '*[_type == "surface"]{\n  _id, \n  title, \n  "image": imageObject, \n  "type": type -> {\n      title,\n      _id\n  },\n  caliber,\n  price,\n  "formats": formats[] {\n      height, \n      width,\n      "price": formatPrice\n    },\n    code,\n    description,\n    available\n}': All_SURFACES_QUERYResult;
-    '*[_type == "surface" && available]{\n  _id, \n  title, \n  "image": imageObject, \n  "type": type -> {\n      title,\n      _id\n  },\n  caliber,\n  price,\n  "formats": formats[] {\n      height, \n      width,\n      "price": formatPrice\n    },\n    code,\n    description,\n    available\n}': AVAILABLE_SURFACES_QUERYResult;
-    '*[_type == "surfaceTypes"]{\n  _id, \n  title\n} ': ALL_SURFACE_TYPES_QUERYResult;
+    "*[_type == \"post\" ][0...12]{\n  _id, \n  title, \n  description,   \n  image\n}": BLOGS_QUERYResult;
+    "*[_type == \"post\" && _id == $id][0]{\n  title, \n  description, \n  body, \n  \"image\": {\n    \"url\": image.asset->url,\n    \"alt\": image.alt\n    }, \n  categories, \n  publishedAt\n}": BLOG_QUERYResult;
+    "*[_type == \"surface\"]{\n  _id, \n  title, \n  \"image\": imageObject, \n  \"type\": type -> {\n      title,\n      _id\n  },\n  caliber,\n  price,\n  \"formats\": formats[] {\n      height, \n      width,\n      \"price\": formatPrice\n    },\n    code,\n    description,\n    available\n}": All_SURFACES_QUERYResult;
+    "*[_type == \"surface\" && available]{\n  _id, \n  title, \n  \"image\": imageObject, \n  \"type\": type -> {\n      title,\n      _id\n  },\n  caliber,\n  price,\n  \"formats\": formats[] {\n      height, \n      width,\n      \"price\": formatPrice\n    },\n    code,\n    description,\n    available\n}": AVAILABLE_SURFACES_QUERYResult;
+    "*[_type == \"surfaceTypes\"]{\n  _id, \n  title\n} ": ALL_SURFACE_TYPES_QUERYResult;
     "*[_type == 'pages'][0]{\n  cotizador\n}": COTIZADOR_QUERYResult;
     "*[_type == 'pages'][0]{\n  homePage[] {\n    ...,\n    primarySurfaces[]->,\n    surfaceList[]->,\n    faqs []->,\n  }\n}": HOMEPAGE_QUERYResult;
     "*[_type == 'pages'][0].homePage[_type == 'contactSection'][0].contactCard": CONTACTCARD_QUERYResult;
@@ -2686,12 +2557,12 @@ declare module "@sanity/client" {
     "*[_type == 'config'][0].information{\n  phone,\n  email\n}": EMAILSENDING_QUERYResult;
     "*[_type == 'config'][0]{\n  information,\n  socialLinks\n}": FOOTERSETTINGS_QUERYResult;
     "*[_type == 'config'][0].metadata": METADATA_QUERYResult;
-    '*[_type == "config"][0].information.email': ADMIN_EMAIL_QUERYResult;
+    "*[_type == \"config\"][0].information.email": ADMIN_EMAIL_QUERYResult;
     "*[_type == 'surfaceTypes'][]": ALLSURFACETYPES_QUERYResult;
     "*[_type == 'surfaceTypes' && _id == $id][0]": SURFACETYPEBYID_QUERYResult;
     "*[_type == 'surface' && type._ref == $id ][0...10]": SURFACESBYTYPE_QUERYResult;
     "*[_type == 'surface' && type._ref == $id ][]._id": SURFACESBYTYPE_IDS_QUERYResult;
-    '*[_type == "surface"][]._id': CATALOGUE_SURFACES_IDS_QUERYResult;
+    "*[_type == \"surface\"][]._id": CATALOGUE_SURFACES_IDS_QUERYResult;
     "*[_type == 'surface'][]": SURFACES_QUERYResult;
     "*[_type == 'surface' && _id == $id ][0]{\n  _id,\n  title,\n  imageObject,\n  type -> {\n    title,\n    _id\n  },\n  \"availability\": available\n}": SURFACE_QUERYResult;
     "*[_type == 'surface'][]._id": ALLSURFACEIDS_QUERYResult;

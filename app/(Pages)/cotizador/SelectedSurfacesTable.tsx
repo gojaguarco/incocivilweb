@@ -126,7 +126,7 @@ const Th = ({
       className={cn("text-center p-2 md:py-5 border-slate-400", className)}
       {...rest}
     >
-      <h4 className="font-normal">{children}</h4>
+      <h4 className="font-semibold">{children}</h4>
     </th>
   );
 };
@@ -367,7 +367,12 @@ const MobileSurface = ({
   const itemBg = index % 2 === 0 ? "bg-tableGray" : "bg-light";
 
   return (
-    <li className={cn("border-b p-5 pb-8 relative flex flex-col", itemBg)}>
+    <li
+      className={cn(
+        "border-b border-slate-300 p-5 pb-8 relative flex flex-col",
+        itemBg
+      )}
+    >
       {surface.image && (
         <Image
           className="rounded-lg w-full h-[150px] object-cover mb-5"
