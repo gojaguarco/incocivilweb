@@ -185,6 +185,7 @@ const DesktopSurface = ({
           image: surface.image ? urlFor(surface.image).url() : "",
           quantity: format.quantity ?? 1,
           formatPrice: format.price,
+          type: surface.type.title,
         },
       });
     }
@@ -344,6 +345,7 @@ const MobileSurface = ({
           image: surface.image ? urlFor(surface.image).url() : "",
           quantity: format.quantity ?? 1,
           formatPrice: format.price,
+          type: surface.type.title,
         },
       });
     }

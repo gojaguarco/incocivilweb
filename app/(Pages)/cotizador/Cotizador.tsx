@@ -50,6 +50,7 @@ const CotizadorUi = ({
         image: surface?.image ? urlFor(surface.image).url() : "",
         name: surface?.title || "",
         formatPrice: surface?.formats ? surface.formats[0].price : 0,
+        type: surface.type.title,
       };
     }
     return initialState;
@@ -104,6 +105,7 @@ const CotizadorUi = ({
         image: surface?.image ? urlFor(surface.image).url() : "",
         quantity: 1,
         formatPrice: surface?.formats ? surface.formats[0].price : 0,
+        type: surface?.type.title || "",
       },
     }));
     router.push(`?${createQueryString("surfaceId", id, "add")}`, {
