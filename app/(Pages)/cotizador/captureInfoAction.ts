@@ -39,7 +39,9 @@ export const captureInfoAction = async (
 
   if (!success) {
     const errors = error.format();
-    console.log({ errors });
+    error.errors.forEach((issue) => {
+      console.log(`- ${issue.path.join(".")}: ${issue.message}`);
+    });
     return {
       success: false,
       errors: errors,
@@ -92,7 +94,7 @@ export const captureInfoAction = async (
       from: "Incocivil <cotizador@incocivil.com>",
       to: [adminEmail, data.email],
       // to: ["julian.m.bustos@gmail.com"],
-      subject: "Mensaje de cliente",
+      subject: "Cotización",
       react: NewQuoteEmail({
         data: {
           email: data.email,

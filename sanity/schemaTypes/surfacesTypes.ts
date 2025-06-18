@@ -92,7 +92,8 @@ export const surfaceType = defineType({
             defineField({
               name: "formatPrice",
               title: "Precio Formato",
-              type: "number",
+              type: "string",
+              components: { input: ColombianPrice },
               validation: (Rule) => Rule.required(),
             }),
           ],
@@ -104,8 +105,12 @@ export const surfaceType = defineType({
             },
             prepare({ width, height, formatPrice }) {
               return {
-                title: `Ancho: ${width || "por definir "}cm x Alto: ${height || "por definir " }cm`,
-                subtitle: `Precio: ${numberToColombianPriceString(formatPrice || 0)}`,
+                title: `Ancho: ${width || "por definir "}cm x Alto: ${
+                  height || "por definir "
+                }cm`,
+                subtitle: `Precio: ${numberToColombianPriceString(
+                  formatPrice || 0
+                )}`,
               };
             },
           },
