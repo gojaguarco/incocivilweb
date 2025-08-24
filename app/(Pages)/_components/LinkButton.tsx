@@ -22,7 +22,7 @@ const LinkButton = ({
   const sizeClasses = {
     grande: "py-1.5 px-[17px] xs:px-6 sm:px-8 sm:py-2 text-base sm:text-lg",
     mediano: "px-4 sm:px-6 py-1.5 xs:py-2 text-sm sm:text-base",
-    pequeño: "py-1 px-3 sm:px-4 text-xs sm:text-sm",
+    "pequeño": "py-1 px-3 sm:px-4 text-xs sm:text-sm",
   };
 
   // Class variations based on color
