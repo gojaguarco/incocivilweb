@@ -33,93 +33,91 @@ export const captureInfoAction = async (
     telefono: formData.get("telefono") as string,
     mensaje: formData.get("mensaje") as string,
     selectedSurfaces: formData.getAll("selectedSurfaces") as string[],
+    captchaToken: formData.get("captchaToken") as string,
   };
 
   const { data, success, error } = formSchema.safeParse(rawData);
 
-  if (!success) {
-    const errors = error.format();
-    error.errors.forEach((issue) => {
-      console.log(`- ${issue.path.join(".")}: ${issue.message}`);
-    });
+  if (!success || !process.env.RECAPTCHA_SECRET_KEY) {
+    const issues = error?.issues;
+
+    const formattedErrors = issues?.reduce((acc, issue) => {
+      const path = issue.path.join(".");
+      if (!acc[path]) {
+        acc[path] = [];
+      }
+      acc[path].push(issue.message);
+      return acc;
+    }, {} as Record<string, string[]>);
+
     return {
       success: false,
-      errors: errors,
+      errors: { ...formattedErrors, _errors: [] },
     };
   }
 
-  const rawAdminEmail = await sanityFetch({
-    query: ADMIN_EMAIL_QUERY,
+  const verificationUrl = `https://www.google.com/recaptcha/api/siteverify?secret=${process.env.RECAPTCHA_SECRET_KEY}&response=${data.captchaToken}`;
+  const captchaResponse = await fetch(verificationUrl, {
+    method: "POST",
   });
-  // console.log({adminEmail})
 
-  const {
-    data: adminEmail,
-    success: adminSuccess,
-    error: adminError,
-  } = adminEmailSchema.safeParse(rawAdminEmail);
-
-  if (!adminSuccess) {
-    const errors = adminError.format();
-    return {
-      success: false,
-      errors,
-    };
-  }
-  try {
-    // console.log({
-    //   from: "Incocivil <cotizador@incocivil.com>",
-    //   to: [adminEmail, data.email],
-    //   // to: ["julian.m.bustos@gmail.com"],
-    //   subject: "Mensaje de cliente",
-    //   react: QuoteEmailTemplate({
-    //     data: {
-    //       email: data.email,
-    //       message: data.mensaje,
-    //       name: `${data.nombre} ${data.apellido}`,
-    //       tel: data.telefono,
-    //       selectedSurfaces: data.selectedSurfaces,
-    //     },
-    //   }),
-    // });
-
-    // console.log({
-    //   email: data.email,
-    //   message: data.mensaje,
-    //   name: `${data.nombre} ${data.apellido}`,
-    //   tel: data.telefono,
-    //   selectedSurfaces: data.selectedSurfaces,
-    // });
-    await resend.emails.send({
-      from: "Incocivil <cotizador@incocivil.com>",
-      to: [adminEmail, data.email],
-      // to: ["julian.m.bustos@gmail.com"],
-      subject: "Cotización",
-      react: NewQuoteEmail({
-        data: {
-          email: data.email,
-          message: data.mensaje,
-          name: `${data.nombre} ${data.apellido}`,
-          tel: data.telefono,
-          selectedSurfaces: data.selectedSurfaces,
-        },
-      }),
+  const captchaData = await captchaResponse.json();
+  if (captchaData.success) {
+    const rawAdminEmail = await sanityFetch({
+      query: ADMIN_EMAIL_QUERY,
     });
+    // console.log({adminEmail})
 
-    // console.log({resendResp})
-  } catch (error) {
-    console.log({ error });
+    const {
+      data: adminEmail,
+      success: adminSuccess,
+      error: adminError,
+    } = adminEmailSchema.safeParse(rawAdminEmail);
+
+    if (!adminSuccess) {
+      const errors = adminError.format();
+      return {
+        success: false,
+        errors,
+      };
+    }
+    try {
+      await resend.emails.send({
+        from: "Incocivil <cotizador@incocivil.com>",
+        to: [adminEmail, data.email],
+        // to: ["julian.m.bustos@gmail.com"],
+        subject: "Cotización",
+        react: NewQuoteEmail({
+          data: {
+            email: data.email,
+            message: data.mensaje,
+            name: `${data.nombre} ${data.apellido}`,
+            tel: data.telefono,
+            selectedSurfaces: data.selectedSurfaces,
+          },
+        }),
+      });
+    } catch (error) {
+      console.log({ error });
+      return {
+        success: false,
+        errors: {
+          _errors: ["algo salió mal"],
+        },
+      };
+    }
+    // console.log({ data, surfaces: data.data?.selectedSurfaces });
+
+    return {
+      success: true,
+      errors: null,
+    };
+  } else {
     return {
       success: false,
       errors: {
-        _errors: ["something went wrong"],
+        _errors: ["algo salió mal"],
       },
     };
   }
-  // console.log({ data, surfaces: data.data?.selectedSurfaces });
-
-  return {
-    success: true,
-    errors: null,
-  };
 };

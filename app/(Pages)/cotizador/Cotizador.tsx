@@ -33,7 +33,7 @@ const CotizadorUi = ({
   const surfaceTypeId = searchParams.get("surfaceType");
   const selectedSurfaceIds = searchParams.get("surfaceId")?.split(",") ?? [];
 
-  const [showTotal, setShowTotal] = useState(false);
+  // const [showTotal, setShowTotal] = useState(false);
 
   const [surfaceFormats, setSurfaceFormats] = useState<{
     [surfaceId: string]: SurfaceToSendAdminEmail;
@@ -236,21 +236,21 @@ const CotizadorUi = ({
             {cotizadorContent?.cotizador?.surfaceSelection?.formatSelection}
           </h3>
           <SelectedSurfacesTable
-            showTotal={showTotal}
+            // showTotal={showTotal}
             surfaceFormats={surfaceFormats}
             setSurfaceFormats={setSurfaceFormats}
             catalogo={catalogo}
             removeSurfaceId={removeSurfaceId}
             selectedSurfaceIds={selectedSurfaceIds}
           />
-          {showTotal && (
-            <div className="bg-tableGray border rounded-b-md border-slate-300 px-5 py-5 text-right font-semibold">
-              Total:{" "}
-              {numberToColombianPriceString(
-                calculateTotalSurface(Object.values(surfaceFormats))
-              )}
-            </div>
-          )}
+          {/* {showTotal && ( */}
+          <div className="bg-tableGray border rounded-b-md border-slate-300 px-5 py-5 text-right font-semibold">
+            Total:{" "}
+            {numberToColombianPriceString(
+              calculateTotalSurface(Object.values(surfaceFormats))
+            )}
+          </div>
+          {/* )} */}
         </section>
         {/* </LightCard> */}
         <div className="w-full items-center flex flex-col md:flex-row gap-2 justify-between">
@@ -278,7 +278,7 @@ const CotizadorUi = ({
             successMessage={
               cotizadorContent?.cotizador?.formContent?.successMessage || ""
             }
-            setShowTotal={setShowTotal}
+            // setShowTotal={setShowTotal}
             surfaceFormats={surfaceFormats}
             createQueryString={createQueryString}
             captureInfoOpen={captureInfoOpen}

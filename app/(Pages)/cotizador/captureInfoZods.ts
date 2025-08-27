@@ -34,6 +34,7 @@ export const formSchema = z.object({
     .array(z.string())
     .transform((strings) => strings.map((str) => JSON.parse(str)))
     .pipe(selectedSurfacesSchema),
+  captchaToken: z.string().min(1),
 });
 
 export const adminEmailSchema = z.string();

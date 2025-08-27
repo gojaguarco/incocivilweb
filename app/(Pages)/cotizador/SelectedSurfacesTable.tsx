@@ -15,8 +15,8 @@ const SelectedSurfacesTable = ({
   selectedSurfaceIds,
   setSurfaceFormats,
   surfaceFormats,
-  showTotal,
-}: {
+}: // showTotal,
+{
   selectedSurfaceIds: string[];
   catalogo: AVAILABLE_SURFACES_QUERYResult;
   removeSurfaceId: (id: string) => void;
@@ -28,7 +28,7 @@ const SelectedSurfacesTable = ({
       [surfaceId: string]: SurfaceToSendAdminEmail;
     }>
   >;
-  showTotal: boolean;
+  // showTotal: boolean;
 }) => {
   return (
     <div className="">
@@ -55,7 +55,7 @@ const SelectedSurfacesTable = ({
 
               return (
                 <DesktopSurface
-                  showTotal={!!showTotal}
+                  // showTotal={!!showTotal}
                   surfaceFormats={surfaceFormats}
                   setSurfaceFormats={setSurfaceFormats}
                   key={id}
@@ -95,7 +95,7 @@ const SelectedSurfacesTable = ({
           if (!surface) return null;
           return (
             <MobileSurface
-              showTotal={showTotal}
+              // showTotal={showTotal}
               setSurfaceFormats={setSurfaceFormats}
               surfaceFormats={surfaceFormats}
               key={id}
@@ -154,9 +154,9 @@ const DesktopSurface = ({
   removeSurfaceId,
   setSurfaceFormats,
   surfaceFormats,
-  showTotal,
-}: {
-  showTotal: boolean;
+}: // showTotal,
+{
+  // showTotal: boolean;
   id: string;
   index: number;
   surface: AVAILABLE_SURFACES_QUERYResult[number];
@@ -263,13 +263,13 @@ const DesktopSurface = ({
         />
       </Td>
       <Td className="border-r border-slate-300 relative">
-        {!showTotal && (
+        {/* {!showTotal && (
           <div
             className={`w-full h-full grid place-content-center absolute z-10 top-0 left-0 ${rowBg}`}
           >
             $0
           </div>
-        )}
+        )} */}
         <span className="">
           {numberToColombianPriceString(
             surfaceFormats[surface._id]?.totalSurface || 0
@@ -311,8 +311,8 @@ const MobileSurface = ({
   id,
   setSurfaceFormats,
   surfaceFormats,
-  showTotal,
-}: {
+}: // showTotal,
+{
   id: string;
   index: number;
   surface: AVAILABLE_SURFACES_QUERYResult[number];
@@ -325,7 +325,7 @@ const MobileSurface = ({
       [surfaceId: string]: SurfaceToSendAdminEmail;
     }>
   >;
-  showTotal: boolean;
+  // showTotal: boolean;
 }) => {
   const onFormatChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const format = JSON.parse(e.target.value);
@@ -478,13 +478,13 @@ const MobileSurface = ({
         {/* <div className="flex flex-col gap-2"> */}
 
         <InfoItem className="relative">
-          {!showTotal && (
+          {/* {!showTotal && (
             <div
               className={`w-full h-full absolute z-10 top-0 left-0 ${itemBg}`}
             >
               $0
             </div>
-          )}
+          )} */}
           <span className="text-lg font-semibold">
             {numberToColombianPriceString(
               surfaceFormats[surface._id]?.totalSurface || 0

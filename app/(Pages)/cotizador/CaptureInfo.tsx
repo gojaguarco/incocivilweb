@@ -3,14 +3,14 @@ import { useRouter } from "next/navigation";
 import LinkButton from "../_components/LinkButton";
 import LightCard from "../_components/LightCard";
 import CaptureForm from "./CaptureForm";
-import { Dispatch, SetStateAction } from "react";
+// import { Dispatch, SetStateAction } from "react";
 import { SurfaceToSendAdminEmail } from "./captureInfoZods";
 
 const CaptureInfo = ({
   createQueryString,
   captureInfoOpen,
   surfaceFormats,
-  setShowTotal,
+  // setShowTotal,
   formTitle,
   successMessage,
 }: {
@@ -23,18 +23,18 @@ const CaptureInfo = ({
     action: "add" | "remove" | "replace"
   ) => string;
   captureInfoOpen: boolean;
-  setShowTotal: Dispatch<SetStateAction<boolean>>;
+  // setShowTotal: Dispatch<SetStateAction<boolean>>;
   formTitle: string;
   successMessage: string;
 }) => {
   const router = useRouter();
 
-  let total = 0;
+  // let total = 0;
 
-  for (const surfaceFormatIn in surfaceFormats) {
-    const surfaceFormat = surfaceFormats[surfaceFormatIn];
-    total += surfaceFormat.totalSurface;
-  }
+  // for (const surfaceFormatIn in surfaceFormats) {
+  // const surfaceFormat = surfaceFormats[surfaceFormatIn];
+  // total += surfaceFormat.totalSurface;
+  // }
   return (
     <>
       {Object.keys(surfaceFormats).length > 0 && (
@@ -63,9 +63,9 @@ const CaptureInfo = ({
             <CaptureForm
               formTitle={formTitle}
               successMessage={successMessage}
-              setShowTotal={setShowTotal}
+              // setShowTotal={setShowTotal}
               selectedFormats={surfaceFormats}
-              totalToShow={total}
+              // totalToShow={total}
             />
           </LightCard>
         </section>

@@ -1,7 +1,16 @@
 import type { StructureResolver } from "sanity/structure";
 import { pagesType } from "./schemaTypes/pagesType";
-import { DocumentTextIcon, ImagesIcon, ProjectsIcon, ThLargeIcon, TiersIcon, UlistIcon, WrenchIcon } from "@sanity/icons";
+import {
+  DocumentTextIcon,
+  ImagesIcon,
+  ProjectsIcon,
+  ThLargeIcon,
+  TiersIcon,
+  WrenchIcon,
+  BillIcon,
+} from "@sanity/icons";
 import { configType } from "./schemaTypes/configType";
+import { dataPrivacyPolicySchema } from "./schemaTypes/dataPrivacyPolicy";
 
 // https://www.sanity.io/docs/structure-builder-cheat-sheet
 export const structure: StructureResolver = (S) =>
@@ -19,22 +28,22 @@ export const structure: StructureResolver = (S) =>
             .title(pagesType.title || "")
         ),
       S.listItem()
-        .title('Superficies')
+        .title("Superficies")
         .icon(ImagesIcon)
         .child(
           S.list()
-            .title('Superficies')
+            .title("Superficies")
             .items([
-              S.documentTypeListItem('surfaceTypes').title('Tipos de Superficie').icon(ThLargeIcon),
-              S.documentTypeListItem('surface').title('Superficies').icon(TiersIcon)
+              S.documentTypeListItem("surfaceTypes")
+                .title("Tipos de Superficie")
+                .icon(ThLargeIcon),
+              S.documentTypeListItem("surface")
+                .title("Superficies")
+                .icon(TiersIcon),
             ])
         ),
-      S.documentTypeListItem('project')
-        .title('Proyectos')
-        .icon(ProjectsIcon),
-      S.documentTypeListItem('service')
-        .title('Servicios')
-        .icon(WrenchIcon),
+      S.documentTypeListItem("project").title("Proyectos").icon(ProjectsIcon),
+      S.documentTypeListItem("service").title("Servicios").icon(WrenchIcon),
       S.listItem()
         .title("Blogs")
         .icon(DocumentTextIcon)
@@ -47,13 +56,23 @@ export const structure: StructureResolver = (S) =>
             ])
         ),
       S.listItem()
-      .title(configType.title || "")
-      .icon(configType.icon)
-      .child(
-        S.editor()
-          .id(configType.name)
-          .schemaType(configType.name)
-          .documentId(configType.name)
-          .title(configType.title || "")
-      ),
+        .title(configType.title || "")
+        .icon(configType.icon)
+        .child(
+          S.editor()
+            .id(configType.name)
+            .schemaType(configType.name)
+            .documentId(configType.name)
+            .title(configType.title || "")
+        ),
+      S.listItem()
+        .title(dataPrivacyPolicySchema.title || "")
+        .icon(BillIcon)
+        .child(
+          S.editor()
+            .id(dataPrivacyPolicySchema.name)
+            .schemaType(dataPrivacyPolicySchema.name)
+            .documentId(dataPrivacyPolicySchema.name)
+            .title(dataPrivacyPolicySchema.title || "")
+        ),
     ]);

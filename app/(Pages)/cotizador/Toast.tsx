@@ -47,7 +47,6 @@ const Toast = () => {
       hideToast();
     }
   }, [searchParams, hideToast, message, isVisible]); // Removed location.pathname, useSearchParams handles changes
-  console.log("here");
   if (!isVisible) {
     return null; // Don't render if not visible
   }
