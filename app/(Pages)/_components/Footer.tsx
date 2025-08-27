@@ -207,7 +207,7 @@ const Footer = async () => {
             <Link href="/services">Servicios</Link>
             <Link href="/blog">Blog</Link>
             <Link href="/cotizador">Cotiza tu Proyecto</Link>
-            <Link href="/politicas">{"Políticas"}</Link>
+            <Link href="/politica">{"Políticas"}</Link>
           </div>
           <div className="flex flex-col gap-1.5">
             <h4>Información</h4>
