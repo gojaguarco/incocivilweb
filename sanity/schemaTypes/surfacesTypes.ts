@@ -2,7 +2,6 @@ import { defineArrayMember, defineField, defineType } from "sanity";
 import { ImageSchema } from "./generalSchemas";
 import ColombianPrice from "../components/ColombianPrice";
 import SizeIcon from "../components/icons/SizeIcon";
-import { numberToColombianPriceString } from "@/app/helpers";
 
 export const surfaceTypesType = defineType({
   name: "surfaceTypes",
@@ -69,7 +68,16 @@ export const surfaceType = defineType({
       name: "formats",
       title: "Formatos",
       type: "array",
-      validation: (Rule) => Rule.required().min(1),
+      validation: (Rule) =>
+        Rule.custom((formats, context) => {
+          const isAvailable = context.document?.available;
+
+          if (isAvailable && (!formats || formats.length === 0)) {
+            return "Debe agregar al menos un formato si el material está disponible.";
+          }
+
+          return true;
+        }),
       of: [
         defineArrayMember({
           name: "formato",
@@ -108,9 +116,8 @@ export const surfaceType = defineType({
                 title: `Ancho: ${width || "por definir "}cm x Alto: ${
                   height || "por definir "
                 }cm`,
-                subtitle: `Precio: ${numberToColombianPriceString(
-                  formatPrice || 0
-                )}`,
+                subtitle: `Precio: $${formatPrice || 0}`,
+                // subtitle: formatPrice,
               };
             },
           },
