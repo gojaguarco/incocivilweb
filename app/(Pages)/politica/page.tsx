@@ -4,7 +4,6 @@ import TextBlock from "../_components/TextBlock";
 const Page = async () => {
   const content = await getPrivacyPolicyContent();
 
-  console.log({ content });
   if (content)
     return (
       <div className="w-full z-10">

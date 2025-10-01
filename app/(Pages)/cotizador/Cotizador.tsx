@@ -15,7 +15,6 @@ import { SurfaceToSendAdminEmail } from "./captureInfoZods";
 import SelectedSurfacesTable from "./SelectedSurfacesTable";
 import {
   calculateTotalSurface,
-  colombianPriceStringToNumber,
   numberToColombianPriceString,
 } from "@/app/helpers";
 
@@ -43,10 +42,8 @@ const CotizadorUi = ({
       const surface = catalogo.find((item) => item._id === surfaceId);
       if (!surface) continue;
 
-      const totalSurface = colombianPriceStringToNumber(
-        surface.formats[0].price
-      );
-      // console.log({ surface, area, price, totalSurface, priceString: surface?.price?.replaceAll(".", "") })
+      const totalSurface =
+        surface.formats && surface.formats[0] ? surface.formats[0].price : 0;
       initialState[surfaceId] = {
         quantity: 1,
         width: surface?.formats ? surface.formats[0].width : 0,
@@ -56,9 +53,7 @@ const CotizadorUi = ({
         id: surface?._id || "",
         image: surface?.image ? urlFor(surface.image).url() : "",
         name: surface?.title || "",
-        formatPrice: surface?.formats
-          ? colombianPriceStringToNumber(surface.formats[0].price)
-          : 0,
+        formatPrice: surface?.formats ? surface.formats[0].price : 0,
         type: surface.type.title,
       };
     }
@@ -113,9 +108,7 @@ const CotizadorUi = ({
         name: surface?.title || "",
         image: surface?.image ? urlFor(surface.image).url() : "",
         quantity: 1,
-        formatPrice: surface?.formats
-          ? colombianPriceStringToNumber(surface.formats[0].price)
-          : 0,
+        formatPrice: surface?.formats ? surface.formats[0].price : 0,
         type: surface?.type.title || "",
       },
     }));
@@ -245,7 +238,7 @@ const CotizadorUi = ({
           />
           {/* {showTotal && ( */}
           <div className="bg-tableGray border rounded-b-md border-slate-300 px-5 py-5 text-right font-semibold">
-            Total:{" "}
+            Total:
             {numberToColombianPriceString(
               calculateTotalSurface(Object.values(surfaceFormats))
             )}

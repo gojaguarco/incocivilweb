@@ -1,6 +1,7 @@
 import { defineArrayMember, defineField, defineType } from "sanity";
 import { ImageSchema } from "./generalSchemas";
 import ColombianPrice from "../components/ColombianPrice";
+import NewColombianPrice from "../components/NewColombianPrice";
 import SizeIcon from "../components/icons/SizeIcon";
 
 export const surfaceTypesType = defineType({
@@ -98,10 +99,10 @@ export const surfaceType = defineType({
               validation: (Rule) => Rule.required(),
             }),
             defineField({
-              name: "formatPrice",
-              title: "Precio Formato",
-              type: "string",
-              components: { input: ColombianPrice },
+              name: "price",
+              title: "Precio Formato nuevo",
+              type: "number",
+              components: { input: NewColombianPrice },
               validation: (Rule) => Rule.required(),
             }),
           ],

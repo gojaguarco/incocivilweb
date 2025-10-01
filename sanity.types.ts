@@ -65,8 +65,8 @@ export type DataPrivacyPolicy = {
       _type: "span";
       _key: string;
     }>;
-    style?: "normal" | "h1" | "h2" | "h3" | "h4" | "blockquote";
-    listItem?: "bullet";
+    style?: "normal" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "blockquote";
+    listItem?: "bullet" | "number";
     markDefs?: Array<{
       href?: string;
       _type: "link";
@@ -74,45 +74,6 @@ export type DataPrivacyPolicy = {
     }>;
     level?: number;
     _type: "block";
-    _key: string;
-  } | {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    alt: string;
-    _type: "imageObject";
-    _key: string;
-  } | {
-    video: {
-      asset?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.fileAsset";
-      };
-      media?: unknown;
-      _type: "file";
-    };
-    imagenDeCarga?: {
-      asset?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-      };
-      media?: unknown;
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      alt: string;
-      _type: "imageObject";
-    };
-    _type: "video";
     _key: string;
   }>;
 };
@@ -658,10 +619,10 @@ export type Surface = {
   };
   caliber?: string;
   price?: string;
-  formats: Array<{
+  formats?: Array<{
     width: number;
     height: number;
-    formatPrice: string;
+    price: number;
     _type: "formato";
     _key: string;
   }>;
@@ -1568,7 +1529,7 @@ export type BLOG_QUERYResult = {
 
 // Source: ./sanity/queries/catalogoQueries.ts
 // Variable: All_SURFACES_QUERY
-// Query: *[_type == "surface"]{  _id,   title,   "image": imageObject,   "type": type -> {      title,      _id  },  caliber,  price,  "formats": formats[] {      height,       width,      "price": formatPrice    },    code,    description,    available}
+// Query: *[_type == "surface"]{  _id,   title,   "image": imageObject,   "type": type -> {      title,      _id  },  caliber,  price,  "formats": formats[] {      height,       width,      price,    },    code,    description,    available}
 export type All_SURFACES_QUERYResult = Array<{
   _id: string;
   title: string;
@@ -1594,14 +1555,14 @@ export type All_SURFACES_QUERYResult = Array<{
   formats: Array<{
     height: number;
     width: number;
-    price: string;
-  }>;
+    price: number;
+  }> | null;
   code: number | null;
   description: string | null;
   available: boolean | null;
 }>;
 // Variable: AVAILABLE_SURFACES_QUERY
-// Query: *[_type == "surface" && available]{  _id,   title,   "image": imageObject,   "type": type -> {      title,      _id  },  caliber,  price,  "formats": formats[] {      height,       width,      "price": formatPrice    },    code,    description,    available}
+// Query: *[_type == "surface" && available]{  _id,   title,   "image": imageObject,   "type": type -> {      title,      _id  },  caliber,  price,  "formats": formats[] {      height,       width,      price,    },    code,    description,    available}
 export type AVAILABLE_SURFACES_QUERYResult = Array<{
   _id: string;
   title: string;
@@ -1627,8 +1588,8 @@ export type AVAILABLE_SURFACES_QUERYResult = Array<{
   formats: Array<{
     height: number;
     width: number;
-    price: string;
-  }>;
+    price: number;
+  }> | null;
   code: number | null;
   description: string | null;
   available: boolean | null;
@@ -1914,10 +1875,10 @@ export type HOMEPAGE_QUERYResult = {
       };
       caliber?: string;
       price?: string;
-      formats: Array<{
+      formats?: Array<{
         width: number;
         height: number;
-        formatPrice: string;
+        price: number;
         _type: "formato";
         _key: string;
       }>;
@@ -1993,8 +1954,8 @@ export type PRIVACY_POLICY_QUERYResult = {
       _type: "span";
       _key: string;
     }>;
-    style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "normal";
-    listItem?: "bullet";
+    style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+    listItem?: "bullet" | "number";
     markDefs?: Array<{
       href?: string;
       _type: "link";
@@ -2002,45 +1963,6 @@ export type PRIVACY_POLICY_QUERYResult = {
     }>;
     level?: number;
     _type: "block";
-    _key: string;
-  } | {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    media?: unknown;
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    alt: string;
-    _type: "imageObject";
-    _key: string;
-  } | {
-    video: {
-      asset?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.fileAsset";
-      };
-      media?: unknown;
-      _type: "file";
-    };
-    imagenDeCarga?: {
-      asset?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-      };
-      media?: unknown;
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      alt: string;
-      _type: "imageObject";
-    };
-    _type: "video";
     _key: string;
   }>;
 } | null;
@@ -2578,10 +2500,10 @@ export type SURFACESBYTYPE_QUERYResult = Array<{
   };
   caliber?: string;
   price?: string;
-  formats: Array<{
+  formats?: Array<{
     width: number;
     height: number;
-    formatPrice: string;
+    price: number;
     _type: "formato";
     _key: string;
   }>;
@@ -2625,10 +2547,10 @@ export type SURFACES_QUERYResult = Array<{
   };
   caliber?: string;
   price?: string;
-  formats: Array<{
+  formats?: Array<{
     width: number;
     height: number;
-    formatPrice: string;
+    price: number;
     _type: "formato";
     _key: string;
   }>;
@@ -2672,8 +2594,8 @@ declare module "@sanity/client" {
     "*[_type == 'pages'][0]{\n  aboutPage\n}": ABOUTPAGE_QUERYResult;
     "*[_type == \"post\" ][0...12]{\n  _id, \n  title, \n  description,   \n  image\n}": BLOGS_QUERYResult;
     "*[_type == \"post\" && _id == $id][0]{\n  title, \n  description, \n  body, \n  \"image\": {\n    \"url\": image.asset->url,\n    \"alt\": image.alt\n    }, \n  categories, \n  publishedAt\n}": BLOG_QUERYResult;
-    "*[_type == \"surface\"]{\n  _id, \n  title, \n  \"image\": imageObject, \n  \"type\": type -> {\n      title,\n      _id\n  },\n  caliber,\n  price,\n  \"formats\": formats[] {\n      height, \n      width,\n      \"price\": formatPrice\n    },\n    code,\n    description,\n    available\n}": All_SURFACES_QUERYResult;
-    "*[_type == \"surface\" && available]{\n  _id, \n  title, \n  \"image\": imageObject, \n  \"type\": type -> {\n      title,\n      _id\n  },\n  caliber,\n  price,\n  \"formats\": formats[] {\n      height, \n      width,\n      \"price\": formatPrice\n    },\n    code,\n    description,\n    available\n}": AVAILABLE_SURFACES_QUERYResult;
+    "*[_type == \"surface\"]{\n  _id, \n  title, \n  \"image\": imageObject, \n  \"type\": type -> {\n      title,\n      _id\n  },\n  caliber,\n  price,\n  \"formats\": formats[] {\n      height, \n      width,\n      price,\n    },\n    code,\n    description,\n    available\n}": All_SURFACES_QUERYResult;
+    "*[_type == \"surface\" && available]{\n  _id, \n  title, \n  \"image\": imageObject, \n  \"type\": type -> {\n      title,\n      _id\n  },\n  caliber,\n  price,\n  \"formats\": formats[] {\n      height, \n      width,\n      price,\n    },\n    code,\n    description,\n    available\n}": AVAILABLE_SURFACES_QUERYResult;
     "*[_type == \"surfaceTypes\"]{\n  _id, \n  title\n} ": ALL_SURFACE_TYPES_QUERYResult;
     "*[_type == 'pages'][0]{\n  cotizador\n}": COTIZADOR_QUERYResult;
     "*[_type == 'pages'][0]{\n  homePage[] {\n    ...,\n    primarySurfaces[]->,\n    surfaceList[]->,\n    faqs []->,\n  }\n}": HOMEPAGE_QUERYResult;

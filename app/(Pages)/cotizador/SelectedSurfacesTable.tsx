@@ -248,7 +248,11 @@ const DesktopSurface = ({
             return (
               <option
                 key={`${format.height}-${format.width}-${index}`}
-                value={JSON.stringify(format)}
+                value={JSON.stringify({
+                  height: format.height,
+                  price: format.price,
+                  width: format.width,
+                })}
               >
                 {format.height}cm * {format.width}cm
               </option>
@@ -330,15 +334,12 @@ const MobileSurface = ({
   const onFormatChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const format = JSON.parse(e.target.value);
     if (format) {
-      const area = (format.height * format.width) / 100;
-
       setSurfaceFormats({
         ...surfaceFormats,
         [surface._id]: {
           height: format.height,
           width: format.width,
-          totalSurface:
-            area * parseInt(surface.price?.replaceAll(".", "") || ""),
+          totalSurface: format.price,
           id: surface._id,
           code: String(surface.code || ""),
           name: surface.title || "",
@@ -452,7 +453,11 @@ const MobileSurface = ({
               return (
                 <option
                   key={`<span class="math-inline">\{format\.height\}\*</span>{format.width}-${index}`}
-                  value={JSON.stringify(format)}
+                  value={JSON.stringify({
+                    height: format.height,
+                    price: format.price,
+                    width: format.width,
+                  })}
                 >
                   {format.height}cm * {format.width}cm
                 </option>

@@ -13,7 +13,7 @@ export const All_SURFACES_QUERY = defineQuery(`*[_type == "surface"]{
   "formats": formats[] {
       height, 
       width,
-      "price": formatPrice
+      price,
     },
     code,
     description,
@@ -33,7 +33,7 @@ export const AVAILABLE_SURFACES_QUERY =
   "formats": formats[] {
       height, 
       width,
-      "price": formatPrice
+      price,
     },
     code,
     description,
