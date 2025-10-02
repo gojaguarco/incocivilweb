@@ -232,14 +232,12 @@ const CotizadorUi = ({
             removeSurfaceId={removeSurfaceId}
             selectedSurfaceIds={selectedSurfaceIds}
           />
-          {/* {showTotal && ( */}
           <div className="bg-tableGray border rounded-b-md border-slate-300 px-5 py-5 text-right font-semibold">
             Total:
             {numberToColombianPriceString(
               calculateTotalSurface(Object.values(surfaceFormats))
             )}
           </div>
-          {/* )} */}
         </section>
         {/* </LightCard> */}
         <div className="w-full items-center flex flex-col md:flex-row gap-2 justify-between">
