@@ -231,9 +231,11 @@ const DesktopSurface = ({
       <Td className="border-r border-slate-300">{surface.type.title}</Td>
       <Td className="border-r border-slate-300">{surface.caliber}</Td>
       <Td className="border-r border-slate-300 max-w-[20ch] text-xs">
-        {surface.description}
+        {surface.description ?? "N/A"}
       </Td>
-      <Td className="border-r border-slate-300">${surface.price}</Td>
+      <Td className="border-r border-slate-300">
+        {surface.price ? `$${surface.price}` : "N/A"}
+      </Td>
       <Td className="border-r border-slate-300">
         <select
           onChange={onFormatChange}
@@ -420,10 +422,10 @@ const MobileSurface = ({
         <InfoItem>
           <div className="relative w-full group flex items-center">
             <p className="w-full whitespace-nowrap overflow-hidden text-ellipsis">
-              {surface.description}
+              {surface.description ?? "N/A"}
             </p>
             <div className="absolute bg-white border rounded p-2 shadow-md z-10 hidden group-hover:block w-full left-0 top-full mt-2">
-              {surface.description}
+              {surface.description ?? "N/A"}
             </div>
             <div className="text-[0.6em] underline text-gray-500 whitespace-nowrap cursor-pointer">
               Ver más.
@@ -434,7 +436,7 @@ const MobileSurface = ({
         <InfoItem>
           <strong>Precio por m2:</strong>
         </InfoItem>
-        <InfoItem>${surface.price}</InfoItem>
+        <InfoItem> {surface.price ? `$${surface.price}` : "N/A"}</InfoItem>
 
         <InfoItem className="h-[39.2px]">
           <strong>Selecciona formato: </strong>

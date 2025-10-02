@@ -155,7 +155,7 @@ const CotizadorUi = ({
         <h3 className="my-5">
           {cotizadorContent?.cotizador?.surfaceSelection?.surfaceSelection}
         </h3>
-        <div className="overflow-x-scroll no-scrollbar">
+        <div className="overflow-x-scroll">
           <ul className="flex gap-4 w-fit pr-5">
             {filteredCatalogo.map((item) => (
               <li
