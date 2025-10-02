@@ -1,8 +1,13 @@
 "use client";
 import { useRouter, useSearchParams } from "next/navigation";
-import { ComponentPropsWithoutRef, Suspense, useCallback } from "react";
+import {
+  ComponentPropsWithoutRef,
+  Suspense,
+  useCallback,
+  // useEffect,
+} from "react";
 import { cn } from "../_lib/cn";
-type Props = ComponentPropsWithoutRef<'select'> & {
+type Props = ComponentPropsWithoutRef<"select"> & {
   filterName: string;
   options: {
     value: string;
@@ -12,8 +17,14 @@ type Props = ComponentPropsWithoutRef<'select'> & {
   allValue?: string;
 };
 
-const Select = ({ filterName, options, allTitle, allValue, className, ...rest }: Props) => {
-
+const Select = ({
+  filterName,
+  options,
+  allTitle,
+  allValue,
+  className,
+  ...rest
+}: Props) => {
   const searchParams = useSearchParams();
 
   const selectedOption = searchParams.get(filterName);
@@ -21,41 +32,69 @@ const Select = ({ filterName, options, allTitle, allValue, className, ...rest }:
   const router = useRouter();
 
   const createQueryString = useCallback(
-    (name: string, value: string, action: 'add' | 'remove' | 'replace' = 'add') => {
-      const params = new URLSearchParams(searchParams.toString())
-      const currentValues = params.get(name)?.split(',').filter(Boolean) || []
+    (
+      name: string,
+      value: string,
+      action: "add" | "remove" | "replace" = "add"
+    ) => {
+      const params = new URLSearchParams(searchParams.toString());
+      const currentValues = params.get(name)?.split(",").filter(Boolean) || [];
 
-      if (action === 'add' && !currentValues.includes(value)) {
-        params.set(name, [...currentValues, value].join(','))
-      } else if (action === 'remove') {
-        params.set(name, currentValues.filter(v => v !== value).join(','))
+      if (action === "add" && !currentValues.includes(value)) {
+        params.set(name, [...currentValues, value].join(","));
+      } else if (action === "remove") {
+        params.set(name, currentValues.filter((v) => v !== value).join(","));
       } else if (action === "replace") {
-        params.set(name, value)
-      };
+        params.set(name, value);
+      }
 
-      return params.toString()
+      return params.toString();
     },
-    [searchParams]);
-
+    [searchParams]
+  );
 
   const onSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const value = e.target.value;
-    router.push(`?${createQueryString(filterName, value, "replace")}`, { scroll: false });
+    router.push(`?${createQueryString(filterName, value, "replace")}`, {
+      scroll: false,
+    });
   };
 
-  const optionsWiithAll = [{ value: allValue ?? "all", label: allTitle }, ...options];
+  const optionsWiithAll = [
+    { value: allValue ?? "all", label: allTitle },
+    ...options,
+  ];
 
-  const filteredOptions = optionsWiithAll.filter(option => option.value !== selectedOption);
+  const filteredOptions = optionsWiithAll.filter(
+    (option) => option.value !== selectedOption
+  );
 
-  const selectedOptionLabel = options.find(option => option.value === selectedOption)?.label;
+  const selectedOptionLabel = options.find(
+    (option) => option.value === selectedOption
+  )?.label;
+
+  // const pathname = usePathname();
+
+  // useEffect(() => {
+  //   if (pathname === "/cotizador") {
+  //     router.push("/cotizador?surfaceType=all");
+  //   }
+  // }, []);
+
   return (
-    <select onChange={onSelectChange}
-      className={cn(`bg-light text-dark px-4 py-2 rounded-lg flex items-center gap-2 text-sm md:text-base lg:text-lg`, className)}
+    <select
+      onChange={onSelectChange}
+      className={cn(
+        `bg-light text-dark px-4 py-2 rounded-lg flex items-center gap-2 text-sm md:text-base lg:text-lg`,
+        className
+      )}
       {...rest}
     >
-      <option value={selectedOption ?? allValue ?? "all"}>
-        {selectedOptionLabel ?? allTitle}
-      </option>
+      {selectedOption && (
+        <option value={selectedOption ?? allValue ?? "all"}>
+          {selectedOptionLabel ?? allTitle}
+        </option>
+      )}
       {filteredOptions.map((option) => (
         <option key={option.value} value={option.value}>
           {option.label}
@@ -63,9 +102,15 @@ const Select = ({ filterName, options, allTitle, allValue, className, ...rest }:
       ))}
     </select>
   );
-}
+};
 
-const SelectFilter = ({ filterName, options, allTitle, allValue, ...rest }: Props) => {
+const SelectFilter = ({
+  filterName,
+  options,
+  allTitle,
+  allValue,
+  ...rest
+}: Props) => {
   return (
     <Suspense>
       <Select
@@ -77,6 +122,6 @@ const SelectFilter = ({ filterName, options, allTitle, allValue, ...rest }: Prop
       />
     </Suspense>
   );
-}
+};
 
 export default SelectFilter;

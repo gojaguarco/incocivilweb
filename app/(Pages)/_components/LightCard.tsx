@@ -1,14 +1,19 @@
 import { ComponentPropsWithoutRef } from "react";
 import { cn } from "../_lib/cn";
 
-type Props = ComponentPropsWithoutRef<'section'>;
-const LightCard = ({ children, className }: Props) => {
+type Props = ComponentPropsWithoutRef<"section">;
+const LightCard = ({ children, className, ...rest }: Props) => {
   return (
-    <section className={cn("bg-light-dark text-dark rounded-xl px-10 py-4", className)}>
+    <section
+      className={cn(
+        "md:bg-light-dark text-dark rounded-xl md:px-10 md:py-4 flex flex-col gap2",
+        className
+      )}
+      {...rest}
+    >
       {children}
     </section>
-
   );
-}
+};
 
 export default LightCard;

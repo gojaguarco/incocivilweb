@@ -1,5 +1,5 @@
 import { defineType, defineArrayMember, defineField } from "sanity";
-import { ImageSchema, VideoSchema } from "./generalSchemas";
+import { ImageSchema } from "./generalSchemas";
 
 /**
  * This is the schema type for block content used in the post document type

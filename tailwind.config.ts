@@ -8,35 +8,46 @@ const config: Config = {
   ],
   theme: {
     screens: {
-  		xs: '420px',
-  		sm: '600px',
-  		md: '768px',
-  		lg: '1024px',
-  		xl: '1280px',
-  		'2xl': '1536px'
-  	},
+      xs: "420px",
+      sm: "600px",
+      md: "768px",
+      lg: "1024px",
+      xl: "1280px",
+      "2xl": "1536px",
+    },
     extend: {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
-        primary: '#363942',
-        'primary-light': '#414553',
-        dark: '#121212',
-        accent1: '#C95701',
-        accent2: '#F8DB7D',
-        light: '#F1F4FE',
-        'light-dark': '#E0E3EC',
-        'logo-red': '#9F1F00',
-        'logo-yellow': '#FCC172',
+        primary: "#363942",
+        "primary-light": "#414553",
+        dark: "#121212",
+        accent1: "#C95701",
+        accent2: "#F8DB7D",
+        light: "#F1F4FE",
+        "light-dark": "#E0E3EC",
+        "logo-red": "#9F1F00",
+        "logo-yellow": "#FCC172",
+        tableGray: "#e8eefe",
       },
       fontFamily: {
-  			inter: 'var(--font-inter)',
-        montserrat: 'var(--font-montserrat)'
-  		},
+        inter: "var(--font-inter)",
+        montserrat: "var(--font-montserrat)",
+      },
+      keyframes: {
+        // Define keyframes for your border blink
+        "outline-blink-red": {
+          "0%, 100%": { outlineColor: "transparent" }, // Start and end with transparent outline
+          "50%": { outlineColor: "red" }, // Halfway through, show red outline
+        },
+      },
+      animation: {
+        // Define the animation using the keyframes
+        "outline-blink-red":
+          "outline-blink-red 1s ease-in-out infinite alternate", // Adjust duration and timing as needed
+      },
     },
-    plugins: [
-      require('@tailwindcss/typography'),
-    ],
-  }
-}
+    plugins: [require("@tailwindcss/typography")],
+  },
+};
 export default config;

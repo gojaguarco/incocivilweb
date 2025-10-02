@@ -1,6 +1,6 @@
 import { defineQuery } from "next-sanity";
 
-export const CATALOGO_QUERY = defineQuery(`*[_type == "surface"]{
+export const All_SURFACES_QUERY = defineQuery(`*[_type == "surface"]{
   _id, 
   title, 
   "image": imageObject, 
@@ -10,12 +10,34 @@ export const CATALOGO_QUERY = defineQuery(`*[_type == "surface"]{
   },
   caliber,
   price,
-  "formats": formats[]->{
+  "formats": formats[] {
       height, 
-      width
+      width,
+      price,
     },
     code,
-    description
+    description,
+    available
+}`);
+export const AVAILABLE_SURFACES_QUERY =
+  defineQuery(`*[_type == "surface" && available]{
+  _id, 
+  title, 
+  "image": imageObject, 
+  "type": type -> {
+      title,
+      _id
+  },
+  caliber,
+  price,
+  "formats": formats[] {
+      height, 
+      width,
+      price,
+    },
+    code,
+    description,
+    available
 }`);
 
 export const ALL_SURFACE_TYPES_QUERY = defineQuery(`*[_type == "surfaceTypes"]{

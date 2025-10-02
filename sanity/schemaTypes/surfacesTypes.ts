@@ -1,6 +1,8 @@
 import { defineArrayMember, defineField, defineType } from "sanity";
 import { ImageSchema } from "./generalSchemas";
 import ColombianPrice from "../components/ColombianPrice";
+import NewColombianPrice from "../components/NewColombianPrice";
+import SizeIcon from "../components/icons/SizeIcon";
 
 export const surfaceTypesType = defineType({
   name: "surfaceTypes",
@@ -67,12 +69,59 @@ export const surfaceType = defineType({
       name: "formats",
       title: "Formatos",
       type: "array",
+      validation: (Rule) =>
+        Rule.custom((formats, context) => {
+          const isAvailable = context.document?.available;
+
+          if (isAvailable && (!formats || formats.length === 0)) {
+            return "Debe agregar al menos un formato si el material está disponible.";
+          }
+
+          return true;
+        }),
       of: [
         defineArrayMember({
           name: "formato",
           title: "Formato",
-          type: "reference",
-          to: { type: "surfaceFormat" },
+          type: "object",
+          icon: SizeIcon,
+          fields: [
+            defineField({
+              name: "width",
+              title: "Ancho",
+              type: "number",
+              validation: (Rule) => Rule.required(),
+            }),
+            defineField({
+              name: "height",
+              title: "Alto",
+              type: "number",
+              validation: (Rule) => Rule.required(),
+            }),
+            defineField({
+              name: "price",
+              title: "Precio Formato",
+              type: "number",
+              components: { input: NewColombianPrice },
+              validation: (Rule) => Rule.required(),
+            }),
+          ],
+          preview: {
+            select: {
+              width: "width",
+              height: "height",
+              formatPrice: "formatPrice",
+            },
+            prepare({ width, height, formatPrice }) {
+              return {
+                title: `Ancho: ${width || "por definir "}cm x Alto: ${
+                  height || "por definir "
+                }cm`,
+                subtitle: `Precio: $${formatPrice || 0}`,
+                // subtitle: formatPrice,
+              };
+            },
+          },
         }),
       ],
     }),
