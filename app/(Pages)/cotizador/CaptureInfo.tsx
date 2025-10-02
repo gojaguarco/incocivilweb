@@ -54,11 +54,11 @@ const CaptureInfo = ({
               { scroll: false }
             );
           }}
-          className="fixed top-0 z-[200] left-0 w-screen h-full bg-black bg-opacity-50 flex justify-center items-center"
+          className="fixed top-0 z-[100] left-0 w-screen h-full bg-black bg-opacity-50 flex justify-center items-center"
         >
           <LightCard
             onClick={(e) => e.stopPropagation()}
-            className="max-w-screen-sm bg-light-dark p-10 relative z-[200] rounded-xl px-10 flex flex-col w-[85dvw] mx-auto gap-5"
+            className="max-w-screen-sm bg-light-dark p-10 relative z-[100] rounded-xl px-10 flex flex-col w-[85dvw] mx-auto gap-5"
           >
             <CaptureForm
               formTitle={formTitle}
