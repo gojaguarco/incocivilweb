@@ -100,7 +100,7 @@ export const surfaceType = defineType({
             }),
             defineField({
               name: "price",
-              title: "Precio Formato nuevo",
+              title: "Precio Formato",
               type: "number",
               components: { input: NewColombianPrice },
               validation: (Rule) => Rule.required(),
