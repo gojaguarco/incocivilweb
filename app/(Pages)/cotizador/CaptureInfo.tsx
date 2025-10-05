@@ -44,6 +44,7 @@ const CaptureInfo = ({
           color="naranja"
           size="mediano"
           link={`?${createQueryString("capture-info", "true", "add")}`}
+          scroll={false}
         />
       )}
       {captureInfoOpen && (
@@ -58,7 +59,7 @@ const CaptureInfo = ({
         >
           <LightCard
             onClick={(e) => e.stopPropagation()}
-            className="max-w-screen-sm bg-light-dark p-10 relative z-[100] rounded-xl px-10 flex flex-col w-[85dvw] mx-auto gap-5"
+            className="max-w-screen-sm bg-light-dark p-10 relative z-[200] rounded-xl px-10 flex flex-col w-[85dvw] mx-auto gap-5"
           >
             <CaptureForm
               formTitle={formTitle}

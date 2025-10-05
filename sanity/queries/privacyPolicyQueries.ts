@@ -11,6 +11,7 @@ export const getPrivacyPolicyContent = async () => {
   const content = await sanityFetch({
     query: PRIVACY_POLICY_QUERY,
   });
+  console.log({ content });
 
   return content;
 };

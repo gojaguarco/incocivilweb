@@ -53,13 +53,23 @@ const DesktopNavBar = ({ className }: Props) => {
           className="absolute h-3 w-3 right-0 -bottom-[12.5px]"
           colorHex="e0e3ec"
         />
-        <LinkButton
-          text={"Cotizador"}
-          className={pathname.includes("/cotizador") ? "hidden" : ""}
-          size="grande"
-          color="naranja"
-          link="/cotizador"
-        />
+        {pathname.includes("/cotizador") ? (
+          <LinkButton
+            text={"Contáctanos"}
+            // className={pathname.includes("/cotizador") ? "hidden" : ""}
+            size="grande"
+            color="naranja"
+            link="/contact"
+          />
+        ) : (
+          <LinkButton
+            text={"Cotizador"}
+            // className={pathname.includes("/cotizador") ? "hidden" : ""}
+            size="grande"
+            color="naranja"
+            link="/cotizador"
+          />
+        )}
         {/* <LinkButton text={"Contáctanos"} size="grande" color="naranja" link="/contact" /> */}
       </section>
     </nav>

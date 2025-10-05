@@ -19,7 +19,7 @@ type TProps = {
 };
 
 const ContactCard = ({ content, className, adminData }: TProps) => {
-  const recaptchaRef = useRef(null);
+  const recaptchaRef = useRef<ReCAPTCHA | null>(null);
   const [isVerified, setIsVerified] = useState(false);
   const [captchaToken, setCaptchaToken] = useState<string | null>(null);
 
@@ -49,6 +49,8 @@ const ContactCard = ({ content, className, adminData }: TProps) => {
         name: "",
         tel: "",
       });
+      setPrivacyCheck(false);
+      recaptchaRef?.current?.reset();
     }
   }, [formState]);
 
@@ -132,6 +134,7 @@ const ContactCard = ({ content, className, adminData }: TProps) => {
             sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
             onChange={handleCaptchaSubmission}
             ref={recaptchaRef}
+            // check
           />
         )}
         <PrivacyCheckBox checked={privacyCheck} setChecked={setPrivacyCheck} />

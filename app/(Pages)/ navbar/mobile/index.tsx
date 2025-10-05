@@ -35,13 +35,23 @@ const MobileNavBar = ({ className }: Props) => {
         />
       </Link>
       <section className="bg-light-dark rounded-bl-[6px] h-full px-2 xs:px-4 flex items-center justify-center gap-2 xs:gap-3 relative">
-        <LinkButton
-          text={"Cotizador"}
-          className={pathname.includes("/cotizador") ? "hidden" : ""}
-          size="grande"
-          color="naranja"
-          link="/cotizador"
-        />
+        {pathname.includes("/cotizador") ? (
+          <LinkButton
+            text={"Contáctanos"}
+            // className={pathname.includes("/cotizador") ? "hidden" : ""}
+            size="grande"
+            color="naranja"
+            link="/contact"
+          />
+        ) : (
+          <LinkButton
+            text={"Cotizador"}
+            // className={pathname.includes("/cotizador") ? "hidden" : ""}
+            size="grande"
+            color="naranja"
+            link="/cotizador"
+          />
+        )}
         {/* <LinkButton text={"Contáctanos"} size="grande" color="naranja" link="/contact" /> */}
         <Burger
           isNavOpen={isNavOpen}

@@ -17,6 +17,7 @@ import {
   calculateTotalSurface,
   numberToColombianPriceString,
 } from "@/app/helpers";
+import "./Scroll.css";
 
 const CotizadorUi = ({
   surfaceTypes,
@@ -155,7 +156,7 @@ const CotizadorUi = ({
         <h3 className="my-5">
           {cotizadorContent?.cotizador?.surfaceSelection?.surfaceSelection}
         </h3>
-        <div className="overflow-x-scroll">
+        <div className="custom-scroll-fix overflow-x-scroll pb-2">
           <ul className="flex gap-4 w-fit pr-5">
             {filteredCatalogo.map((item) => (
               <li

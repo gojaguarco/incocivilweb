@@ -172,7 +172,7 @@ const Footer = async () => {
   };
 
   return (
-    <footer className="w-full bg-dark flex flex-col items-center">
+    <footer className="relative z-1 w-full bg-dark flex flex-col items-center">
       <div className="max-w-screen-xl default-paddings w-full flex flex-col lg:flex-row justify-between py-16 gap-y-12">
         <header className="flex flex-col items-center gap-1">
           <Image

@@ -1,0 +1,16 @@
+/* For WebKit browsers (Chrome, Safari, iOS) */
+.custom-scroll-fix::-webkit-scrollbar {
+  height: 8px; /* Adjust height as needed */
+  background-color: transparent; /* Makes the track invisible */
+}
+
+.custom-scroll-fix::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2); /* A semi-transparent scrollbar */
+  border-radius: 3px; /* Rounded edges */
+  visibility: visible !important; /* Forces it to show */
+}
+
+/* Optional: Add smooth scrolling to iOS */
+.custom-scroll-fix {
+  -webkit-overflow-scrolling: touch;
+}

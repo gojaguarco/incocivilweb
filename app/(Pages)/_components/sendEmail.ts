@@ -39,7 +39,6 @@ export const sendEmail = async (
   };
 
   const { success, data, error: zError } = formSchema.safeParse(rawFormData);
-
   if (!success || !process.env.RECAPTCHA_SECRET_KEY) {
     console.error(zError);
     return {
@@ -53,21 +52,23 @@ export const sendEmail = async (
     method: "POST",
   });
   const captchaData = await captchaResponse.json();
+  console.log(captchaData);
   if (captchaData.success) {
-    // console.log("send email");
+    console.log("send email");
     try {
-      const { error } = await resend.emails.send({
+      const resendResp = await resend.emails.send({
         from: "Incocivil <noreply@incocivil.com>",
         to: [rawFormData.email],
         bcc: [rawFormData.adminData.email],
         subject: "Mensaje de cliente.",
         react: ContactEmailTemplate({ data: rawFormData }),
       });
+      console.log({ resendResp });
 
-      if (error) {
+      if (resendResp.error) {
         return {
           success: false,
-          error: error,
+          error: resendResp.error,
         };
       }
       return {
