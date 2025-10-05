@@ -52,9 +52,7 @@ export const sendEmail = async (
     method: "POST",
   });
   const captchaData = await captchaResponse.json();
-  console.log(captchaData);
   if (captchaData.success) {
-    console.log("send email");
     try {
       const resendResp = await resend.emails.send({
         from: "Incocivil <noreply@incocivil.com>",
@@ -63,7 +61,6 @@ export const sendEmail = async (
         subject: "Mensaje de cliente.",
         react: ContactEmailTemplate({ data: rawFormData }),
       });
-      console.log({ resendResp });
 
       if (resendResp.error) {
         return {
