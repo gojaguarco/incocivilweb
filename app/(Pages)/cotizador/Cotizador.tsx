@@ -39,9 +39,9 @@ const CotizadorUi = ({
       if (!item) continue;
 
       const parts = item.split("_");
-      if (parts.length < 4) continue;
+      if (parts.length < 5) continue;
 
-      const [surfaceId, width, height, quantity] = parts;
+      const [surfaceId, width, height, uniqueId, quantity] = parts;
 
       const surface = catalogo.find((s) => s._id === surfaceId);
       if (!surface || !surface.formats) continue;
@@ -52,7 +52,7 @@ const CotizadorUi = ({
 
       if (!matchingFormat) continue;
 
-      const cartItemKey = `${surfaceId}_${width}_${height}`;
+      const cartItemKey = `${surfaceId}_${width}_${height}_${uniqueId}`;
 
       initialState[cartItemKey] = {
         quantity: Number(quantity),
@@ -76,7 +76,8 @@ const CotizadorUi = ({
     if (!surface || !surface.formats || !surface.formats[formatIndex]) return;
 
     const selectedFormat = surface.formats[formatIndex];
-    const newItem = `${id}_${selectedFormat.width}_${selectedFormat.height}_1`;
+    const uniqueId = Date.now().toString();
+    const newItem = `${id}_${selectedFormat.width}_${selectedFormat.height}_${uniqueId}_1`;
 
     const params = new URLSearchParams(window.location.search);
     const items = params.get("items")?.split(":").filter(Boolean) || [];
@@ -123,7 +124,7 @@ const CotizadorUi = ({
 
     if (itemIndex !== -1) {
       const parts = items[itemIndex].split("_");
-      parts[3] = String(quantity);
+      parts[4] = String(quantity);
       items[itemIndex] = parts.join("_");
     }
 
