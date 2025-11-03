@@ -1,33 +1,28 @@
 "use client";
-import { useRouter } from "next/navigation";
+import { ReadonlyURLSearchParams, useRouter } from "next/navigation";
 import LinkButton from "../_components/LinkButton";
 import LightCard from "../_components/LightCard";
 import CaptureForm from "./CaptureForm";
-// import { Dispatch, SetStateAction } from "react";
 import { SurfaceToSendAdminEmail } from "./captureInfoZods";
+import { useCreateQueryString } from "../_lib/createQueryString";
 
 const CaptureInfo = ({
-  createQueryString,
   captureInfoOpen,
   surfaceFormats,
-  // setShowTotal,
   formTitle,
   successMessage,
+  searchParams,
 }: {
+  searchParams: ReadonlyURLSearchParams;
   surfaceFormats: {
     [surfaceId: string]: SurfaceToSendAdminEmail;
   };
-  createQueryString: (
-    name: string,
-    value: string,
-    action: "add" | "remove" | "replace"
-  ) => string;
   captureInfoOpen: boolean;
-  // setShowTotal: Dispatch<SetStateAction<boolean>>;
   formTitle: string;
   successMessage: string;
 }) => {
   const router = useRouter();
+  const createQueryString = useCreateQueryString(searchParams);
 
   // let total = 0;
 

@@ -9,7 +9,7 @@ import SelectFilter from "../_components/SelectFilter";
 import { useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
 import { urlFor } from "@/sanity/lib/image";
-import { Suspense, useCallback, useState } from "react";
+import { Suspense, useMemo } from "react";
 import CaptureInfo from "./CaptureInfo";
 import { SurfaceToSendAdminEmail } from "./captureInfoZods";
 import SelectedSurfacesTable from "./SelectedSurfacesTable";
@@ -29,39 +29,109 @@ const CotizadorUi = ({
   cotizadorContent: COTIZADOR_QUERYResult;
 }) => {
   const searchParams = useSearchParams();
-  const captureInfoOpen = searchParams.get("capture-info") === "true";
-  const surfaceTypeId = searchParams.get("surfaceType");
-  const selectedSurfaceIds = searchParams.get("surfaceId")?.split(",") ?? [];
+  const router = useRouter();
 
-  // const [showTotal, setShowTotal] = useState(false);
+  const surfaceFormats = useMemo(() => {
+    const initialState: { [key: string]: SurfaceToSendAdminEmail } = {};
+    const items = searchParams.get("items")?.split(":") ?? [];
 
-  const [surfaceFormats, setSurfaceFormats] = useState<{
-    [surfaceId: string]: SurfaceToSendAdminEmail;
-  }>(() => {
-    const initialState: { [surfaceId: string]: SurfaceToSendAdminEmail } = {};
-    for (const surfaceId of selectedSurfaceIds) {
-      const surface = catalogo.find((item) => item._id === surfaceId);
-      if (!surface) continue;
+    for (const item of items) {
+      if (!item) continue;
 
-      const totalSurface =
-        surface.formats && surface.formats[0] ? surface.formats[0].price : 0;
-      initialState[surfaceId] = {
-        quantity: 1,
-        width: surface?.formats ? surface.formats[0].width : 0,
-        height: surface?.formats ? surface.formats[0].height : 0,
-        totalSurface,
-        code: surface?.code ? String(surface.code) : "",
-        id: surface?._id || "",
-        image: surface?.image ? urlFor(surface.image).url() : "",
-        name: surface?.title || "",
-        formatPrice: surface?.formats ? surface.formats[0].price : 0,
+      const parts = item.split("_");
+      if (parts.length < 4) continue;
+
+      const [surfaceId, width, height, quantity] = parts;
+
+      const surface = catalogo.find((s) => s._id === surfaceId);
+      if (!surface || !surface.formats) continue;
+
+      const matchingFormat = surface.formats.find(
+        (f) => f.width === Number(width) && f.height === Number(height)
+      );
+
+      if (!matchingFormat) continue;
+
+      const cartItemKey = `${surfaceId}_${width}_${height}`;
+
+      initialState[cartItemKey] = {
+        quantity: Number(quantity),
+        width: matchingFormat.width,
+        height: matchingFormat.height,
+        totalSurface: matchingFormat.price * Number(quantity),
+        code: surface.code ? String(surface.code) : "",
+        id: surface._id,
+        image: surface.image ? urlFor(surface.image).url() : "",
+        name: surface.title || "",
+        formatPrice: matchingFormat.price,
         type: surface.type.title,
       };
     }
-    return initialState;
-  });
 
-  const router = useRouter();
+    return initialState;
+  }, [searchParams, catalogo]);
+
+  const addSurfaceId = (id: string, formatIndex: number = 0) => {
+    const surface = catalogo.find((item) => item._id === id);
+    if (!surface || !surface.formats || !surface.formats[formatIndex]) return;
+
+    const selectedFormat = surface.formats[formatIndex];
+    const newItem = `${id}_${selectedFormat.width}_${selectedFormat.height}_1`;
+
+    const params = new URLSearchParams(window.location.search);
+    const items = params.get("items")?.split(":").filter(Boolean) || [];
+    items.push(newItem);
+    params.set("items", items.join(":"));
+    router.push(`?${params.toString()}`, { scroll: false });
+  };
+
+  const removeSurfaceId = (cartItemKey: string) => {
+    const params = new URLSearchParams(window.location.search);
+    const items = params.get("items")?.split(":").filter(Boolean) || [];
+    const updatedItems = items.filter((item) => !item.startsWith(cartItemKey));
+    if (updatedItems.length === 0) {
+      params.delete("items");
+    } else {
+      params.set("items", updatedItems.join(":"));
+    }
+    router.push(`?${params.toString()}`, { scroll: false });
+  };
+
+  const onFormatChange = (
+    cartItemKey: string,
+    newFormat: { width: number; height: number }
+  ) => {
+    const params = new URLSearchParams(window.location.search);
+    const items = params.get("items")?.split(":").filter(Boolean) || [];
+    const itemIndex = items.findIndex((item) => item.startsWith(cartItemKey));
+
+    if (itemIndex !== -1) {
+      const parts = items[itemIndex].split("_");
+      parts[1] = String(newFormat.width);
+      parts[2] = String(newFormat.height);
+      items[itemIndex] = parts.join("_");
+    }
+
+    params.set("items", items.join(":"));
+    router.push(`?${params.toString()}`, { scroll: false });
+  };
+
+  const onQuantityChange = (cartItemKey: string, quantity: number) => {
+    const params = new URLSearchParams(window.location.search);
+    const items = params.get("items")?.split(":").filter(Boolean) || [];
+    const itemIndex = items.findIndex((item) => item.startsWith(cartItemKey));
+
+    if (itemIndex !== -1) {
+      const parts = items[itemIndex].split("_");
+      parts[3] = String(quantity);
+      items[itemIndex] = parts.join("_");
+    }
+
+    params.set("items", items.join(":"));
+    router.push(`?${params.toString()}`, { scroll: false });
+  };
+
+  const surfaceTypeId = searchParams.get("surfaceType");
   const filteredCatalogo = catalogo.filter((item) => {
     if (!surfaceTypeId || surfaceTypeId === "all" || surfaceTypeId === "") {
       return true;
@@ -69,72 +139,8 @@ const CotizadorUi = ({
     return item.type._id === surfaceTypeId;
   });
 
-  const createQueryString = useCallback(
-    (
-      name: string,
-      value: string,
-      action: "add" | "remove" | "replace" = "add"
-    ) => {
-      const params = new URLSearchParams(searchParams.toString());
-      const currentValues = params.get(name)?.split(",").filter(Boolean) || [];
-
-      if (action === "add" && !currentValues.includes(value)) {
-        params.set(name, [...currentValues, value].join(","));
-      } else if (action === "remove") {
-        params.set(name, currentValues.filter((v) => v !== value).join(","));
-      } else if (action === "replace") {
-        params.set(name, value);
-      }
-
-      return params.toString();
-    },
-    [searchParams]
-  );
-
-  const addSurfaceId = (id: string) => {
-    const surface = catalogo.find((item) => item._id === id);
-
-    setSurfaceFormats((prev) => ({
-      ...prev,
-      [id]: {
-        width: surface?.formats ? surface.formats[0].width : 0,
-        height: surface?.formats ? surface.formats[0].height : 0,
-        totalSurface: surface?.formats ? surface.formats[0].price : 0,
-        id: surface?._id || "",
-        code: surface?.code ? String(surface.code) : "",
-        name: surface?.title || "",
-        image: surface?.image ? urlFor(surface.image).url() : "",
-        quantity: 1,
-        formatPrice: surface?.formats ? surface.formats[0].price : 0,
-        type: surface?.type.title || "",
-      },
-    }));
-    router.push(`?${createQueryString("surfaceId", id, "add")}`, {
-      scroll: false,
-    });
-  };
-
-  const removeSurfaceId = (id: string) => {
-    if (selectedSurfaceIds.length === 1) {
-      // remove surfaceId from url search params
-      const params = new URLSearchParams(searchParams.toString());
-      params.delete("surfaceId");
-      router.push(`?${params.toString()}`, { scroll: false });
-    } else {
-      router.push(`?${createQueryString("surfaceId", id, "remove")}`, {
-        scroll: false,
-      });
-    }
-    setSurfaceFormats((prevSurfaceFormats) => {
-      const updatedSurfaceFormats = { ...prevSurfaceFormats };
-      delete updatedSurfaceFormats[id];
-      return updatedSurfaceFormats;
-    });
-  };
-
   return (
     <section className="flex flex-col gap-[60px]">
-      {/* <LightCard> */}
       <div className="md:flex justify-between items-center gap-3">
         <h3 className="my-5">
           {cotizadorContent?.cotizador?.surfaceSelection?.surfaceTypeSelection}{" "}
@@ -149,9 +155,6 @@ const CotizadorUi = ({
           }))}
         />
       </div>
-      {/* </LightCard> */}
-      {/* {surfaceTypeId && ( */}
-      {/* <LightCard className="pr-0 flex flex-col gap-2"> */}
       <div id="surface-selector" className="box-content scroll-mt-[50vh]">
         <h3 className="my-5">
           {cotizadorContent?.cotizador?.surfaceSelection?.surfaceSelection}
@@ -215,23 +218,17 @@ const CotizadorUi = ({
           </ul>
         </div>
       </div>
-
-      {/* </LightCard> */}
-      {/* )} */}
-      {/* {surfaceTypeId && ( */}
       <>
-        {/* <LightCard> */}
         <section className="w-fit">
           <h3 className="my-5">
             {cotizadorContent?.cotizador?.surfaceSelection?.formatSelection}
           </h3>
           <SelectedSurfacesTable
-            // showTotal={showTotal}
             surfaceFormats={surfaceFormats}
-            setSurfaceFormats={setSurfaceFormats}
             catalogo={catalogo}
             removeSurfaceId={removeSurfaceId}
-            selectedSurfaceIds={selectedSurfaceIds}
+            onFormatChange={onFormatChange}
+            onQuantityChange={onQuantityChange}
           />
           <div className="bg-tableGray border rounded-b-md border-slate-300 px-5 py-5 text-right font-semibold">
             Total:
@@ -240,9 +237,7 @@ const CotizadorUi = ({
             )}
           </div>
         </section>
-        {/* </LightCard> */}
         <div className="w-full items-center flex flex-col md:flex-row gap-2 justify-between">
-          {/* <LightCard> */}
           <div className="">
             <h6 className="font-inter">
               {cotizadorContent?.cotizador?.surfaceSelection?.footer?.title}
@@ -260,20 +255,17 @@ const CotizadorUi = ({
               }
             </a>
           </div>
-          {/* </LightCard> */}
           <CaptureInfo
+            searchParams={searchParams}
             formTitle={cotizadorContent?.cotizador?.formContent?.title || ""}
             successMessage={
               cotizadorContent?.cotizador?.formContent?.successMessage || ""
             }
-            // setShowTotal={setShowTotal}
             surfaceFormats={surfaceFormats}
-            createQueryString={createQueryString}
-            captureInfoOpen={captureInfoOpen}
+            captureInfoOpen={searchParams.get("capture-info") === "true"}
           />
         </div>
       </>
-      {/* )} */}
     </section>
   );
 };

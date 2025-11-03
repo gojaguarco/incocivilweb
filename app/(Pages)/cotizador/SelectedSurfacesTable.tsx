@@ -2,7 +2,7 @@
 import { AVAILABLE_SURFACES_QUERYResult } from "@/sanity.types";
 import { urlFor } from "@/sanity/lib/image";
 import Image from "next/image";
-import { ComponentPropsWithoutRef, Dispatch, SetStateAction } from "react";
+import { ComponentPropsWithoutRef } from "react";
 import { cn } from "../_lib/cn";
 import { numberToColombianPriceString } from "@/app/helpers";
 import { SurfaceToSendAdminEmail } from "./captureInfoZods";
@@ -12,27 +12,24 @@ import SelectSurfaceButton from "./SelectSurfaceButton";
 const SelectedSurfacesTable = ({
   catalogo,
   removeSurfaceId,
-  selectedSurfaceIds,
-  setSurfaceFormats,
   surfaceFormats,
-}: // showTotal,
-{
-  selectedSurfaceIds: string[];
+  onFormatChange,
+  onQuantityChange,
+}: {
   catalogo: AVAILABLE_SURFACES_QUERYResult;
   removeSurfaceId: (id: string) => void;
-  surfaceFormats: {
-    [surfaceId: string]: SurfaceToSendAdminEmail;
-  };
-  setSurfaceFormats: Dispatch<
-    SetStateAction<{
-      [surfaceId: string]: SurfaceToSendAdminEmail;
-    }>
-  >;
-  // showTotal: boolean;
+  surfaceFormats: { [key: string]: SurfaceToSendAdminEmail };
+  onFormatChange: (
+    cartItemKey: string,
+    newFormat: { width: number; height: number }
+  ) => void;
+  onQuantityChange: (cartItemKey: string, quantity: number) => void;
 }) => {
+  const selectedItems = Object.keys(surfaceFormats);
+
   return (
     <div className="">
-      {selectedSurfaceIds && selectedSurfaceIds.length > 0 ? (
+      {selectedItems && selectedItems.length > 0 ? (
         <table className="hidden xl:block table-fixed w-fit border-collapse bg-light rounded shadow-sm overflow-hidden">
           <thead className="w-full">
             <tr className="border-b">
@@ -45,24 +42,24 @@ const SelectedSurfacesTable = ({
               <Th className="border-r border-slate-300">Formato</Th>
               <Th className="border-r border-slate-300">Cantidad</Th>
               <Th className="border-r border-slate-300">Total</Th>
-              {/* <Th>Acciones</Th> */}
             </tr>
           </thead>
           <tbody className="w-full">
-            {selectedSurfaceIds.map((id, index) => {
-              const surface = catalogo.find((item) => item._id === id);
+            {selectedItems.map((cartKey, index) => {
+              const surfaceId = cartKey.split("_")[0];
+              const surface = catalogo.find((item) => item._id === surfaceId);
               if (!surface) return null;
 
               return (
                 <DesktopSurface
-                  // showTotal={!!showTotal}
-                  surfaceFormats={surfaceFormats}
-                  setSurfaceFormats={setSurfaceFormats}
-                  key={id}
-                  id={id}
+                  cartItem={surfaceFormats[cartKey]}
+                  key={cartKey}
+                  id={cartKey}
                   index={index}
                   removeSurfaceId={removeSurfaceId}
                   surface={surface}
+                  onFormatChange={onFormatChange}
+                  onQuantityChange={onQuantityChange}
                 />
               );
             })}
@@ -90,24 +87,24 @@ const SelectedSurfacesTable = ({
         id=""
         className="xl:hidden w-full border-collapse bg-light rounded shadow-sm overflow-hidden flex flex-col"
       >
-        {selectedSurfaceIds.map((id, index) => {
-          const surface = catalogo.find((item) => item._id === id);
+        {selectedItems.map((cartKey, index) => {
+          const surfaceId = cartKey.split("_")[0];
+          const surface = catalogo.find((item) => item._id === surfaceId);
           if (!surface) return null;
           return (
             <MobileSurface
-              // showTotal={showTotal}
-              setSurfaceFormats={setSurfaceFormats}
-              surfaceFormats={surfaceFormats}
-              key={id}
+              cartItem={surfaceFormats[cartKey]}
+              key={cartKey}
               index={index}
               surface={surface}
-              id={id}
+              id={cartKey}
               removeSurfaceId={removeSurfaceId}
+              onFormatChange={onFormatChange}
+              onQuantityChange={onQuantityChange}
             />
           );
         })}
       </ul>
-      {/* {JSON.stringify(selectedSurfaces)} */}
     </div>
   );
 };
@@ -152,57 +149,21 @@ const DesktopSurface = ({
   index,
   surface,
   removeSurfaceId,
-  setSurfaceFormats,
-  surfaceFormats,
-}: // showTotal,
-{
-  // showTotal: boolean;
+  cartItem,
+  onFormatChange,
+  onQuantityChange,
+}: {
   id: string;
   index: number;
   surface: AVAILABLE_SURFACES_QUERYResult[number];
   removeSurfaceId: (id: string) => void;
-  surfaceFormats: {
-    [surfaceId: string]: SurfaceToSendAdminEmail;
-  };
-  setSurfaceFormats: Dispatch<
-    SetStateAction<{
-      [surfaceId: string]: SurfaceToSendAdminEmail;
-    }>
-  >;
+  cartItem: SurfaceToSendAdminEmail;
+  onFormatChange: (
+    cartItemKey: string,
+    newFormat: { width: number; height: number }
+  ) => void;
+  onQuantityChange: (cartItemKey: string, quantity: number) => void;
 }) => {
-  const onFormatChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const format = JSON.parse(e.target.value);
-    if (format) {
-      setSurfaceFormats({
-        ...surfaceFormats,
-        [surface._id]: {
-          height: format.height,
-          width: format.width,
-          totalSurface: format.price,
-          id: surface._id,
-          code: String(surface.code || ""),
-          name: surface.title || "",
-          image: surface.image ? urlFor(surface.image).url() : "",
-          quantity: format.quantity ?? 1,
-          formatPrice: format.price,
-          type: surface.type.title,
-        },
-      });
-    }
-  };
-
-  const onQuantityChange = (quantity: number) => {
-    const newTotal = surfaceFormats[surface._id]?.formatPrice * quantity;
-    setSurfaceFormats({
-      ...surfaceFormats,
-      [surface._id]: {
-        ...surfaceFormats[surface._id],
-        quantity: quantity,
-        totalSurface: newTotal,
-      },
-    });
-  };
-
   const rowBg = index % 2 === 0 ? "bg-tableGray" : "bg-light";
   return (
     <tr className={cn("border-b text-xs", rowBg)}>
@@ -210,22 +171,15 @@ const DesktopSurface = ({
         {surface.image && (
           <Image
             className="rounded-lg w-[116.25px] h-[47px] object-cover"
-            src={urlFor(surface.image)
-              .width(500)
-              .height(500)
-              .format("webp")
-              .url()}
+            src={urlFor(surface.image).width(500).height(500).format("webp").url()}
             alt={surface.title}
             width={116}
             height={47}
           />
         )}
         <h6 className="capitalize text-xs self-start">
-          {surface.title
-            .toLowerCase()
-            .replace(surface.type.title.toLowerCase(), "")}
+          {surface.title.toLowerCase().replace(surface.type.title.toLowerCase(), "")}
         </h6>
-        {/* <p className="text-xs self-start">{surface.type.title}</p>{" "} */}
       </Td>
       <Td className="border-r border-slate-300 code">{surface.code}</Td>
       <Td className="border-r border-slate-300">{surface.type.title}</Td>
@@ -238,22 +192,20 @@ const DesktopSurface = ({
       </Td>
       <Td className="border-r border-slate-300">
         <select
-          onChange={onFormatChange}
+          onChange={(e) => onFormatChange(id, JSON.parse(e.target.value))}
           value={JSON.stringify({
-            height: surfaceFormats[surface._id]?.height || 0,
-            price: surfaceFormats[surface._id]?.formatPrice || 0,
-            width: surfaceFormats[surface._id]?.width || 0,
+            width: cartItem.width,
+            height: cartItem.height,
           })}
           className="p-2 rounded"
         >
-          {surface.formats?.map((format, index) => {
+          {surface.formats?.map((format, formatIndex) => {
             return (
               <option
-                key={`${format.height}-${format.width}-${index}`}
+                key={`${format.height}_${format.width}_${formatIndex}`}
                 value={JSON.stringify({
-                  height: format.height,
-                  price: format.price,
                   width: format.width,
+                  height: format.height,
                 })}
               >
                 {format.height}cm * {format.width}cm
@@ -264,22 +216,13 @@ const DesktopSurface = ({
       </Td>
       <Td className="border-r border-slate-300">
         <NumberInput
-          amount={surfaceFormats[surface._id]?.quantity}
-          onChange={onQuantityChange}
+          amount={cartItem.quantity}
+          onChange={(quantity) => onQuantityChange(id, quantity)}
         />
       </Td>
       <Td className="border-r border-slate-300 relative">
-        {/* {!showTotal && (
-          <div
-            className={`w-full h-full grid place-content-center absolute z-10 top-0 left-0 ${rowBg}`}
-          >
-            $0
-          </div>
-        )} */}
         <span className="">
-          {numberToColombianPriceString(
-            surfaceFormats[surface._id]?.totalSurface || 0
-          )}
+          {numberToColombianPriceString(cartItem.totalSurface || 0)}
         </span>
       </Td>
       <Td className="border-r border-slate-300">
@@ -315,58 +258,21 @@ const MobileSurface = ({
   surface,
   removeSurfaceId,
   id,
-  setSurfaceFormats,
-  surfaceFormats,
-}: // showTotal,
-{
+  cartItem,
+  onFormatChange,
+  onQuantityChange,
+}: {
   id: string;
   index: number;
   surface: AVAILABLE_SURFACES_QUERYResult[number];
   removeSurfaceId: (id: string) => void;
-  surfaceFormats: {
-    [surfaceId: string]: SurfaceToSendAdminEmail;
-  };
-  setSurfaceFormats: Dispatch<
-    SetStateAction<{
-      [surfaceId: string]: SurfaceToSendAdminEmail;
-    }>
-  >;
-  // showTotal: boolean;
+  cartItem: SurfaceToSendAdminEmail;
+  onFormatChange: (
+    cartItemKey: string,
+    newFormat: { width: number; height: number }
+  ) => void;
+  onQuantityChange: (cartItemKey: string, quantity: number) => void;
 }) => {
-  const onFormatChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const format = JSON.parse(e.target.value);
-    if (format) {
-      setSurfaceFormats({
-        ...surfaceFormats,
-        [surface._id]: {
-          height: format.height,
-          width: format.width,
-          totalSurface: format.price,
-          id: surface._id,
-          code: String(surface.code || ""),
-          name: surface.title || "",
-          image: surface.image ? urlFor(surface.image).url() : "",
-          quantity: format.quantity ?? 1,
-          formatPrice: format.price,
-          type: surface.type.title,
-        },
-      });
-    }
-  };
-
-  const onQuantityChange = (quantity: number) => {
-    const newTotal = surfaceFormats[surface._id]?.formatPrice * quantity;
-
-    setSurfaceFormats({
-      ...surfaceFormats,
-      [surface._id]: {
-        ...surfaceFormats[surface._id],
-        quantity: quantity,
-        totalSurface: newTotal,
-      },
-    });
-  };
-
   const itemBg = index % 2 === 0 ? "bg-tableGray" : "bg-light";
 
   return (
@@ -379,27 +285,20 @@ const MobileSurface = ({
       {surface.image && (
         <Image
           className="rounded-lg w-full h-[150px] object-cover mb-5"
-          src={urlFor(surface.image)
-            .width(1500)
-            .height(600)
-            .format("webp")
-            .url()}
+          src={urlFor(surface.image).width(1500).height(600).format("webp").url()}
           alt={surface.title}
           width={1500}
           height={600}
         />
       )}
       <div className="grid grid-cols-2 gap-2">
-        {/* <div className="flex flex-col gap-2 w-fit"> */}
         <InfoItem>
           <strong>Título: </strong>
         </InfoItem>
         <InfoItem>
           {" "}
           <h6 className="capitalize">
-            {surface.title
-              .toLowerCase()
-              .replace(surface.type.title.toLowerCase(), "")}
+            {surface.title.toLowerCase().replace(surface.type.title.toLowerCase(), "")}
           </h6>
         </InfoItem>
         <InfoItem className="code">
@@ -443,11 +342,10 @@ const MobileSurface = ({
         </InfoItem>
         <InfoItem>
           <select
-            onChange={onFormatChange}
+            onChange={(e) => onFormatChange(id, JSON.parse(e.target.value))}
             value={JSON.stringify({
-              height: surfaceFormats[surface._id]?.height || 0,
-              price: surfaceFormats[surface._id]?.formatPrice || 0,
-              width: surfaceFormats[surface._id]?.width || 0,
+              width: cartItem.width,
+              height: cartItem.height,
             })}
             className="p-2 rounded"
           >
@@ -456,9 +354,8 @@ const MobileSurface = ({
                 <option
                   key={`<span class="math-inline">\{format\.height\}\*</span>{format.width}-${index}`}
                   value={JSON.stringify({
-                    height: format.height,
-                    price: format.price,
                     width: format.width,
+                    height: format.height,
                   })}
                 >
                   {format.height}cm * {format.width}cm
@@ -473,32 +370,20 @@ const MobileSurface = ({
         </InfoItem>
         <InfoItem>
           <NumberInput
-            amount={surfaceFormats[surface._id]?.quantity}
-            onChange={onQuantityChange}
+            amount={cartItem.quantity}
+            onChange={(quantity) => onQuantityChange(id, quantity)}
           />
         </InfoItem>
 
         <InfoItem className="">
           <strong>Total: </strong>
         </InfoItem>
-        {/* </div> */}
-        {/* <div className="flex flex-col gap-2"> */}
 
         <InfoItem className="relative">
-          {/* {!showTotal && (
-            <div
-              className={`w-full h-full absolute z-10 top-0 left-0 ${itemBg}`}
-            >
-              $0
-            </div>
-          )} */}
           <span className="text-lg font-semibold">
-            {numberToColombianPriceString(
-              surfaceFormats[surface._id]?.totalSurface || 0
-            )}
+            {numberToColombianPriceString(cartItem.totalSurface || 0)}
           </span>
         </InfoItem>
-        {/* </div> */}
         <button
           onClick={() => removeSurfaceId(id)}
           className="p-2 text-red-500 hover:text-red-700 absolute z-20 bottom-0 right-0"
