@@ -65,7 +65,11 @@ const CaptureInfo = ({
               { scroll: false }
             );
           }}
-          style={{ zIndex: 1000 }}
+          style={{
+            isolation: "isolate",
+            transform: "translateZ(0)",
+            WebkitTransform: "translateZ(0)",
+          }}
           className="pt-10 fixed top-0 left-0 w-screen h-screen bg-black bg-opacity-50 flex justify-center items-center"
         >
           <LightCard
