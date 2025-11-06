@@ -126,7 +126,7 @@ const CaptureForm = ({
   }, [formState.success]);
 
   return (
-    <form className="flex flex-col gap-5">
+    <form className="flex flex-col gap-5 relative">
       <h1 className="text-3xl md:text-5xl">{formTitle}</h1>
       {/* <p>
         El valor

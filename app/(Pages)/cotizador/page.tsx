@@ -32,7 +32,7 @@ const page = async () => {
   );
 
   return (
-    <div className="w-full z-10">
+    <div className="w-full">
       <section className="bg-light-dark min-h-screen w-full relative z-20 flex flex-col gap-5 py-10 px-5 md:px-10 xl:px-48 mx-auto">
         <header>
           <h1>{cotizadorContent?.cotizador?.surfaceSelection?.title}</h1>
