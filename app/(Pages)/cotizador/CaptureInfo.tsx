@@ -54,7 +54,7 @@ const CaptureInfo = ({
         >
           <LightCard
             onClick={(e) => e.stopPropagation()}
-            className="max-w-screen-sm max-h-[90svh] overflow-y-scroll md:overflow-y-auto p-10 relative z-[200] rounded- px-10 flex flex-col w-[85dvw] mx-auto gap-5"
+            className="max-w-screen-sm bg-light-dark overflow-y-scroll md:overflow-y-auto max-h-[90svh] p-10 relative z-[200] rounded-xl px-10 flex flex-col w-[85dvw] mx-auto gap-5"
           >
             <CaptureForm
               formTitle={formTitle}
