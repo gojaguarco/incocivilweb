@@ -1,11 +1,11 @@
 "use client";
 import { ReadonlyURLSearchParams, useRouter } from "next/navigation";
+import { useEffect, useRef } from "react";
 import LinkButton from "../_components/LinkButton";
 import LightCard from "../_components/LightCard";
 import CaptureForm from "./CaptureForm";
 import { SurfaceToSendAdminEmail } from "./captureInfoZods";
 import { useCreateQueryString } from "../_lib/createQueryString";
-import { useEffect } from "react";
 
 const CaptureInfo = ({
   captureInfoOpen,
@@ -24,32 +24,29 @@ const CaptureInfo = ({
 }) => {
   const router = useRouter();
   const createQueryString = useCreateQueryString(searchParams);
-
-  // let total = 0;
-
-  // for (const surfaceFormatIn in surfaceFormats) {
-  // const surfaceFormat = surfaceFormats[surfaceFormatIn];
-  // total += surfaceFormat.totalSurface;
-  // }
+  const dialogRef = useRef<HTMLDialogElement>(null);
 
   useEffect(() => {
-    if (captureInfoOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "unset";
-    }
+    const dialog = dialogRef.current;
+    if (!dialog) return;
 
-    // Cleanup function to restore scroll when component unmounts
-    return () => {
-      document.body.style.overflow = "unset";
-    };
+    if (captureInfoOpen) {
+      dialog.showModal();
+    } else {
+      dialog.close();
+    }
   }, [captureInfoOpen]);
+
+  const handleClose = () => {
+    router.push(`?${createQueryString("capture-info", "true", "remove")}`, {
+      scroll: false,
+    });
+  };
 
   return (
     <>
       {Object.keys(surfaceFormats).length > 0 && (
         <LinkButton
-          // scroll={false}
           text={`Cotizar`}
           color="naranja"
           size="mediano"
@@ -57,35 +54,24 @@ const CaptureInfo = ({
           scroll={false}
         />
       )}
-      {captureInfoOpen && (
-        <section
-          onClick={() => {
-            router.push(
-              `?${createQueryString("capture-info", "true", "remove")}`,
-              { scroll: false }
-            );
-          }}
-          style={{
-            isolation: "isolate",
-            transform: "translateZ(0)",
-            WebkitTransform: "translateZ(0)",
-          }}
-          className="pt-10 fixed top-0 left-0 w-screen h-screen bg-black bg-opacity-50 flex justify-center items-center"
-        >
+      <dialog
+        ref={dialogRef}
+        onClick={handleClose}
+        className="backdrop:bg-black backdrop:bg-opacity-50 bg-transparent p-0 max-w-none w-full h-full overflow-hidden"
+      >
+        <div className="pt-10 w-screen h-screen flex justify-center items-center">
           <LightCard
             onClick={(e) => e.stopPropagation()}
-            className="max-w-[500px] md:max-w-screen-sm bg-light-dark overflow-x-hidden overflow-y-scroll md:overflow-y-auto max-h-[80svh] p-10 fixed z-[200] rounded-xl px-10 flex flex-col w-[85dvw] mx-auto gap-5"
+            className="max-w-[500px] md:max-w-screen-sm bg-light-dark overflow-x-hidden overflow-y-scroll md:overflow-y-auto max-h-[80svh] p-10 rounded-xl px-10 flex flex-col w-[85dvw] mx-auto gap-5"
           >
             <CaptureForm
               formTitle={formTitle}
               successMessage={successMessage}
-              // setShowTotal={setShowTotal}
               selectedFormats={surfaceFormats}
-              // totalToShow={total}
             />
           </LightCard>
-        </section>
-      )}
+        </div>
+      </dialog>
     </>
   );
 };
