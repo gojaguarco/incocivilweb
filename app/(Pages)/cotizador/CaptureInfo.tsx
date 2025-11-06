@@ -5,6 +5,7 @@ import LightCard from "../_components/LightCard";
 import CaptureForm from "./CaptureForm";
 import { SurfaceToSendAdminEmail } from "./captureInfoZods";
 import { useCreateQueryString } from "../_lib/createQueryString";
+import { useEffect } from "react";
 
 const CaptureInfo = ({
   captureInfoOpen,
@@ -30,6 +31,20 @@ const CaptureInfo = ({
   // const surfaceFormat = surfaceFormats[surfaceFormatIn];
   // total += surfaceFormat.totalSurface;
   // }
+
+  useEffect(() => {
+    if (captureInfoOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+
+    // Cleanup function to restore scroll when component unmounts
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [captureInfoOpen]);
+
   return (
     <>
       {Object.keys(surfaceFormats).length > 0 && (
@@ -50,11 +65,11 @@ const CaptureInfo = ({
               { scroll: false }
             );
           }}
-          className="pt-10 fixed top-0 z-[50] left-0 w-screen h-full bg-black bg-opacity-50 flex justify-center items-center"
+          className="pt-10 fixed top-0 z-[50] left-0 w-screen h-screen bg-black bg-opacity-50 flex justify-center items-center"
         >
           <LightCard
             onClick={(e) => e.stopPropagation()}
-            className="max-w-[500px] md:max-w-screen-sm bg-light-dark overflow-x-hidden overflow-y-scroll md:overflow-y-auto max-h-[70svh] p-10 relative z-[200] rounded-xl px-10 flex flex-col w-[85dvw] mx-auto gap-5"
+            className="max-w-[500px] md:max-w-screen-sm bg-light-dark overflow-x-hidden overflow-y-scroll md:overflow-y-auto max-h-[80svh] p-10 relative z-[200] rounded-xl px-10 flex flex-col w-[85dvw] mx-auto gap-5"
           >
             <CaptureForm
               formTitle={formTitle}

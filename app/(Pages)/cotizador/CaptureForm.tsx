@@ -127,7 +127,7 @@ const CaptureForm = ({
 
   return (
     <form className="flex flex-col gap-5">
-      <h1>{formTitle}</h1>
+      <h1 className="text-3xl md:text-5xl">{formTitle}</h1>
       {/* <p>
         El valor
         <strong className="mx-[0.5ch]">TOTAL</strong>
