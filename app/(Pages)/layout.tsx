@@ -61,9 +61,9 @@ export default async function PagesLayout({
           className="fixed top-0 bottom-0 left-1/2 -translate-x-1/2 h-full opacity-[25%] object-cover"
         />
         <main className="w-full main-background prose lg:prose-lg max-w-none overflow-hidden flex flex-col items-center">
-          <WhatsappButton />
           {modal}
           {children}
+          <WhatsappButton />
         </main>
         <Footer />
         {(await draftMode()).isEnabled && <VisualEditing />}
