@@ -50,7 +50,7 @@ const CaptureInfo = ({
               { scroll: false }
             );
           }}
-          className="fixed top-0 z-[100] left-0 w-screen h-full bg-black bg-opacity-50 flex justify-center items-center"
+          className="pt-10 fixed top-0 z-[100] left-0 w-screen h-full bg-black bg-opacity-50 flex justify-center items-center"
         >
           <LightCard
             onClick={(e) => e.stopPropagation()}
