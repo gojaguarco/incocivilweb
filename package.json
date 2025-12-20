@@ -23,7 +23,7 @@
     "@sanity/ui": "^2.11.6",
     "@sanity/vision": "^3.62.3",
     "clsx": "^2.1.1",
-    "next": "15.0.5",
+    "next": "15.0.7",
     "next-sanity": "^9.8.8",
     "react": "19.0.1",
     "react-dom": "19.0.1",
